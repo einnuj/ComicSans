@@ -16,8 +16,8 @@
 </head>
 <body>
 
-    <div id="authDiv">
-        <a href="#" onclick="authenticate()">Click here for AuthServlet!</a>
+    <div id="ajaxDiv">
+        <a href="#" onclick="fakeAjax()">Click here for AJAX!</a>
     </div>
 
     <div id="profileDiv">

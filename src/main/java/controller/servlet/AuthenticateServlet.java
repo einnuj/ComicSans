@@ -31,7 +31,7 @@ public class AuthenticateServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService userService = UserServiceFactory.getUserService();
-        String currentURL = request.getRequestURI();
+        String currentURL = request.getParameter("currentURL");
         String responseURL;
 
         response.setContentType("text/plain");

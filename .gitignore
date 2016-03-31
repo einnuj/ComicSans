@@ -95,6 +95,8 @@ appengine-generated/
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
 
+*.iml
+
 ## File-based project format:
 *.iws
 

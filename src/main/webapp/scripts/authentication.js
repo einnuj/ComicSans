@@ -10,7 +10,6 @@ function authenticate() {
         type: "get",
         data: {"currentURL" : currentURL},
         success: function(responseText) {
-            $("#logLink").text("Log(In/Out) Here!");
             $("#logLink").attr("href", responseText);
             $("#logLink").show();
         }

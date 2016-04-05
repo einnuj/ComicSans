@@ -45,11 +45,12 @@
                 <ul class="nav navbar-nav">
                     <li><a href="">Directory</a></li>
                     <li><a href="">Upload/Create</a></li>
+                    <li><a id="logLink" href="">Log In</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
         <%-- Indicators --%>
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -58,24 +59,39 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+                <img class="first-slide" src="images/banners/CoConutBanner.png" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <img src="" />
+                        <h1>CoConut</h1>
+                        <h3>John Smith</h3>
+                        <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
+                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+                <img class="second-slide" src="images/banners/DoenutBanner.png" alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
+                        <h1>Doenut</h1>
+                        <h3>Jane Doe</h3>
+                        <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
+                            will she have?</p>
+                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+                <img class="third-slide" src="images/banners/DoofusBanner.png" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">
+                        <h1>Doofus</h1>
+                        <h3>Ian McKellen</h3>
+                        <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
+                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -90,8 +106,35 @@
         </a>
     </div>
     <%-- End of Carousel --%>
-    <div class=""></div>
-    <div class=""></div>
+    <div class="section-sliders">
+        <%--<div class="section-title">Continue Reading</div>--%>
+        <h2>Continue Reading</h2>
+        <ul>
+            <li>
+                <img src="images/covers/CoConutCover.png" />
+            </li>
+            <li>
+                <img src="images/covers/DoenutCover.png" />
+            </li>
+            <li>
+                <img src="images/covers/DoofusCover.png" />
+            </li>
+        </ul>
+    </div>
+    <div class="section-sliders">
+        <h2>Favorites</h2>
+        <ul>
+            <li>
+                <img src="images/covers/CoConutCover.png" />
+            </li>
+            <li>
+                <img src="images/covers/DoenutCover.png" />
+            </li>
+            <li>
+                <img src="images/covers/DoofusCover.png" />
+            </li>
+        </ul>
+    </div>
     <%--<div id="ajaxDiv">--%>
         <%--<a href="#" onclick="fakeAjax()">Click here for AJAX!</a>--%>
     <%--</div>--%>

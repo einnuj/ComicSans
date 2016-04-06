@@ -1,0 +1,44 @@
+body {
+    background-color: #252525 !important;
+    color: white !important;
+}
+ul, ol, li{
+    list-style-type: none;
+}
+.info-container {
+    margin-left: 90px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+.info-container h1 {
+    padding: 15px;
+    border-bottom: 1px solid white;
+}
+.comic-listing {
+    display: block;
+    padding: 15px;
+    float: left;
+}
+.comic-listing h5 {
+    color: #8d8d8d;
+}
+.dropdown-menu {
+    background-color: #252525 !important;
+    border-radius: 0 !important;
+    border: 1px solid white !important;
+    height: auto;
+    max-height: 150px;
+    overflow-x: hidden;
+}
+.dropdown-menu > li > a {
+    color: white !important;
+}
+.dropdown-menu > li > a:hover {
+    background-color: #8d8d8d !important;
+}
+#dropdownMenu1, #dropdownMenu1:active {
+    background-color: #252525;
+    border-radius: 0;
+    border: none;
+    color: white;
+}

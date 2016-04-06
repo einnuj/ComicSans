@@ -43,7 +43,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="">Directory</a></li>
+                    <li><a href="directory.jsp">Directory</a></li>
                     <li><a href="">Upload/Create</a></li>
                     <li><a id="logLink" href="">Log In</a></li>
                 </ul>

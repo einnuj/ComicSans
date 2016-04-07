@@ -22,7 +22,6 @@ ul, ol, li{
 }
 .info-container h1 {
     padding: 15px;
-    border-bottom: 1px solid white;
 }
 .info-container h2{
     padding: 15px;
@@ -81,4 +80,19 @@ ul, ol, li{
     width: 80%;
     border: 1px solid white;
     border-radius: 10px;
+}
+.create-content {
+    border: 1px solid white;
+    padding: 10px 0px 10px 0px;
+    border-radius: 10px;
+    width: 80%;
+}
+.create-content form, .input-group {
+    padding: 10px;
+    font-size: 15px;
+}
+.create-content img {
+    margin-left: 10px;
+    width: 900px;
+    height: auto;
 }

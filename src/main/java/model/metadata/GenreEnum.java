@@ -5,5 +5,6 @@ package model.metadata;
  * Created by einnuj on 4/7/2016.
  */
 public enum GenreEnum {
-    ACTION, COMEDY, DRAMA, FANTASY, GAMING, HORROR, ROMANCE, SPORTS, THRILLER
+    ACTION, COMEDY, DRAMA, FANTASY, GAMING, HORROR, ROMANCE, SPORTS,
+    THRILLER, UNLISTED
 }

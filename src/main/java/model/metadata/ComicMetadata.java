@@ -3,7 +3,9 @@ package model.metadata;
 import model.metadata.fields.Comment;
 import model.metadata.fields.Favorite;
 import model.metadata.fields.Like;
+import model.metadata.fields.Rating;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,11 +16,21 @@ public class ComicMetadata {
     private List<Like> likeList;
     private List<Favorite> favoriteList;
     private List<Comment> commentList;
+    private Rating rating;
     private GenreEnum genre;
     private String description;
 
     // This should be a User
     private String author;
+
+    public ComicMetadata(String author) {
+        likeList = new ArrayList<Like>();
+        favoriteList = new ArrayList<Favorite>();
+        commentList = new ArrayList<Comment>();
+        genre = GenreEnum.UNLISTED;
+        description = "";
+        this.author = author;
+    }
 
     /* GETTERS */
 

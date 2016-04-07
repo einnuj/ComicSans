@@ -5,10 +5,20 @@ body {
 ul, ol, li{
     list-style-type: none;
 }
+.btn-primary{
+    background-color: #f06060 !important;
+    border: none !important;
+    border-radius: 0px !important;
+    padding: 10px !important;
+    width: 120px;
+}
+.btn-primary:hover {
+    background-color: #f17d7d !important;
+}
 .info-container {
     margin-left: 90px;
     padding: 1px 16px;
-    height: 1000px;
+    height: 100%;
 }
 .info-container h1 {
     padding: 15px;
@@ -41,4 +51,33 @@ ul, ol, li{
     border-radius: 0;
     border: none;
     color: white;
+}
+.comic-info {
+    width: 100%;
+    margin-left: 5%;
+    margin-top: 5%;
+    display: flex;
+}
+.comic-info img{
+    height: auto;
+}
+.comic-info-descr {
+    width: 50%;
+    margin-left: 5%;
+}
+.comic-info-descr h1 {
+    border: none;
+    padding: 0;
+}
+.social-buttons {
+    padding-top: 20px;
+}
+.user-comments {
+    margin-left: 5%;
+    margin-top: 5%;
+    padding: 10px;
+    font-size: 15px;
+    width: 80%;
+    border: 1px solid white;
+    border-radius: 10px;
 }

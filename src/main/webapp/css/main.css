@@ -24,8 +24,12 @@ ul, ol, li{
     padding: 15px;
     border-bottom: 1px solid white;
 }
+.info-container h2{
+    padding: 15px;
+    border-top: 1px solid white;
+}
 .comic-listing {
-    display: block;
+    display: inline-block;
     padding: 15px;
     float: left;
 }
@@ -57,9 +61,6 @@ ul, ol, li{
     margin-left: 5%;
     margin-top: 5%;
     display: flex;
-}
-.comic-info img{
-    height: auto;
 }
 .comic-info-descr {
     width: 50%;

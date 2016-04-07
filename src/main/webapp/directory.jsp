@@ -56,7 +56,7 @@
 
         <%-- Comic Listing --%>
         <div class="comic-listing">
-            <img src="images/covers/CoConutCover.png" />
+            <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
             <h3>CoConut</h3>
             <h5>John Smith</h5>
         </div>

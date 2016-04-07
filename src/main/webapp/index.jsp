@@ -65,8 +65,8 @@
                         <h1>CoConut</h1>
                         <h3>John Smith</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
-                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
+                        <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary" href="summary.jsp" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -78,8 +78,8 @@
                         <h3>Jane Doe</h3>
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
-                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
+                        <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -90,8 +90,8 @@
                         <h1>Doofus</h1>
                         <h3>Ian McKellen</h3>
                         <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
-                        <p><a class="btn btn-lg btn-primary " role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary " role="button">Read Now</a></p>
+                        <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
+                            <a class="btn btn-lg btn-primary" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
         <h2>Continue Reading</h2>
         <ul>
             <li>
-                <img src="images/covers/CoConutCover.png" />
+                <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
             </li>
             <li>
                 <img src="images/covers/DoenutCover.png" />
@@ -125,7 +125,7 @@
         <h2>Favorites</h2>
         <ul>
             <li>
-                <img src="images/covers/CoConutCover.png" />
+                <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
             </li>
             <li>
                 <img src="images/covers/DoenutCover.png" />

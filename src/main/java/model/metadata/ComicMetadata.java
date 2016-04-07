@@ -19,4 +19,54 @@ public class ComicMetadata {
 
     // This should be a User
     private String author;
+
+    /* GETTERS */
+
+    public List<Like> getLikeList() {
+        return likeList;
+    }
+
+    public List<Favorite> getFavoriteList() {
+        return favoriteList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public GenreEnum getGenre() {
+        return genre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    /* Setters */
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setGenre(GenreEnum genre) {
+        this.genre = genre;
+    }
+
+    /* General Methods */
+
+    public void addToLikeList(Like like) {
+        likeList.add(like);
+    }
+
+    public void addToFavoriteList(Favorite favorite) {
+        favoriteList.add(favorite);
+    }
+
+    public void addToCommentList(Comment comment) {
+        commentList.add(comment);
+    }
 }

@@ -1,6 +1,6 @@
 package model.metadata.fields;
 
-import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
+import org.joda.time.DateTime;
 
 /**
  * An Abstract class that acts as parent to all Fields
@@ -13,13 +13,12 @@ public abstract class AbstractField {
     // This will become a Comic Object
     private String comicTarget;
 
-    private DateTime dateTime;
+    private DateTime dateTimeCreated;
 
-    public AbstractField(String userOrigin, String comicTarget, DateTime
-            dateTime) {
+    public AbstractField(String userOrigin, String comicTarget) {
         this.userOrigin = userOrigin;
         this.comicTarget = comicTarget;
-        this.dateTime = dateTime;
+        this.dateTimeCreated = DateTime.now();
     }
 
     public String getUserOrigin() {
@@ -31,6 +30,6 @@ public abstract class AbstractField {
     }
 
     public DateTime getDateTime() {
-        return dateTime;
+        return dateTimeCreated;
     }
 }

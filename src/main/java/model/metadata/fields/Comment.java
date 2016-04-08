@@ -1,6 +1,6 @@
 package model.metadata.fields;
 
-import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
+import org.joda.time.DateTime;
 
 /**
  * A Field class that represents a User's comments on a Comic
@@ -8,14 +8,26 @@ import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
  */
 public class Comment extends AbstractField {
     private String description;
+    private DateTime lastEditedTime;
 
-    public Comment(String userOrigin, String comicTarget, DateTime
-            dateTime, String description) {
-        super(userOrigin, comicTarget, dateTime);
-        this.description = description;
+    public Comment(String userOrigin, String comicTarget, String description) {
+        super(userOrigin, comicTarget);
+        setDescription(description);
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public DateTime getLastEditedTime() {
+        return lastEditedTime;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void updateLastEditedTime() {
+        this.lastEditedTime = DateTime.now();
     }
 }

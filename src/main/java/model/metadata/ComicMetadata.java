@@ -23,6 +23,9 @@ public class ComicMetadata {
     // This should be a User
     private String author;
 
+    // We have to decide how to represent Cover Pages
+    private String coverPage;
+
     public ComicMetadata(String author) {
         likeList = new ArrayList<Like>();
         favoriteList = new ArrayList<Favorite>();
@@ -31,6 +34,7 @@ public class ComicMetadata {
         genre = GenreEnum.UNLISTED;
         description = "";
         this.author = author;
+        this.coverPage = "";
     }
 
     /* GETTERS */
@@ -61,14 +65,20 @@ public class ComicMetadata {
         return author;
     }
 
+    public String getCoverPage() { return coverPage; }
+
     /* Setters */
+
+    public void setGenre(GenreEnum genre) {
+        this.genre = genre;
+    }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setGenre(GenreEnum genre) {
-        this.genre = genre;
+    public void setCoverPage(String coverPage) {
+        this.coverPage = coverPage;
     }
 
     /* General Methods */

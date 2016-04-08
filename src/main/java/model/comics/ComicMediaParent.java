@@ -9,11 +9,17 @@ import java.util.List;
 public abstract class ComicMediaParent extends ComicMedia {
     private List<ComicMedia> childMediaList;
 
+    public ComicMediaParent(String author) {
+        super(author);
+    }
+
     public List<ComicMedia> getChildMediaList() {
         return childMediaList;
     }
 
-    public void addToChildMediaList(ComicMedia mediaToAdd) {
-        childMediaList.add(mediaToAdd);
+    public abstract void addToChildMediaList(ComicMedia mediaToAdd);
+
+    public boolean removeFromChildMediaList(ComicMedia mediaToRemove) {
+        return childMediaList.remove(mediaToRemove);
     }
 }

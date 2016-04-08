@@ -1,5 +1,6 @@
 package model.comics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,5 +10,15 @@ import java.util.List;
 public class ComicChapter extends ComicMediaParent {
     private List<ComicPage> childMediaList;
 
-    
+    public ComicChapter(String name) {
+        super(name);
+        childMediaList = new ArrayList<ComicPage>();
+    }
+
+    @Override
+    public void addToChildMediaList(ComicMedia mediaToAdd) {
+        if (mediaToAdd instanceof ComicPage) {
+            childMediaList.add((ComicPage) mediaToAdd);
+        }
+    }
 }

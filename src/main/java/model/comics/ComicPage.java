@@ -7,6 +7,11 @@ package model.comics;
 public class ComicPage extends ComicMedia {
     private String imgURL;
 
+    public ComicPage(String name, String imgURL) {
+        super(name);
+        this.imgURL = imgURL;
+    }
+
     public String getImgURL() {
         return imgURL;
     }

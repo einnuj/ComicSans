@@ -7,6 +7,10 @@ package model.comics;
 public abstract class ComicMedia {
     private String name;
 
+    public ComicMedia(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

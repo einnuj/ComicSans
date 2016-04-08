@@ -84,4 +84,6 @@ public class ComicMetadata {
     public void addToCommentList(Comment comment) {
         commentList.add(comment);
     }
+
+    public void addToRatingList(Rating rating) { ratingList.add(rating); }
 }

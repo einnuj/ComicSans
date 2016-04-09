@@ -8,7 +8,7 @@ public class Bookmark extends AbstractField {
 
     // Like Favorite and such, there are no fields/methods necessary.
 
-    public Bookmark(String userOrigin, String comicTarget) {
-        super(userOrigin, comicTarget);
+    public Bookmark(String comicTarget, String userOrigin) {
+        super(comicTarget, userOrigin);
     }
 }

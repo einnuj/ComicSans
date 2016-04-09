@@ -8,12 +8,16 @@ import org.joda.time.DateTime;
  */
 public class Comment extends AbstractField {
     private String description;
+
     private DateTime lastEditedTime;
 
-    public Comment(String userOrigin, String comicTarget, String description) {
-        super(userOrigin, comicTarget);
+    public Comment(String comicTarget, String userOrigin, String description) {
+        super(comicTarget, userOrigin);
+
         setDescription(description);
     }
+
+    /* Getters */
 
     public String getDescription() {
         return description;
@@ -23,9 +27,13 @@ public class Comment extends AbstractField {
         return lastEditedTime;
     }
 
+    /* Setters */
+
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /* Methods */
 
     public void updateLastEditedTime() {
         this.lastEditedTime = DateTime.now();

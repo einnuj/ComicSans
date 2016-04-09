@@ -4,12 +4,14 @@ package model.comics;
  * The ancestor class of all Comic Media Objects
  * Created by einnuj on 4/7/2016.
  */
-public abstract class ComicMedia {
+abstract class ComicMedia {
     private String name;
 
-    public ComicMedia(String name) {
+    ComicMedia(String name) {
         this.name = name;
     }
+
+    /* Getters */
 
     public String getName() {
         return name;

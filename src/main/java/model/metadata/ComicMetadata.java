@@ -19,7 +19,7 @@ public class ComicMetadata extends AbstractMetadata {
 
     private List<Rating> ratingList;
 
-    public ComicMetadata(String author, String name) {
+    public ComicMetadata(String name, String author) {
         super(name);
 
         this.author = author;

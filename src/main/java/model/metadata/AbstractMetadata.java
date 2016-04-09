@@ -12,9 +12,9 @@ import java.util.List;
  * An Abstract class that is the ancestor of all Metadata classes.
  * Created by einnuj.
  */
-abstract class AbstractMetadata {
-    private String bioString;
-    private String nameString;
+class AbstractMetadata {
+    private String bio;
+    private String name;
     private String displayPicture;          // This is a stand-in type.
 
     private List<Bookmark> bookmarkList;
@@ -22,9 +22,9 @@ abstract class AbstractMetadata {
     private List<Favorite> favoriteList;
     private List<Like> likeList;
 
-    AbstractMetadata(String nameString) {
-        bioString = "";
-        this.nameString = nameString;
+    AbstractMetadata(String name) {
+        bio = "";
+        this.name = name;
         displayPicture = "";
 
         bookmarkList = new ArrayList<Bookmark>();
@@ -35,12 +35,12 @@ abstract class AbstractMetadata {
 
     /* Getters */
 
-    public String getBioString() {
-        return bioString;
+    public String getBio() {
+        return bio;
     }
 
-    public String getNameString() {
-        return nameString;
+    public String getName() {
+        return name;
     }
 
     public String getDisplayPicture() {
@@ -65,8 +65,8 @@ abstract class AbstractMetadata {
 
     /* Setters */
 
-    public void setBioString(String bioString) {
-        this.bioString = bioString;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public void setDisplayPicture(String displayPicture) {

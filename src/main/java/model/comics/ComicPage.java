@@ -9,8 +9,11 @@ public class ComicPage extends ComicMedia {
 
     public ComicPage(String name, String imgURL) {
         super(name);
+
         this.imgURL = imgURL;
     }
+
+    /* Getters */
 
     public String getImgURL() {
         return imgURL;

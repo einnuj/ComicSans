@@ -16,7 +16,7 @@ public class WebComic extends ComicMediaParent {
     public WebComic(String name, String author) {
         super(name);
         childMediaList = new ArrayList<ComicChapter>();
-        metadata = new ComicMetadata(author);
+        metadata = new ComicMetadata(author, name);
     }
 
     @Override

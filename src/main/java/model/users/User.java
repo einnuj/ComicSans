@@ -15,13 +15,11 @@ public class User {
 
     /* Methods */
 
-    // TODO: implement relevant change in AbstractMetadata class
     public boolean hasIcon() {
-        return false;
+        return null != getIconURL();
     }
 
-    // TODO: implement relevant change in AbstractMetadata class
     public String getIconURL() {
-        return null;
+        return metadata.getDisplayPicture();
     }
 }

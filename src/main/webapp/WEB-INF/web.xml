@@ -19,7 +19,7 @@
 
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/UserServlet</url-pattern>
+        <url-pattern>/profile.jsp</url-pattern>
     </servlet-mapping>
 
     <!-- Authentication Security -->

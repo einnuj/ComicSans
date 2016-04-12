@@ -18,6 +18,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User newUser = new MockUserController().genMockUser("Junnie");
+        req.setAttribute("user", newUser);
     }
 
     @Override

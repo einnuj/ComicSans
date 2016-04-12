@@ -1,0 +1,97 @@
+package controller.mock;
+
+import model.metadata.UserMetadata;
+import model.metadata.fields.FieldFactory;
+import model.users.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A Mock Class that generates a hard-coded User
+ * Created by einnuj on 4/12/2016.
+ */
+public class MockUserController {
+
+    /* Methods */
+    public User genMockUser(String userName) {
+        User user = new User(userName);
+        UserMetadata metadata = user.getMetadata();
+
+        // Filling in random data
+        metadata.setBio("This is my bio!");
+
+        // List of Comics to work with
+        List<String> comicsList = new ArrayList<String>();
+
+        comicsList.add("CoCo the Nut");
+        comicsList.add("The Misadventures of Goat the GOAT-goat");
+        comicsList.add("Androgynous Android");
+        comicsList.add("Two Ton Munich");
+        comicsList.add("The Pearls of Prussia");
+        comicsList.add("I Can't Believe You've Done This");
+        comicsList.add("Steve Jobs In Purgatory");
+        comicsList.add("Finding Nemo A Job");
+        comicsList.add("Avatar: the Last Fender-Bender");
+        comicsList.add("Link In Park");
+
+        // Generating random Fields and tie to the User
+        for (String comicName : comicsList) {
+
+            FieldFactory fieldFactory = new FieldFactory(comicName, userName);
+
+            for (int i = 0; i < 3;) {
+                List<String> alreadyGeneratedFieldList = new ArrayList<String>();
+                String fieldToBeAdded;
+
+                switch ((int) Math.floor(Math.random() * 5)) {
+                    case 0:
+                        fieldToBeAdded = "Bookmark";
+                        if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
+                            alreadyGeneratedFieldList.add(fieldToBeAdded);
+                            metadata.addToBookmarkedList(fieldFactory.getBookmark());
+                            i++;
+                        }
+                        break;
+                    case 1:
+                        fieldToBeAdded = "Comment";
+                        if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
+                            alreadyGeneratedFieldList.add(fieldToBeAdded);
+                            metadata.addToCommentedList(fieldFactory.getComment("Great Comic!"));
+                            i++;
+                        }
+                        break;
+                    case 2:
+                        fieldToBeAdded = "Favorite";
+                        if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
+                            alreadyGeneratedFieldList.add(fieldToBeAdded);
+                            metadata.addToFavoritedList(fieldFactory.getFavorite());
+                            i++;
+                        }
+                        break;
+                    case 3:
+                        fieldToBeAdded = "Like";
+                        if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
+                            alreadyGeneratedFieldList.add(fieldToBeAdded);
+                            metadata.addToLikedList(fieldFactory.getLike());
+                            i++;
+                        }
+                        break;
+                    case 4:
+                        fieldToBeAdded = "Rating";
+                        if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
+                            alreadyGeneratedFieldList.add(fieldToBeAdded);
+                            metadata.addToRatedList(fieldFactory.getRating(4));
+                            i++;
+                        }
+                        break;
+                    default:
+                        System.out.println("Something that shouldn't have happened happened in our MockUserController.");
+                        return null;
+                }
+            }
+        }
+
+        return user;
+    }
+}

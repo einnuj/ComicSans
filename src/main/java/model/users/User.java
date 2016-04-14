@@ -13,6 +13,10 @@ public class User {
         metadata = new UserMetadata(name);
     }
 
+    /* Getters */
+
+    public UserMetadata getMetadata() { return metadata; }
+
     /* Methods */
 
     public boolean hasIcon() {

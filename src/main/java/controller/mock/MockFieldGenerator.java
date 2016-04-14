@@ -16,9 +16,9 @@ public class MockFieldGenerator {
     /* Methods */
     public void genMockComicFields(ComicMetadata metadata, FieldFactory
             fieldFactory) {
+        List<String> alreadyGeneratedFieldList = new ArrayList<String>();
 
         for (int i = 0; i < 3;) {
-            List<String> alreadyGeneratedFieldList = new ArrayList<String>();
             String fieldToBeAdded;
 
             switch ((int) Math.floor(Math.random() * 5)) {
@@ -73,9 +73,9 @@ public class MockFieldGenerator {
 
     public void genMockUserFields(UserMetadata metadata,FieldFactory
             fieldFactory) {
+        List<String> alreadyGeneratedFieldList = new ArrayList<String>();
 
         for (int i = 0; i < 3;) {
-            List<String> alreadyGeneratedFieldList = new ArrayList<String>();
             String fieldToBeAdded;
 
             switch ((int) Math.floor(Math.random() * 5)) {

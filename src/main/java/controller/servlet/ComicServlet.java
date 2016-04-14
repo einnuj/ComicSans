@@ -1,5 +1,8 @@
 package controller.servlet;
 
+import model.comics.WebComic;
+import utilities.JsonHelper;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,9 @@ public class ComicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        WebComic webComic = new WebComic("Comic Name", "Author");
+        String comicInJson = JsonHelper.objectToJson(webComic);
+
+        resp.getWriter().write(comicInJson);
     }
 }

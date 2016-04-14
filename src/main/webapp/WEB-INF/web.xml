@@ -21,6 +21,16 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/profile.jsp</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ComicServlet</servlet-name>
+        <servlet-class>controller.servlet.ComicServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ComicServlet</servlet-name>
+        <url-pattern>/ComicServlet.create</url-pattern>
+    </servlet-mapping>
 
     <!-- Authentication Security -->
     <security-constraint>

@@ -18,7 +18,12 @@ public class WebComic extends ComicMediaParent {
         super(name);
 
         childMediaList = new ArrayList<ComicChapter>();
-        metadata = new ComicMetadata(author, name);
+        metadata = new ComicMetadata(name, author);
+    }
+
+    /* Getters */
+    public ComicMetadata getMetadata() {
+        return metadata;
     }
 
     /* Overridden Methods */

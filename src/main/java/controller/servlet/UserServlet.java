@@ -2,6 +2,7 @@ package controller.servlet;
 
 import controller.mock.MockUserController;
 import model.users.User;
+import utilities.JsonHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,10 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User newUser = new MockUserController().genMockUser("Junnie");
         req.setAttribute("user", newUser);
+
+        String userJson = JsonHelper.objectToJson(newUser);
+
+        resp.getWriter().write(userJson);
     }
 
     @Override

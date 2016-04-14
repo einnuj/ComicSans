@@ -19,7 +19,7 @@
 
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
     
     <servlet>

@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import controller.mock.MockComicController;
 import model.comics.WebComic;
 import utilities.JsonHelper;
 
@@ -22,7 +23,8 @@ public class ComicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        WebComic webComic = new WebComic("Comic Name", "Author");
+        WebComic webComic = new MockComicController().genWebComic("Comic " +
+                "Sam", "Junnie");
         String comicInJson = JsonHelper.objectToJson(webComic);
 
         resp.getWriter().write(comicInJson);

@@ -63,6 +63,7 @@
                     <a class="btn btn-lg btn-primary" role="button">Subscribe</a>
                     <a class="btn btn-lg btn-primary" role="button">Favorite</a>
                     <a class="btn btn-lg btn-primary" role="button">Like</a>
+                    <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now</a>
                 </div>
             </div>
         </div>

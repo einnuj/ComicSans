@@ -26,6 +26,7 @@
     <link href="css/main.css" rel="stylesheet">
 
     <title>Publish</title>
+    <script src="../scripts/submit.js"></script>
 </head>
 <body>
     <%-- Side navbar --%>
@@ -36,64 +37,32 @@
         <h1>Upload</h1>
         <div class="create-content">
             <ul>
+
                 <li>
-                    <%-- Chapter Dropdown --%>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <h4>Chapter <span class="caret"></span></h4>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <%-- Page Dropdown --%>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <h4>Page <span class="caret"></span></h4>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li><a href="">5</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <%-- Genre Dropdown --%>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <h4>Filter By <span class="caret"></span></h4>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="">Action</a></li>
-                            <li><a href="">Comedy</a></li>
-                            <li><a href="">Drama</a></li>
-                            <li><a href="">Fantasy</a></li>
-                            <li><a href="">Gaming</a> </li>
-                            <li><a href="">Horror</a> </li>
-                            <li><a href="">Romance</a></li>
-                            <li><a href="">Sports</a> </li>
-                            <li><a href="">Thriller</a> </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <%-- Title Input --%>
-                    <div class="input-group">
-                        Title:
-                        <input type="text" class="form-control"/>
-                    </div>
-                </li>
-                <li>
-                    <form action="">
-                        <input type="file" name="" accept="">
+                    <form id="submitComicForm" name="submitForm">
+                        <label for="chapterNumber" id="labelForChapter">Chapter:</label>
+                        <input type="text" name="chapter" id="chapterNumber"/> <br>
+                        <label for="pageNumber" id="labelForPage">Page:</label>
+                        <input type="text" name="page" id="pageNumber"/> <br>
+                        <label for="genreName" id="labelForGenre">Genre:</label>
+                        <select id="genreName">
+                            <option>Action</option>
+                            <option>Comedy</option>
+                            <option>Drama</option>
+                            <option>Fantasy</option>
+                            <option>Gaming</option>
+                            <option>Horror</option>
+                            <option>Romance</option>
+                            <option>Sports</option>
+                            <option>Thriller</option>
+                        </select>
                         <br>
-                        <input class="btn btn-primary" type="submit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <label for="titleid">Title:</label>
+                        <br><br>
+                        <input type="text" name="title" id="titleid"/> <br>
+                        <input id ="fileSubmit" type="file" name="comicPage" accept="">
+                        <br>
+                        <input id="submit" onclick="submitComicFunction()" type="button" value="Submit">
                     </form>
                 </li>
             </ul>

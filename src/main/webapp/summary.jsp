@@ -39,7 +39,7 @@
             <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="changeCoverImage()"></span>
             <div class="comic-info-descr">
                 <h1 id="title-header">CoConut</h1>
-                <button type="button" onclick="myFunction()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                <button type="button" onclick="editComicTitle()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                 <div id="edit-title">
                     <input id="title-text" type="text" value="" />
                 </div>

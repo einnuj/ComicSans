@@ -3,29 +3,14 @@
  */
 
 var editTitle = false;
-//var editSummary = false;
-
-function editComicTitle() {
-    $("#TitleText").html("buttholes");
-    if (editTitle == false) {
-        // show textbox TitleText
-        $("#TitleText").show();
-    }
-    else { // textbox is visible
-        //
-        $("#TitleText").hide();
-    }
-}
 
 function changeCoverImage() {
 
 }
-
 function editComicSummary() {
 
 }
-
-function myFunction() {
+function editComicTitle() {
     if (editTitle == true) {
         editTitle = false;
         $("#title-header")

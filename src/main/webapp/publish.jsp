@@ -93,7 +93,8 @@
                     <form action="">
                         <input type="file" name="" accept="">
                         <br>
-                        <input class="btn btn-primary" type="submit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <input class="btn btn-lg btn-primary" type="submit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
                     </form>
                 </li>
             </ul>

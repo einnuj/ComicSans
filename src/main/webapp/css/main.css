@@ -5,6 +5,9 @@ body {
 ul, ol, li{
     list-style-type: none;
 }
+input {
+    color: black !important;
+}
 .btn-primary{
     background-color: #f06060 !important;
     border: none !important;
@@ -68,6 +71,7 @@ ul, ol, li{
 .comic-info-descr h1 {
     border: none;
     padding: 0;
+    display: inline-flex;
 }
 .social-buttons {
     padding-top: 20px;
@@ -112,4 +116,7 @@ ul, ol, li{
 }
 .comic-reading-dd {
     display: inline-flex;
+}
+#edit-title {
+    display: none;
 }

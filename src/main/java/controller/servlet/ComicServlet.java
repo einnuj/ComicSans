@@ -26,6 +26,7 @@ public class ComicServlet extends HttpServlet {
         String imgFile = req.getParameter("imgFile");
         String title = req.getParameter("title");
 
+
         System.out.println(title);
         System.out.println(genre);
         System.out.println(chapter);

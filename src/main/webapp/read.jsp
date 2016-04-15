@@ -55,11 +55,10 @@
                         <h4>Page <span class="caret"></span></h4>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                        <li><a href="javascript:jumpToPage(1)">1</a></li>
+                        <li><a href="javascript:jumpToPage(2)">2</a></li>
+                        <li><a href="javascript:jumpToPage(3)">3</a></li>
+                        <li><a href="javascript:jumpToPage(4)">4</a></li>
                     </ul>
                 </div>
             </div>

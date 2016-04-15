@@ -8,6 +8,9 @@ ul, ol, li{
 input {
     color: black !important;
 }
+textarea{
+    color: black !important;
+}
 .btn-primary{
     background-color: #f06060 !important;
     border: none !important;
@@ -119,4 +122,7 @@ input {
 }
 #edit-title {
     display: none;
+}
+#edit-summary {
+    display:none;
 }

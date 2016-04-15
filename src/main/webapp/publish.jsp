@@ -26,7 +26,6 @@
     <link href="css/main.css" rel="stylesheet">
 
     <title>Publish</title>
-    <script src="../scripts/submit.js"></script>
 </head>
 <body>
     <%-- Side navbar --%>
@@ -62,7 +61,8 @@
                         <input type="text" name="title" id="titleid"/> <br>
                         <input id ="fileSubmit" type="file" name="comicPage" accept="">
                         <br>
-                        <input id="submit" onclick="submitComicFunction()" type="button" value="Submit">
+                        <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
+                        <input class="btn btn-lg btn-primary" onclick="submitComicFunction()" type="button" value="Submit">
                     </form>
                 </li>
             </ul>
@@ -81,3 +81,4 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/submit.js"></script>

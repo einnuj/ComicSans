@@ -6,7 +6,6 @@ import model.comics.WebComic;
 import utilities.JsonHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import java.io.IOException;
  * Created by einnuj on 4/12/2016.
  */
 
-@MultipartConfig
 public class ComicServlet extends HttpServlet {
 
     @Override
@@ -28,7 +26,13 @@ public class ComicServlet extends HttpServlet {
         String imgFile = req.getParameter("imgFile");
         String title = req.getParameter("title");
 
+        System.out.println(title);
+        System.out.println(genre);
+        System.out.println(chapter);
+        System.out.println(page);
+
         ComicPage ourPage = new ComicPage(title, imgFile, page, chapter, genre);
+
 
     }
 

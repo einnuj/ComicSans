@@ -35,7 +35,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img src="images/covers/CoConutCover.png" onclick="changeCoverImage()"/>
+            <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
             <div class="comic-info-descr">
                 <h1 id="title-header">CoConut</h1>
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
         <div class="user-comments">
             <p>Probably the funniest thing I've read in a while! Easily my favorite!</p>
             <em>saucetrocity</em>

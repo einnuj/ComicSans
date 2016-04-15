@@ -1,4 +1,5 @@
 var pageArray = new Array();
+var img = document.getElementById("comic-page");
 
 pageArray[0] = new Image();
 pageArray[0].src = "images/covers/CoConutCover.png";
@@ -13,8 +14,6 @@ pageArray[3] = new Image();
 pageArray[3].src = "../images/mockpages/3.png";
 
 function nextPage(){
-    var img = document.getElementById("comic-page");
-
     for(var i = 0; i < pageArray.length; i++)
     {
         if(pageArray[i].src == img.src){
@@ -54,3 +53,7 @@ $("body").keydown(function(e) {
         nextPage();
     }
 });
+
+function jumpToPage(param){
+    img.src = pageArray[param - 1].src;
+}

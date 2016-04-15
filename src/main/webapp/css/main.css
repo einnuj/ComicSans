@@ -10,7 +10,7 @@ ul, ol, li{
     border: none !important;
     border-radius: 0px !important;
     padding: 10px !important;
-    width: 120px;
+    width: 140px;
 }
 .btn-primary:hover {
     background-color: #f17d7d !important;
@@ -95,4 +95,21 @@ ul, ol, li{
     margin-left: 10px;
     width: 900px;
     height: auto;
+}
+.comic-reading {
+    height: auto;
+    position: relative;
+    text-align: center;
+}
+.comic-reading img {
+    margin: auto;
+    margin-top: 40px;
+    vertical-align: middle;
+    text-align: center;
+    display: block;
+    width: 500px;
+
+}
+.comic-reading-dd {
+    display: inline-flex;
 }

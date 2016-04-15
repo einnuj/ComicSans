@@ -66,7 +66,7 @@
             <div class="comic-reading-dd">
                 <a class="btn btn-lg btn-primary" role="button"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmark </a>
             </div>
-            <img onclick="nextPage()" src="images/covers/CoConutCover.png" />
+            <a href="javascript:nextPage()"><img src="images/covers/CoConutCover.png" id="comic-page"/></a>
         </div>
     </div>
 </body>

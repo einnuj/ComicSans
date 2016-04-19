@@ -29,7 +29,13 @@ public class InitServlet extends HttpServlet {
 
     public void init() {
         System.out.println("INITIALIZING");
+    }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebComic comic = new WebComic("Super Comic", "Junnie");
         ComicMetadata metadata = comic.getMetadata();
 
@@ -43,13 +49,5 @@ public class InitServlet extends HttpServlet {
         ofy().save().entity(comic).now();
 
         System.out.println("ENTITY SAVED");
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

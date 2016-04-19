@@ -38,6 +38,11 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>InitServlet</servlet-name>
+        <url-pattern>/InitServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Objectify Filter -->
     <filter>
         <filter-name>ObjectifyFilter</filter-name>

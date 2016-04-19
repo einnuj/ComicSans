@@ -6,20 +6,26 @@ import java.util.List;
  * A ComicMedia Abstract that represents a piece of Media that "has" another.
  * Created by einnuj on 4/7/2016.
  */
-public abstract class ComicMediaParent extends ComicMedia {
+abstract class ComicMediaParent extends ComicMedia {
     private List<ComicMedia> childMediaList;
 
-    public ComicMediaParent(String author) {
+    ComicMediaParent(String author) {
         super(author);
     }
+
+    /* Getters */
 
     public List<ComicMedia> getChildMediaList() {
         return childMediaList;
     }
 
-    public abstract void addToChildMediaList(ComicMedia mediaToAdd);
+    /* Methods */
 
     public boolean removeFromChildMediaList(ComicMedia mediaToRemove) {
         return childMediaList.remove(mediaToRemove);
     }
+
+    /* Abstract Methods */
+
+    public abstract void addToChildMediaList(ComicMedia mediaToAdd);
 }

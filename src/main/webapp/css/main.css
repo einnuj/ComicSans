@@ -5,12 +5,18 @@ body {
 ul, ol, li{
     list-style-type: none;
 }
+input[type="text"] {
+    color: black !important;
+}
+textarea{
+    color: black !important;
+}
 .btn-primary{
     background-color: #f06060 !important;
     border: none !important;
     border-radius: 0px !important;
     padding: 10px !important;
-    width: 120px;
+    width: 140px;
 }
 .btn-primary:hover {
     background-color: #f17d7d !important;
@@ -68,6 +74,7 @@ ul, ol, li{
 .comic-info-descr h1 {
     border: none;
     padding: 0;
+    display: inline-flex;
 }
 .social-buttons {
     padding-top: 20px;
@@ -95,4 +102,34 @@ ul, ol, li{
     margin-left: 10px;
     width: 900px;
     height: auto;
+}
+.comic-reading {
+    height: auto;
+    position: relative;
+    text-align: center;
+}
+.comic-reading img {
+    margin: auto;
+    margin-top: 40px;
+    vertical-align: middle;
+    text-align: center;
+    display: block;
+    width: 500px;
+
+}
+.comic-reading-dd {
+    display: inline-flex;
+}
+#edit-title {
+    display: none;
+}
+#edit-summary {
+    display:none;
+}
+.preview-options {
+    margin-top: 25%;
+    margin-left: 40px;
+    text-align: center;
+    width: 100%;
+    padding: 30px;
 }

@@ -12,8 +12,11 @@ public class ComicChapter extends ComicMediaParent {
 
     public ComicChapter(String name) {
         super(name);
+
         childMediaList = new ArrayList<ComicPage>();
     }
+
+    /* Overridden Methods */
 
     @Override
     public void addToChildMediaList(ComicMedia mediaToAdd) {

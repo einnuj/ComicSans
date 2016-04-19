@@ -35,11 +35,20 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img src="images/covers/CoConutCover.png" />
+            <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
             <div class="comic-info-descr">
-                <h1>CoConut</h1>
+                <h1 id="title-header">CoConut</h1>
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
+                <div id="edit-title">
+                    <input id="title-text" type="text" value="" />
+                </div>
+
                 <h5>Author: John Smith</h5>
-                <h4>Follow the adventures of CoConut, the most relatable fruit in the world.</h4>
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
+                <div id="edit-summary">
+                    <textarea id="summary-text-area" value=""></textarea>
+                </div>
+                <p id="summary-paragraph">Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                 <br>
                 <br>
                 <br>
@@ -54,9 +63,11 @@
                     <a class="btn btn-lg btn-primary" role="button">Subscribe</a>
                     <a class="btn btn-lg btn-primary" role="button">Favorite</a>
                     <a class="btn btn-lg btn-primary" role="button">Like</a>
+                    <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now</a>
                 </div>
             </div>
         </div>
+        <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
         <div class="user-comments">
             <p>Probably the funniest thing I've read in a while! Easily my favorite!</p>
             <em>saucetrocity</em>
@@ -69,3 +80,4 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/summary.js"></script>

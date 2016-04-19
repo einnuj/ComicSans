@@ -11,13 +11,22 @@ import java.util.List;
  */
 public class WebComic extends ComicMediaParent {
     private List<ComicChapter> childMediaList;
+
     private ComicMetadata metadata;
 
     public WebComic(String name, String author) {
         super(name);
+
         childMediaList = new ArrayList<ComicChapter>();
-        metadata = new ComicMetadata(author);
+        metadata = new ComicMetadata(name, author);
     }
+
+    /* Getters */
+    public ComicMetadata getMetadata() {
+        return metadata;
+    }
+
+    /* Overridden Methods */
 
     @Override
     public void addToChildMediaList(ComicMedia mediaToAdd) {

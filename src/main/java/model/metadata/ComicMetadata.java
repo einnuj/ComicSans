@@ -12,44 +12,22 @@ import java.util.List;
  * A class that represents the Metadata of a Comic.
  * Created by einnuj on 4/7/2016.
  */
-public class ComicMetadata {
-    private List<Like> likeList;
-    private List<Favorite> favoriteList;
-    private List<Comment> commentList;
-    private List<Rating> ratingList;
+public class ComicMetadata extends AbstractMetadata {
+    private String author;              // This is a stand-in type
+
     private GenreEnum genre;
-    private String description;
 
-    // This should be a User
-    private String author;
+    private List<Rating> ratingList;
 
-    // We have to decide how to represent Cover Pages
-    private String coverPage;
+    public ComicMetadata(String name, String author) {
+        super(name);
 
-    public ComicMetadata(String author) {
-        likeList = new ArrayList<Like>();
-        favoriteList = new ArrayList<Favorite>();
-        commentList = new ArrayList<Comment>();
-        ratingList = new ArrayList<Rating>();
-        genre = GenreEnum.UNLISTED;
-        description = "";
         this.author = author;
-        this.coverPage = "";
+        genre = GenreEnum.UNLISTED;
+        ratingList = new ArrayList<Rating>();
     }
 
-    /* GETTERS */
-
-    public List<Like> getLikeList() {
-        return likeList;
-    }
-
-    public List<Favorite> getFavoriteList() {
-        return favoriteList;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
+    /* Getters */
 
     public List<Rating> getRatingList() { return ratingList; }
 
@@ -57,43 +35,17 @@ public class ComicMetadata {
         return genre;
     }
 
-    public String getDescription() {
-        return description;
+    public void setGenre(GenreEnum genre) {
+        this.genre = genre;
     }
+
+    /* Setters */
 
     public String getAuthor() {
         return author;
     }
 
-    public String getCoverPage() { return coverPage; }
-
-    /* Setters */
-
-    public void setGenre(GenreEnum genre) {
-        this.genre = genre;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCoverPage(String coverPage) {
-        this.coverPage = coverPage;
-    }
-
-    /* General Methods */
-
-    public void addToLikeList(Like like) {
-        likeList.add(like);
-    }
-
-    public void addToFavoriteList(Favorite favorite) {
-        favoriteList.add(favorite);
-    }
-
-    public void addToCommentList(Comment comment) {
-        commentList.add(comment);
-    }
+    /* Methods */
 
     public void addToRatingList(Rating rating) { ratingList.add(rating); }
 }

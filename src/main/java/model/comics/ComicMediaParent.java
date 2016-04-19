@@ -9,6 +9,8 @@ import java.util.List;
 abstract class ComicMediaParent extends ComicMedia {
     private List<ComicMedia> childMediaList;
 
+    ComicMediaParent() {}
+
     ComicMediaParent(String author) {
         super(author);
     }

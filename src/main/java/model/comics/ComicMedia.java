@@ -7,6 +7,8 @@ package model.comics;
 abstract class ComicMedia {
     private String name;
 
+    ComicMedia() {}
+
     ComicMedia(String name) {
         this.name = name;
     }

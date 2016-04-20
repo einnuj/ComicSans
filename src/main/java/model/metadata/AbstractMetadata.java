@@ -33,6 +33,8 @@ class AbstractMetadata {
         likeList = new ArrayList<Like>();
     }
 
+    AbstractMetadata(){}
+
     /* Getters */
 
     public String getBio() {

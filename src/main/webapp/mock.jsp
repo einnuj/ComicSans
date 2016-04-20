@@ -18,6 +18,9 @@
         <div id="comicJson">
             <a href="#" onclick="mockComic()">Click Here To Get COMIC</a>
         </div>
+        <div id="objectify">
+            <a href="#">This shouldn't be here</a>
+        </div>
     </div>
 </body>
 </html>

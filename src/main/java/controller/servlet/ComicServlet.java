@@ -44,7 +44,5 @@ public class ComicServlet extends HttpServlet {
         String comicInJson = JsonHelper.objectToJson(webComic);
 
         resp.getWriter().write(comicInJson);
-
-
     }
 }

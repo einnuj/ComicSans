@@ -21,3 +21,14 @@ function mockComic() {
         }
     })
 }
+
+function mockObjectify() {
+    $.ajax({
+        url: "/InitServlet",
+        type: "get",
+        success: function(responseText) {
+            $("#objectify > a").text(responseText);
+        }
+        })}
+
+$(document).ready(mockObjectify());

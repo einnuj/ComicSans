@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 /**
  * A Servlet that handles User-related requests.
  * Created by einnuj on 4/12/2016.
@@ -21,7 +23,13 @@ public class UserServlet extends HttpServlet {
         User newUser = new MockUserController().genMockUser("Junnie");
         req.setAttribute("user", newUser);
 
-        String userJson = JsonHelper.objectToJson(newUser);
+        ofy().save().entity(newUser).now();
+
+        System.out.println("USER SAVED");
+
+        User query = ofy().load().type(User.class).id(newUser.getId()).now();
+
+        String userJson = JsonHelper.objectToJson(query);
 
         resp.getWriter().write(userJson);
     }

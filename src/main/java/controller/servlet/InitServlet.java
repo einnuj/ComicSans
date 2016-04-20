@@ -8,6 +8,7 @@ import model.metadata.fields.Bookmark;
 import model.metadata.fields.Comment;
 import model.metadata.fields.Favorite;
 import model.metadata.fields.Like;
+import model.users.User;
 import utilities.JsonHelper;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ public class InitServlet extends HttpServlet {
     static {
         JodaTimeTranslators.add(ObjectifyService.factory());
         ObjectifyService.register(WebComic.class);
+        ObjectifyService.register(User.class);
     }
 
     public void init() {

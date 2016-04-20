@@ -1,6 +1,5 @@
 package controller.servlet;
 
-import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import model.users.User;
 import utilities.JsonHelper;
@@ -20,7 +19,7 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
 
     /**
-     * Returns a JSON representation of the User if they're logged in.
+     * Writes a JSON representation of the User if they're logged in to Response.
      * @param req the HttpServletRequest Object
      * @param resp the HttpServletResponse Object
      * @throws ServletException - thrown when there are multiple Users with the same googleId as the Google.User.
@@ -28,33 +27,50 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = UserServiceFactory.getUserService();
-        com.google.appengine.api.users.User googleUser = userService.getCurrentUser();
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
 
         if (googleUser != null) {
-            User genUser;
+            try {
+                User genUser = queryForUser(googleUser.getUserId());
 
-            ObjectifyHelper helper = new ObjectifyHelper();
-            List<User> loadedUsers = helper.loadWithEqualsFilter(User.class, "googleId", googleUser.getUserId());
+                // There was no User in the DB; must be a new User.
+                if (genUser == null) {
+                    genUser = new User(googleUser.getNickname(), googleUser.getUserId());
 
-            if (loadedUsers.size() == 0) {
-                genUser = new User(googleUser.getNickname(), googleUser.getUserId());
-                helper.save(genUser);
+                    ObjectifyHelper.save(genUser);
+                }
+                resp.getWriter().write(JsonHelper.objectToJson(genUser));
             }
-            else if (loadedUsers.size() == 1) {
-                genUser = loadedUsers.get(0);
+            catch (Exception ex) {
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
             }
-            else {
-                throw new ServletException("More than one User returned with googleId: " + googleUser.getUserId());
-            }
-
-            JsonHelper jsonHelper = new JsonHelper();
-            resp.getWriter().write(jsonHelper.objectToJson(genUser));
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
+
+        if (googleUser != null) {
+            List<User> loadedUsers = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleUser.getUserId());
+        }
+    }
+
+    private com.google.appengine.api.users.User getGoogleUser() {
+        return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
+    private User queryForUser(String googleId) throws Exception {
+        List<User> userList = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleId);
+
+        if (userList.isEmpty()) {
+            return null;
+        }
+        else if (userList.size() == 1) {
+            return userList.get(0);
+        }
+        else {
+            throw new Exception("More than one User returned with googleId: " + googleId);
+        }
     }
 }

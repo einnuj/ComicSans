@@ -15,7 +15,7 @@ public class MockUserController {
 
     /* Methods */
     public User genMockUser(String userName) {
-        User user = new User(userName);
+        User user = new User(userName, "");
         UserMetadata metadata = user.getMetadata();
 
         // Filling in random data

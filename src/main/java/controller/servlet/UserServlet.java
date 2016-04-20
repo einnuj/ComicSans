@@ -3,6 +3,7 @@ package controller.servlet;
 import controller.mock.MockUserController;
 import model.users.User;
 import utilities.JsonHelper;
+import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,11 +24,12 @@ public class UserServlet extends HttpServlet {
         User newUser = new MockUserController().genMockUser("Junnie");
         req.setAttribute("user", newUser);
 
-        ofy().save().entity(newUser).now();
+        ObjectifyHelper helper = new ObjectifyHelper();
+        helper.save(newUser);
 
         System.out.println("USER SAVED");
 
-        User query = ofy().load().type(User.class).id(newUser.getId()).now();
+        User query = helper.loadById(User.class, newUser.getId());
 
         String userJson = JsonHelper.objectToJson(query);
 

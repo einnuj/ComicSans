@@ -10,6 +10,7 @@ import model.metadata.fields.Favorite;
 import model.metadata.fields.Like;
 import model.users.User;
 import utilities.JsonHelper;
+import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,14 +52,14 @@ public class InitServlet extends HttpServlet {
         metadata.addToFavoriteList(new Favorite("Super Comic", "Stranger3"));
         metadata.addToLikeList(new Like("Super Comic", "Stranger4"));
 
-        ofy().save().entity(comic).now();
+        ObjectifyHelper helper = new ObjectifyHelper();
+        helper.save(comic);
 
         System.out.println("ENTITY SAVED");
 
         assert comic.getId() != null;
 
-        WebComic fetched = ofy().load().type(WebComic.class).id(comic.getId()
-        ).now();
+        WebComic fetched = helper.loadById(WebComic.class, comic.getId());
 
         response.getWriter().write(JsonHelper.objectToJson(fetched));
     }

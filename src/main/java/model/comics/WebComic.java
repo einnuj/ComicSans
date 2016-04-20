@@ -31,6 +31,8 @@ public class WebComic extends ComicMediaParent {
     }
 
     /* Getters */
+    public Long getId() {return id;}
+
     public ComicMetadata getMetadata() {
         return metadata;
     }

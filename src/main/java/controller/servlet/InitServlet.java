@@ -1,12 +1,14 @@
 package controller.servlet;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.impl.translate.opt.joda.JodaTimeTranslators;
 import model.comics.WebComic;
 import model.metadata.ComicMetadata;
 import model.metadata.fields.Bookmark;
 import model.metadata.fields.Comment;
 import model.metadata.fields.Favorite;
 import model.metadata.fields.Like;
+import utilities.JsonHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +26,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 public class InitServlet extends HttpServlet {
     // Register Objectify Entities
     static {
+        JodaTimeTranslators.add(ObjectifyService.factory());
         ObjectifyService.register(WebComic.class);
     }
 
@@ -49,5 +52,12 @@ public class InitServlet extends HttpServlet {
         ofy().save().entity(comic).now();
 
         System.out.println("ENTITY SAVED");
+
+        assert comic.getId() != null;
+
+        WebComic fetched = ofy().load().type(WebComic.class).id(comic.getId()
+        ).now();
+
+        response.getWriter().write(JsonHelper.objectToJson(fetched));
     }
 }

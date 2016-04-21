@@ -1,6 +1,8 @@
 package controller.servlet;
 
 import com.google.appengine.api.users.UserServiceFactory;
+import controller.exceptions.NonUniqueGoogleIdException;
+import controller.exceptions.UserNotFoundException;
 import model.metadata.UserMetadata;
 import model.users.User;
 import utilities.JsonHelper;
@@ -31,6 +33,7 @@ public class UserServlet extends HttpServlet {
         com.google.appengine.api.users.User googleUser = getGoogleUser();
 
         if (googleUser != null) {
+            resp.setContentType("application/json");
             try {
                 User genUser = queryForUser(googleUser.getUserId());
 
@@ -44,8 +47,7 @@ public class UserServlet extends HttpServlet {
                 resp.getWriter().write(JsonHelper.objectToJson(genUser));
                 resp.setStatus(HttpServletResponse.SC_OK);
             }
-            catch (Exception ex) {
-                resp.setContentType("application/json");
+            catch (NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -63,6 +65,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         com.google.appengine.api.users.User googleUser = getGoogleUser();
+        resp.setContentType("application/json");
 
         if (googleUser != null) {
             try {
@@ -70,7 +73,7 @@ public class UserServlet extends HttpServlet {
 
                 // Must have existed for our logic to continue
                 if (currentUser == null) {
-                    throw new Exception("User does not exist in DB.");
+                    throw new UserNotFoundException(googleUser.getUserId());
                 }
 
                 String name = req.getParameter("name");
@@ -84,7 +87,7 @@ public class UserServlet extends HttpServlet {
                 resp.getWriter().write(JsonHelper.objectToJson(currentUser));
                 resp.setStatus(HttpServletResponse.SC_OK);
             }
-            catch (Exception ex) {
+            catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
                 resp.setContentType("application/json");
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
@@ -107,9 +110,9 @@ public class UserServlet extends HttpServlet {
      * Attempts to return the first User with the relevant googleId.
      * @param googleId the unique String representation of a User
      * @return User Object with the same googleId parameter, or null if not found in DataStore
-     * @throws Exception - thrown when more than one Users are returned from the query
+     * @throws NonUniqueGoogleIdException - thrown when more than one Users are returned from the query
      */
-    private User queryForUser(String googleId) throws Exception {
+    private User queryForUser(String googleId) throws NonUniqueGoogleIdException {
         List<User> userList = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleId);
 
         if (userList.isEmpty()) {
@@ -121,7 +124,7 @@ public class UserServlet extends HttpServlet {
             return user;
         }
         else {
-            throw new Exception("More than one User returned with googleId: " + googleId);
+            throw new NonUniqueGoogleIdException(googleId);
         }
     }
 }

@@ -14,7 +14,7 @@ textarea{
 .btn-primary{
     background-color: #f06060 !important;
     border: none !important;
-    border-radius: 0px !important;
+    border-radius: 5px !important;
     padding: 10px !important;
     width: 140px;
 }
@@ -62,14 +62,8 @@ textarea{
     color: white;
 }
 .comic-info {
-    width: 100%;
-    margin-left: 5%;
     margin-top: 5%;
     display: flex;
-}
-.comic-info-descr {
-    width: 50%;
-    margin-left: 5%;
 }
 .comic-info-descr h1 {
     border: none;
@@ -78,15 +72,6 @@ textarea{
 }
 .social-buttons {
     padding-top: 20px;
-}
-.user-comments {
-    margin-left: 5%;
-    margin-top: 5%;
-    padding: 10px;
-    font-size: 15px;
-    width: 80%;
-    border: 1px solid white;
-    border-radius: 10px;
 }
 .create-content {
     border: 1px solid white;
@@ -115,16 +100,9 @@ textarea{
     text-align: center;
     display: block;
     width: 500px;
-
 }
 .comic-reading-dd {
     display: inline-flex;
-}
-#edit-title {
-    display: none;
-}
-#edit-summary {
-    display:none;
 }
 .preview-options {
     margin-top: 25%;

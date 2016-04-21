@@ -1,0 +1,44 @@
+.comic-summary {
+    display: inline-flex;
+}
+.comic-info .glyphicon, .chapter-listing .glyphicon {
+    margin-left: 10px;
+}
+#edit-title {
+    display: none;
+    font-size: 10px;
+}
+#edit-summary {
+    display:none;
+}
+#edit-summary textarea {
+    min-height: 200px;
+    min-width: 500px;
+    resize: none;
+}
+#edit-cover-picker {
+    margin-top: 10px;
+}
+.user-comments {
+    margin-top: 5%;
+    padding: 10px;
+    font-size: 15px;
+    width: 80%;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.chapter-listing {
+    margin-top: 5%;
+    padding: 10px;
+    font-size: 15px;
+}
+.chapter-listing a {
+    color: white;
+}
+.chapter-listing a:hover {
+    text-decoration: none;
+}
+.chapter-listing .btn-primary{
+    margin-top: 10px;
+    text-align: center;
+}

@@ -24,7 +24,9 @@
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <%-- Stylesheets --%>
+    <link href="css/summary.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+
 
     <title>Summary</title>
 </head>
@@ -35,20 +37,27 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
+            <div class="edit-image">
+                <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
+                <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
+            </div>
             <div class="comic-info-descr">
                 <h1 id="title-header">CoConut</h1>
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
                 <div id="edit-title">
-                    <input id="title-text" type="text" value="" />
+                    New Title: <input id="title-text" type="text" value="" />
                 </div>
 
                 <h5>Author: John Smith</h5>
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
+
+                <div class="comic-summary">
+                    <p id="summary-paragraph">Follow the adventures of CoConut, the most relatable fruit in the world.
+                    </p>
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
+                </div>
                 <div id="edit-summary">
                     <textarea id="summary-text-area" value=""></textarea>
                 </div>
-                <p id="summary-paragraph">Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                 <br>
                 <br>
                 <br>
@@ -60,14 +69,32 @@
                 <p>Favorites: 15</p>
                 <p>Last updated: <em>3 days ago</em></p>
                 <div class="social-buttons">
-                    <a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                    <a class="btn btn-lg btn-primary" role="button">Favorite</a>
-                    <a class="btn btn-lg btn-primary" role="button">Like</a>
-                    <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now</a>
+                    <a class="btn btn-lg btn-primary" role="button">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
-        <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
+        <div class="chapter-listing">
+            <div class="row">
+                <div class="col-md-6"><h3>Chapters</h3></div>
+                <div class="col-md-6"><h3>Date</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6"><a href="">Chapter 01</a></div>
+                <div class="col-md-6">Today</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6"><a href="">Chapter 02</a></div>
+                <div class="col-md-6">Today</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6"><a href="">Chapter 03</a></div>
+                <div class="col-md-6">Today</div>
+            </div>
+            <a class="btn btn-lg btn-primary" role="button" href="">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+        </div>
         <div class="user-comments">
             <p>Probably the funniest thing I've read in a while! Easily my favorite!</p>
             <em>saucetrocity</em>

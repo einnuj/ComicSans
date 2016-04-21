@@ -98,4 +98,28 @@ public class UserMetadata extends AbstractMetadata {
     public int getNumberOfComicsRated() {
         return comicsRatedList.size();
     }
+
+    @Override
+    public void reload() {
+        super.reload();
+
+        if (comicsCreatedList == null) {
+            comicsCreatedList = new ArrayList<WebComic>();
+        }
+        if (comicsBookmarkedList == null) {
+            comicsBookmarkedList = new ArrayList<Bookmark>();
+        }
+        if (comicsCommentedList == null) {
+            comicsCommentedList = new ArrayList<Comment>();
+        }
+        if (comicsFavoritedList == null) {
+            comicsFavoritedList = new ArrayList<Favorite>();
+        }
+        if (comicsLikedList == null) {
+            comicsLikedList = new ArrayList<Like>();
+        }
+        if (comicsRatedList == null) {
+            comicsRatedList = new ArrayList<Rating>();
+        }
+    }
 }

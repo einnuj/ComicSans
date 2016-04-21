@@ -1,5 +1,6 @@
 package model.comics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,4 +31,9 @@ abstract class ComicMediaParent extends ComicMedia {
     /* Abstract Methods */
 
     public abstract void addToChildMediaList(ComicMedia mediaToAdd);
+
+    /**
+     * If this Object's lists are null, will initialize them to an Empty List.
+     */
+    public abstract void reload();
 }

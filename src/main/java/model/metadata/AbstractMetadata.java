@@ -89,4 +89,22 @@ class AbstractMetadata {
     public void addToLikeList(Like like) {
         likeList.add(like);
     }
+
+    /**
+     * Will reinitialize any null Collections in the Object
+     */
+    public void reload() {
+        if (bookmarkList == null) {
+            bookmarkList = new ArrayList<Bookmark>();
+        }
+        if (commentList == null) {
+            commentList = new ArrayList<Comment>();
+        }
+        if (favoriteList == null) {
+            favoriteList = new ArrayList<Favorite>();
+        }
+        if (likeList == null) {
+            likeList = new ArrayList<Like>();
+        }
+    }
 }

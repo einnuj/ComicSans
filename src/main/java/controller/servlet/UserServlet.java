@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import com.google.appengine.api.users.UserServiceFactory;
+import model.metadata.UserMetadata;
 import model.users.User;
 import utilities.JsonHelper;
 import utilities.data.ObjectifyHelper;
@@ -115,7 +116,9 @@ public class UserServlet extends HttpServlet {
             return null;
         }
         else if (userList.size() == 1) {
-            return userList.get(0);
+            User user = userList.get(0);
+            user.getMetadata().reload();    // Reinstantiates any null Collection resulting from DS load
+            return user;
         }
         else {
             throw new Exception("More than one User returned with googleId: " + googleId);

@@ -38,20 +38,20 @@
     <div class="info-container">
         <div class="comic-info">
             <div class="edit-image">
-                <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
+                <img id="cover-thumbnail" src="" />
                 <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
             </div>
             <div class="comic-info-descr">
-                <h1 id="title-header">CoConut</h1>
+                <h1 id="title-header"></h1>
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
                 <div id="edit-title">
                     New Title: <input id="title-text" type="text" value="" />
                 </div>
 
-                <h5>Author: John Smith</h5>
+                <h5 id="author-header">Author: </h5>
 
                 <div class="comic-summary">
-                    <p id="summary-paragraph">Follow the adventures of CoConut, the most relatable fruit in the world.
+                    <p id="summary-paragraph">
                     </p>
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
                 </div>

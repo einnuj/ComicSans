@@ -22,8 +22,8 @@ public class UserServlet extends HttpServlet {
      * Writes a JSON representation of the User if they're logged in to Response.
      * @param req the HttpServletRequest Object
      * @param resp the HttpServletResponse Object
-     * @throws ServletException - thrown when there are multiple Users with the same googleId as the Google.User.
-     * @throws IOException - not explicitly thrown.
+     * @throws ServletException - not explicitly thrown
+     * @throws IOException - not explicitly thrown
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,7 +39,9 @@ public class UserServlet extends HttpServlet {
 
                     ObjectifyHelper.save(genUser);
                 }
+
                 resp.getWriter().write(JsonHelper.objectToJson(genUser));
+                resp.setStatus(HttpServletResponse.SC_OK);
             }
             catch (Exception ex) {
                 resp.setContentType("application/json");
@@ -50,12 +52,49 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Augments a User's Metadata according to parameter fields and returns a JSON representation of the User.
+     * @param req the HttpServletRequest Object
+     * @param resp the HttpServletResponse Object
+     * @throws ServletException - not explicitly thrown
+     * @throws IOException - not explicitly thrown
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         com.google.appengine.api.users.User googleUser = getGoogleUser();
 
         if (googleUser != null) {
-            List<User> loadedUsers = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleUser.getUserId());
+            try {
+                User currentUser = queryForUser(googleUser.getUserId());
+
+                // Must have existed for our logic to continue
+                if (currentUser == null) {
+                    throw new Exception("User does not exist in DB.");
+                }
+
+                String name = req.getParameter("name");
+                String description = req.getParameter("description");
+
+                currentUser.getMetadata().setName(name);
+                currentUser.getMetadata().setBio(description);
+
+                ObjectifyHelper.save(currentUser);
+
+                resp.getWriter().write(JsonHelper.objectToJson(currentUser));
+                resp.setStatus(HttpServletResponse.SC_OK);
+            }
+            catch (Exception ex) {
+                resp.setContentType("application/json");
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+        else {
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"error\":\"No User Logged In\"}");
+
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 
@@ -63,6 +102,12 @@ public class UserServlet extends HttpServlet {
         return UserServiceFactory.getUserService().getCurrentUser();
     }
 
+    /**
+     * Attempts to return the first User with the relevant googleId.
+     * @param googleId the unique String representation of a User
+     * @return User Object with the same googleId parameter, or null if not found in DataStore
+     * @throws Exception - thrown when more than one Users are returned from the query
+     */
     private User queryForUser(String googleId) throws Exception {
         List<User> userList = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleId);
 

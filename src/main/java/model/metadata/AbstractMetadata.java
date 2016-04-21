@@ -71,6 +71,8 @@ class AbstractMetadata {
         this.bio = bio;
     }
 
+    public void setName(String name) { this.name = name; }
+
     public void setDisplayPicture(String displayPicture) {
         this.displayPicture = displayPicture;
     }

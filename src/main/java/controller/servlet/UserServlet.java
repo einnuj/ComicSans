@@ -42,7 +42,10 @@ public class UserServlet extends HttpServlet {
                 resp.getWriter().write(JsonHelper.objectToJson(genUser));
             }
             catch (Exception ex) {
-                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
+                resp.setContentType("application/json");
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }
     }

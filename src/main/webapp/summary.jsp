@@ -93,7 +93,7 @@
                 <div class="col-md-6"><a href="">Chapter 03</a></div>
                 <div class="col-md-6">Today</div>
             </div>
-            <a class="btn btn-lg btn-primary" role="button" href="">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+            <a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
         </div>
         <div class="user-comments">
             <p>Probably the funniest thing I've read in a while! Easily my favorite!</p>

@@ -12,12 +12,12 @@ abstract class AbstractField {
     // This will become a User Object
     private String userOrigin;
 
-    private DateTime dateTimeCreated;
+    private long timeCreatedMillis;
 
     AbstractField(String comicTarget, String userOrigin) {
         this.comicTarget = comicTarget;
         this.userOrigin = userOrigin;
-        this.dateTimeCreated = DateTime.now();
+        this.timeCreatedMillis = System.currentTimeMillis();
     }
 
     /* Getters */
@@ -30,7 +30,7 @@ abstract class AbstractField {
         return userOrigin;
     }
 
-    public DateTime getDateTime() {
-        return dateTimeCreated;
+    public long getTimeCreatedMillis() {
+        return timeCreatedMillis;
     }
 }

@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 public class Comment extends AbstractField {
     private String description;
 
-    private DateTime lastEditedTime;
+    private long lastEditedTimeMillis;
 
     public Comment(String comicTarget, String userOrigin, String description) {
         super(comicTarget, userOrigin);
@@ -23,8 +23,8 @@ public class Comment extends AbstractField {
         return description;
     }
 
-    public DateTime getLastEditedTime() {
-        return lastEditedTime;
+    public long getLastEditedTimeMillis() {
+        return lastEditedTimeMillis;
     }
 
     /* Setters */
@@ -36,6 +36,6 @@ public class Comment extends AbstractField {
     /* Methods */
 
     public void updateLastEditedTime() {
-        this.lastEditedTime = DateTime.now();
+        this.lastEditedTimeMillis = System.currentTimeMillis();
     }
 }

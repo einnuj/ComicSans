@@ -48,4 +48,13 @@ public class ComicMetadata extends AbstractMetadata {
     /* Methods */
 
     public void addToRatingList(Rating rating) { ratingList.add(rating); }
+
+    @Override
+    public void reload() {
+        super.reload();
+
+        if (ratingList == null) {
+            ratingList = new ArrayList<Rating>();
+        }
+    }
 }

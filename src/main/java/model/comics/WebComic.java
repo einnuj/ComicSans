@@ -45,4 +45,11 @@ public class WebComic extends ComicMediaParent {
             childMediaList.add((ComicChapter) mediaToAdd);
         }
     }
+
+    @Override
+    public void reload() {
+        if (childMediaList == null) {
+            childMediaList = new ArrayList<ComicChapter>();
+        }
+    }
 }

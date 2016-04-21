@@ -24,4 +24,11 @@ public class ComicChapter extends ComicMediaParent {
             childMediaList.add((ComicPage) mediaToAdd);
         }
     }
+
+    @Override
+    public void reload() {
+        if (childMediaList == null) {
+            childMediaList = new ArrayList<ComicPage>();
+        }
+    }
 }

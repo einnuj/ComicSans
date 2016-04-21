@@ -42,25 +42,6 @@ public class InitServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WebComic comic = new WebComic("Super Comic", "Junnie");
-        ComicMetadata metadata = comic.getMetadata();
 
-        metadata.setBio("Totally awesome bio");
-        metadata.addToBookmarkList(new Bookmark("Super Comic", "Stranger1"));
-        metadata.addToCommentList(new Comment("Super Comic", "Stranger2",
-                "Totes awesome bruh"));
-        metadata.addToFavoriteList(new Favorite("Super Comic", "Stranger3"));
-        metadata.addToLikeList(new Like("Super Comic", "Stranger4"));
-
-        ObjectifyHelper helper = new ObjectifyHelper();
-        helper.save(comic);
-
-        System.out.println("ENTITY SAVED");
-
-        assert comic.getId() != null;
-
-        WebComic fetched = helper.loadById(WebComic.class, comic.getId());
-
-        response.getWriter().write(JsonHelper.objectToJson(fetched));
     }
 }

@@ -33,6 +33,8 @@ class AbstractMetadata {
         likeList = new ArrayList<Like>();
     }
 
+    AbstractMetadata(){}
+
     /* Getters */
 
     public String getBio() {
@@ -68,6 +70,8 @@ class AbstractMetadata {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    public void setName(String name) { this.name = name; }
 
     public void setDisplayPicture(String displayPicture) {
         this.displayPicture = displayPicture;

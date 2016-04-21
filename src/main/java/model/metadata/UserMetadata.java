@@ -31,6 +31,8 @@ public class UserMetadata extends AbstractMetadata {
         comicsRatedList = new ArrayList<Rating>();
     }
 
+    UserMetadata(){}
+
     /* Getters */
 
     public List<WebComic> getComicsCreatedList() {

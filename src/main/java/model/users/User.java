@@ -2,6 +2,7 @@ package model.users;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import model.metadata.UserMetadata;
 
 /**
@@ -13,17 +14,23 @@ public class User {
     @Id
     private Long id;
 
+    @Index
+    private String googleId;
+
     private UserMetadata metadata;
 
     private User() {}
 
-    public User(String name) {
+    public User(String name, String googleId) {
+        this.googleId = googleId;
         metadata = new UserMetadata(name);
     }
 
     /* Getters */
 
-    public Long getId() {return id; }
+    public Long getId() { return id; }
+
+    public String getGoogleId() { return googleId; }
 
     public UserMetadata getMetadata() { return metadata; }
 

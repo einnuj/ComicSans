@@ -31,4 +31,13 @@ function mockObjectify() {
         }
         })}
 
-$(document).ready(mockObjectify());
+function mockEditUser() {
+    $.ajax({
+        url: "/UserServlet",
+        type: "post",
+        data: {"name" : "Junnie", "description" : "BRAND NEW"},
+        success: function(responseText) {
+            $("#editUserJson > a").text(responseText);
+        }
+    })
+}

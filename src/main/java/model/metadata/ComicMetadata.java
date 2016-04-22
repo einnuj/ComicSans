@@ -1,8 +1,5 @@
 package model.metadata;
 
-import model.metadata.fields.Comment;
-import model.metadata.fields.Favorite;
-import model.metadata.fields.Like;
 import model.metadata.fields.Rating;
 
 import java.util.ArrayList;
@@ -18,6 +15,8 @@ public class ComicMetadata extends AbstractMetadata {
     private GenreEnum genre;
 
     private List<Rating> ratingList;
+
+    ComicMetadata(){};
 
     public ComicMetadata(String name, String author) {
         super(name);

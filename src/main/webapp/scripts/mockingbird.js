@@ -14,10 +14,36 @@ function mockUser() {
 
 function mockComic() {
     $.ajax({
-        url: "/ComicServlet.create",
-        type: "get",
+        url: "/ComicServlet",
+        type: "post",
+        data: {"action" : "CREATE COMIC", "name" : "CAPTAIN PLAN IT", "description" : "dotally rad comik"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
+
+            comicId = responseText.id;
+            $("#getComicDiv > a").show();
+        }
+    })
+}
+
+function mockCreateChapterAndPages() {
+    $.ajax({
+        url: "/ComicServlet",
+        type: "post",
+        data: {"action" : "CREATE CHAPTER", "id" : comicId, "name" : "Napter Chame", "files" : "file1"},
+        success: function() {
+            console.log("SUCCESS");
+        }
+    })
+}
+
+function mockGetComic() {
+    $.ajax({
+        url:"/ComicServlet",
+        type: "get",
+        data: {"id" : comicId},
+        success: function(responseText) {
+            $("#getComicDiv > a").text(responseText);
         }
     })
 }
@@ -41,3 +67,9 @@ function mockEditUser() {
         }
     })
 }
+
+function hideGetComic() {
+    $("#getComicDiv > a").hide();
+}
+
+$(document).ready(hideGetComic());

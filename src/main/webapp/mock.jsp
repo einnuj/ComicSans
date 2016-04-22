@@ -16,10 +16,16 @@
             <a href="#" onclick="mockUser()">Click Here To Get USER</a>
         </div>
         <div id="comicJson">
-            <a href="#" onclick="mockComic()">Click Here To Get COMIC</a>
+            <a href="#" onclick="mockComic()">Click Here To Create COMIC</a>
         </div>
         <div id="editUserJson">
             <a href="#" onclick="mockEditUser()">Click Here To Edit USER!</a>
+        </div>
+        <div id="addChapter">
+            <a href="#" onclick="mockCreateChapterAndPages()">Click Here To Generate CHAPTER/PAGES!</a>
+        </div>
+        <div id="getComicDiv">
+            <a href="#" onclick="mockGetComic()">Click Here to GET Comic</a>
         </div>
     </div>
 </body>

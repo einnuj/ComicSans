@@ -2,6 +2,7 @@ package model.comics;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Subclass;
 import model.metadata.ComicMetadata;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by einnuj on 4/7/2016.
  */
 @Entity
+@Subclass
 public class WebComic extends ComicMediaParent {
     @Id
     private Long id;

@@ -29,7 +29,7 @@
 
     <servlet-mapping>
         <servlet-name>ComicServlet</servlet-name>
-        <url-pattern>/ComicServlet.create</url-pattern>
+        <url-pattern>/ComicServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -51,6 +51,15 @@
     <servlet-mapping>
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MockComicServlet</servlet-name>
+        <servlet-class>controller.servlet.MockComicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MockComicServlet</servlet-name>
+        <url-pattern>/MockComicServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify Filter -->

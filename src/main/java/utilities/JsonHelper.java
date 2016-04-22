@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * A Class that de/serializes between JSON and Objects.
@@ -18,5 +19,9 @@ public class JsonHelper {
 
     public static <T> T jsonToObject (String json, Class<T> tClass) throws IOException {
         return mapper.readValue(json, tClass);
+    }
+
+    public static <T> List jsonArrayToListGeneric (String json, Class<T> tClass) throws IOException {
+        return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, tClass));
     }
 }

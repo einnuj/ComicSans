@@ -12,7 +12,7 @@ import java.util.List;
  * An Abstract class that is the ancestor of all Metadata classes.
  * Created by einnuj.
  */
-class AbstractMetadata {
+abstract class AbstractMetadata {
     private String bio;
     private String name;
     private String displayPicture;          // This is a stand-in type.

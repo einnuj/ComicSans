@@ -300,9 +300,8 @@ window.onload = function() {
             var activeObject = canvas.getActiveObject(),
                 activeGroup = canvas.getActiveGroup();
             if (activeObject) {
-                if (confirm('Are you sure?')) {
-                    canvas.remove(activeObject);
-                }
+                canvas.remove(activeObject);
+
             }
             else if (activeGroup) {
                 if (confirm('Are you sure?')) {

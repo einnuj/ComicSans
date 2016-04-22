@@ -14,8 +14,9 @@ function mockUser() {
 
 function mockComic() {
     $.ajax({
-        url: "/ComicServlet.create",
+        url: "/ComicServlet",
         type: "get",
+        data: {"name" : "NEW NAME", "description" : "NEW BIO"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
         }

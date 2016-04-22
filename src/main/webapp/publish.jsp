@@ -60,6 +60,7 @@
                         <label for="titleid">Title:</label>
                         <br>
                         <input type="text" name="title" id="titleid"/> <br>
+                        <br>
                         <input id ="fileSubmit" type="file" name="comicPage" accept="">
                         <br>
                         <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>

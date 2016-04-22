@@ -31,7 +31,7 @@
 <div class="info-container">
     <div class="comic-info">
         <div class="edit-image">
-            <img id="cover-thumbnail" src="" />
+            <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
         </div>
         <div class="chapter-info-descr">
             <h1>Chapter 01</h1>

@@ -33,6 +33,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>controller.servlet.CreateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/CreateServlet.save</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>controller.servlet.InitServlet</servlet-class>
         <load-on-startup>0</load-on-startup>

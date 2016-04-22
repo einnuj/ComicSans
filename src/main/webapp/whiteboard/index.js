@@ -82,7 +82,7 @@ window.onload = function() {
                 size = parseInt(size, 10);
 
                 canvas.add(new fabric.Text(text, {
-                    fontFamily: 'Arial',
+                    fontFamily: font,
                     fontSize: size,
                     left: mouse_pos.x,
                     top: mouse_pos.y,
@@ -247,6 +247,17 @@ window.onload = function() {
             //window.localStorage.setItem("hoge", json);
 
             // $http.post('ENTER SERVER URL HERE', json);
+            $.ajax({
+                type: "POST",
+                url: "/CreateServlet.save",
+                data: {json: JSON.stringify(canvas)},
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
         });
         $("#load").click(function(){
             canvas.isDrawingMode = false;

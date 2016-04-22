@@ -38,17 +38,17 @@
     <div class="info-container">
         <div class="comic-info">
             <div class="edit-image">
-                <img id="cover-thumbnail" src="" />
+                <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
                 <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
             </div>
             <div class="comic-info-descr">
-                <h1 id="title-header"></h1>
+                <h1 id="title-header">CoConut</h1>
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
                 <div id="edit-title">
                     New Title: <input id="title-text" type="text" value="" />
                 </div>
 
-                <h5 id="author-header">Author: </h5>
+                <h5 id="author-header">Author: John Smith</h5>
 
                 <div class="comic-summary">
                     <p id="summary-paragraph">
@@ -56,6 +56,7 @@
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
                 </div>
                 <div id="edit-summary">
+                    This is an example of a comic summary.
                     <textarea id="summary-text-area" value=""></textarea>
                 </div>
                 <br>
@@ -82,7 +83,7 @@
                 <div class="col-md-6"><h3>Date</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-6"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a><a href=""> Chapter 01</a></div>
+                <div class="col-md-6"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a><a href="read.jsp"> Chapter 01</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <div class="row">

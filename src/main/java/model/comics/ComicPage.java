@@ -1,14 +1,19 @@
 package model.comics;
 
+import com.googlecode.objectify.annotation.Subclass;
+
 /**
  * A class that represents a single page in a comic.
  * Created by einnuj on 4/7/2016.
  */
+@Subclass
 public class ComicPage extends ComicMedia {
     private String imgURL;
     private int pageNumber;
     private int chapterNumber;
     private String genre;
+
+    ComicPage(){}
 
     // TODO: evaluate purpose of this constructor
     public ComicPage(String name, String imgURL, int pageNumber, int chapterNumber, String genre) {

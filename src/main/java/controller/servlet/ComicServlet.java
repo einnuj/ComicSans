@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * A Servlet that will respond with a WebComic class.
@@ -44,13 +43,10 @@ public class ComicServlet extends HttpServlet {
                     }
 
                     String name = req.getParameter("name");
-                    List<String> fileList = JsonHelper.jsonArrayToListGeneric(req.getParameter("files"), String.class);
+                    String file = req.getParameter("files");
 
                     ComicChapter newChapter = new ComicChapter(name);
-
-                    for (String pageString : fileList) {
-                        newChapter.addToChildMediaList(new ComicPage("", pageString));
-                    }
+                    newChapter.addToChildMediaList(new ComicPage("fileName", file));
 
                     comic.addToChildMediaList(newChapter);
 
@@ -124,7 +120,7 @@ public class ComicServlet extends HttpServlet {
         Long id = Long.valueOf(req.getParameter("id"));
 
         if (id != null) {
-            resp.setContentType("application/json");
+            //resp.setContentType("application/json");
 
             try {
                 WebComic webComic = ComicAccess.queryForComic(id);

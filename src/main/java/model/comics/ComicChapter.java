@@ -1,5 +1,7 @@
 package model.comics;
 
+import com.googlecode.objectify.annotation.Subclass;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,11 @@ import java.util.List;
  * A ComicMediaParent class that represents a ComicChapter.
  * Created by einnuj on 4/7/2016.
  */
+@Subclass
 public class ComicChapter extends ComicMediaParent {
     private List<ComicPage> childMediaList;
+
+    ComicChapter(){}
 
     public ComicChapter(String name) {
         super(name);

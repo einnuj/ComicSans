@@ -82,7 +82,7 @@ window.onload = function() {
                 size = parseInt(size, 10);
 
                 canvas.add(new fabric.Text(text, {
-                    fontFamily: 'Arial',
+                    fontFamily: font,
                     fontSize: size,
                     left: mouse_pos.x,
                     top: mouse_pos.y,
@@ -242,11 +242,20 @@ window.onload = function() {
             // save to localStorage
             var json = JSON.stringify(canvas);
             var url = 'data:text/json;charset=utf8,' + encodeURIComponent(json);
-            window.open(url, '_blank');
-            window.focus();
-            //window.localStorage.setItem("hoge", json);
 
-            // $http.post('ENTER SERVER URL HERE', json);
+            //window.localStorage.setItem("hoge", json);
+            
+            $.ajax({
+                type: "POST",
+                url: "/CreateServlet.save",
+                data: {json: JSON.stringify(canvas)},
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
         });
         $("#load").click(function(){
             canvas.isDrawingMode = false;
@@ -254,7 +263,19 @@ window.onload = function() {
             //clear canvas
             canvas.clear();
             //load from localStorage
-            canvas.loadFromJSON(window.localStorage.getItem("hoge"));
+            //canvas.loadFromJSON(window.localStorage.getItem("hoge"));
+            $.ajax({
+                type: "GET",
+                url: "/CreateServlet.save",
+                data: {get_param: 'value'},
+                success: function(data){
+
+                    canvas.loadFromJSON(data);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
             // re-render the canvas
             canvas.renderAll();
             // optional

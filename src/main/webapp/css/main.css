@@ -73,21 +73,6 @@ textarea{
 .social-buttons {
     padding-top: 20px;
 }
-.create-content {
-    border: 1px solid white;
-    padding: 10px 0px 10px 0px;
-    border-radius: 10px;
-    width: 80%;
-}
-.create-content form, .input-group {
-    padding: 10px;
-    font-size: 15px;
-}
-.create-content img {
-    margin-left: 10px;
-    width: 900px;
-    height: auto;
-}
 .comic-reading {
     height: auto;
     position: relative;

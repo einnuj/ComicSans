@@ -1,30 +1,39 @@
-#title { overflow: hidden; position: relative; }
-
 #tool {
     margin: 10px 10px 10px;
 }
-
 #canvas {
     border: 1px solid black;
 }
-
 #drawing-mode-options {
     display: inline-block;
     vertical-align: top;
     margin-bottom: 10px;
     margin-top: 10px;
-    background: #f5f2f0;
     padding: 10px;
 }
-
 #slider {
     width: 30%;
 }
-
 #labelForAmount {
     font-size:12px;
 }
-
 #amount {
     background: transparent;
+}
+.drawing-board {
+    background-color: white;
+    width: 960px;
+    margin: auto;
+    padding: 30px;
+    color: black;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.drawing-board .btn-primary {
+    margin: 1px;
+    font-size: 10px;
+    width: 120px;
+}
+.drawing-board .glyphicon {
+    margin-left: 3px;
 }

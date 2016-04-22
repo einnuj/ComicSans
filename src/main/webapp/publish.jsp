@@ -24,6 +24,7 @@
 
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/publish.css" rel="stylesheet">
 
     <title>Publish</title>
 </head>
@@ -67,12 +68,13 @@
                 </li>
             </ul>
         </div>
-        <h1>Create</h1>
+        <h1>Draw</h1>
         <div class="create-content">
-            <img src="images/APIplaceholder.png" />
-            <form action="">
-                <input class="btn btn-primary" type="submit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            </form>
+            <p>
+            Comic Sans allows you to draw and submit your artwork all in one place! Prepare your drawing
+            tablet and hands to create something awesome! <br><br>
+            <a class="btn btn-lg btn-primary" role="button" href="whiteboard/index.jsp">Let's Draw!</a>
+            </p>
         </div>
     </div>
 </body>

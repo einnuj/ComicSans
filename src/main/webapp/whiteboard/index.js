@@ -67,13 +67,13 @@ window.onload = function() {
                 var context = canvas.getContext('2d');
             }
 
-            var text, size, color;
+            var text, size, font;
 
             var mouse_pos = { x:0 , y:0 };
 
             text = $('#text').val();
             size = $('#size').val();
-            color = $('#color').val();
+            font = $('#textdropdown').val();
 
 
             canvas.observe('mouse:down', function(e) {

@@ -10,17 +10,18 @@ var editSummary = false;
 // Get data from a mock comic to populate the summary page
 //var JSONcomic = '{"name":"CoConut","childMediaList":null,"id":null,"metadata":{"bio":"Follow the adventures of CoConut, the most relatable fruit in the world.","name":"Comic Sam","displayPicture":"images/covers/CoConutCover.png","bookmarkList":[{"comicTarget":"Comic Sam","userOrigin":"Junnie","timeCreatedMillis":1461279320918},{"comicTarget":"Comic Sam","userOrigin":"Maggie","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Chaerin","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Barack Obama","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Alexander Hamilton","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Richard McKenna","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Jennifer Wong","timeCreatedMillis":1461279320919}],"commentList":[{"comicTarget":"Comic Sam","userOrigin":"Maggie","timeCreatedMillis":1461279320919,"description":"Great Comic!","lastEditedTimeMillis":0},{"comicTarget":"Comic Sam","userOrigin":"John Cena","timeCreatedMillis":1461279320919,"description":"Great Comic!","lastEditedTimeMillis":0},{"comicTarget":"Comic Sam","userOrigin":"Jennifer Wong","timeCreatedMillis":1461279320919,"description":"Great Comic!","lastEditedTimeMillis":0},{"comicTarget":"Comic Sam","userOrigin":"Son Goku","timeCreatedMillis":1461279320919,"description":"Great Comic!","lastEditedTimeMillis":0}],"favoriteList":[{"comicTarget":"Comic Sam","userOrigin":"Junnie","timeCreatedMillis":1461279320918},{"comicTarget":"Comic Sam","userOrigin":"Maggie","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"John","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Chaerin","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Barack Obama","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Alexander Hamilton","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Richard McKenna","timeCreatedMillis":1461279320919}],"likeList":[{"comicTarget":"Comic Sam","userOrigin":"Junnie","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"John","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Barack Obama","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"John Cena","timeCreatedMillis":1461279320919},{"comicTarget":"Comic Sam","userOrigin":"Son Goku","timeCreatedMillis":1461279320919}],"author":"Maggie Lei","genre":"UNLISTED","ratingList":[{"comicTarget":"Comic Sam","userOrigin":"John","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"Chaerin","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"Alexander Hamilton","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"John Cena","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"Richard McKenna","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"Jennifer Wong","timeCreatedMillis":1461279320919,"rating":4},{"comicTarget":"Comic Sam","userOrigin":"Son Goku","timeCreatedMillis":1461279320919,"rating":4}]}}';
 
-var name;
-var author;
-var biography;
-var cover;
-var JSONcomic = '';
+//var name;
+//var author;
+//var biography;
+//var cover;
+//var JSONcomic = '';
+
+
+
 mockComic();
 //var obj = JSON.parse(JSONcomic);
 
-
-
-var mockUser = mockUser();
+//var mockUser = mockUser();
 //var mockObjectify = mockObjectify();
 
 function editComicSummary(comic) {
@@ -103,7 +104,13 @@ function mockComic() {
             $("#summary-text-area").html(biography);
 
             // Set the cover image
-            $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
+            var number = localStorage.getItem("ComicNumberSelected");
+            if (number == 1)
+                $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
+            else if (number == 2)
+                $("#cover-thumbnail").attr("src", "images/covers/DoenutCover.png");
+            else
+                $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
         }
     })
 }

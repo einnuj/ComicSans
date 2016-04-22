@@ -10,7 +10,7 @@ public class ComicPage extends ComicMedia {
     private int chapterNumber;
     private String genre;
 
-
+    // TODO: evaluate purpose of this constructor
     public ComicPage(String name, String imgURL, int pageNumber, int chapterNumber, String genre) {
         super(name);
 
@@ -18,6 +18,12 @@ public class ComicPage extends ComicMedia {
         this.pageNumber = pageNumber;
         this.genre = genre;
         this.chapterNumber = chapterNumber;
+    }
+
+    public ComicPage(String name, String imgURL) {
+        super(name);
+
+        this.imgURL = imgURL;
     }
 
     /* Getters */

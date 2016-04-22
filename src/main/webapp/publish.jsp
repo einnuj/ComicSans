@@ -56,9 +56,9 @@
                             <option>Sports</option>
                             <option>Thriller</option>
                         </select>
-                        <br>
-                        <label for="titleid">Title:</label>
                         <br><br>
+                        <label for="titleid">Title:</label>
+                        <br>
                         <input type="text" name="title" id="titleid"/> <br>
                         <input id ="fileSubmit" type="file" name="comicPage" accept="">
                         <br>

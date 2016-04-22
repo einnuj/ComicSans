@@ -82,15 +82,15 @@
                 <div class="col-md-6"><h3>Date</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-6"><a href="">Chapter 01</a></div>
+                <div class="col-md-6"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a><a href=""> Chapter 01</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <div class="row">
-                <div class="col-md-6"><a href="">Chapter 02</a></div>
+                <div class="col-md-6"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a><a href=""> Chapter 02</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <div class="row">
-                <div class="col-md-6"><a href="">Chapter 03</a></div>
+                <div class="col-md-6"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a><a href=""> Chapter 03</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>

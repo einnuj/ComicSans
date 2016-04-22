@@ -1,7 +1,7 @@
 .comic-summary {
     display: inline-flex;
 }
-.comic-info .glyphicon, .chapter-listing .glyphicon {
+.comic-info .glyphicon, .chapter-listing .glyphicon, .page-listing .glyphicon {
     margin-left: 10px;
 }
 #edit-title {
@@ -37,8 +37,35 @@
 }
 .chapter-listing a:hover {
     text-decoration: none;
+    color: #8d8d8d;
 }
 .chapter-listing .btn-primary{
     margin-top: 10px;
     text-align: center;
+}
+.row .glyphicon {
+    margin-left: 0;
+    margin-right: 20px;
+}
+.page-listing {
+    display: inline-flex;
+}
+.page-block{
+    width: 200px;
+    padding: 0;
+    text-align: center;
+}
+.page-block img {
+    width: 80%;
+    height: auto;
+    padding: 15px;
+}
+.page-block .btn-primary {
+    width: 100px;
+}
+.chapter-info-descr {
+    margin-left: 1em;
+}
+.chapter-info-descr button{
+    margin-left: 1em;
 }

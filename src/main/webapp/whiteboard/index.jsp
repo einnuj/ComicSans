@@ -55,6 +55,7 @@
             <button class=btn-primary id="clear" type="button">Clear Canvas <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
             <button class=btn-primary id="draw" type="button">Draw <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
             <button class=btn-primary id="stopDraw" type="button">Select <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></button>
+            <button class=btn-primary id="remove" type="button">Remove object <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button>
             <br><br>
             <label for="amount" id="labelForAmount">Set Width:</label>
             <input type="text" id="amount" readonly>
@@ -70,8 +71,6 @@
             <button class=btn-primary id="circle" type="button">Add circle</button>
             <button class=btn-primary id="ellipse" type="button">Add ellipse</button>
             <button class=btn-primary id="line" type="button">Draw line</button>
-            <br>
-            <button class=btn-primary id="remove" type="button">Remove object <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button>
             <br>
             <button class=btn-primary id="text_input" type="button">Input Text <span class="glyphicon glyphicon-font" aria-hidden="true"></span></button>
             <input id="text" name="text" type="text" size="40" value="Input here!">

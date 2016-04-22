@@ -66,7 +66,7 @@
                         <h3>John Smith</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" href="summary.jsp" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(1)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(2)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                         <h3>Ian McKellen</h3>
                         <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(3)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -154,3 +154,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="scripts/authentication.js"></script>
+<script>
+    function selectFromHome(num) {
+        localStorage.setItem("ComicNumberSelected", num);
+        window.location.assign("summary.jsp");
+    }
+</script>

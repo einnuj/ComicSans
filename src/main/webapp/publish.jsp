@@ -34,16 +34,15 @@
     <jsp:include page="${sideNav}"></jsp:include>
 
     <div class="info-container">
-        <h1>Upload</h1>
+        <h1>Upload New Series</h1>
         <div class="create-content">
             <ul>
-
                 <li>
                     <form id="submitComicForm" name="submitForm">
-                        <label for="chapterNumber" id="labelForChapter">Chapter:</label>
-                        <input type="text" name="chapter" id="chapterNumber"/> <br>
-                        <label for="pageNumber" id="labelForPage">Page:</label>
-                        <input type="text" name="page" id="pageNumber"/> <br>
+                        <label for="titleid">Title:</label>
+                        <br>
+                        <input type="text" name="title" id="titleid"/>
+                        <br><br>
                         <label for="genreName" id="labelForGenre">Genre:</label>
                         <select id="genreName">
                             <option>Action</option>
@@ -55,12 +54,11 @@
                             <option>Romance</option>
                             <option>Sports</option>
                             <option>Thriller</option>
-                        </select>
+                        </select><br><br>
+                        <label for="comicSummary">Summary:</label>
+                        <br>
+                        <textarea type="input" name="summary" id="comicSummary"></textarea>
                         <br><br>
-                        <label for="titleid">Title:</label>
-                        <br>
-                        <input type="text" name="title" id="titleid"/> <br>
-                        <br>
                         <input id ="fileSubmit" type="file" name="comicPage" accept="">
                         <br>
                         <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
@@ -72,6 +70,7 @@
         <h1>Draw</h1>
         <div class="create-content">
             <p>
+                <br>
             Comic Sans allows you to draw and submit your artwork all in one place! Prepare your drawing
             tablet and hands to create something awesome! <br><br>
             <a class="btn btn-lg btn-primary" role="button" href="whiteboard/index.jsp">Let's Draw!</a>

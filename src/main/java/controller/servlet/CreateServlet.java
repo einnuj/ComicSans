@@ -1,11 +1,14 @@
 package controller.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.users.UserServiceFactory;
+import controller.exceptions.NonUniqueGoogleIdException;
 import controller.mock.MockComicController;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import model.users.User;
 import utilities.JsonHelper;
+import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Created by cherrinkim on 4/22/16.
@@ -21,19 +25,81 @@ import java.io.InputStreamReader;
 public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getParameter("json") != null){
-            String json = req.getParameter("json");
-            User user = new User("Mary", "googleid");
-            user.setDrawJson(json);
-            System.out.println(json);
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        if (googleUser != null) {
+            resp.setContentType("application/json");
+            try {
+                User genUser = queryForUser(googleUser.getUserId());
+
+                // There was no User in the DB; must be a new User.
+                if (genUser == null) {
+                    genUser = new User(googleUser.getNickname(), googleUser.getUserId());
+
+                    ObjectifyHelper.save(genUser);
+                }
+                if(req.getParameter("json") != null) {
+                    String json = req.getParameter("json");
+                    genUser.setDrawJson(json);
+                    ObjectifyHelper.save(genUser);
+                }
+            }
+            catch (NonUniqueGoogleIdException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         }
 
     }
 
+    private com.google.appengine.api.users.User getGoogleUser() {
+        return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = ("{\"objects\":[{\"type\":\"text\",\"originX\":\"center\",\"originY\":\"center\",\"left\":145.04,\"top\":48,\"width\":39.83,\"height\":23.4,\"fill\":\"rgb(0,0,0)\",\"overlayFill\":null,\"stroke\":null,\"strokeWidth\":1,\"strokeDashArray\":null,\"scaleX\":3.26,\"scaleY\":1,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"selectable\":true,\"hasControls\":true,\"hasBorders\":true,\"hasRotatingPoint\":true,\"transparentCorners\":true,\"perPixelTargetFind\":false,\"shadow\":null,\"visible\":true,\"text\":\"Test\",\"fontSize\":18,\"fontWeight\":\"bold\",\"fontFamily\":\"Comic Sans MS\",\"fontStyle\":\"\",\"lineHeight\":1.3,\"textDecoration\":\"\",\"textShadow\":\"\",\"textAlign\":\"left\",\"path\":null,\"strokeStyle\":\"\",\"backgroundColor\":\"\",\"textBackgroundColor\":\"\",\"useNative\":true}],\"background\":\"\"}\n\n");
-        resp.getWriter().write(json);
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        if (googleUser != null) {
+            resp.setContentType("application/json");
+            try {
+                User genUser = queryForUser(googleUser.getUserId());
+
+                // There was no User in the DB; must be a new User.
+                if (genUser == null) {
+                    //then we don't do anything
+                    return;
+                }
+                String json = genUser.getDrawJson();
+                resp.getWriter().write(json);
+            }
+            catch (NonUniqueGoogleIdException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+    }
+
+    /**
+     * Attempts to return the first User with the relevant googleId.
+     * @param googleId the unique String representation of a User
+     * @return User Object with the same googleId parameter, or null if not found in DataStore
+     * @throws NonUniqueGoogleIdException - thrown when more than one Users are returned from the query
+     */
+    private User queryForUser(String googleId) throws NonUniqueGoogleIdException {
+        List<User> userList = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleId);
+
+        if (userList.isEmpty()) {
+            return null;
+        }
+        else if (userList.size() == 1) {
+            User user = userList.get(0);
+            user.getMetadata().reload();    // Reinstantiates any null Collection resulting from DS load
+            return user;
+        }
+        else {
+            throw new NonUniqueGoogleIdException(googleId);
+        }
     }
 }
 

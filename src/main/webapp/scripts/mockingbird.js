@@ -7,7 +7,7 @@ function mockUser() {
         url: "/UserServlet",
         type: "get",
         success: function(responseText) {
-            $("#userJson > a").text(responseText);
+            $("#userJson > a").text(responseText.metadata.name);
         }
     })
 }

@@ -19,6 +19,9 @@ function mockComic() {
         data: {"name" : "NEW NAME", "description" : "NEW BIO"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
+
+            console.log(responseText.id);
+            console.log(responseText.metadata.name);
         }
     })
 }

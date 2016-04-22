@@ -31,6 +31,8 @@ public class ComicServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         com.google.appengine.api.users.User googleUser = UserServiceFactory.getUserService().getCurrentUser();
 
+        resp.setContentType("application/json");
+
         if (googleUser != null) {
             try {
                 User author = UserAccess.queryForUser(googleUser.getUserId());
@@ -53,14 +55,12 @@ public class ComicServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_OK);
             }
             catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
-                resp.setContentType("application/json");
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }
         else {
-            resp.setContentType("application/json");
             resp.getWriter().write("{\"error\":\"No User Logged In\"}");
 
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);

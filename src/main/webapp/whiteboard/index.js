@@ -242,11 +242,9 @@ window.onload = function() {
             // save to localStorage
             var json = JSON.stringify(canvas);
             var url = 'data:text/json;charset=utf8,' + encodeURIComponent(json);
-            window.open(url, '_blank');
-            window.focus();
-            //window.localStorage.setItem("hoge", json);
 
-            // $http.post('ENTER SERVER URL HERE', json);
+            //window.localStorage.setItem("hoge", json);
+            
             $.ajax({
                 type: "POST",
                 url: "/CreateServlet.save",
@@ -265,7 +263,19 @@ window.onload = function() {
             //clear canvas
             canvas.clear();
             //load from localStorage
-            canvas.loadFromJSON(window.localStorage.getItem("hoge"));
+            //canvas.loadFromJSON(window.localStorage.getItem("hoge"));
+            $.ajax({
+                type: "GET",
+                url: "/CreateServlet.save",
+                data: {get_param: 'value'},
+                success: function(data){
+
+                    canvas.loadFromJSON(data);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
             // re-render the canvas
             canvas.renderAll();
             // optional

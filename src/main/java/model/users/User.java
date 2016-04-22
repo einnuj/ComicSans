@@ -19,6 +19,8 @@ public class User {
 
     private UserMetadata metadata;
 
+    private String drawJson;
+
     private User() {}
 
     public User(String name, String googleId) {
@@ -33,6 +35,14 @@ public class User {
     public String getGoogleId() { return googleId; }
 
     public UserMetadata getMetadata() { return metadata; }
+
+    public String getDrawJson() { return drawJson; }
+
+    /* Setters */
+
+    public void setDrawJson(String drawJson){
+        this.drawJson = drawJson;
+    }
 
     /* Methods */
 

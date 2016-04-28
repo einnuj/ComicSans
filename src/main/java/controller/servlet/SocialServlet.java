@@ -114,8 +114,7 @@ public class SocialServlet extends HttpServlet {
                     //then we don't do anything
                     return;
                 }
-                String json = genUser.getDrawJson();
-                resp.getWriter().write(json);
+                // do stuff here
             }
             catch (NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

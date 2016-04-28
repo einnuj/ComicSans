@@ -20,6 +20,9 @@ public class UserMetadata extends AbstractMetadata {
 
     int numComments;
 
+    private String drawJson;
+
+
     //key = comicTarget
     private HashMap<String, Like> comicsLiked;
 
@@ -65,6 +68,13 @@ public class UserMetadata extends AbstractMetadata {
 
     public int getNumComments(){
         return numComments;
+    }
+
+    public String getDrawJson() { return drawJson; }
+    /* Setters */
+
+    public void setDrawJson(String drawJson){
+        this.drawJson = drawJson;
     }
 
     /* Methods */

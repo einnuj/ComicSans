@@ -24,19 +24,12 @@ public class User {
 
     private UserMetadata metadata;
 
-    private String drawJson;
-
-    private List<ComicPage> bookmarks;
-
-    private int numComments;
 
     private User() {}
 
     public User(String name, String googleId) {
         this.googleId = googleId;
-        metadata = new UserMetadata(name);
-        this.bookmarks = new ArrayList<ComicPage>();
-    }
+        metadata = new UserMetadata(name);}
 
     /* Getters */
 
@@ -46,15 +39,7 @@ public class User {
 
     public UserMetadata getMetadata() { return metadata; }
 
-    public String getDrawJson() { return drawJson; }
 
-    public List<ComicPage> getBookmarks(){ return bookmarks; }
-
-    /* Setters */
-
-    public void setDrawJson(String drawJson){
-        this.drawJson = drawJson;
-    }
 
 
     /* Methods */
@@ -65,14 +50,5 @@ public class User {
 
     public String getIconURL() {
         return metadata.getDisplayPicture();
-    }
-
-
-    public void addBookmark(ComicPage comicPage){
-        bookmarks.add(comicPage);
-    }
-
-    public void removeFromBookmarks(ComicPage comicPage){
-        bookmarks.remove(comicPage);
     }
 }

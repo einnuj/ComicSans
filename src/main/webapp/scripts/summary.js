@@ -156,3 +156,31 @@ function like(){
         }
     });
 }
+
+function unlike() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNLIKE", "comicId": "INSERT ID HERE"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+function unfavorite() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNFAVORITE", "comicId": "INSERT ID HERE"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}

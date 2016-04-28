@@ -39,7 +39,7 @@ public class CreateServlet extends HttpServlet {
                 }
                 if(req.getParameter("json") != null) {
                     String json = req.getParameter("json");
-                    genUser.setDrawJson(json);
+                    genUser.getMetadata().setDrawJson(json);
                     ObjectifyHelper.save(genUser);
                 }
             }
@@ -69,7 +69,7 @@ public class CreateServlet extends HttpServlet {
                     //then we don't do anything
                     return;
                 }
-                String json = genUser.getDrawJson();
+                String json = genUser.getMetadata().getDrawJson();
                 resp.getWriter().write(json);
             }
             catch (NonUniqueGoogleIdException ex) {

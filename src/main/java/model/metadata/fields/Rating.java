@@ -13,6 +13,7 @@ public class Rating extends AbstractField {
         this.rating = (validateRating(rating)) ? rating : 0;
     }
 
+
     /* Getters */
 
     public int getRating() {

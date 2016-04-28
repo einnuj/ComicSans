@@ -4,6 +4,7 @@ import model.comics.WebComic;
 import model.metadata.fields.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,10 +15,15 @@ public class UserMetadata extends AbstractMetadata {
     private List<WebComic> comicsCreatedList;
 
     private List<Bookmark> comicsBookmarkedList;
-    private List<Comment> comicsCommentedList;
     private List<Favorite> comicsFavoritedList;
     private List<Like> comicsLikedList;
-    private List<Rating> comicsRatedList;
+
+    int numComments;
+
+    //key = comicTarget
+    private HashMap<String, Like> comicsLiked;
+
+    private HashMap<String, Favorite> comicsFavorited;
 
     public UserMetadata(String name) {
         super(name);
@@ -25,10 +31,10 @@ public class UserMetadata extends AbstractMetadata {
         comicsCreatedList = new ArrayList<WebComic>();
 
         comicsBookmarkedList = new ArrayList<Bookmark>();
-        comicsCommentedList = new ArrayList<Comment>();
         comicsFavoritedList = new ArrayList<Favorite>();
         comicsLikedList = new ArrayList<Like>();
-        comicsRatedList = new ArrayList<Rating>();
+        comicsLiked = new HashMap<String, Like>();
+        numComments = 0;
     }
 
     UserMetadata(){}
@@ -43,9 +49,6 @@ public class UserMetadata extends AbstractMetadata {
         return comicsBookmarkedList;
     }
 
-    public List<Comment> getComicsCommentedList() {
-        return comicsCommentedList;
-    }
 
     public List<Favorite> getComicsFavoritedList() {
         return comicsFavoritedList;
@@ -55,8 +58,13 @@ public class UserMetadata extends AbstractMetadata {
         return comicsLikedList;
     }
 
-    public List<Rating> getComicsRatedList() {
-        return comicsRatedList;
+
+    public HashMap<String, Like> getLikes(){return comicsLiked;}
+
+    public HashMap<String, Favorite> getFavorites(){ return comicsFavorited; }
+
+    public int getNumComments(){
+        return numComments;
     }
 
     /* Methods */
@@ -69,9 +77,6 @@ public class UserMetadata extends AbstractMetadata {
         comicsBookmarkedList.add(bookmark);
     }
 
-    public void addToCommentedList(Comment comment) {
-        comicsCommentedList.add(comment);
-    }
 
     public void addToFavoritedList(Favorite favorite) {
         comicsFavoritedList.add(favorite);
@@ -81,16 +86,28 @@ public class UserMetadata extends AbstractMetadata {
         comicsLikedList.add(like);
     }
 
-    public void addToRatedList(Rating rating) {
-        comicsRatedList.add(rating);
+
+    public void addToLikes(String comicTarget, Like like) {
+        comicsLiked.put(comicTarget, like);
     }
+
+    public void removeFromLikes(String comicTarget) { comicsLiked.remove(comicTarget); }
+
+    public void addToFavorites(String comicTarget, Favorite fave) { comicsFavorited.put(comicTarget, fave); }
+
+    public void removeFromFavorites(String comicTarget) { comicsFavorited.remove(comicTarget); }
+
+    public void incrementComment(){
+        numComments++;
+    }
+
+
+    public void removeFromFavorites(Favorite favorite) { comicsFavoritedList.remove(favorite); }
+
+    public void removeFromBookmarks(Bookmark bookmark) { comicsBookmarkedList.remove(bookmark); }
 
     public int getNumberOfComicsBookmarked() {
         return comicsBookmarkedList.size();
-    }
-
-    public int getNumberOfComicsCommented() {
-        return comicsCommentedList.size();
     }
 
     public int getNumberOfComicsFavorited() {
@@ -101,9 +118,6 @@ public class UserMetadata extends AbstractMetadata {
         return comicsLikedList.size();
     }
 
-    public int getNumberOfComicsRated() {
-        return comicsRatedList.size();
-    }
 
     @Override
     public void reload() {
@@ -115,17 +129,13 @@ public class UserMetadata extends AbstractMetadata {
         if (comicsBookmarkedList == null) {
             comicsBookmarkedList = new ArrayList<Bookmark>();
         }
-        if (comicsCommentedList == null) {
-            comicsCommentedList = new ArrayList<Comment>();
-        }
+
         if (comicsFavoritedList == null) {
             comicsFavoritedList = new ArrayList<Favorite>();
         }
         if (comicsLikedList == null) {
             comicsLikedList = new ArrayList<Like>();
         }
-        if (comicsRatedList == null) {
-            comicsRatedList = new ArrayList<Rating>();
-        }
+
     }
 }

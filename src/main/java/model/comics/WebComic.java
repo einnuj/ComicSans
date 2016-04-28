@@ -22,14 +22,6 @@ public class WebComic extends ComicMediaParent {
 
     private ComicMetadata metadata;
 
-    private List<String> comments;
-
-    private double publicRating;
-
-    private double realRating;
-
-    private int numRatings;
-
     // Solely for Objectify
     private WebComic() {}
 
@@ -38,7 +30,6 @@ public class WebComic extends ComicMediaParent {
 
         childMediaList = new ArrayList<ComicChapter>();
         metadata = new ComicMetadata(name, author);
-        comments = new ArrayList<String>();
     }
 
     /* Getters */
@@ -48,53 +39,16 @@ public class WebComic extends ComicMediaParent {
         return metadata;
     }
 
-    public List<String> getComments() { return comments; }
-
-    public double getPublicRating() { return publicRating; }
-
-    public double getRealRating() { return realRating; }
-
-    public int getNumRatings() { return numRatings; }
 
 
     /* Setters */
 
-    public void setComments(List<String> comments){
-        this.comments = comments;
-    }
 
-    public void setPublicRating(double rating) {
-        this.publicRating = rating;
-    }
 
-    public void setRealRating(double rating) {
-        this.realRating = rating;
-    }
-
-    public void setNumRatings(int numRatings){
-        this.numRatings = numRatings;
-    }
 
     /* Methods */
-    public void addComment(String comment){
-        comments.add(comment);
-    }
 
-    public void deleteComment(String comment){
-        comments.remove(comment);
-    }
 
-    public void addRating(int rating){
-        incrementNumRatings();
-        int currentNumRatings = getNumRatings();
-        realRating = (realRating + rating)/currentNumRatings;
-        // setsPublicRating to be rounded to the nearest .5
-        setPublicRating((Math.round(realRating * 2) / 2.0));
-    }
-
-    public void incrementNumRatings(){
-        numRatings++;
-    }
 
     /* Overridden Methods */
 

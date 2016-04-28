@@ -4,6 +4,8 @@ import com.google.appengine.api.users.UserServiceFactory;
 import controller.exceptions.NonUniqueGoogleIdException;
 import model.comics.ComicPage;
 import model.comics.WebComic;
+import model.metadata.ComicMetadata;
+import model.metadata.fields.*;
 import model.users.User;
 import utilities.data.ObjectifyHelper;
 
@@ -37,36 +39,44 @@ public class SocialServlet extends HttpServlet {
                 String action = req.getParameter("action");
 
                 WebComic testComic = new WebComic("TestName", "Bob Jones");
+
                 ComicPage testPage = new ComicPage("test", "url");
                 //need to change the comic into the actual comic object getting manipulated
 
                 switch(action) {
                     case "LIKE":
-                        genUser.addToLikes(testComic);
+                        Like myLike = new Like("my comic id", genUser.getGoogleId());
+                        genUser.getMetadata().addToLikes("my comic id", myLike);
                         break;
                     case "UNLIKE":
-                        genUser.removeFromLikes(testComic);
+                        genUser.getMetadata().removeFromLikes("my comic id");
                         break;
                     case "FAVORITE":
-                        genUser.addToFavorites(testComic);
+                        Favorite myFave = new Favorite("my comic id", genUser.getGoogleId());
+                        genUser.getMetadata().addToFavorites("my comic id", myFave);
                         break;
                     case "UNFAVORITE":
-                        genUser.removeFromFavorites(testComic);
+                        genUser.getMetadata().removeFromFavorites("my comic id");
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");
-                        genUser.incrementComment();
-                        testComic.addComment(comment);
+                        Comment myComment = new Comment("my comic id", genUser.getGoogleId(), comment);
+                        myComment.updateLastEditedTime();
+                        genUser.getMetadata().incrementComment();
+                        testComic.getMetadata().addToCommentedList(myComment);
                         break;
                     case "RATE":
                         int rating = Integer.parseInt(req.getParameter("rating"));
-                        testComic.addRating(rating);
+                        Rating myRating = new Rating("MyComic", genUser.getGoogleId(), rating);
+                        testComic.getMetadata().addToRatingList(myRating);
                         break;
                     case "BOOKMARK":
-                        genUser.addBookmark(testPage);
+                        Bookmark myBM = new Bookmark("my comic id", genUser.getGoogleId(), 0, 0);
+                        genUser.getMetadata().addToBookmarkedList(myBM);
                         break;
                     case "UNBOOKMARK":
-                        genUser.removeFromBookmarks(testPage);
+                        Bookmark myBMm = new Bookmark("my comic id", genUser.getGoogleId(), 0, 0);
+                        genUser.getMetadata().removeFromBookmarks(myBMm);
                         break;
                 }
 

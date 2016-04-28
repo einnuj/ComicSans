@@ -70,9 +70,9 @@
                 <p>Favorites: 15</p>
                 <p>Last updated: <em>3 days ago</em></p>
                 <div class="social-buttons">
-                    <a class="btn btn-lg btn-primary" role="button">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" onclick="subscribe()" role="button">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" onclick="favorite()" role="button">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" onclick="like()" role="button">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
                     <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
                 </div>
             </div>

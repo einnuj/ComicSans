@@ -2,6 +2,7 @@ package controller.servlet;
 
 import com.google.appengine.api.users.UserServiceFactory;
 import controller.exceptions.NonUniqueGoogleIdException;
+import model.comics.AllComics;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import model.metadata.ComicMetadata;
@@ -38,10 +39,14 @@ public class SocialServlet extends HttpServlet {
 
                 String action = req.getParameter("action");
 
-                WebComic testComic = new WebComic("TestName", "Bob Jones");
+                String comicId = req.getParameter("comicId");
 
-                ComicPage testPage = new ComicPage("test", "url");
-                //need to change the comic into the actual comic object getting manipulated
+                AllComics myComics = new AllComics();
+                // do stuff to actually obtain all comics in myComics from datastore
+
+                WebComic testComic = myComics.getComic(comicId);
+
+                //need to change the comic into the actual comic object getting manipulated by the passed comicId
 
                 switch(action) {
                     case "LIKE":

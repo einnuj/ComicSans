@@ -17,8 +17,8 @@ public class FieldFactory {
 
     /* Factory Methods */
 
-    public Bookmark getBookmark() {
-        return new Bookmark(comic, user);
+    public Bookmark getBookmark(int chapterNumber, int pageNumber) {
+        return new Bookmark(comic, user, chapterNumber, pageNumber);
     }
 
     public Comment getComment(String description) {

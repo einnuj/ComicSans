@@ -15,8 +15,10 @@ public class UserMetadata extends AbstractMetadata {
     private List<WebComic> comicsCreatedList;
 
     private List<Bookmark> comicsBookmarkedList;
+    private List<Comment> comicsCommentedList;
     private List<Favorite> comicsFavoritedList;
     private List<Like> comicsLikedList;
+    private List<Rating> comicsRatedList;
 
     int numComments;
 
@@ -24,9 +26,9 @@ public class UserMetadata extends AbstractMetadata {
 
 
     //key = comicTarget
-    private HashMap<String, Like> comicsLiked;
+    private HashMap<String, Like> comicsLikedMap;
 
-    private HashMap<String, Favorite> comicsFavorited;
+    private HashMap<String, Favorite> comicsFavoritedMap;
 
     public UserMetadata(String name) {
         super(name);
@@ -34,9 +36,14 @@ public class UserMetadata extends AbstractMetadata {
         comicsCreatedList = new ArrayList<WebComic>();
 
         comicsBookmarkedList = new ArrayList<Bookmark>();
+        comicsCommentedList = new ArrayList<Comment>();
         comicsFavoritedList = new ArrayList<Favorite>();
         comicsLikedList = new ArrayList<Like>();
-        comicsLiked = new HashMap<String, Like>();
+        comicsRatedList = new ArrayList<Rating>();
+
+        comicsLikedMap = new HashMap<String, Like>();
+        comicsFavoritedMap = new HashMap<String, Favorite>();
+
         numComments = 0;
     }
 
@@ -52,6 +59,9 @@ public class UserMetadata extends AbstractMetadata {
         return comicsBookmarkedList;
     }
 
+    public List<Comment> getComicsCommentedList() {
+        return comicsCommentedList;
+    }
 
     public List<Favorite> getComicsFavoritedList() {
         return comicsFavoritedList;
@@ -61,10 +71,11 @@ public class UserMetadata extends AbstractMetadata {
         return comicsLikedList;
     }
 
+    public List<Rating> getComicsRatedList() { return comicsRatedList; }
 
-    public HashMap<String, Like> getLikes(){return comicsLiked;}
+    public HashMap<String, Like> getLikes(){return comicsLikedMap;}
 
-    public HashMap<String, Favorite> getFavorites(){ return comicsFavorited; }
+    public HashMap<String, Favorite> getFavorites(){ return comicsFavoritedMap; }
 
     public int getNumComments(){
         return numComments;
@@ -88,6 +99,9 @@ public class UserMetadata extends AbstractMetadata {
         comicsBookmarkedList.add(bookmark);
     }
 
+    public void addToCommentedList(Comment comment) {
+        comicsCommentedList.add(comment);
+    }
 
     public void addToFavoritedList(Favorite favorite) {
         comicsFavoritedList.add(favorite);
@@ -97,28 +111,44 @@ public class UserMetadata extends AbstractMetadata {
         comicsLikedList.add(like);
     }
 
+    public void addToRatedList(Rating rating) { comicsRatedList.add(rating); }
 
-    public void addToLikes(String comicTarget, Like like) {
-        comicsLiked.put(comicTarget, like);
+    public void removeFromComicsCreatedList(WebComic comic) {
+        comicsCreatedList.remove(comic);
     }
 
-    public void removeFromLikes(String comicTarget) { comicsLiked.remove(comicTarget); }
+    public void removeFromBookmarkedList(Bookmark bookmark) { comicsBookmarkedList.remove(bookmark); }
 
-    public void addToFavorites(String comicTarget, Favorite fave) { comicsFavorited.put(comicTarget, fave); }
+    public void removeFromCommentedList(Comment comment) { comicsCommentedList.remove(comment); }
 
-    public void removeFromFavorites(String comicTarget) { comicsFavorited.remove(comicTarget); }
+    public void removeFromFavoritedList(Favorite favorite) { comicsFavoritedList.remove(favorite); }
+
+    public void removeFromLikedList(Like like) { comicsLikedList.remove(like); }
+
+    public void removeFromRatedList(Rating rating) { comicsRatedList.remove(rating); }
+
+
+
+    public void addToLikesMap(Like like) {
+        comicsLikedMap.put(like.getComicTarget(), like);
+    }
+
+    public void removeFromLikesMap(Like like) { comicsLikedMap.remove(like.getComicTarget()); }
+
+    public void addToFavoritesMap(Favorite fave) { comicsFavoritedMap.put(fave.getComicTarget(), fave); }
+
+    public void removeFromFavoritesMap(Favorite fave) { comicsFavoritedMap.remove(fave.getComicTarget()); }
 
     public void incrementComment(){
         numComments++;
     }
 
-
-    public void removeFromFavorites(Favorite favorite) { comicsFavoritedList.remove(favorite); }
-
-    public void removeFromBookmarks(Bookmark bookmark) { comicsBookmarkedList.remove(bookmark); }
-
     public int getNumberOfComicsBookmarked() {
         return comicsBookmarkedList.size();
+    }
+
+    public int getNumberOfComicsCommented() {
+        return comicsCommentedList.size();
     }
 
     public int getNumberOfComicsFavorited() {
@@ -129,6 +159,8 @@ public class UserMetadata extends AbstractMetadata {
         return comicsLikedList.size();
     }
 
+    public int getNumberOfComicsRated() { return comicsRatedList.size(); }
+
 
     @Override
     public void reload() {
@@ -137,15 +169,33 @@ public class UserMetadata extends AbstractMetadata {
         if (comicsCreatedList == null) {
             comicsCreatedList = new ArrayList<WebComic>();
         }
+
         if (comicsBookmarkedList == null) {
             comicsBookmarkedList = new ArrayList<Bookmark>();
+        }
+
+        if (comicsCommentedList == null) {
+            comicsCommentedList = new ArrayList<Comment>();
         }
 
         if (comicsFavoritedList == null) {
             comicsFavoritedList = new ArrayList<Favorite>();
         }
+
         if (comicsLikedList == null) {
             comicsLikedList = new ArrayList<Like>();
+        }
+
+        if (comicsRatedList == null) {
+            comicsRatedList = new ArrayList<Rating>();
+        }
+
+        if (comicsLikedMap == null) {
+            comicsLikedMap = new HashMap<String, Like>();
+        }
+
+        if (comicsFavoritedMap == null) {
+            comicsFavoritedMap = new HashMap<String, Favorite>();
         }
 
     }

@@ -7,6 +7,8 @@ package model.metadata.fields;
 public class Rating extends AbstractField {
     private int rating;
 
+    Rating(){}
+
     public Rating(String comicTarget, String userOrigin, int rating) {
         super(comicTarget, userOrigin);
 

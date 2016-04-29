@@ -94,6 +94,22 @@ abstract class AbstractMetadata {
         likeList.add(like);
     }
 
+    public void removeFromBookmarkList(Bookmark bookmark) {
+        bookmarkList.remove(bookmark);
+    }
+
+    public void removeFromCommentList(Comment comment) {
+        commentList.remove(comment);
+    }
+
+    public void removeFromFavoriteList(Favorite favorite) {
+        favoriteList.remove(favorite);
+    }
+
+    public void removeFromLikeList(Like like) {
+        likeList.remove(like);
+    }
+
     /**
      * Will reinitialize any null Collections in the Object
      */

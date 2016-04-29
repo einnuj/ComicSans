@@ -1,7 +1,5 @@
 package model.metadata.fields;
 
-import org.joda.time.DateTime;
-
 /**
  * An Abstract class that acts as parent to all Fields
  * Created by einnuj on 4/7/2016.
@@ -13,6 +11,8 @@ abstract class AbstractField {
     private String userOrigin;
 
     private long timeCreatedMillis;
+
+    AbstractField(){}
 
     AbstractField(String comicTarget, String userOrigin) {
         this.comicTarget = comicTarget;

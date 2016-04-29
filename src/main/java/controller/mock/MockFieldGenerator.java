@@ -26,7 +26,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Bookmark";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToBookmarkList(fieldFactory.getBookmark());
+                        metadata.addToBookmarkList(fieldFactory.getBookmark(1, 5));
                         i++;
                     }
                     break;
@@ -83,7 +83,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Bookmark";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToBookmarkedList(fieldFactory.getBookmark());
+                        metadata.addToBookmarkedList(fieldFactory.getBookmark(1, 5));
                         i++;
                     }
                     break;

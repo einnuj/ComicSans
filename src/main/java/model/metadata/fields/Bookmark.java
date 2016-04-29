@@ -10,6 +10,8 @@ public class Bookmark extends AbstractField {
     private int chapterNumber;
     private int pageNumber;
 
+    public Bookmark(){}
+
     public Bookmark(String comicTarget, String userOrigin, int cNum, int pNum) {
         super(comicTarget, userOrigin);
         this.chapterNumber = cNum;

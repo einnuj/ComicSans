@@ -1,23 +1,16 @@
 package controller.servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.users.UserServiceFactory;
+import controller.data.UserAccess;
 import controller.exceptions.NonUniqueGoogleIdException;
-import controller.mock.MockComicController;
-import model.comics.ComicPage;
-import model.comics.WebComic;
 import model.users.User;
-import utilities.JsonHelper;
 import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * Created by cherrinkim on 4/22/16.
@@ -29,7 +22,7 @@ public class CreateServlet extends HttpServlet {
         if (googleUser != null) {
             resp.setContentType("application/json");
             try {
-                User genUser = queryForUser(googleUser.getUserId());
+                User genUser = UserAccess.queryForUser(googleUser.getUserId());
 
                 // There was no User in the DB; must be a new User.
                 if (genUser == null) {
@@ -62,7 +55,7 @@ public class CreateServlet extends HttpServlet {
         if (googleUser != null) {
             resp.setContentType("application/json");
             try {
-                User genUser = queryForUser(googleUser.getUserId());
+                User genUser = UserAccess.queryForUser(googleUser.getUserId());
 
                 // There was no User in the DB; must be a new User.
                 if (genUser == null) {
@@ -77,28 +70,6 @@ public class CreateServlet extends HttpServlet {
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        }
-    }
-
-    /**
-     * Attempts to return the first User with the relevant googleId.
-     * @param googleId the unique String representation of a User
-     * @return User Object with the same googleId parameter, or null if not found in DataStore
-     * @throws NonUniqueGoogleIdException - thrown when more than one Users are returned from the query
-     */
-    private User queryForUser(String googleId) throws NonUniqueGoogleIdException {
-        List<User> userList = ObjectifyHelper.loadWithEqualsFilter(User.class, "googleId", googleId);
-
-        if (userList.isEmpty()) {
-            return null;
-        }
-        else if (userList.size() == 1) {
-            User user = userList.get(0);
-            user.getMetadata().reload();    // Reinstantiates any null Collection resulting from DS load
-            return user;
-        }
-        else {
-            throw new NonUniqueGoogleIdException(googleId);
         }
     }
 }

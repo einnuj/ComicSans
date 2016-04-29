@@ -1,5 +1,6 @@
 package controller.data;
 
+import com.google.appengine.api.users.UserServiceFactory;
 import controller.exceptions.NonUniqueGoogleIdException;
 import model.users.User;
 import utilities.data.ObjectifyHelper;
@@ -32,5 +33,9 @@ public class UserAccess {
         else {
             throw new NonUniqueGoogleIdException(googleId);
         }
+    }
+
+    public static com.google.appengine.api.users.User getGoogleUser() {
+        return UserServiceFactory.getUserService().getCurrentUser();
     }
 }

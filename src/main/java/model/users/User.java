@@ -3,12 +3,7 @@ package model.users;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import model.comics.ComicPage;
-import model.comics.WebComic;
 import model.metadata.UserMetadata;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A Class that represents a User.
@@ -29,7 +24,8 @@ public class User {
 
     public User(String name, String googleId) {
         this.googleId = googleId;
-        metadata = new UserMetadata(name);}
+        metadata = new UserMetadata(name);
+    }
 
     /* Getters */
 

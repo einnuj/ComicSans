@@ -4,13 +4,20 @@
 
 function authenticate() {
     var currentURL = window.location.href;
+    var response;
 
     $.ajax({
         url: "/AuthServlet",
         type: "get",
         data: {"currentURL" : currentURL},
         success: function(responseText) {
-            $("#logLink").attr("href", responseText);
+            $("#logLink").attr("href", responseText.url);
+            if (responseText.loggedIn) {
+                $("#logLink").text("Log Out");
+            }
+            else {
+                $("#logLink").text("Log In");
+            }
             $("#logLink").show();
         }
     });

@@ -81,6 +81,9 @@ public class ComicServlet extends HttpServlet {
                         WebComic newComic = new WebComic(name, author.getMetadata().getName());
                         newComic.getMetadata().setBio(description);
 
+                        ObjectifyHelper.save(newComic);         // Gets us the Long id
+                        newComic.reload();
+
                         // Update User!
                         author.getMetadata().addToComicsCreated(newComic);
 

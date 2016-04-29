@@ -12,8 +12,10 @@ public class ComicAccess {
 
     public static WebComic queryForComic(Long id) throws NonUniqueLongIdException {
         WebComic comic =  ObjectifyHelper.loadById(WebComic.class, id);
+
         if (comic != null) {
             comic.reload();
+            comic.getMetadata().reload();
         }
 
         return comic;

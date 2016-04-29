@@ -27,7 +27,7 @@ public class UserAccess {
         }
         else if (userList.size() == 1) {
             User user = userList.get(0);
-            user.getMetadata().reload();    // Reinstantiates any null Collection resulting from DS load
+            user.getMetadata().reload();
             return user;
         }
         else {

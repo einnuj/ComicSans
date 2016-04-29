@@ -132,7 +132,6 @@ function socialButton(type) {
             break;
     }
 }
-=======
 function subscribe(){
     $.ajax({
         type: "POST",
@@ -202,4 +201,3 @@ function unfavorite() {
         }
     });
 }
->>>>>>> social_backend

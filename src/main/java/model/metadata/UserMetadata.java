@@ -90,6 +90,11 @@ public class UserMetadata extends AbstractMetadata {
 
     /* Methods */
 
+    public boolean hasLike(WebComic comic){
+        if(comicsLikedMap.containsKey(comic.getId().toString())) return true;
+        else return false;
+    }
+
     public void addSubscription(WebComic comic){
         subscriptions.put(comic.getId().toString(), comic);
     }

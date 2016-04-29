@@ -12,6 +12,21 @@ function subscribe(){
     });
 }
 
+function unsubscribe(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "UNSUBSCRIBE", "comicId" : "INSERT ID HERE"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+
 function favorite(){
     $.ajax({
         type: "POST",

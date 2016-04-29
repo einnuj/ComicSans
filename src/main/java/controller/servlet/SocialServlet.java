@@ -115,6 +115,12 @@ public class SocialServlet extends HttpServlet {
                         Bookmark myBm = fieldFactory.getBookmark(0, 0);
                         userMetadata.removeFromBookmarks(myBm.getComicTarget());
                         break;
+                    case "SUBSCRIBE":
+                        userMetadata.addSubscription(targetComic);
+                        break;
+                    case "UNSUBSCRIBE":
+                        userMetadata.removeSubscription(targetComic);
+                        break;
                     default:
                         throw new UndefinedActionException(action);
                 }

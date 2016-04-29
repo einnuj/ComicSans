@@ -28,6 +28,8 @@ public class UserMetadata extends AbstractMetadata {
 
     private Queue<WebComic> userHistory;
 
+    private HashMap<String, WebComic> subscriptions;
+
     public UserMetadata(String name) {
         super(name);
 
@@ -43,12 +45,18 @@ public class UserMetadata extends AbstractMetadata {
 
         userHistory = new LinkedList<>();
 
+        subscriptions = new HashMap<>();
+
         numComments = 0;
     }
 
     UserMetadata(){}
 
     /* Getters */
+
+    public HashMap<String, WebComic> getSubscriptions(){
+        return subscriptions;
+    }
 
     public Queue<WebComic> getUserHistory(){
         return userHistory;
@@ -81,6 +89,14 @@ public class UserMetadata extends AbstractMetadata {
     }
 
     /* Methods */
+
+    public void addSubscription(WebComic comic){
+        subscriptions.put(comic.getId().toString(), comic);
+    }
+
+    public void removeSubscription(WebComic comic){
+        subscriptions.remove(comic.getId().toString());
+    }
 
     public void addToComicsCreated(WebComic comic) {
         comicsCreatedMap.put(comic.getId().toString(), comic);

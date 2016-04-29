@@ -41,17 +41,17 @@
     <div class="info-container">
         <div class="comic-info">
             <div class="edit-image">
-                <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
+                <img id="cover-thumbnail" src="" />
                 <input class="AUTHOR_PRIV" id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
             </div>
             <div class="comic-info-descr">
-                <h1 id="title-header">CoConut</h1>
+                <h1 id="title-header"></h1>
                 <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span></span>
                 <div id="edit-title">
                     New Title: <input id="title-text" type="text" value="" />
                 </div>
 
-                <h5 id="author-header">Author: John Smith</h5>
+                <h5 id="author-header"></h5>
 
                 <div class="comic-summary">
                     <p id="summary-paragraph">
@@ -59,7 +59,6 @@
                     <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span></span>
                 </div>
                 <div id="edit-summary">
-                    This is an example of a comic summary.
                     <textarea id="summary-text-area" value=""></textarea>
                 </div>
                 <br>

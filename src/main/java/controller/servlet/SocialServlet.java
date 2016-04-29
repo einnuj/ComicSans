@@ -83,10 +83,12 @@ public class SocialServlet extends HttpServlet {
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
                         userMetadata.addToFavoritesMap(myFave);
+                        comicMetadata.incrementFaves();
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
                         userMetadata.removeFromFavoritesMap(favorite);
+                        comicMetadata.decrementFaves();
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");

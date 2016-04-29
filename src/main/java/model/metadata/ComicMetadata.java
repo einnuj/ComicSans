@@ -71,6 +71,14 @@ public class ComicMetadata extends AbstractMetadata {
         likes--;
     }
 
+    public void incrementFaves(){
+        favorites++;
+    }
+
+    public void decrementFaves(){
+        favorites--;
+    }
+
     public int getRatingAsInt() {
         return Math.round(rating);
     }

@@ -27,6 +27,8 @@ public class UserAccess {
         }
         else if (userList.size() == 1) {
             User user = userList.get(0);
+
+            // Objectify sets all empty Collections to null; this reinstantiates them.
             user.getMetadata().reload();
             return user;
         }

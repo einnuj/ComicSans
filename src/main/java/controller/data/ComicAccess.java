@@ -1,6 +1,5 @@
 package controller.data;
 
-import controller.exceptions.NonUniqueLongIdException;
 import model.comics.WebComic;
 import utilities.data.ObjectifyHelper;
 
@@ -10,10 +9,17 @@ import utilities.data.ObjectifyHelper;
  */
 public class ComicAccess {
 
-    public static WebComic queryForComic(Long id) throws NonUniqueLongIdException {
+    /**
+     * Attempts to return the first WebComic with the relevant id
+     * @param id the unique Long representation of a WebComic
+     * @return the WebComic with the same id, or null if not found in DataStore
+     */
+    public static WebComic queryForComic(Long id) {
         WebComic comic =  ObjectifyHelper.loadById(WebComic.class, id);
 
         if (comic != null) {
+
+            // Objectify returns empty Collections to null; this reinstantializes them.
             comic.reload();
             comic.getMetadata().reload();
         }

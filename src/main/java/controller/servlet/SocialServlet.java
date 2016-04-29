@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import com.google.appengine.api.users.UserServiceFactory;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.*;
@@ -72,18 +73,22 @@ public class SocialServlet extends HttpServlet {
                     case "LIKE":
                         Like myLike = fieldFactory.getLike();
                         userMetadata.addToLikesMap(myLike);
+                        comicMetadata.incrementLike();
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
                         userMetadata.removeFromLikesMap(like);
+                        comicMetadata.decrementLike();
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
                         userMetadata.addToFavoritesMap(myFave);
+                        comicMetadata.incrementFaves();
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
                         userMetadata.removeFromFavoritesMap(favorite);
+                        comicMetadata.decrementFaves();
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");
@@ -104,7 +109,7 @@ public class SocialServlet extends HttpServlet {
                         }
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
-                        userMetadata.addToRatedList(myRating);
+                        userMetadata.addToRatedMap(myRating);
                         // testComic.getMetadata().addToRatingList(myRating);
                         break;
                     case "BOOKMARK":
@@ -150,7 +155,31 @@ public class SocialServlet extends HttpServlet {
         }
     }
 
+    private com.google.appengine.api.users.User getGoogleUser() {
+        return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        if (googleUser != null) {
+            resp.setContentType("application/json");
+            try {
+                User genUser = UserAccess.queryForUser(googleUser.getUserId());
+
+                // There was no User in the DB; must be a new User.
+                if (genUser == null) {
+                    //then we don't do anything
+                    return;
+                }
+                String json = genUser.getMetadata().getDrawJson();
+                resp.getWriter().write(json);
+            }
+            catch (NonUniqueGoogleIdException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 }

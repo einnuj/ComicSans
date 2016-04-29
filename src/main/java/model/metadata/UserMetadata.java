@@ -110,6 +110,11 @@ public class UserMetadata extends AbstractMetadata {
         else return false;
     }
 
+    public boolean hasFavorited(WebComic comic){
+        if(comicsFavoritedMap.containsKey(comic.getId().toString())) return true;
+        else return false;
+    }
+
     public void addSubscription(WebComic comic){
         subscriptions.put(comic.getId().toString(), comic);
     }

@@ -172,13 +172,62 @@ public class SocialServlet extends HttpServlet {
                     //then we don't do anything
                     return;
                 }
-                String json = genUser.getMetadata().getDrawJson();
-                resp.getWriter().write(json);
+                String googleId = genUser.getGoogleId();
+                String request = req.getParameter("request");
+                String comicId = req.getParameter("comicId");
+
+                if (comicId == null) {
+                    throw new ParameterNotFoundException("comicId");
+                }
+
+                WebComic targetComic = ComicAccess.queryForComic(Long.valueOf(comicId));
+
+                FieldFactory fieldFactory = new FieldFactory(comicId, googleId);
+                UserMetadata userMetadata = genUser.getMetadata();
+                ComicMetadata comicMetadata = targetComic.getMetadata();
+
+                targetComic.reload();
+                userMetadata.reload();
+                comicMetadata.reload();
+
+                switch (request) {
+                    case "numFavorites":
+                        int numFaves = comicMetadata.getFavorites();
+                        resp.getWriter().write(numFaves);
+                        break;
+                    case "numLikes":
+                        int numLikes = comicMetadata.getLikes();
+                        resp.getWriter().write(numLikes);
+                        break;
+                    case "isSubscribed":
+                         if(userMetadata.hasSubscription(targetComic)){
+                             resp.getWriter().write("true");
+                         } else
+                             resp.getWriter().write("false");
+                        break;
+                    case "isLiked":
+                        if(userMetadata.hasLike(targetComic)){
+                            resp.getWriter().write("true");
+                        } else
+                            resp.getWriter().write("false");
+                        break;
+                    case "isFavorited":
+                        if(userMetadata.hasFavorited(targetComic)){
+                            resp.getWriter().write("true");
+                        } else
+                            resp.getWriter().write("false");
+                        break;
+                }
+
             }
             catch (NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (NonUniqueLongIdException e) {
+                e.printStackTrace();
+            } catch (ParameterNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

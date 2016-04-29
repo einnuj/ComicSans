@@ -1,6 +1,6 @@
 package model.metadata;
 
-import model.metadata.fields.Rating;
+import model.metadata.fields.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,13 @@ import java.util.List;
  */
 public class ComicMetadata extends AbstractMetadata {
     private String author;              // This is a stand-in type
-
     private GenreEnum genre;
 
-    private List<Rating> ratingList;
+    private int favorites;
+    private int likes;
+    private float rating;
+
+    private List<Comment> commentList;
 
     ComicMetadata(){}
 
@@ -23,7 +26,7 @@ public class ComicMetadata extends AbstractMetadata {
 
         this.author = author;
         genre = GenreEnum.UNLISTED;
-        ratingList = new ArrayList<Rating>();
+        commentList = new ArrayList<Comment>();
     }
 
     /* Getters */
@@ -36,7 +39,21 @@ public class ComicMetadata extends AbstractMetadata {
         return genre;
     }
 
-    public List<Rating> getRatingList() { return ratingList; }
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public int getFavorites() {
+        return favorites;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public float getRating() {
+        return rating;
+    }
 
     /* Setters */
 
@@ -46,23 +63,16 @@ public class ComicMetadata extends AbstractMetadata {
 
     /* Methods */
 
-    public void addToRatingList(Rating rating) { ratingList.add(rating); }
-
-    public double calculateRating(){
-        double total = 0;
-        for(Rating rate : ratingList){
-            total += rate.getRating();
-        }
-        double realRating = total/ratingList.size();
-        return (Math.round(realRating * 2) / 2.0);
+    public int getRatingAsInt() {
+        return Math.round(rating);
     }
 
-    @Override
+    /**
+     * Reinitializes any null collection in the object as returned by Objectify
+     */
     public void reload() {
-        super.reload();
-
-        if (ratingList == null) {
-            ratingList = new ArrayList<Rating>();
+        if (commentList == null) {
+            commentList = new ArrayList<Comment>();
         }
     }
 }

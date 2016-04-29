@@ -7,11 +7,14 @@ package model.metadata.fields;
 public class Rating extends AbstractField {
     private int rating;
 
+    Rating(){}
+
     public Rating(String comicTarget, String userOrigin, int rating) {
         super(comicTarget, userOrigin);
 
         this.rating = (validateRating(rating)) ? rating : 0;
     }
+
 
     /* Getters */
 

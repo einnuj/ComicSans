@@ -9,6 +9,8 @@ public class Favorite extends AbstractField {
     // This class really doesn't need anything in it. The only relevant bits
     // needed are in the AbstractField class.
 
+    Favorite(){}
+
     public Favorite(String comicTarget, String userOrigin) {
         super(comicTarget, userOrigin);
     }

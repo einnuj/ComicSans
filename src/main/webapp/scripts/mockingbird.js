@@ -68,8 +68,107 @@ function mockEditUser() {
     })
 }
 
+function addBookmark() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "BOOKMARK", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function removeBookmark() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "UNBOOKMARK", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function addComment() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "COMMENT", "comicId" : "5277655813324800", "comment" : "Junnie's Awesome."},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function addFavorite() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "FAVORITE", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function removeFavorite() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "UNFAVORITE", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function addLike() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "LIKE", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function removeLike() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "UNLIKE", "comicId" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
+function addRating() {
+    $.ajax({
+        url: "/SocialServlet",
+        type: "post",
+        data: {"action" : "RATE", "comicId" : "5277655813324800", "rating" : "3"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+function callTestUser() {
+    $.ajax({
+        url:"/ComicServlet",
+        type: "get",
+        data: {"id" : "5277655813324800"},
+        success: function(responseText) {
+            $("#currentUserObject > p").text(JSON.stringify(responseText));
+        }
+    })
+}
+
 function hideGetComic() {
     $("#getComicDiv > a").hide();
 }
 
 $(document).ready(hideGetComic());
+$(document).ready(callTestUser());

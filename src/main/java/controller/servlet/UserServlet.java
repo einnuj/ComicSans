@@ -1,6 +1,5 @@
 package controller.servlet;
 
-import com.google.appengine.api.users.UserServiceFactory;
 import controller.data.UserAccess;
 import controller.exceptions.NonUniqueGoogleIdException;
 import controller.exceptions.UserNotFoundException;
@@ -29,7 +28,7 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        com.google.appengine.api.users.User googleUser = UserAccess.getGoogleUser();
 
         if (googleUser != null) {
             resp.setContentType("application/json");
@@ -63,7 +62,7 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        com.google.appengine.api.users.User googleUser = UserAccess.getGoogleUser();
         resp.setContentType("application/json");
 
         if (googleUser != null) {
@@ -99,9 +98,5 @@ public class UserServlet extends HttpServlet {
 
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
-    }
-
-    private com.google.appengine.api.users.User getGoogleUser() {
-        return UserServiceFactory.getUserService().getCurrentUser();
     }
 }

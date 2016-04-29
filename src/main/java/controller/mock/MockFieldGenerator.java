@@ -26,7 +26,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Bookmark";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToBookmarkList(fieldFactory.getBookmark());
+                        //metadata.addToBookmarkList(fieldFactory.getBookmark(1, 5));
                         i++;
                     }
                     break;
@@ -34,8 +34,8 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Comment";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToCommentList(fieldFactory.getComment("Great " +
-                                "Comic!"));
+                        //metadata.addToCommentList(fieldFactory.getComment("Great " +
+                                //"Comic!"));
                         i++;
                     }
                     break;
@@ -43,7 +43,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Favorite";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToFavoriteList(fieldFactory.getFavorite());
+                        //metadata.addToFavoriteList(fieldFactory.getFavorite());
                         i++;
                     }
                     break;
@@ -51,7 +51,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Like";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToLikeList(fieldFactory.getLike());
+                        //metadata.addToLikeList(fieldFactory.getLike());
                         i++;
                     }
                     break;
@@ -59,7 +59,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Rating";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToRatingList(fieldFactory.getRating(4));
+                        //metadata.addToRatingList(fieldFactory.getRating(4));
                         i++;
                     }
                     break;
@@ -83,7 +83,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Bookmark";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToBookmarkedList(fieldFactory.getBookmark());
+                        //metadata.addToBookmarkedList(fieldFactory.getBookmark(1, 5));
                         i++;
                     }
                     break;
@@ -91,7 +91,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Comment";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToCommentedList(fieldFactory.getComment("Great Comic!"));
+                        //metadata.addToCommentedList(fieldFactory.getComment("Great Comic!"));
                         i++;
                     }
                     break;
@@ -99,7 +99,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Favorite";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToFavoritedList(fieldFactory.getFavorite());
+                        //metadata.addToFavoritedList(fieldFactory.getFavorite());
                         i++;
                     }
                     break;
@@ -107,7 +107,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Like";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToLikedList(fieldFactory.getLike());
+                        //metadata.addToLikedList(fieldFactory.getLike());
                         i++;
                     }
                     break;

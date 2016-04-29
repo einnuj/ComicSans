@@ -132,3 +132,72 @@ function socialButton(type) {
             break;
     }
 }
+function subscribe(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "SUBSCRIBE", "comicId" : "INSERT ID HERE"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+function favorite(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "FAVORITE", "comicId" : "INSERT ID HERE"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+function like(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "LIKE", "comicId" : "INSERT ID HERE"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+function unlike() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNLIKE", "comicId": "INSERT ID HERE"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+function unfavorite() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNFAVORITE", "comicId": "INSERT ID HERE"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}

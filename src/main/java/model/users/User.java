@@ -19,7 +19,6 @@ public class User {
 
     private UserMetadata metadata;
 
-    private String drawJson;
 
     private User() {}
 
@@ -36,13 +35,8 @@ public class User {
 
     public UserMetadata getMetadata() { return metadata; }
 
-    public String getDrawJson() { return drawJson; }
 
-    /* Setters */
 
-    public void setDrawJson(String drawJson){
-        this.drawJson = drawJson;
-    }
 
     /* Methods */
 

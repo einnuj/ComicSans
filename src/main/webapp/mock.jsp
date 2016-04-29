@@ -27,6 +27,27 @@
         <div id="getComicDiv">
             <a href="#" onclick="mockGetComic()">Click Here to GET Comic</a>
         </div>
+        <div id="bookmarkDiv">
+            <a href="#" onclick="addBookmark()">Click to Add Bookmark!</a>
+            <a href="#" onclick="removeBookmark()">Click to Remove Bookmark!</a>
+        </div>
+        <div id="commentDiv">
+            <a href="#" onclick="addComment()">Click to Add Comment!</a>
+        </div>
+        <div id="favoriteDiv">
+            <a href="#" onclick="addFavorite()">Click to Add Favorite!</a>
+            <a href="#" onclick="removeFavorite()">Click to Remove Favorite!</a>
+        </div>
+        <div id="likeDiv">
+            <a href="#" onclick="addLike()">Click to Add Like!</a>
+            <a href="#" onclick="removeLike()">Click to Remove Like!</a>
+        </div>
+        <div id="ratingDiv">
+            <a href="#" onclick="addRating()">Click to Add Rating!</a>
+        </div>
+        <div id="currentUserObject">
+            <p>Nothing's Here!</p>
+        </div>
     </div>
 </body>
 </html>

@@ -158,6 +158,7 @@ function checkLike() {
 function checkFavorite() {
     $.get("/SocialServlet", {"request": "isFavorited", "comicId": "4785074604081152"})
         .done(function (resp) { // on sucess
+            console.log(resp);
             if(resp == "true"){
                 // do something if favorited
             } else {
@@ -183,7 +184,7 @@ function isSubscribed() {
         });
 }
 
-function getNumLikes(){
+function numLikes(){
     $.get("/SocialServlet", {"request": "numLikes", "comicId": "4785074604081152"})
         .done(function (resp) { // on sucess
             console.log(resp);
@@ -193,7 +194,7 @@ function getNumLikes(){
         });
 }
 
-function getNumFavorites(){
+function numFavorites(){
     $.get("/SocialServlet", {"request": "numFavorites", "comicId": "4785074604081152"})
         .done(function (resp) { // on sucess
             console.log(resp);

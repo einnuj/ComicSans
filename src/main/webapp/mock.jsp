@@ -47,6 +47,10 @@
         </div>
         <div id="checkLike">
             <a href="#" onclick="checkLike()">Click to check like!</a>
+            <a href="#" onclick="checkFavorite()">Click to check fave!</a>
+            <a href="#" onclick="numLikes()">get num likes!</a>
+            <a href="#" onclick="numFavorites()">get num favess!</a>
+
         </div>
         <div id="currentUserObject">
             <p>Nothing's Here!</p>

@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "5066549580791808"},
+        data: {"id": "4785074604081152"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -88,7 +88,6 @@ function getComic() {
     })
 }
 
-<<<<<<< HEAD
 function waitForAjaxComic(obj) {
     // Get data for each field from JSON object
     currentComic = obj;
@@ -108,6 +107,9 @@ function waitForAjaxComic(obj) {
     $("#summary-paragraph").html(biography);
     $("#summary-text-area").html(biography);
 
+    // Set data for favorites
+    $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+
     // Set the cover image
     var number = localStorage.getItem("ComicNumberSelected");
     if (number == 1)
@@ -121,63 +123,48 @@ function waitForAjaxComic(obj) {
 function socialButton(type) {
     switch (type) {
         case "SUB":
-            console.log(currentComic.metadata.name); 
+
+            if (true) { // user is not subscribed yet
+                subscribe(currentComic.id);
+                $("#sub-btn").text("UnSubscribe");
+            }
+            else {
+                unsubscribe(currentComic.id); // user is already subscribed
+                $("#sub-btn").html("Subscribe");
+            }
             break;
 
         case "FAV":
-            console.log("Favorited");
+            if (true) { // If the user doesn't already like the comic, then allow a like
+                favorite(currentComic.id);
+                currentComic.metadata.favorites++;
+                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                $("#fav-btn").html("UnFavorite");
+            }
+            else {
+                unfavorite(currentComic.id);
+                currentComic.metadata.favorites--;
+                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                $("#fav-btn").html("Favorite");
+            }
             break;
 
         case "LIK":
-            console.log("Liked");
+            if (true) {
+                like(currentComic.id);
+                currentComic.metadata.likes++;
+                $("#lik-btn").html("UnLike");
+            }
+            else {
+                unlike(currentComic.id);
+                currentComic.likes--;
+                $("#lik-btn").html("Like");
+            }
             break;
 
         default:
-            console.log("Something's fucky...");
+            console.log("Something's off...");
             break;
     }
 }
-function subscribe(){
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action" : "SUBSCRIBE", "comicId" : "INSERT ID HERE"},
-        success: function(result){
-            console.log(result);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-}
-
-function favorite(){
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action" : "FAVORITE", "comicId" : "INSERT ID HERE"},
-        success: function(result){
-            console.log(result);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-}
-
-function like(){
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action" : "LIKE", "comicId" : "INSERT ID HERE"},
-        success: function(result){
-            console.log(result);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-}
-=======
->>>>>>> 7a3af5a2b5d9105a6edd391fd06677e47d9d7e58
 

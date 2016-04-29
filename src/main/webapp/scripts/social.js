@@ -1,9 +1,9 @@
-function subscribe() {
+function subscribe(number){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "SUBSCRIBE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
+        data: {"action" : "SUBSCRIBE", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -12,12 +12,25 @@ function subscribe() {
     });
 }
 
-function unsubscribe() {
+function unsubscribe(number){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNSUBSCRIBE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
+        data: {"action" : "UNSUBSCRIBE", "comicId" : number.toString()},
+        success: function(result){
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+function favorite(number){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "FAVORITE", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -26,13 +39,12 @@ function unsubscribe() {
     });
 }
 
-
-function favorite() {
+function unfavorite(number){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "FAVORITE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
+        data: {"action" : "UNFAVORITE", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -41,12 +53,12 @@ function favorite() {
     });
 }
 
-function unfavorite() {
+function like(number){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNFAVORITE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
+        data: {"action" : "LIKE", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -55,26 +67,12 @@ function unfavorite() {
     });
 }
 
-function like() {
+function unlike(number){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "LIKE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}
-
-function unlike() {
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action": "UNLIKE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
+        data: {"action" : "UNLIKE", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -97,12 +95,12 @@ function addRating() {
     });
 }
 
-function addComment() {
+function addComment(number) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "COMMENT", "comicId": "INSERT ID", "comment": "insert comment here"},
-        success: function (result) {
+        data: {"action" : "COMMENT", "comicId" : number.toString(), "comment" : "insert comment here"},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -111,12 +109,12 @@ function addComment() {
     });
 }
 
-function addBookmark() {
+function addBookmark(number) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "BOOKMARK", "comicId": "INSERT ID"},
-        success: function (result) {
+        data: {"action" : "BOOKMARK", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {
@@ -125,12 +123,12 @@ function addBookmark() {
     });
 }
 
-function removeBookmark() {
+function removeBookmark(number) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "UNBOOKMARK", "comicId": "INSERT ID"},
-        success: function (result) {
+        data: {"action" : "UNBOOKMARK", "comicId" : number.toString()},
+        success: function(result){
             console.log(result);
         },
         error: function (err) {

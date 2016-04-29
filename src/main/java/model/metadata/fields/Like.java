@@ -8,6 +8,8 @@ public class Like extends AbstractField {
 
     // Like Favorite, this class can essentially be empty.
 
+    Like(){}
+
     public Like(String comicTarget, String userOrigin) {
         super(comicTarget, userOrigin);
     }

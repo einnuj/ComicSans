@@ -12,6 +12,7 @@ import java.util.List;
 @Subclass
 public class ComicChapter extends ComicMediaParent {
     private List<ComicPage> childMediaList;
+    private int chapterNumber;
 
     ComicChapter(){}
 
@@ -19,6 +20,14 @@ public class ComicChapter extends ComicMediaParent {
         super(name);
 
         childMediaList = new ArrayList<ComicPage>();
+    }
+
+    public void setChapterNumber(int n){
+        chapterNumber = n;
+    }
+
+    public int getChapterNumber(){
+        return chapterNumber;
     }
 
     /* Overridden Methods */

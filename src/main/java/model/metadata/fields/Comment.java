@@ -1,7 +1,5 @@
 package model.metadata.fields;
 
-import org.joda.time.DateTime;
-
 /**
  * A Field class that represents a User's comments on a Comic
  * Created by einnuj on 4/7/2016.
@@ -9,7 +7,10 @@ import org.joda.time.DateTime;
 public class Comment extends AbstractField {
     private String description;
 
+    // If 0 -> unedited
     private long lastEditedTimeMillis;
+
+    Comment(){}
 
     public Comment(String comicTarget, String userOrigin, String description) {
         super(comicTarget, userOrigin);
@@ -35,6 +36,9 @@ public class Comment extends AbstractField {
 
     /* Methods */
 
+    /**
+     * Sets the lastEditedTimeMillis to the current System time. Should only be called when an existing Comment is edited.
+     */
     public void updateLastEditedTime() {
         this.lastEditedTimeMillis = System.currentTimeMillis();
     }

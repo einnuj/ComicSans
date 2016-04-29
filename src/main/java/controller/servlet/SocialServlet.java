@@ -72,23 +72,31 @@ public class SocialServlet extends HttpServlet {
                 switch(action) {
                     case "LIKE":
                         Like myLike = fieldFactory.getLike();
-                        userMetadata.addToLikesMap(myLike);
-                        comicMetadata.incrementLike();
+                        if(!userMetadata.getLikes().containsKey(comicId)) {
+                            userMetadata.addToLikesMap(myLike);
+                            comicMetadata.incrementLike();
+                        }
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
-                        userMetadata.removeFromLikesMap(like);
-                        comicMetadata.decrementLike();
+                        if(userMetadata.getLikes().containsKey(comicId)){
+                            userMetadata.removeFromLikesMap(like);
+                            comicMetadata.decrementLike();
+                        }
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
-                        userMetadata.addToFavoritesMap(myFave);
-                        comicMetadata.incrementFaves();
+                        if(!userMetadata.getFavorites().containsKey(comicId)) {
+                            userMetadata.addToFavoritesMap(myFave);
+                            comicMetadata.incrementFaves();
+                        }
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
-                        userMetadata.removeFromFavoritesMap(favorite);
-                        comicMetadata.decrementFaves();
+                        if(userMetadata.getFavorites().containsKey(comicId)){
+                            userMetadata.removeFromFavoritesMap(favorite);
+                            comicMetadata.decrementFaves();
+                        }
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");

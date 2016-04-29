@@ -74,22 +74,18 @@ public class SocialServlet extends HttpServlet {
                 switch(action) {
                     case "LIKE":
                         Like myLike = fieldFactory.getLike();
-                        userMetadata.addToLikedList(myLike);
                         userMetadata.addToLikesMap(myLike);
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
-                        userMetadata.removeFromLikedList(like);
                         userMetadata.removeFromLikesMap(like);
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
-                        userMetadata.addToFavoritedList(myFave);
                         userMetadata.addToFavoritesMap(myFave);
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
-                        userMetadata.removeFromFavoritedList(favorite);
                         userMetadata.removeFromFavoritesMap(favorite);
                         break;
                     case "COMMENT":
@@ -101,7 +97,7 @@ public class SocialServlet extends HttpServlet {
                         }
 
                         Comment myComment = fieldFactory.getComment(comment);
-                        userMetadata.addToCommentedList(myComment);
+                        comicMetadata.addComment(myComment);
                         userMetadata.incrementComment();
                         //testComic.getMetadata().addToCommentedList(myComment);
                         break;
@@ -119,11 +115,11 @@ public class SocialServlet extends HttpServlet {
                         break;
                     case "BOOKMARK":
                         Bookmark myBM = fieldFactory.getBookmark(0, 0);
-                        userMetadata.addToBookmarkedList(myBM);
+                        userMetadata.addToBookmarks(myBM);
                         break;
                     case "UNBOOKMARK":
                         Bookmark myBm = fieldFactory.getBookmark(0, 0);
-                        userMetadata.removeFromBookmarkedList(myBm);
+                        userMetadata.removeFromBookmarks(myBm.getComicTarget());
                         break;
                     default:
                         // TODO: an unspecified action was given

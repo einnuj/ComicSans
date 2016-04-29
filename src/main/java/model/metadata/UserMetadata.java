@@ -76,12 +76,12 @@ public class UserMetadata extends AbstractMetadata {
 
     /* Methods */
 
-    public void addToComicsCreated(String comicId, WebComic comic) {
-        comicsCreatedMap.put(comicId, comic);
+    public void addToComicsCreated(WebComic comic) {
+        comicsCreatedMap.put(comic.getId().toString(), comic);
     }
 
-    public void addToBookmarks(String comicId, Bookmark bookmark) {
-        comicsBookmarkedMap.put(comicId, bookmark);
+    public void addToBookmarks(Bookmark bookmark) {
+        comicsBookmarkedMap.put(bookmark.getComicTarget(), bookmark);
     }
 
     public void addToRatedList(Rating rating) { comicsRatedList.add(rating); }

@@ -18,7 +18,7 @@ function mockComic() {
         type: "post",
         data: {"action" : "CREATE COMIC", "name" : "CAPTAIN PLAN IT", "description" : "dotally rad comik"},
         success: function(responseText) {
-            $("#comicJson > a").text(responseText);
+            $("#comicJson > a").text(JSON.stringify(responseText));
 
             comicId = responseText.id;
             $("#getComicDiv > a").show();
@@ -43,7 +43,7 @@ function mockGetComic() {
         type: "get",
         data: {"id" : comicId},
         success: function(responseText) {
-            $("#getComicDiv > a").text(responseText);
+            $("#getComicDiv > a").text(JSON.stringify(responseText));
         }
     })
 }
@@ -63,7 +63,7 @@ function mockEditUser() {
         type: "post",
         data: {"name" : "Junnie", "description" : "BRAND NEW"},
         success: function(responseText) {
-            $("#editUserJson > a").text(responseText);
+            $("#editUserJson > a").text(JSON.stringify(responseText));
         }
     })
 }

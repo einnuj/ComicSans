@@ -82,7 +82,7 @@ public class ComicServlet extends HttpServlet {
                         newComic.getMetadata().setBio(description);
 
                         // Update User!
-                        author.getMetadata().addToComicsCreatedList(newComic);
+                        author.getMetadata().addToComicsCreated(newComic);
 
                         ObjectifyHelper.save(newComic);
                         ObjectifyHelper.save(author);

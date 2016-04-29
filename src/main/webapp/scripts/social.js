@@ -154,3 +154,51 @@ function checkLike() {
             alert("Request failed.");
         });
 }
+
+function checkFavorite() {
+    $.get("/SocialServlet", {"request": "isFavorited", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            if(resp == "true"){
+                // do something if favorited
+            } else {
+                //comic is not faved
+            }
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function isSubscribed() {
+    $.get("/SocialServlet", {"request": "isSubscribed", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            if(resp == "true"){
+                // do something if subscribed
+            } else {
+                //comic is not subscribed
+            }
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function getNumLikes(){
+    $.get("/SocialServlet", {"request": "numLikes", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function getNumFavorites(){
+    $.get("/SocialServlet", {"request": "numFavorites", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}

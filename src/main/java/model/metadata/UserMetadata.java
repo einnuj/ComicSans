@@ -162,9 +162,7 @@ public class UserMetadata extends AbstractMetadata {
     public int getNumberOfComicsRated() { return comicsRatedList.size(); }
 
 
-    @Override
     public void reload() {
-        super.reload();
 
         if (comicsCreatedList == null) {
             comicsCreatedList = new ArrayList<WebComic>();

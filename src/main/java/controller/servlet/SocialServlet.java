@@ -76,29 +76,21 @@ public class SocialServlet extends HttpServlet {
                         Like myLike = fieldFactory.getLike();
                         userMetadata.addToLikedList(myLike);
                         userMetadata.addToLikesMap(myLike);
-
-                        comicMetadata.addToLikeList(myLike);
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
                         userMetadata.removeFromLikedList(like);
                         userMetadata.removeFromLikesMap(like);
-
-                        comicMetadata.removeFromLikeList(like);
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
                         userMetadata.addToFavoritedList(myFave);
                         userMetadata.addToFavoritesMap(myFave);
-
-                        comicMetadata.addToFavoriteList(myFave);
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
                         userMetadata.removeFromFavoritedList(favorite);
                         userMetadata.removeFromFavoritesMap(favorite);
-
-                        comicMetadata.removeFromFavoriteList(favorite);
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");
@@ -111,8 +103,6 @@ public class SocialServlet extends HttpServlet {
                         Comment myComment = fieldFactory.getComment(comment);
                         userMetadata.addToCommentedList(myComment);
                         userMetadata.incrementComment();
-
-                        comicMetadata.addToCommentList(myComment);
                         //testComic.getMetadata().addToCommentedList(myComment);
                         break;
                     case "RATE":
@@ -125,21 +115,15 @@ public class SocialServlet extends HttpServlet {
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
                         userMetadata.addToRatedList(myRating);
-
-                        comicMetadata.addToRatingList(myRating);
                         // testComic.getMetadata().addToRatingList(myRating);
                         break;
                     case "BOOKMARK":
                         Bookmark myBM = fieldFactory.getBookmark(0, 0);
                         userMetadata.addToBookmarkedList(myBM);
-
-                        comicMetadata.addToBookmarkList(myBM);
                         break;
                     case "UNBOOKMARK":
                         Bookmark myBm = fieldFactory.getBookmark(0, 0);
                         userMetadata.removeFromBookmarkedList(myBm);
-
-                        comicMetadata.removeFromBookmarkList(myBm);
                         break;
                     default:
                         // TODO: an unspecified action was given

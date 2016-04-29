@@ -126,7 +126,7 @@ public class SocialServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_OK);
 
             }
-            catch (UserNotFoundException | NonUniqueGoogleIdException | NonUniqueLongIdException ex) {
+            catch (UserNotFoundException | NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

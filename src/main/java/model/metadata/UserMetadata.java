@@ -16,6 +16,8 @@ public class UserMetadata extends AbstractMetadata {
 
     private List<Bookmark> comicsBookmarkedList;
     private List<Comment> comicsCommentedList;
+    private List<Favorite> comicsFavoritedList;
+    private List<Like> comicsLikedList;
     private List<Rating> comicsRatedList;
 
     int numComments;
@@ -35,6 +37,8 @@ public class UserMetadata extends AbstractMetadata {
 
         comicsBookmarkedList = new ArrayList<Bookmark>();
         comicsCommentedList = new ArrayList<Comment>();
+        comicsFavoritedList = new ArrayList<Favorite>();
+        comicsLikedList = new ArrayList<Like>();
         comicsRatedList = new ArrayList<Rating>();
 
         comicsLikedMap = new HashMap<String, Like>();
@@ -59,6 +63,13 @@ public class UserMetadata extends AbstractMetadata {
         return comicsCommentedList;
     }
 
+    public List<Favorite> getComicsFavoritedList() {
+        return comicsFavoritedList;
+    }
+
+    public List<Like> getComicsLikedList() {
+        return comicsLikedList;
+    }
 
     public List<Rating> getComicsRatedList() { return comicsRatedList; }
 
@@ -92,6 +103,14 @@ public class UserMetadata extends AbstractMetadata {
         comicsCommentedList.add(comment);
     }
 
+    public void addToFavoritedList(Favorite favorite) {
+        comicsFavoritedList.add(favorite);
+    }
+
+    public void addToLikedList(Like like) {
+        comicsLikedList.add(like);
+    }
+
     public void addToRatedList(Rating rating) { comicsRatedList.add(rating); }
 
     public void removeFromComicsCreatedList(WebComic comic) {
@@ -101,6 +120,10 @@ public class UserMetadata extends AbstractMetadata {
     public void removeFromBookmarkedList(Bookmark bookmark) { comicsBookmarkedList.remove(bookmark); }
 
     public void removeFromCommentedList(Comment comment) { comicsCommentedList.remove(comment); }
+
+    public void removeFromFavoritedList(Favorite favorite) { comicsFavoritedList.remove(favorite); }
+
+    public void removeFromLikedList(Like like) { comicsLikedList.remove(like); }
 
     public void removeFromRatedList(Rating rating) { comicsRatedList.remove(rating); }
 
@@ -128,6 +151,14 @@ public class UserMetadata extends AbstractMetadata {
         return comicsCommentedList.size();
     }
 
+    public int getNumberOfComicsFavorited() {
+        return comicsFavoritedList.size();
+    }
+
+    public int getNumberOfComicsLiked() {
+        return comicsLikedList.size();
+    }
+
     public int getNumberOfComicsRated() { return comicsRatedList.size(); }
 
 
@@ -145,6 +176,14 @@ public class UserMetadata extends AbstractMetadata {
 
         if (comicsCommentedList == null) {
             comicsCommentedList = new ArrayList<Comment>();
+        }
+
+        if (comicsFavoritedList == null) {
+            comicsFavoritedList = new ArrayList<Favorite>();
+        }
+
+        if (comicsLikedList == null) {
+            comicsLikedList = new ArrayList<Like>();
         }
 
         if (comicsRatedList == null) {

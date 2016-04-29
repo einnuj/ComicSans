@@ -66,10 +66,14 @@ function getCurrentUser() {
 // If the current user is the author, then toggle off edit controls
 function getUserHelper(response) {
     currentUser = response;
-    if (currentUser == "")
+    if (currentUser == ""){
         $(".AUTHOR_PRIV").toggle();
-    else if (currentUser.metadata.name != author)
+        $(".comic-info-descr").css("margin-left", "+=65");
+    }
+    else if (currentUser.metadata.name != author) {
+        $(".comic-info-descr").css("margin-left", "+=65");
         $(".AUTHOR_PRIV").toggle();
+    }
 }
 
 function getComic() {

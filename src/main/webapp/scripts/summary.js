@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "5066549580791808"},
+        data: {"id": "5682617542246400"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -140,7 +140,7 @@ function subscribe(){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action" : "SUBSCRIBE", "comicId" : "INSERT ID HERE"},
+        data: {"action" : "SUBSCRIBE", "comicId" : "5682617542246400"},
         success: function(result){
             console.log(result);
         },
@@ -154,7 +154,7 @@ function favorite(){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action" : "FAVORITE", "comicId" : "INSERT ID HERE"},
+        data: {"action" : "FAVORITE", "comicId" : "5682617542246400"},
         success: function(result){
             console.log(result);
         },
@@ -168,7 +168,7 @@ function like(){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action" : "LIKE", "comicId" : "INSERT ID HERE"},
+        data: {"action" : "LIKE", "comicId" : "5682617542246400"},
         success: function(result){
             console.log(result);
         },
@@ -182,7 +182,7 @@ function unlike() {
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNLIKE", "comicId": "INSERT ID HERE"},
+        data: {"action": "UNLIKE", "comicId": "5682617542246400"},
         success: function (result) {
             console.log(result);
         },
@@ -196,7 +196,7 @@ function unfavorite() {
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNFAVORITE", "comicId": "INSERT ID HERE"},
+        data: {"action": "UNFAVORITE", "comicId": "5682617542246400"},
         success: function (result) {
             console.log(result);
         },

@@ -30,7 +30,7 @@ function mockCreateChapterAndPages() {
     $.ajax({
         url: "/ComicServlet",
         type: "post",
-        data: {"action" : "CREATE CHAPTER", "id" : comicId, "name" : "Napter Chame", "files" : "file1"},
+        data: {"action" : "CREATE CHAPTER", "id" : 5682617542246400, "name" : "Napter Chame", "files" : "file1"},
         success: function() {
             console.log("SUCCESS");
         }
@@ -41,7 +41,7 @@ function mockGetComic() {
     $.ajax({
         url:"/ComicServlet",
         type: "get",
-        data: {"id" : comicId},
+        data: {"id" : 5682617542246400},
         success: function(responseText) {
             $("#getComicDiv > a").text(JSON.stringify(responseText));
         }
@@ -72,7 +72,7 @@ function addBookmark() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "BOOKMARK", "comicId" : "4785074604081152"},
+        data: {"action" : "BOOKMARK", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -83,7 +83,7 @@ function removeBookmark() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "UNBOOKMARK", "comicId" : "4785074604081152"},
+        data: {"action" : "UNBOOKMARK", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -94,7 +94,7 @@ function addComment() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "COMMENT", "comicId" : "4785074604081152", "comment" : "Junnie's Awesome."},
+        data: {"action" : "COMMENT", "comicId" : "5682617542246400", "comment" : "Junnie's Awesome."},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -105,7 +105,7 @@ function addFavorite() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "FAVORITE", "comicId" : "4785074604081152"},
+        data: {"action" : "FAVORITE", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -116,7 +116,7 @@ function removeFavorite() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "UNFAVORITE", "comicId" : "4785074604081152"},
+        data: {"action" : "UNFAVORITE", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -127,7 +127,7 @@ function addLike() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "LIKE", "comicId" : "4785074604081152"},
+        data: {"action" : "LIKE", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -138,7 +138,7 @@ function removeLike() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "UNLIKE", "comicId" : "4785074604081152"},
+        data: {"action" : "UNLIKE", "comicId" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -149,7 +149,7 @@ function addRating() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action" : "RATE", "comicId" : "4785074604081152", "rating" : "3"},
+        data: {"action" : "RATE", "comicId" : "5682617542246400", "rating" : "3"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }
@@ -159,7 +159,7 @@ function callTestUser() {
     $.ajax({
         url:"/ComicServlet",
         type: "get",
-        data: {"id" : "4785074604081152"},
+        data: {"id" : "5682617542246400"},
         success: function(responseText) {
             $("#currentUserObject > p").text(JSON.stringify(responseText));
         }

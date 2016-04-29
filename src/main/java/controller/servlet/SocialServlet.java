@@ -233,8 +233,6 @@ public class SocialServlet extends HttpServlet {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            } catch (NonUniqueLongIdException e) {
-                e.printStackTrace();
             } catch (ParameterNotFoundException e) {
                 e.printStackTrace();
             }

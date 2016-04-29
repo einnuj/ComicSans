@@ -140,10 +140,12 @@ function removeBookmark() {
 }
 
 function checkLike() {
-    $.get('SocialServlet', {"request": "isLiked", "comicId": "INSERT ID"},
-        function (resp) { // on sucess
+    $.get("/SocialServlet", {"request": "isLiked", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
             if(resp == "true"){
                 // this means the comic has been liked
+                console.log("has been liked!");
             } else {
                 //comic is not liked
             }             

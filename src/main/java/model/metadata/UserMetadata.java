@@ -71,6 +71,7 @@ public class UserMetadata extends AbstractMetadata {
     }
 
     public String getDrawJson() { return drawJson; }
+
     /* Setters */
 
     public void setDrawJson(String drawJson){

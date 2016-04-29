@@ -3,9 +3,7 @@ package controller.servlet;
 import com.google.appengine.api.users.UserServiceFactory;
 import controller.exceptions.NonUniqueGoogleIdException;
 import model.comics.AllComics;
-import model.comics.ComicPage;
 import model.comics.WebComic;
-import model.metadata.ComicMetadata;
 import model.metadata.fields.*;
 import model.users.User;
 import utilities.data.ObjectifyHelper;
@@ -68,7 +66,7 @@ public class SocialServlet extends HttpServlet {
                         Comment myComment = new Comment("my comic id", genUser.getGoogleId(), comment);
                         myComment.updateLastEditedTime();
                         genUser.getMetadata().incrementComment();
-                        testComic.getMetadata().addToCommentedList(myComment);
+                        //testComic.getMetadata().addToCommentedList(myComment);
                         break;
                     case "RATE":
                         int rating = Integer.parseInt(req.getParameter("rating"));

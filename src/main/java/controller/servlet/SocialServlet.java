@@ -2,8 +2,7 @@ package controller.servlet;
 
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
-import controller.exceptions.NonUniqueGoogleIdException;
-import controller.exceptions.NonUniqueLongIdException;
+import controller.exceptions.*;
 import model.comics.WebComic;
 import model.metadata.ComicMetadata;
 import model.metadata.UserMetadata;
@@ -35,8 +34,7 @@ public class SocialServlet extends HttpServlet {
                 User genUser = UserAccess.queryForUser(googleUser.getUserId());
 
                 if (genUser == null) {
-                    // TODO: User somehow gained access to this page without logging in to our system. Address immediately.
-                    return;
+                    throw new UserNotFoundException(googleUser.getUserId());
                 }
 
                 String googleId = genUser.getGoogleId();
@@ -44,8 +42,7 @@ public class SocialServlet extends HttpServlet {
                 String comicId = req.getParameter("comicId");
 
                 if (comicId == null) {
-                    // TODO: comicId was not passed back to BackEnd.
-                    return;
+                    throw new ParameterNotFoundException("comicId");
                 }
 
                 WebComic targetComic = ComicAccess.queryForComic(Long.valueOf(comicId));
@@ -92,21 +89,18 @@ public class SocialServlet extends HttpServlet {
                         String comment = req.getParameter("comment");
 
                         if (comment == null) {
-                            // TODO: comment was not passed back to BackEnd.,
-                            return;
+                            throw new ParameterNotFoundException("comment");
                         }
 
                         Comment myComment = fieldFactory.getComment(comment);
                         comicMetadata.addComment(myComment);
                         userMetadata.incrementComment();
-                        //testComic.getMetadata().addToCommentedList(myComment);
                         break;
                     case "RATE":
                         String rating = req.getParameter("rating");
 
                         if (rating == null) {
-                            // TODO: rating was not passed back to BackEnd
-                            return;
+                            throw new ParameterNotFoundException("rating");
                         }
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
@@ -122,8 +116,7 @@ public class SocialServlet extends HttpServlet {
                         userMetadata.removeFromBookmarks(myBm.getComicTarget());
                         break;
                     default:
-                        // TODO: an unspecified action was given
-                        return;
+                        throw new UndefinedActionException(action);
                 }
 
                 ObjectifyHelper.save(genUser);
@@ -133,13 +126,22 @@ public class SocialServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_OK);
 
             }
-            catch (NonUniqueGoogleIdException | NonUniqueLongIdException ex) {
+            catch (UserNotFoundException | NonUniqueGoogleIdException | NonUniqueLongIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        }
+            catch (ParameterNotFoundException | UndefinedActionException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        }
+        else {
+            resp.getWriter().write("{\"error\":\"No User Logged In\"}");
+
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 
     @Override

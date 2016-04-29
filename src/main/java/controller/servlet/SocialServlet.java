@@ -104,7 +104,7 @@ public class SocialServlet extends HttpServlet {
                         }
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
-                        userMetadata.addToRatedList(myRating);
+                        userMetadata.addToRatedMap(myRating);
                         // testComic.getMetadata().addToRatingList(myRating);
                         break;
                     case "BOOKMARK":

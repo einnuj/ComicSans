@@ -67,6 +67,10 @@ public class ComicMetadata extends AbstractMetadata {
         return Math.round(rating);
     }
 
+    public void addComment(Comment c){
+        commentList.add(c);
+    }
+
     /**
      * Reinitializes any null collection in the object as returned by Objectify
      */

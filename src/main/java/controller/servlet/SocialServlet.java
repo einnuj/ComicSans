@@ -193,11 +193,12 @@ public class SocialServlet extends HttpServlet {
                 switch (request) {
                     case "numFavorites":
                         int numFaves = comicMetadata.getFavorites();
-                        resp.getWriter().write(numFaves);
+                        resp.getWriter().write(Integer.toString(numFaves));
                         break;
                     case "numLikes":
                         int numLikes = comicMetadata.getLikes();
-                        resp.getWriter().write(numLikes);
+
+                        resp.getWriter().write(Integer.toString(numLikes));
                         break;
                     case "isSubscribed":
                          if(userMetadata.hasSubscription(targetComic)){

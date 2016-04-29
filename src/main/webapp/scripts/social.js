@@ -140,13 +140,64 @@ function removeBookmark() {
 }
 
 function checkLike() {
-    $.get('SocialServlet', {"request": "isLiked", "comicId": "INSERT ID"},
-        function (resp) { // on sucess
+    $.get("/SocialServlet", {"request": "isLiked", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
             if(resp == "true"){
                 // this means the comic has been liked
+                console.log("has been liked!");
             } else {
                 //comic is not liked
             }             
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function checkFavorite() {
+    $.get("/SocialServlet", {"request": "isFavorited", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+            if(resp == "true"){
+                // do something if favorited
+            } else {
+                //comic is not faved
+            }
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function isSubscribed() {
+    $.get("/SocialServlet", {"request": "isSubscribed", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            if(resp == "true"){
+                // do something if subscribed
+            } else {
+                //comic is not subscribed
+            }
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function numLikes(){
+    $.get("/SocialServlet", {"request": "numLikes", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function numFavorites(){
+    $.get("/SocialServlet", {"request": "numFavorites", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
         })
         .fail(function () { // on failure
             alert("Request failed.");

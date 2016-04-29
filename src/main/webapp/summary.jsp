@@ -4,6 +4,9 @@
   Date: 4/7/16
   Time: 11:48 AM
   To change this template use File | Settings | File Templates.
+
+  *** THE CLASS AUTHOR PRIV IS FOR EDIT CONTROLS ONLY VISIBLE TO THE AUTHOR ***
+
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -39,11 +42,11 @@
         <div class="comic-info">
             <div class="edit-image">
                 <img id="cover-thumbnail" src="images/covers/CoConutCover.png" />
-                <input id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
+                <input class="AUTHOR_PRIV" id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
             </div>
             <div class="comic-info-descr">
                 <h1 id="title-header">CoConut</h1>
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span>
+                <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span></span>
                 <div id="edit-title">
                     New Title: <input id="title-text" type="text" value="" />
                 </div>
@@ -53,7 +56,7 @@
                 <div class="comic-summary">
                     <p id="summary-paragraph">
                     </p>
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span>
+                    <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicSummary()"></span></span>
                 </div>
                 <div id="edit-summary">
                     This is an example of a comic summary.
@@ -70,9 +73,9 @@
                 <p>Favorites: 15</p>
                 <p>Last updated: <em>3 days ago</em></p>
                 <div class="social-buttons">
-                    <a class="btn btn-lg btn-primary" role="button">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('SUB')">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
                     <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
                 </div>
             </div>

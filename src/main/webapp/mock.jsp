@@ -45,6 +45,13 @@
         <div id="ratingDiv">
             <a href="#" onclick="addRating()">Click to Add Rating!</a>
         </div>
+        <div id="checkLike">
+            <a href="#" onclick="checkLike()">Click to check like!</a>
+            <a href="#" onclick="checkFavorite()">Click to check fave!</a>
+            <a href="#" onclick="numLikes()">get num likes!</a>
+            <a href="#" onclick="numFavorites()">get num favess!</a>
+
+        </div>
         <div id="currentUserObject">
             <p>Nothing's Here!</p>
         </div>
@@ -54,3 +61,4 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="/scripts/mockingbird.js"></script>
+<script src="/scripts/social.js"></script>

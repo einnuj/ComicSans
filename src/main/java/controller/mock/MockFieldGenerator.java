@@ -115,7 +115,7 @@ public class MockFieldGenerator {
                     fieldToBeAdded = "Rating";
                     if (!alreadyGeneratedFieldList.contains(fieldToBeAdded)) {
                         alreadyGeneratedFieldList.add(fieldToBeAdded);
-                        metadata.addToRatedList(fieldFactory.getRating(4));
+                        //metadata.addToRatedList(fieldFactory.getRating(4));
                         i++;
                     }
                     break;

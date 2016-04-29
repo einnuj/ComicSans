@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import com.google.appengine.api.users.UserServiceFactory;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.*;
@@ -71,19 +72,31 @@ public class SocialServlet extends HttpServlet {
                 switch(action) {
                     case "LIKE":
                         Like myLike = fieldFactory.getLike();
-                        userMetadata.addToLikesMap(myLike);
+                        if(!userMetadata.getLikes().containsKey(comicId)) {
+                            userMetadata.addToLikesMap(myLike);
+                            comicMetadata.incrementLike();
+                        }
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
-                        userMetadata.removeFromLikesMap(like);
+                        if(userMetadata.getLikes().containsKey(comicId)){
+                            userMetadata.removeFromLikesMap(like);
+                            comicMetadata.decrementLike();
+                        }
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
-                        userMetadata.addToFavoritesMap(myFave);
+                        if(!userMetadata.getFavorites().containsKey(comicId)) {
+                            userMetadata.addToFavoritesMap(myFave);
+                            comicMetadata.incrementFaves();
+                        }
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
-                        userMetadata.removeFromFavoritesMap(favorite);
+                        if(userMetadata.getFavorites().containsKey(comicId)){
+                            userMetadata.removeFromFavoritesMap(favorite);
+                            comicMetadata.decrementFaves();
+                        }
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");
@@ -104,7 +117,7 @@ public class SocialServlet extends HttpServlet {
                         }
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
-                        userMetadata.addToRatedList(myRating);
+                        userMetadata.addToRatedMap(myRating);
                         // testComic.getMetadata().addToRatingList(myRating);
                         break;
                     case "BOOKMARK":
@@ -114,6 +127,12 @@ public class SocialServlet extends HttpServlet {
                     case "UNBOOKMARK":
                         Bookmark myBm = fieldFactory.getBookmark(0, 0);
                         userMetadata.removeFromBookmarks(myBm.getComicTarget());
+                        break;
+                    case "SUBSCRIBE":
+                        userMetadata.addSubscription(targetComic);
+                        break;
+                    case "UNSUBSCRIBE":
+                        userMetadata.removeSubscription(targetComic);
                         break;
                     default:
                         throw new UndefinedActionException(action);
@@ -144,7 +163,81 @@ public class SocialServlet extends HttpServlet {
         }
     }
 
+    private com.google.appengine.api.users.User getGoogleUser() {
+        return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        com.google.appengine.api.users.User googleUser = getGoogleUser();
+        if (googleUser != null) {
+            resp.setContentType("application/json");
+            try {
+                User genUser = UserAccess.queryForUser(googleUser.getUserId());
+
+                // There was no User in the DB; must be a new User.
+                if (genUser == null) {
+                    //then we don't do anything
+                    return;
+                }
+                String googleId = genUser.getGoogleId();
+                String request = req.getParameter("request");
+                String comicId = req.getParameter("comicId");
+
+                if (comicId == null) {
+                    throw new ParameterNotFoundException("comicId");
+                }
+
+                WebComic targetComic = ComicAccess.queryForComic(Long.valueOf(comicId));
+
+                FieldFactory fieldFactory = new FieldFactory(comicId, googleId);
+                UserMetadata userMetadata = genUser.getMetadata();
+                ComicMetadata comicMetadata = targetComic.getMetadata();
+
+                targetComic.reload();
+                userMetadata.reload();
+                comicMetadata.reload();
+
+                switch (request) {
+                    case "numFavorites":
+                        int numFaves = comicMetadata.getFavorites();
+                        resp.getWriter().write(Integer.toString(numFaves));
+                        break;
+                    case "numLikes":
+                        int numLikes = comicMetadata.getLikes();
+
+                        resp.getWriter().write(Integer.toString(numLikes));
+                        break;
+                    case "isSubscribed":
+                         if(userMetadata.hasSubscription(targetComic)){
+                             resp.getWriter().write("true");
+                         } else
+                             resp.getWriter().write("false");
+                        break;
+                    case "isLiked":
+                        if(userMetadata.hasLike(targetComic)){
+                            resp.getWriter().write("true");
+                        } else
+                            resp.getWriter().write("false");
+                        break;
+                    case "isFavorited":
+                        if(userMetadata.hasFavorited(targetComic)){
+                            resp.getWriter().write("true");
+                        } else
+                            resp.getWriter().write("false");
+                        break;
+                }
+
+            }
+            catch (NonUniqueGoogleIdException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (NonUniqueLongIdException e) {
+                e.printStackTrace();
+            } catch (ParameterNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

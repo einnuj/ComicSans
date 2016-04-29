@@ -3,9 +3,7 @@ package model.metadata;
 import model.comics.WebComic;
 import model.metadata.fields.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * A Class that represents the Metadata of a User.
@@ -28,6 +26,8 @@ public class UserMetadata extends AbstractMetadata {
 
     private HashMap<String, Bookmark> comicsBookmarkedMap;
 
+    private Queue<WebComic> userHistory;
+
     public UserMetadata(String name) {
         super(name);
 
@@ -41,12 +41,18 @@ public class UserMetadata extends AbstractMetadata {
 
         comicsFavoritedMap = new HashMap<String, Favorite>();
 
+        userHistory = new LinkedList<>();
+
         numComments = 0;
     }
 
     UserMetadata(){}
 
     /* Getters */
+
+    public Queue<WebComic> getUserHistory(){
+        return userHistory;
+    }
 
     public HashMap<String, WebComic> getComicsCreatedMap() {
         return comicsCreatedMap;
@@ -94,7 +100,12 @@ public class UserMetadata extends AbstractMetadata {
 
     public void removeFromRatedList(Rating rating) { comicsRatedList.remove(rating); }
 
-
+    public void addToHistory(WebComic comic){
+        if(userHistory.size() >= 10){
+            userHistory.remove();
+        }
+        userHistory.add(comic);
+    }
 
     public void addToLikesMap(Like like) {
         comicsLikedMap.put(like.getComicTarget(), like);
@@ -137,6 +148,10 @@ public class UserMetadata extends AbstractMetadata {
 
         if (comicsFavoritedMap == null) {
             comicsFavoritedMap = new HashMap<String, Favorite>();
+        }
+
+        if(userHistory == null) {
+            userHistory = new LinkedList<WebComic>();
         }
 
     }

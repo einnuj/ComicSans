@@ -78,6 +78,7 @@ public class SocialServlet extends HttpServlet {
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
                         userMetadata.removeFromLikesMap(like);
+                        comicMetadata.decrementLike();
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();

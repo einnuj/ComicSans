@@ -88,6 +88,7 @@ function getComic() {
     })
 }
 
+<<<<<<< HEAD
 function waitForAjaxComic(obj) {
     // Get data for each field from JSON object
     currentComic = obj;
@@ -177,31 +178,6 @@ function like(){
         }
     });
 }
+=======
+>>>>>>> 7a3af5a2b5d9105a6edd391fd06677e47d9d7e58
 
-function unlike() {
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action": "UNLIKE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}
-
-function unfavorite() {
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action": "UNFAVORITE", "comicId": "INSERT ID HERE"},
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}

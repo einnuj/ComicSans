@@ -7,7 +7,7 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic;
+var currentComic = "4644337115725824";
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "4785074604081152"},
+        data: {"id": "4644337115725824"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -135,17 +135,17 @@ function socialButton(type) {
             break;
 
         case "FAV":
-            if (true) { // If the user doesn't already like the comic, then allow a like
+            if ($("#fav-btn").text().trim() == "Favorite") { // If the user doesn't already like the comic, then allow a like
                 favorite(currentComic.id);
                 currentComic.metadata.favorites++;
                 $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
-                $("#fav-btn").html("UnFavorite");
+                $("#fav-btn").html("UnFavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
             }
             else {
                 unfavorite(currentComic.id);
                 currentComic.metadata.favorites--;
                 $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
-                $("#fav-btn").html("Favorite");
+                $("#fav-btn").html("Favorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
             }
             break;
 

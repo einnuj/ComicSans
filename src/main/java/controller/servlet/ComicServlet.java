@@ -7,6 +7,7 @@ import controller.exceptions.ComicNotFoundException;
 import controller.exceptions.NonUniqueGoogleIdException;
 import controller.exceptions.ParameterNotFoundException;
 import controller.exceptions.UserNotFoundException;
+import model.comics.AllComics;
 import model.comics.ComicChapter;
 import model.comics.ComicPage;
 import model.comics.WebComic;
@@ -156,7 +157,6 @@ public class ComicServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idString = req.getParameter("id");
-        String loadString = req.getParameter("load");
 
         if (idString != null) {
             Long id = Long.valueOf(req.getParameter("id"));
@@ -177,7 +177,7 @@ public class ComicServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }
-        else if (loadString != null) {
+        else {
             try {
                 List<WebComic> webComicList = ComicAccess.queryAllComics();
 
@@ -186,17 +186,21 @@ public class ComicServlet extends HttpServlet {
                     return;
                 }
 
-                resp.getWriter().write(JsonHelper.objectToJson(webComicList));
+                AllComics allComics = new AllComics();
+
+                for (WebComic comic : webComicList) {
+                    allComics.addComic(comic.getId(), comic);
+                }
+
+                req.setAttribute("allComics", allComics);
                 resp.setStatus(HttpServletResponse.SC_OK);
-                resp.setContentType("application/json");
+                req.getRequestDispatcher("directory.jsp").forward(req, resp);
+
             } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        }
-        else {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 }

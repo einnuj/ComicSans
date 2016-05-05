@@ -7,9 +7,19 @@ function sortComics(filter) {
     
 }
 
+function listAllComics() {
+    // Select all Comics
+    var allComicsMap = {};
+    $(".comic-listing").each(function(comicDiv) {
+        allComicsMap[$(this).attr("id")] = $(this).data("genre");
+    });
+    return allComicsMap;
+}
+
 function filterComics() {
-    var filteredComics = "${allComics.getComicsAsList}";
-    filteredComics = filteredComics.filter(filterComic);
+    var comicsMap = listAllComics();
+    
+    console.log(comicsMap);
 }
 
 function filterComic(comic) {

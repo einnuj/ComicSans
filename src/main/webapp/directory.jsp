@@ -77,6 +77,7 @@
             </div>
         </c:forEach>
 
+        <%-- COMMENTED OUT FOR JS TESTING PURPOSES
         <div class="comic-listing">
             <a href="summary.jsp"><img src="images/covers/CoConutCover.png"></a>
             <h3>CoConut</h3>
@@ -92,6 +93,8 @@
             <h3>Doofus</h3>
             <h5>Ian McKellen</h5>
         </div>
+        --%>
+
     </div>
 
 </body>

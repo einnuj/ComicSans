@@ -216,3 +216,13 @@ function getComments(){
             alert("Request failed.");
         });
 }
+
+function getRating(){
+    $.get("/SocialServlet", {"request": "getRating", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}

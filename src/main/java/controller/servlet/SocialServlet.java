@@ -232,7 +232,16 @@ public class SocialServlet extends HttpServlet {
                             String comments = new Gson().toJson(comicMetadata.getCommentList());
                             resp.getWriter().write(comments);
                         }
-
+                        break;
+                    case "getRating":
+                        if(comicMetadata.getRatingMap().size()>0){
+                            int rating = comicMetadata.getRatingAsInt();
+                            resp.getWriter().write(rating);
+                        } else {
+                            // to indicate there is no rating
+                            resp.getWriter().write("0");
+                        }
+                        break;
                 }
 
             }

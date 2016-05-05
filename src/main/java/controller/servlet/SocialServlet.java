@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.*;
@@ -226,6 +227,12 @@ public class SocialServlet extends HttpServlet {
                         } else
                             resp.getWriter().write("false");
                         break;
+                    case "getComments":
+                        if(comicMetadata.getCommentList().size() > 0) {
+                            String comments = new Gson().toJson(comicMetadata.getCommentList());
+                            resp.getWriter().write(comments);
+                        }
+
                 }
 
             }

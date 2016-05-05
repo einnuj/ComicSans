@@ -3,22 +3,13 @@ package controller.servlet;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.impl.translate.opt.joda.JodaTimeTranslators;
 import model.comics.WebComic;
-import model.metadata.ComicMetadata;
-import model.metadata.fields.Bookmark;
-import model.metadata.fields.Comment;
-import model.metadata.fields.Favorite;
-import model.metadata.fields.Like;
 import model.users.User;
-import utilities.JsonHelper;
-import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 /**
  * A Servlet class that will take care of initializing anything we need before

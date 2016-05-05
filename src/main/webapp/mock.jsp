@@ -25,7 +25,7 @@
             <a href="#" onclick="mockCreateChapterAndPages()">Click Here To Generate CHAPTER/PAGES!</a>
         </div>
         <div id="getComicDiv">
-            <a href="#" onclick="mockGetComic()">Click Here to GET Comic</a>
+            <a href="#" onclick="mockGetComics()">Click Here to GET Comics</a>
         </div>
         <div id="bookmarkDiv">
             <a href="#" onclick="addBookmark()">Click to Add Bookmark!</a>

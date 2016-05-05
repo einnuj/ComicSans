@@ -231,6 +231,8 @@ public class SocialServlet extends HttpServlet {
                         if(comicMetadata.getCommentList().size() > 0) {
                             String comments = new Gson().toJson(comicMetadata.getCommentList());
                             resp.getWriter().write(comments);
+                        } else {
+                            resp.getWriter().write("null");
                         }
                         break;
                     case "getRating":

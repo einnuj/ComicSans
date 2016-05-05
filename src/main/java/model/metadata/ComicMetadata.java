@@ -89,12 +89,17 @@ public class ComicMetadata extends AbstractMetadata {
     }
 
     public int getRatingAsInt() {
-        double num = ratingMap.size();
-        double total = 0;
-        for(Rating r : ratingMap.values()){
-            total+= r.getRating();
+        if(ratingMap != null) {
+            if(ratingMap.size() > 0) {
+                double num = ratingMap.size();
+                double total = 0;
+                for (Rating r : ratingMap.values()) {
+                    total += r.getRating();
+                }
+                return (int) Math.round(total / num);
+            }
         }
-        return (int) Math.round(total/num);
+        return 0;
     }
 
     public void addComment(Comment c){

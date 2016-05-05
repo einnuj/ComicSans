@@ -1,3 +1,5 @@
+comicId = "5770237022568448";
+
 function subscribe() {
     $.ajax({
         type: "POST",
@@ -205,12 +207,17 @@ function numFavorites(){
 }
 
 function getComments(){
-    $.get("/SocialServlet", {"request": "getComments", "comicId": "4785074604081152"})
-        .done(function (resp) { // on sucess
-            for(c in resp){
-                console.log(resp[c].description);
-                console.log(resp[c].userOrigin);
+    $.get("/SocialServlet", {"request": "getComments", "comicId": comicId})
+        .done(function (resp) { // on success
+            if(resp == "null"){
+                console.log("no comments");
+            } else {
+                for(c in resp){
+                    console.log(resp[c].description);
+                    console.log(resp[c].userOrigin);
+                }
             }
+
         })
         .fail(function () { // on failure
             alert("Request failed.");
@@ -218,7 +225,7 @@ function getComments(){
 }
 
 function getRating(){
-    $.get("/SocialServlet", {"request": "getRating", "comicId": "4785074604081152"})
+    $.get("/SocialServlet", {"request": "getRating", "comicId": comicId})
         .done(function (resp) { // on sucess
             console.log(resp);
         })

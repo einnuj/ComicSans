@@ -2,6 +2,7 @@
  * Completely Mock JS.
  * Created by lilsh on 4/14/2016.
  */
+comicId = "5770237022568448";
 
 function mockUser() {
     $.ajax({

@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -33,16 +32,19 @@ public class AuthenticateServlet extends HttpServlet {
         UserService userService = UserServiceFactory.getUserService();
         String currentURL = request.getParameter("currentURL");
         String responseURL;
+        boolean loggedIn;
 
-        response.setContentType("text/plain");
+        response.setContentType("application/json");
 
         if (request.getUserPrincipal() != null) {
             responseURL = userService.createLogoutURL(currentURL);
+            loggedIn = true;
         }
         else {
             responseURL = userService.createLoginURL(currentURL);
+            loggedIn = false;
         }
 
-        response.getWriter().write(responseURL);
+        response.getWriter().write("{\"loggedIn\":" + loggedIn + ", \"url\":\"" + responseURL + "\"}");
     }
 }

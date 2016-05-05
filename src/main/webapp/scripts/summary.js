@@ -7,7 +7,7 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic = "4644337115725824";
+var currentComic = "5910974510923776";
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "4644337115725824"},
+        data: {"id": "5682617542246400"},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -167,4 +167,72 @@ function socialButton(type) {
             break;
     }
 }
+function subscribe(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "SUBSCRIBE", "comicId" : "5682617542246400"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
 
+function favorite(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "FAVORITE", "comicId" : "5682617542246400"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+function like(){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action" : "LIKE", "comicId" : "5682617542246400"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+}
+
+function unlike() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNLIKE", "comicId": "5682617542246400"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+function unfavorite() {
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNFAVORITE", "comicId": "5682617542246400"},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}

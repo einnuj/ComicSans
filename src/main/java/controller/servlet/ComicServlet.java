@@ -5,7 +5,7 @@ import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.ComicNotFoundException;
 import controller.exceptions.NonUniqueGoogleIdException;
-import controller.exceptions.NonUniqueLongIdException;
+import controller.exceptions.ParameterNotFoundException;
 import controller.exceptions.UserNotFoundException;
 import model.comics.ComicChapter;
 import model.comics.ComicPage;
@@ -27,23 +27,42 @@ import java.io.IOException;
 
 public class ComicServlet extends HttpServlet {
 
+    /**
+     * This POST call reacts differently pending an "action" parameter:
+     *      "CREATE CHAPTER" - attempts to create a ComicChapter with a name from a "name" parameter and ComicPage pages from files from a "files" parameter and save it to an existing WebComic with an id equal to the "id" parameter.
+     *      "CREATE COMIC" - attempts to create a new WebComic with a name from a "name" parameter and a description from a "description" parameter. Returns the WebComic as a JSONObject.
+     * @param req the HttpServletRequest Object
+     * @param resp the HttpServletResponse Object
+     * @throws ServletException - not explicitly thrown
+     * @throws IOException - not explicitly thrown
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
         switch (action) {
             case "CREATE CHAPTER":
-                Long id = Long.valueOf(req.getParameter("id"));
-
                 try {
+                    String idString = req.getParameter("id");
+                    String name = req.getParameter("name");
+                    String file = req.getParameter("files");
+
+                    if (idString == null) {
+                        throw new ParameterNotFoundException("id");
+                    }
+                    if (name == null) {
+                        throw new ParameterNotFoundException("name");
+                    }
+                    if (file == null) {
+                        throw new ParameterNotFoundException("files");
+                    }
+
+                    Long id = Long.valueOf(idString);
                     WebComic comic = ComicAccess.queryForComic(id);
 
                     if (comic == null) {
                         throw new ComicNotFoundException(id);
                     }
-
-                    String name = req.getParameter("name");
-                    String file = req.getParameter("files");
 
                     ComicChapter newChapter = new ComicChapter(name);
                     newChapter.addToChildMediaList(new ComicPage("fileName", file));
@@ -55,10 +74,15 @@ public class ComicServlet extends HttpServlet {
                     comic.reload();
                     comic.getMetadata().reload();
                 }
-                catch (NonUniqueLongIdException | ComicNotFoundException ex) {
+                catch (ComicNotFoundException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
+                catch (ParameterNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 }
                 break;
 
@@ -70,13 +94,18 @@ public class ComicServlet extends HttpServlet {
                 if (googleUser != null) {
                     try {
                         User author = UserAccess.queryForUser(googleUser.getUserId());
+                        String name = req.getParameter("name");
+                        String description = req.getParameter("description");
 
                         if (author == null) {
                             throw new UserNotFoundException(googleUser.getUserId());
                         }
-
-                        String name = req.getParameter("name");
-                        String description = req.getParameter("description");
+                        if (name == null) {
+                            throw new ParameterNotFoundException("name");
+                        }
+                        if (description == null) {
+                            throw new ParameterNotFoundException("description");
+                        }
 
                         WebComic newComic = new WebComic(name, author.getMetadata().getName());
                         newComic.getMetadata().setBio(description);
@@ -100,6 +129,11 @@ public class ComicServlet extends HttpServlet {
 
                         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
+                    catch (ParameterNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                    }
                 }
                 else {
                     resp.getWriter().write("{\"error\":\"No User Logged In\"}");
@@ -113,10 +147,10 @@ public class ComicServlet extends HttpServlet {
 
     /**
      * Returns to the caller a JSON representation of the WebComic queried for via Long id.
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * @param req the HttpServletRequest Object
+     * @param resp the HttpServletResponse Object
+     * @throws ServletException - now explicitly thrown
+     * @throws IOException - not explicitly thrown
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -135,7 +169,7 @@ public class ComicServlet extends HttpServlet {
                 resp.getWriter().write(JsonHelper.objectToJson(webComic));
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.setContentType("application/json");
-            } catch (NonUniqueLongIdException | ComicNotFoundException ex) {
+            } catch (ComicNotFoundException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

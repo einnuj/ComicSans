@@ -72,23 +72,31 @@ public class SocialServlet extends HttpServlet {
                 switch(action) {
                     case "LIKE":
                         Like myLike = fieldFactory.getLike();
-                        userMetadata.addToLikesMap(myLike);
-                        comicMetadata.incrementLike();
+                        if(!userMetadata.getLikes().containsKey(comicId)) {
+                            userMetadata.addToLikesMap(myLike);
+                            comicMetadata.incrementLike();
+                        }
                         break;
                     case "UNLIKE":
                         Like like = fieldFactory.getLike();
-                        userMetadata.removeFromLikesMap(like);
-                        comicMetadata.decrementLike();
+                        if(userMetadata.getLikes().containsKey(comicId)){
+                            userMetadata.removeFromLikesMap(like);
+                            comicMetadata.decrementLike();
+                        }
                         break;
                     case "FAVORITE":
                         Favorite myFave = fieldFactory.getFavorite();
-                        userMetadata.addToFavoritesMap(myFave);
-                        comicMetadata.incrementFaves();
+                        if(!userMetadata.getFavorites().containsKey(comicId)) {
+                            userMetadata.addToFavoritesMap(myFave);
+                            comicMetadata.incrementFaves();
+                        }
                         break;
                     case "UNFAVORITE":
                         Favorite favorite = fieldFactory.getFavorite();
-                        userMetadata.removeFromFavoritesMap(favorite);
-                        comicMetadata.decrementFaves();
+                        if(userMetadata.getFavorites().containsKey(comicId)){
+                            userMetadata.removeFromFavoritesMap(favorite);
+                            comicMetadata.decrementFaves();
+                        }
                         break;
                     case "COMMENT":
                         String comment = req.getParameter("comment");
@@ -137,7 +145,7 @@ public class SocialServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_OK);
 
             }
-            catch (UserNotFoundException | NonUniqueGoogleIdException | NonUniqueLongIdException ex) {
+            catch (UserNotFoundException | NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -225,8 +233,6 @@ public class SocialServlet extends HttpServlet {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            } catch (NonUniqueLongIdException e) {
-                e.printStackTrace();
             } catch (ParameterNotFoundException e) {
                 e.printStackTrace();
             }

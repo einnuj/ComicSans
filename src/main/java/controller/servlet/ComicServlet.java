@@ -194,7 +194,6 @@ public class ComicServlet extends HttpServlet {
 
                 req.setAttribute("allComics", allComics);
                 resp.setStatus(HttpServletResponse.SC_OK);
-                req.getRequestDispatcher("directory.jsp").forward(req, resp);
 
             } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

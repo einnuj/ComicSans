@@ -8,28 +8,12 @@ function sortComics(filter) {
 }
 
 function filterComics() {
+    var filteredComics = "${allComics.getComicsAsList}";
+    filteredComics = filteredComics.filter(filterComic);
+}
+
+function filterComic(comic) {
     var filter = $('.dropdown-menu :selected').text();
 
-    switch(filter) {
-        case 'Action':
-            break;
-        case 'Comedy':
-            break;
-        case 'Drama':
-            break;
-        case 'Fantasy':
-            break;
-        case 'Gaming':
-            break;
-        case 'Horror':
-            break;
-        case 'Romance':
-            break;
-        case 'Sports':
-            break;
-        case 'Thriller':
-            break;
-        default:
-            break;
-    }
+    return filter === comic.metadata.genre;
 }

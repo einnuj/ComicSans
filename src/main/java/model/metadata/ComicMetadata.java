@@ -30,7 +30,7 @@ public class ComicMetadata extends AbstractMetadata {
         this.author = author;
         genre = GenreEnum.UNLISTED;
         commentList = new ArrayList<Comment>();
-        ratingMap = new HashMap<>();
+        ratingMap = new HashMap<String, Rating>();
     }
 
     /* Getters */
@@ -112,6 +112,9 @@ public class ComicMetadata extends AbstractMetadata {
     public void reload() {
         if (commentList == null) {
             commentList = new ArrayList<Comment>();
+        }
+        if (ratingMap == null) {
+            ratingMap = new HashMap<>();
         }
     }
 }

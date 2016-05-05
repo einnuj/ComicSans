@@ -203,3 +203,16 @@ function numFavorites(){
             alert("Request failed.");
         });
 }
+
+function getComments(){
+    $.get("/SocialServlet", {"request": "getComments", "comicId": "4785074604081152"})
+        .done(function (resp) { // on sucess
+            for(c in resp){
+                console.log(resp[c].description);
+                console.log(resp[c].userOrigin);
+            }
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}

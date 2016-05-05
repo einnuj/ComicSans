@@ -17,10 +17,12 @@ public class ObjectifyHelper {
 
     public static <T> void save(T entity) { ofy().save().entity(entity).now(); }
 
-    public static <T> T loadById(Class<T> tClass, Long id) { return ofy().load()
-            .type(tClass).id(id).now(); }
+    public static <T> T loadById(Class<T> tClass, Long id) { return ofy().load().type(tClass).id(id).now(); }
+
+    public static <T> List<T> loadAllOfType(Class<T> tClass) { return ofy().load().type(tClass).list(); }
 
     public static <T> List<T> loadWithEqualsFilter(Class<T> tClass, String fieldName, Object value) {
         return ofy().load().type(tClass).filter(fieldName, value).list();
     }
+
 }

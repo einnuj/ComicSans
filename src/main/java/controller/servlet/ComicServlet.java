@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * A Servlet that will respond with a WebComic class.
@@ -154,10 +155,11 @@ public class ComicServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("id"));
+        String idString = req.getParameter("id");
+        String loadString = req.getParameter("load");
 
-        if (id != null) {
-            //resp.setContentType("application/json");
+        if (idString != null) {
+            Long id = Long.valueOf(req.getParameter("id"));
 
             try {
                 WebComic webComic = ComicAccess.queryForComic(id);
@@ -170,6 +172,24 @@ public class ComicServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.setContentType("application/json");
             } catch (ComicNotFoundException ex) {
+                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+        else if (loadString != null) {
+            try {
+                List<WebComic> webComicList = ComicAccess.queryAllComics();
+
+                if (webComicList == null) {
+                    // Something horrible has happened.
+                    return;
+                }
+
+                resp.getWriter().write(JsonHelper.objectToJson(webComicList));
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.setContentType("application/json");
+            } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

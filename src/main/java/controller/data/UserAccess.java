@@ -13,6 +13,16 @@ import java.util.List;
  */
 public class UserAccess {
 
+    public static List<User> queryAllUsers() {
+        List<User> userList = ObjectifyHelper.loadAllOfType(User.class);
+
+        for (User user : userList) {
+            reinstantiate(user);
+        }
+
+        return userList;
+    }
+
     /**
      * Attempts to return the first User with the relevant googleId.
      * @param googleId the unique String representation of a User
@@ -28,8 +38,7 @@ public class UserAccess {
         else if (userList.size() == 1) {
             User user = userList.get(0);
 
-            // Objectify sets all empty Collections to null; this reinstantiates them.
-            user.getMetadata().reload();
+            reinstantiate(user);
             return user;
         }
         else {
@@ -39,5 +48,9 @@ public class UserAccess {
 
     public static com.google.appengine.api.users.User getGoogleUser() {
         return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
+    private static void reinstantiate(User user) {
+        user.getMetadata().reload();
     }
 }

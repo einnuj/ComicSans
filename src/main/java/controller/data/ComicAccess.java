@@ -3,11 +3,27 @@ package controller.data;
 import model.comics.WebComic;
 import utilities.data.ObjectifyHelper;
 
+import java.util.List;
+
 /**
  * A Class that handles CRUD Comics for Controllers against our DataBase.
  * Created by einnuj on 4/22/2016.
  */
 public class ComicAccess {
+
+    /**
+     * Attempts to return all WebComics from the DataStore
+     * @return a List of all WebComics from the DataStore
+     */
+    public static List<WebComic> queryAllComics() {
+        List<WebComic> comicList = ObjectifyHelper.loadAllOfType(WebComic.class);
+
+        for (WebComic comic : comicList) {
+            reinstantiate(comic);
+        }
+
+        return comicList;
+    }
 
     /**
      * Attempts to return the first WebComic with the relevant id
@@ -17,13 +33,20 @@ public class ComicAccess {
     public static WebComic queryForComic(Long id) {
         WebComic comic =  ObjectifyHelper.loadById(WebComic.class, id);
 
-        if (comic != null) {
+        reinstantiate(comic);
 
-            // Objectify returns empty Collections to null; this reinstantializes them.
+        return comic;
+    }
+
+    /**
+     * Reinstantiates all Collections returned from Objectify.
+     * @param comic - the WebComic to reinstantiate
+     */
+    private static void reinstantiate(WebComic comic) {
+
+        if (comic != null) {
             comic.reload();
             comic.getMetadata().reload();
         }
-
-        return comic;
     }
 }

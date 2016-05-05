@@ -7,7 +7,7 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic;
+var currentComic = "5910974510923776";
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -107,6 +107,9 @@ function waitForAjaxComic(obj) {
     $("#summary-paragraph").html(biography);
     $("#summary-text-area").html(biography);
 
+    // Set data for favorites
+    $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+
     // Set the cover image
     var number = localStorage.getItem("ComicNumberSelected");
     if (number == 1)
@@ -120,19 +123,47 @@ function waitForAjaxComic(obj) {
 function socialButton(type) {
     switch (type) {
         case "SUB":
-            console.log(currentComic.metadata.name); 
+
+            if (true) { // user is not subscribed yet
+                subscribe(currentComic.id);
+                $("#sub-btn").text("UnSubscribe");
+            }
+            else {
+                unsubscribe(currentComic.id); // user is already subscribed
+                $("#sub-btn").html("Subscribe");
+            }
             break;
 
         case "FAV":
-            console.log("Favorited");
+            if ($("#fav-btn").text().trim() == "Favorite") { // If the user doesn't already like the comic, then allow a like
+                favorite(currentComic.id);
+                currentComic.metadata.favorites++;
+                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                $("#fav-btn").html("UnFavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
+            }
+            else {
+                unfavorite(currentComic.id);
+                currentComic.metadata.favorites--;
+                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                $("#fav-btn").html("Favorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
+            }
             break;
 
         case "LIK":
-            console.log("Liked");
+            if (true) {
+                like(currentComic.id);
+                currentComic.metadata.likes++;
+                $("#lik-btn").html("UnLike");
+            }
+            else {
+                unlike(currentComic.id);
+                currentComic.likes--;
+                $("#lik-btn").html("Like");
+            }
             break;
 
         default:
-            console.log("Something's fucky...");
+            console.log("Something's off...");
             break;
     }
 }

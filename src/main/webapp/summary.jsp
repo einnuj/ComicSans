@@ -69,12 +69,12 @@
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span></p>
-                <p>Favorites: 15</p>
+                <p id="fav-field">Favorites: </p>
                 <p>Last updated: <em>3 days ago</em></p>
                 <div class="social-buttons">
-                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('SUB')">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                    <a id="sub-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('SUB')">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                    <a id="fav-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                    <a id="lik-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
                     <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
                 </div>
             </div>

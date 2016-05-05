@@ -37,16 +37,9 @@ public class WebComic extends ComicMediaParent {
         return metadata;
     }
 
-
-
     /* Setters */
 
-
-
-
     /* Methods */
-
-
 
     /* Overridden Methods */
 

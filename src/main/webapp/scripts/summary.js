@@ -7,7 +7,7 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic = "5910974510923776";
+var comicId = sessionStorage.getItem("id_to_load");
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "5682617542246400"},
+        data: {"id": comicId},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -111,7 +111,7 @@ function waitForAjaxComic(obj) {
     $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
 
     // Set the cover image
-    var number = localStorage.getItem("ComicNumberSelected");
+    var number = sessionStorage.getItem("ComicNumberSelected");
     if (number == 1)
         $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
     else if (number == 2)
@@ -171,21 +171,7 @@ function subscribe(){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action" : "SUBSCRIBE", "comicId" : "5682617542246400"},
-        success: function(result){
-            console.log(result);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-}
-
-function favorite(){
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action" : "FAVORITE", "comicId" : "5682617542246400"},
+        data: {"action" : "SUBSCRIBE", "comicId" : comicId},
         success: function(result){
             console.log(result);
         },
@@ -199,7 +185,7 @@ function like(){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action" : "LIKE", "comicId" : "5682617542246400"},
+        data: {"action" : "LIKE", "comicId" : comicId},
         success: function(result){
             console.log(result);
         },
@@ -213,7 +199,7 @@ function unlike() {
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNLIKE", "comicId": "5682617542246400"},
+        data: {"action": "UNLIKE", "comicId": comicId},
         success: function (result) {
             console.log(result);
         },
@@ -227,7 +213,7 @@ function unfavorite() {
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNFAVORITE", "comicId": "5682617542246400"},
+        data: {"action": "UNFAVORITE", "comicId": comicId},
         success: function (result) {
             console.log(result);
         },

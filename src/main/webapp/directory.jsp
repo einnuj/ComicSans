@@ -24,6 +24,7 @@
 
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/tooltips.css" rel="stylesheet">
 
     <title>Comic Directory</title>
 </head>
@@ -73,6 +74,11 @@
                             </c:otherwise>
                         </c:choose>
                     </a>
+                    <span class="tooltips">
+                        <h3><c:out value="${comic.name}"/></h3><br>
+                        <c:out value="${comic.metadata.bio}"/> <br><br>
+                        <b>Genre: </b><c:out value="${comic.metadata.genre}"/>
+                     </span>
                     <h3><c:out value="${comic.name}"/></h3>
                     <h5><c:out value="${comic.metadata.author}"/></h5>
                 </div>

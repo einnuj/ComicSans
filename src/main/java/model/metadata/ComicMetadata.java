@@ -122,6 +122,10 @@ public class ComicMetadata extends AbstractMetadata {
         commentList.add(c);
     }
 
+    public void deleteComment(int n){
+        commentList.remove(n);
+    }
+
     /**
      * Reinitializes any null collection in the object as returned by Objectify
      */

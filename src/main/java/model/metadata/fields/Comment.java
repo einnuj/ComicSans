@@ -36,10 +36,5 @@ public class Comment extends AbstractField {
 
     /* Methods */
 
-    /**
-     * Sets the lastEditedTimeMillis to the current System time. Should only be called when an existing Comment is edited.
-     */
-    public void updateLastEditedTime() {
-        this.lastEditedTimeMillis = System.currentTimeMillis();
-    }
+
 }

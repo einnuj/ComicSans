@@ -120,11 +120,12 @@ function addRating() {
     });
 }
 
-function addComment(number) {
+function addComment(id_num, text) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "COMMENT", "comicId": "5910974510923776", "comment": "insert comment here"},
+        data: {"action": "COMMENT", "comicId": id_num, "comment": text},
+        async: false,
         success: function (result) {
             console.log(result);
         },

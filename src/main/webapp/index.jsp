@@ -66,6 +66,9 @@
                         <h3>John Smith</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
+                            <%-- IMPORTANT: CHANGE THE FIRST PARAMETER IN passBySession TO THE ID OF A COMIC IN YOUR DATASTORE --%>
+                            <%-- REPEAT THIS FOR THE OTHER TWO INSTANCES BELOW. THEY DON'T HAVE TO BE THE SAME NUMBER AS LONG --%>
+                            <%-- AS THEY MATCH COMICS IN YOUR LOCAL DATASTORE --%>
                             <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 1)" role="button">Read Now</a></p>
                     </div>
                 </div>

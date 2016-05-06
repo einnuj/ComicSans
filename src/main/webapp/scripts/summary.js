@@ -198,3 +198,28 @@ function socialButton(type) {
             break;
     }
 }
+
+function appendComment() {
+    var commentText = $("#comment-input").val();
+
+    if (commentText == "")
+        return;
+
+    addComment(comicId, commentText);
+
+    $.ajax({
+        url: "/ComicServlet",
+        type: "get",
+        data: {"id": comicId},
+        async: false,
+        success: function(responseText) {
+            $("#comicJson > a").text(responseText);
+            currentComic = responseText;
+        }
+    })
+
+    var timestamp = new Date();
+    var date = timestamp.getMonth() + '/' + timestamp.getDate() + '/' + (timestamp.getYear() - 100) + ' - AT ' +  timestamp.getHours() +  ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds();
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON ' + date + '<br>' + commentText + '</li>');
+    $("#comment-input").val('');
+}

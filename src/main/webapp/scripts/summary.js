@@ -151,6 +151,8 @@ function waitForAjaxComic(obj) {
 }
 
 function socialButton(type) {
+    if (currentUser == "")
+        return;
     switch (type) {
         case "SUB":
             if ($("#sub-btn").text().trim() == "Subscribe") { // If the user doesn't already like the comic, then allow a like

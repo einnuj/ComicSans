@@ -180,7 +180,6 @@ function checkLike(id_num) {
     console.log("result is " + result);
     return result;
 }
-
 /**
  * Checks to see if the comic with the given comicId is in the current user's favorites
  */
@@ -242,15 +241,15 @@ function numFavorites(comicId){
         });
 }
 
-function getComments(comicId){
+function getCommentsBad(comicId){
+    var list = [];
     $.get("/SocialServlet", {"request": "getComments", "comicId": comicId})
         .done(function (resp) { // on success
             if(resp == "null"){
                 console.log("no comments");
             } else {
                 for(c in resp){
-                    console.log(resp[c].description);
-                    console.log(resp[c].userOrigin);
+                    list.push(c);
                 }
             }
 
@@ -258,7 +257,26 @@ function getComments(comicId){
         .fail(function () { // on failure
             alert("Request failed.");
         });
+    return list;
 }
+
+function getComments(id_num, userIds, timestamp, text) {
+    jQuery.ajax({
+        url: "/SocialServlet",
+        type: "get",
+        async: false,
+        data: {"request": "getComments", "comicId": id_num},
+        success: function (resp) {
+            for (c in resp) {
+                userIds.push(resp[c].userOrigin);
+                timestamp.push(resp[c].timeCreatedMillis);
+                text.push(resp[c].description);
+            }
+        }
+    });
+    console.log("success???");
+}
+
 
 function deleteComment(comicId, num){
     $.ajax({

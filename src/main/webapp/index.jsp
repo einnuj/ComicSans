@@ -69,7 +69,7 @@
                             <%-- IMPORTANT: CHANGE THE FIRST PARAMETER IN passBySession TO THE ID OF A COMIC IN YOUR DATASTORE --%>
                             <%-- REPEAT THIS FOR THE OTHER TWO INSTANCES BELOW. THEY DON'T HAVE TO BE THE SAME NUMBER AS LONG --%>
                             <%-- AS THEY MATCH COMICS IN YOUR LOCAL DATASTORE --%>
-                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 1)" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(5998935441145856, 1)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 2)" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(5154510511013888, 2)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         <h3>Ian McKellen</h3>
                         <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 3)" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(6280410417856512, 3)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>

@@ -2,14 +2,14 @@
  * Completely Mock JS.
  * Created by lilsh on 4/14/2016.
  */
-comicId = "5770237022568448";
+var comicId = "5770237022568448";
 
 function mockUser() {
     $.ajax({
         url: "/UserServlet",
         type: "get",
         success: function(responseText) {
-            $("#userJson > a").text(responseText.metadata.name);
+            $("#userJson > a").text(JSON.stringify(responseText));
         }
     })
 }
@@ -37,6 +37,8 @@ function mockComic() {
         success: function (responseText) {
             $("#comicJson > a").text(JSON.stringify(responseText));
 
+            responseText = JSON.parse(responseText);
+
             comicId = responseText.id;
             $("#getComicDiv > a").show();
         }
@@ -47,7 +49,7 @@ function mockCreateChapterAndPages() {
     $.ajax({
         url: "/ComicServlet",
         type: "post",
-        data: {"action" : "CREATE CHAPTER", "id" : comicId, "name" : "Napter Chame", "files" : "file1"},
+        data: {"action" : "CREATE CHAPTER", "id" : "4538783999459328", "name" : "Napter Chame", "files" : "file1"},
         success: function() {
             console.log("SUCCESS");
         }

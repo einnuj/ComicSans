@@ -7,7 +7,7 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic = "5910974510923776";
+var currentComic = "4679521487814656";
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -80,7 +80,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": "5682617542246400"},
+        data: {"id": currentComic},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);

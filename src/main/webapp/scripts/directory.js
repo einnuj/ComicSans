@@ -49,7 +49,15 @@ function filterComics(filter) {
         if (!comicsMap.hasOwnProperty(key)) {
             continue;
         }
-        if (filterUpper != comicsMap[key]) {
+        if (filterUpper === "FAVE" && user) {
+            if (!user.metadata.favorites[key]) {
+                $("#" + key).hide();
+            }
+            else {
+                $("#" + key).show();
+            }
+        }
+        else if (filterUpper != comicsMap[key]) {
             $("#" + key).hide();
         }
         else {
@@ -57,3 +65,21 @@ function filterComics(filter) {
         }
     }
 }
+
+function isLoggedIn() {
+    $.ajax({
+        url: "/UserServlet",
+        type: "get",
+        async: false,
+        success: function(responseText) {
+            console.log(responseText);
+            user = responseText;
+            return responseText;
+        },
+        error: function(_) {
+            return false;
+        }
+    })
+}
+
+$(document).ready(isLoggedIn());

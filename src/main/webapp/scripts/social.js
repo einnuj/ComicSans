@@ -1,8 +1,12 @@
-function subscribe(number){
+/**
+ * Allows current user to subscribe to the comic with id = id_num
+ * @param id_num
+ */
+function subscribe(id_num){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "SUBSCRIBE", "comicId": "5910974510923776"},
+        data: {"action": "SUBSCRIBE", "comicId": id_num},
         success: function (result) {
             console.log(result);
         },
@@ -12,24 +16,15 @@ function subscribe(number){
     });
 }
 
-function unsubscribe(number){
+/**
+ * Allows the current user to unsubscribe from the comic with id = id_num
+ * @param id_num
+ */
+function unsubscribe(id_num){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNSUBSCRIBE", "comicId": "5910974510923776"},
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}
-function favorite(number){
-    $.ajax({
-        type: "POST",
-        url: "/SocialServlet",
-        data: {"action": "FAVORITE", "comicId": "5910974510923776"},
+        data: {"action": "UNSUBSCRIBE", "comicId": id_num},
         success: function (result) {
             console.log(result);
         },
@@ -39,11 +34,15 @@ function favorite(number){
     });
 }
 
-function unfavorite(number){
+/**
+ * Allows the current user to favorite the comic with id = id_num
+ * @param id_num
+ */
+function favorite(id_num){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNFAVORITE", "comicId": "5910974510923776"},
+        data: {"action": "FAVORITE", "comicId": id_num},
         success: function (result) {
             console.log(result);
         },
@@ -53,11 +52,15 @@ function unfavorite(number){
     });
 }
 
-function like(number){
+/**
+ * Allows the current user to unfavorite the comic with id = id_num
+ * @param id_num
+ */
+function unfavorite(id_num){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "LIKE", "comicId": "5910974510923776"},
+        data: {"action": "UNFAVORITE", "comicId": id_num},
         success: function (result) {
             console.log(result);
         },
@@ -67,11 +70,33 @@ function like(number){
     });
 }
 
-function unlike(number){
+/**
+ * Allows the user to like the comic with id = id_num
+ * @param id_num
+ */
+function like(id_num){
     $.ajax({
         type: "POST",
         url: "/SocialServlet",
-        data: {"action": "UNLIKE", "comicId": "5910974510923776"},
+        data: {"action": "LIKE", "comicId": id_num},
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+/**
+ * Allows the user to unlike the comic with id = id_num
+ * @param id_num
+ */
+function unlike(id_num){
+    $.ajax({
+        type: "POST",
+        url: "/SocialServlet",
+        data: {"action": "UNLIKE", "comicId": id_num},
         success: function (result) {
             console.log(result);
         },
@@ -137,49 +162,61 @@ function removeBookmark(number) {
     });
 }
 
-function checkLike() {
-    $.get("/SocialServlet", {"request": "isLiked", "comicId": "5910974510923776"})
-        .done(function (resp) { // on sucess
+/**
+ * Checks to see if the current user likes the comic with the given comicId
+ */
+function checkLike(id_num) {
+    var result;
+    jQuery.ajax({
+        url: "/SocialServlet",
+        type: "get",
+        async: false,
+        data: {"request": "isLiked", "comicId": id_num},
+        success: function (resp) {
             console.log(resp);
-            if(resp == "true"){
-                // this means the comic has been liked
-                console.log("has been liked!");
-            } else {
-                //comic is not liked
-            }             
-        })
-        .fail(function () { // on failure
-            alert("Request failed.");
-        });
+            result = resp;
+        }
+    });
+    console.log("result is " + result);
+    return result;
 }
 
-function checkFavorite() {
-    $.get("/SocialServlet", {"request": "isFavorited", "comicId": "5910974510923776"})
-        .done(function (resp) { // on sucess
+/**
+ * Checks to see if the comic with the given comicId is in the current user's favorites
+ */
+function checkFavorite(id_num) {
+    var result;
+    jQuery.ajax({
+        url: "/SocialServlet",
+        type: "get",
+        async: false,
+        data: {"request": "isFavorited", "comicId": id_num},
+        success: function (resp) {
             console.log(resp);
-            if(resp == "true"){
-                // do something if favorited
-            } else {
-                //comic is not faved
-            }
-        })
-        .fail(function () { // on failure
-            alert("Request failed.");
-        });
+            result = resp;
+        }
+    });
+    console.log("result is " + result);
+    return result;
 }
 
-function isSubscribed() {
-    $.get("/SocialServlet", {"request": "isSubscribed", "comicId": "5910974510923776"})
-        .done(function (resp) { // on sucess
-            if(resp == "true"){
-                // do something if subscribed
-            } else {
-                //comic is not subscribed
-            }
-        })
-        .fail(function () { // on failure
-            alert("Request failed.");
-        });
+/**
+ * Checks to see if the current user is subscribed to the comic with id = id_num
+ */
+function isSubscribed(id_num) {
+    var result;
+    jQuery.ajax({
+        url: "/SocialServlet",
+        type: "get",
+        async: false,
+        data: {"request": "isSubscribed", "comicId": id_num},
+        success: function (resp) {
+            console.log(resp);
+            result = resp;
+        }
+    });
+    console.log("result is " + result);
+    return result;
 }
 
 function numLikes(){

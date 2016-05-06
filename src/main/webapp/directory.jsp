@@ -47,15 +47,15 @@
 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#" onclick="filterComics()">Action</a></li>
-                <li><a href="#" onclick="filterComics()">Comedy</a></li>
-                <li><a href="#" onclick="filterComics()">Drama</a></li>
-                <li><a href="#" onclick="filterComics()">Fantasy</a></li>
-                <li><a href="#" onclick="filterComics()">Gaming</a> </li>
-                <li><a href="#" onclick="filterComics()">Horror</a> </li>
-                <li><a href="#" onclick="filterComics()">Romance</a></li>
-                <li><a href="#" onclick="filterComics()">Sports</a> </li>
-                <li><a href="#" onclick="filterComics()">Thriller</a> </li>
+                <li><a href="#" onclick="filterComics('action')">Action</a></li>
+                <li><a href="#" onclick="filterComics('comedy')">Comedy</a></li>
+                <li><a href="#" onclick="filterComics('drama')">Drama</a></li>
+                <li><a href="#" onclick="filterComics('fantasy')">Fantasy</a></li>
+                <li><a href="#" onclick="filterComics('gaming')">Gaming</a> </li>
+                <li><a href="#" onclick="filterComics('horror')">Horror</a> </li>
+                <li><a href="#" onclick="filterComics('romance')">Romance</a></li>
+                <li><a href="#" onclick="filterComics('sports')">Sports</a> </li>
+                <li><a href="#" onclick="filterComics('thriller')">Thriller</a> </li>
             </ul>
         </div>
 

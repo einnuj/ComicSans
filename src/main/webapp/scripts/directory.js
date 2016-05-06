@@ -18,20 +18,19 @@ function getAllComicsAsMap() {
     return allComicsMap;
 }
 
-function filterComics() {
+function filterComics(filter) {
     var comicsMap = getAllComicsAsMap();
-    var filter = $('.dropdown-menu :selected').text();
+    var filterUpper = filter.toUpperCase();
     
     for (var key in comicsMap) {
         if (!comicsMap.hasOwnProperty(key)) {
             continue;
         }
-        if (filter != comicsMap[key]) {
+        if (filterUpper != comicsMap[key]) {
             $("#" + key).hide();
         }
+        else {
+            $("#" + key).show();
+        }
     }
-}
-
-function filterComic(genre, filter) {
-    return filter === genre;
 }

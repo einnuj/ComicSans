@@ -7,7 +7,7 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
     opacity: 0.98;
-
+    border: 2px solid white;
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
@@ -21,7 +21,7 @@
     position: absolute;
     border-style: solid;
     border-width: 15px 15px 0;
-    border-color: #FF974F transparent;
+    border-color: white transparent;
     display: block;
     width: 0;
     z-index: 1;

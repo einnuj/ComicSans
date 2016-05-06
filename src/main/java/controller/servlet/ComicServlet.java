@@ -98,6 +98,7 @@ public class ComicServlet extends HttpServlet {
                         User author = UserAccess.queryForUser(googleUser.getUserId());
                         String name = req.getParameter("name");
                         String description = req.getParameter("description");
+                        String genre = req.getParameter("genre");
 
                         if (author == null) {
                             throw new UserNotFoundException(googleUser.getUserId());
@@ -108,23 +109,48 @@ public class ComicServlet extends HttpServlet {
                         if (description == null) {
                             throw new ParameterNotFoundException("description");
                         }
+                        if (genre != null){
+                            WebComic newComic1 = new WebComic(name, author.getMetadata().getName(), genre);
+                            newComic1.getMetadata().setBio(description);
+                            ObjectifyHelper.save(newComic1);         // Gets us the Long id
+                            newComic1.reload();
+                            // Update User!
+                            author.getMetadata().addToComicsCreated(newComic1);
 
-                        WebComic newComic = new WebComic(name, author.getMetadata().getName());
-                        newComic.getMetadata().setBio(description);
 
-                        ObjectifyHelper.save(newComic);         // Gets us the Long id
-                        newComic.reload();
+                            ComicChapter newChapter = new ComicChapter("1");
+                            newComic1.addToChildMediaList(newChapter);
 
-                        // Update User!
-                        author.getMetadata().addToComicsCreated(newComic);
+                            newChapter.reload();
 
-                        ObjectifyHelper.save(newComic);
-                        ObjectifyHelper.save(author);
+                            ObjectifyHelper.save(newComic1);
+                            ObjectifyHelper.save(author);
 
-                        newComic.reload();
+                            newComic1.reload();
 
-                        resp.getWriter().write(JsonHelper.objectToJson(newComic));
-                        resp.setStatus(HttpServletResponse.SC_OK);
+                            Long comicId = newComic1.getId();
+                            resp.getWriter().write(Long.toString(comicId));
+                            resp.setStatus(HttpServletResponse.SC_OK);
+
+                        } else {
+
+                            WebComic newComic = new WebComic(name, author.getMetadata().getName());
+                            newComic.getMetadata().setBio(description);
+
+                            ObjectifyHelper.save(newComic);         // Gets us the Long id
+                            newComic.reload();
+
+                            // Update User!
+                            author.getMetadata().addToComicsCreated(newComic);
+
+                            ObjectifyHelper.save(newComic);
+                            ObjectifyHelper.save(author);
+
+                            newComic.reload();
+
+                            resp.getWriter().write(JsonHelper.objectToJson(newComic));
+                            resp.setStatus(HttpServletResponse.SC_OK);
+                        }
                     }
                     catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
                         resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
@@ -143,7 +169,55 @@ public class ComicServlet extends HttpServlet {
                     resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
                 break;
+            case "ADD PAGE" :
+                googleUser = UserServiceFactory.getUserService().getCurrentUser();
 
+                resp.setContentType("application/json");
+
+                if (googleUser != null) {
+                    try {
+                        User author = UserAccess.queryForUser(googleUser.getUserId());
+
+                        if (author == null) {
+                            throw new UserNotFoundException(googleUser.getUserId());
+                        }
+                        String file = req.getParameter("file");
+                        String comicId = req.getParameter("comicId");
+                        String page = req.getParameter("page");
+
+                        if (comicId == null) {
+                            throw new ParameterNotFoundException("comicId");
+                        }
+                        if (page == null) {
+                            throw new ParameterNotFoundException("page");
+                        }
+                        if (file == null) {
+                            throw new ParameterNotFoundException("file");
+                        } else {
+                            Long id = Long.valueOf(comicId);
+
+                            WebComic webComic = ComicAccess.queryForComic(id);
+                            ComicPage newPage = new ComicPage(page, file);
+
+                            ComicChapter myChapter = (ComicChapter)webComic.getChildMediaList().get(0);
+                            myChapter.addToChildMediaList(newPage);
+
+                            ObjectifyHelper.save(webComic);
+                            ObjectifyHelper.save(author);
+                            resp.getWriter().write("{}");
+                            resp.setStatus(HttpServletResponse.SC_OK);
+                        }
+                    } catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    } catch (ParameterNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                    }
+                    break;
+                }
         }
     }
 

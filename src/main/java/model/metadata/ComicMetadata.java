@@ -33,6 +33,22 @@ public class ComicMetadata extends AbstractMetadata {
         ratingMap = new HashMap<String, Rating>();
     }
 
+    public ComicMetadata(String name, String author, String genre){
+        super(name);
+
+        this.author = author;
+        setEnum(genre);
+        commentList = new ArrayList<>();
+        ratingMap = new HashMap<>();
+    }
+
+    private void setEnum(String genre){
+        for(GenreEnum g : GenreEnum.values()){
+            if (genre.equals(g)){
+                this.genre = g;
+            }
+        }
+    }
     /* Getters */
 
     public String getAuthor() {

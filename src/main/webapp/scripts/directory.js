@@ -4,7 +4,20 @@
  */
 
 function sortComics(filter) {
-    
+
+    switch (filter) {
+        case 'alph':
+            $(".comic-listing").sort(function (a, b) {
+                return $(a).data("name").localeCompare($(b).data("name"));
+            }).map(function () {
+                return $(this).closest('.comicBlock');
+            }).each(function (_, comicBlock) {
+                $(comicBlock).parent().append(comicBlock);
+            });
+            break;
+        default:
+            console.log("SOMETHING ASPLODED, CAP'N!");
+    }
 }
 
 function getAllComicsAsMap() {
@@ -16,6 +29,16 @@ function getAllComicsAsMap() {
         allComicsMap[$(this).attr("id")] = $(this).data("genre");
     });
     return allComicsMap;
+}
+
+function getAllComicsAsArray() {
+    var allComicsArray = new Array();
+
+    $(".comic-listing").each(function(comicDiv) {
+        // Add to the Map: key = id, value = genre
+        allComicsArray.push({id: $(this).attr("id"), name: $(this).data("name")});
+    });
+    return allComicsArray;
 }
 
 function filterComics(filter) {

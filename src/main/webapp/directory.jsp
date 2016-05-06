@@ -61,7 +61,7 @@
 
         <%-- Comic Listing --%>
         <c:forEach var="comic" items="${allComics.comicsAsList}">
-            <div class="comic-listing" id="${comic.id}" data-genre="${comic.metadata.genre}">
+            <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}">
                 <a href="summary.jsp">
                     <c:choose>
                         <c:when test="${comic.metadata.displayPicture == ''}">

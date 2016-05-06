@@ -4,7 +4,12 @@
  */
 
 function sortComics(filter) {
-    
+    var comicsMap = getAllComicsAsArray();
+
+    switch (filter) {
+        case 'alph':
+            
+    }
 }
 
 function getAllComicsAsMap() {
@@ -16,6 +21,16 @@ function getAllComicsAsMap() {
         allComicsMap[$(this).attr("id")] = $(this).data("genre");
     });
     return allComicsMap;
+}
+
+function getAllComicsAsArray() {
+    var allComicsArray = new Array();
+
+    $(".comic-listing").each(function(comicDiv) {
+        // Add to the Map: key = id, value = genre
+        allComicsArray.push({id: $(this).attr("id"), name: $(this).data("name")});
+    });
+    return allComicsArray;
 }
 
 function filterComics(filter) {

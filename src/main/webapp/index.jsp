@@ -66,7 +66,10 @@
                         <h3>John Smith</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(1)" role="button">Read Now</a></p>
+                            <%-- IMPORTANT: CHANGE THE FIRST PARAMETER IN passBySession TO THE ID OF A COMIC IN YOUR DATASTORE --%>
+                            <%-- REPEAT THIS FOR THE OTHER TWO INSTANCES BELOW. THEY DON'T HAVE TO BE THE SAME NUMBER AS LONG --%>
+                            <%-- AS THEY MATCH COMICS IN YOUR LOCAL DATASTORE --%>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 1)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -79,7 +82,7 @@
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(2)" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 2)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -91,7 +94,7 @@
                         <h3>Ian McKellen</h3>
                         <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
                         <p><a class="btn btn-lg btn-primary" role="button">Subscribe</a>
-                            <a class="btn btn-lg btn-primary" onclick="selectFromHome(3)" role="button">Read Now</a></p>
+                            <a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 3)" role="button">Read Now</a></p>
                     </div>
                 </div>
             </div>
@@ -155,8 +158,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="scripts/authentication.js"></script>
 <script>
-    function selectFromHome(num) {
-        localStorage.setItem("ComicNumberSelected", num);
+    function passBySession(id, image) {
+        sessionStorage.setItem('id_to_load', id);
+        sessionStorage.setItem("ComicNumberSelected", image);
         window.location.assign("summary.jsp");
     }
 </script>

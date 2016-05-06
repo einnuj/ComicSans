@@ -7,23 +7,31 @@ function sortComics(filter) {
     
 }
 
-function listAllComics() {
-    // Select all Comics
+function getAllComicsAsMap() {
     var allComicsMap = {};
+
+    // Iterate through all elements st class=comic-listing
     $(".comic-listing").each(function(comicDiv) {
+        // Add to the Map: key = id, value = genre
         allComicsMap[$(this).attr("id")] = $(this).data("genre");
     });
     return allComicsMap;
 }
 
 function filterComics() {
-    var comicsMap = listAllComics();
+    var comicsMap = getAllComicsAsMap();
+    var filter = $('.dropdown-menu :selected').text();
     
-    console.log(comicsMap);
+    for (var key in comicsMap) {
+        if (!comicsMap.hasOwnProperty(key)) {
+            continue;
+        }
+        if (filter != comicsMap[key]) {
+            $("#" + key).hide();
+        }
+    }
 }
 
-function filterComic(comic) {
-    var filter = $('.dropdown-menu :selected').text();
-
-    return filter === comic.metadata.genre;
+function filterComic(genre, filter) {
+    return filter === genre;
 }

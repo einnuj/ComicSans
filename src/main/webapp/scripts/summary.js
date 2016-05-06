@@ -150,7 +150,7 @@ function waitForAjaxComic(obj) {
         $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
 
     // Fill out the comments section
-    //fillComments();
+    fillComments();
 
 }
 
@@ -229,6 +229,13 @@ function appendComment() {
 }
 
 function fillComments() {
-    var commentsList = getComments(comicId);
-    console.log(commentsList);
+    var users = [];
+    var descriptions = [];
+    var time = [];
+    getComments(comicId, users, time, descriptions);
+
+
+    for (i=0;i<users.length;i++) {
+        $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + users[i] + ' - AT TIME ' + time[i] + '<br>' + descriptions[i] + '</li>');
+    }
 }

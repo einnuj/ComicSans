@@ -4,7 +4,14 @@ function submitComicFunction() {
     var files = document.getElementById("fileSubmit").files;
     var title = document.getElementById("titleid").value;
     var summary = document.getElementById("comicSummary").value;
-
+    if(title == null || summary == null || title == "" || summary == ""){
+        alert("Fields cannot be blank.");
+        return false;
+    }
+    if(files.length == 0){
+        alert("Missing an upload");
+        return false;
+    }
 
         $.ajax({
             type: "POST",
@@ -44,11 +51,4 @@ function submitComicFunction() {
                 console.log(err);
             }
         });
-
-
-    
-
-
-
 }
-

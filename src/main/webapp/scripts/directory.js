@@ -4,20 +4,26 @@
  */
 
 function sortComics(filter) {
+    var dataName;
 
     switch (filter) {
         case 'alph':
-            $(".comic-listing").sort(function (a, b) {
-                return $(a).data("name").localeCompare($(b).data("name"));
-            }).map(function () {
-                return $(this).closest('.comicBlock');
-            }).each(function (_, comicBlock) {
-                $(comicBlock).parent().append(comicBlock);
-            });
+            dataName = "name";
+            break;
+        case 'auth':
+            dataName = "author";
             break;
         default:
             console.log("SOMETHING ASPLODED, CAP'N!");
     }
+
+    $(".comic-listing").sort(function (a, b) {
+        return $(a).data(dataName).localeCompare($(b).data(dataName));
+    }).map(function () {
+        return $(this).closest('.comicBlock');
+    }).each(function (_, comicBlock) {
+        $(comicBlock).parent().append(comicBlock);
+    });
 }
 
 function getAllComicsAsMap() {

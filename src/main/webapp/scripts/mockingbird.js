@@ -14,12 +14,27 @@ function mockUser() {
     })
 }
 
+/*
 function mockComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "post",
         data: {"action" : "CREATE COMIC", "name" : "CAPTAIN PLAN IT", "description" : "dotally rad comik"},
         success: function(responseText) {
+            $("#comicJson > a").text(JSON.stringify(responseText));
+
+            comicId = responseText.id;
+            $("#getComicDiv > a").show();
+        }
+    })
+}
+*/
+
+function mockComic() {
+    $.ajax({
+        url: "/MockComicServlet",
+        type: "get",
+        success: function (responseText) {
             $("#comicJson > a").text(JSON.stringify(responseText));
 
             comicId = responseText.id;

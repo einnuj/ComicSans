@@ -4,6 +4,7 @@ import controller.mock.MockComicController;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import utilities.JsonHelper;
+import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +42,9 @@ public class MockComicServlet extends HttpServlet {
                 "Sam", "Junnie");
         String comicInJson = JsonHelper.objectToJson(webComic);
 
+        ObjectifyHelper.save(webComic);
+
+        resp.setContentType("application/json");
         resp.getWriter().write(comicInJson);
     }
 }

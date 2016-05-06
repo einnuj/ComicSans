@@ -110,6 +110,10 @@ public class SocialServlet extends HttpServlet {
                         comicMetadata.addComment(myComment);
                         userMetadata.incrementComment();
                         break;
+                    case "DELETECOMMENT":
+                        int numComment = Integer.parseInt(req.getParameter("numComment"));
+                        comicMetadata.deleteComment(numComment);
+                        break;
                     case "RATE":
                         String rating = req.getParameter("rating");
 

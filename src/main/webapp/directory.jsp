@@ -61,19 +61,21 @@
 
         <%-- Comic Listing --%>
         <c:forEach var="comic" items="${allComics.comicsAsList}">
-            <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}">
-                <a href="summary.jsp">
-                    <c:choose>
-                        <c:when test="${comic.metadata.displayPicture == ''}">
-                            <img src="images/covers/CoConutCover.png">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="data:image/jpeg;base64,${comic.metadata.displayPicture}">
-                        </c:otherwise>
-                    </c:choose>
-                </a>
-                <h3><c:out value="${comic.name}"/></h3>
-                <h5><c:out value="${comic.metadata.author}"/></h5>
+            <div class="comicBlock">
+                <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}">
+                    <a href="summary.jsp">
+                        <c:choose>
+                            <c:when test="${comic.metadata.displayPicture == ''}">
+                                <img src="images/covers/CoConutCover.png">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="data:image/jpeg;base64,${comic.metadata.displayPicture}">
+                            </c:otherwise>
+                        </c:choose>
+                    </a>
+                    <h3><c:out value="${comic.name}"/></h3>
+                    <h5><c:out value="${comic.metadata.author}"/></h5>
+                </div>
             </div>
         </c:forEach>
 

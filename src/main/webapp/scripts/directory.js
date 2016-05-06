@@ -4,11 +4,19 @@
  */
 
 function sortComics(filter) {
-    var comicsMap = getAllComicsAsArray();
 
     switch (filter) {
         case 'alph':
-            
+            $(".comic-listing").sort(function (a, b) {
+                return $(a).data("name").localeCompare($(b).data("name"));
+            }).map(function () {
+                return $(this).closest('.comicBlock');
+            }).each(function (_, comicBlock) {
+                $(comicBlock).parent().append(comicBlock);
+            });
+            break;
+        default:
+            console.log("SOMETHING ASPLODED, CAP'N!");
     }
 }
 

@@ -98,11 +98,12 @@
             </div>
             <a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
         </div>
-        <div class="user-comments">
-            <p>Probably the funniest thing I've read in a while! Easily my favorite!</p>
-            <em>saucetrocity</em>
-            <p>Posted: October 29, 2015</p>
-        </div>
+        <%-- COMMENT THREAD STUFFS --%>
+        <textarea id="comment-input"></textarea>
+        <a id="comment-submit" class="btn btn-lg btn-primary" role="button" onclick="appendComment()">Submit <span class="glyphicon glyphicon-edit"></span></a>
+        <ul id="comment-thread" class="user-comments">
+        </ul>
+
     </div>
 </body>
 </html>

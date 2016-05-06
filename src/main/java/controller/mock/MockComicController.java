@@ -13,15 +13,18 @@ import java.util.List;
  * Created by einnuj on 4/12/2016.
  */
 public class MockComicController {
-    private int rando = (int) Math.floor(Math.random() * 9);
 
     /* Methods */
-    public WebComic genWebComic(String name, String author) {
-        WebComic webComic = new WebComic(name, author);
+    public WebComic genWebComic() {
+        MockFieldGenerator mockFieldGenerator = new MockFieldGenerator();
+        String name = mockFieldGenerator.getRandomName();
+        WebComic webComic = new WebComic(name, mockFieldGenerator.getRandomAuthor());
         ComicMetadata metadata = webComic.getMetadata();
 
         // Filling in data
-        metadata.setBio("A Comic about procrastination and other deadly sins");
+        metadata.setBio(mockFieldGenerator.getRandomBio());
+
+        int rando = (int) Math.floor(Math.random() * 9);
 
         switch(rando) {
             case 0:
@@ -59,22 +62,15 @@ public class MockComicController {
         // Dummy Data - List of "Users" to work with
         List<String> userList = new ArrayList<String>();
 
-        userList.add("Junnie");
-        userList.add("Maggie");
-        userList.add("John");
-        userList.add("Chaerin");
         userList.add("Barack Obama");
         userList.add("Alexander Hamilton");
         userList.add("John Cena");
-        userList.add("Richard McKenna");
-        userList.add("Jennifer Wong");
         userList.add("Son Goku");
 
         // Randomly generate Fields per "User"
         for (String userName : userList) {
             FieldFactory fieldFactory = new FieldFactory(name, userName);
 
-            MockFieldGenerator mockFieldGenerator = new MockFieldGenerator();
             mockFieldGenerator.genMockComicFields(metadata, fieldFactory);
         }
 

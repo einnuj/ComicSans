@@ -36,8 +36,7 @@ public class MockComicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        WebComic webComic = new MockComicController().genWebComic("Comic " +
-                "Sam", "Junnie");
+        WebComic webComic = new MockComicController().genWebComic();
         String comicInJson = JsonHelper.objectToJson(webComic);
 
         ObjectifyHelper.save(webComic);

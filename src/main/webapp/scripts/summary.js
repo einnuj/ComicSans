@@ -7,7 +7,8 @@
 var editTitle = false;
 var editSummary = false;
 var currentUser;
-var currentComic = "4679521487814656";
+var comicId = sessionStorage.getItem("id_to_load");
+var checkResult; // used for checking if someone is liked/favorite/subscribed (holds ajax result)
 
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
@@ -74,13 +75,42 @@ function getUserHelper(response) {
         $(".AUTHOR_PRIV").toggle();
         $(".comic-info-descr").css("margin-left", "+=65");
     }
+
+    // * * * at this point the currentComic and currentUser are available for use ma nigga * * *
+
+
+    //var testCase = isSubscribed(comicId); --- buggy? skip subscribe for now
+    //console.log(testCase);
+
+    /*  BUGGY
+    checkResult = isSubscribed(comicId);
+    // if the user is subscribed to the comic
+    if (checkResult) {
+        // set button text to unsubscribe
+        $("#sub-btn").html("Unsubscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
+    } // else do nothing (text will be subscribe by default
+    */
+
+    checkResult = checkLike(comicId);
+    // if the user liked the comic
+    if (checkResult) {
+        // set button text to unlike
+        $("#lik-btn").html("Unlike" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
+    } // else do nothing (text will be favorite by default
+
+    checkResult = checkFavorite(comicId);
+    // if the user favorited the comic
+    if (checkResult) {
+        // set button text to unfavorite
+        $("#fav-btn").html("Unfavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
+    } // else do nothing (text will be favorite by default
 }
 
 function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": currentComic},
+        data: {"id": comicId},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             waitForAjaxComic(responseText);
@@ -111,7 +141,7 @@ function waitForAjaxComic(obj) {
     $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
 
     // Set the cover image
-    var number = localStorage.getItem("ComicNumberSelected");
+    var number = sessionStorage.getItem("ComicNumberSelected");
     if (number == 1)
         $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
     else if (number == 2)
@@ -121,28 +151,29 @@ function waitForAjaxComic(obj) {
 }
 
 function socialButton(type) {
+    if (currentUser == "")
+        return;
     switch (type) {
         case "SUB":
-
-            if (true) { // user is not subscribed yet
-                subscribe(currentComic.id);
-                $("#sub-btn").text("UnSubscribe");
+            if ($("#sub-btn").text().trim() == "Subscribe") { // If the user doesn't already like the comic, then allow a like
+                //subscribe(comicId);
+                $("#sub-btn").html("Unsubscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
             }
             else {
-                unsubscribe(currentComic.id); // user is already subscribed
-                $("#sub-btn").html("Subscribe");
+                //unsubscribe(comicId);
+                $("#sub-btn").html("Subscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
             }
             break;
 
         case "FAV":
             if ($("#fav-btn").text().trim() == "Favorite") { // If the user doesn't already like the comic, then allow a like
-                favorite(currentComic.id);
+                favorite(comicId);
                 currentComic.metadata.favorites++;
                 $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
-                $("#fav-btn").html("UnFavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
+                $("#fav-btn").html("Unfavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
             }
             else {
-                unfavorite(currentComic.id);
+                unfavorite(comicId);
                 currentComic.metadata.favorites--;
                 $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
                 $("#fav-btn").html("Favorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
@@ -150,15 +181,15 @@ function socialButton(type) {
             break;
 
         case "LIK":
-            if (true) {
-                like(currentComic.id);
+            if ($("#lik-btn").text().trim() == "Like") { // If the user doesn't already like the comic, then allow a like
+                like(comicId);
                 currentComic.metadata.likes++;
-                $("#lik-btn").html("UnLike");
+                $("#lik-btn").html("Unlike" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             else {
-                unlike(currentComic.id);
-                currentComic.likes--;
-                $("#lik-btn").html("Like");
+                unlike(comicId);
+                currentComic.metadata.likes--;
+                $("#lik-btn").html("Like" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             break;
 
@@ -166,4 +197,29 @@ function socialButton(type) {
             console.log("Something's off...");
             break;
     }
+}
+
+function appendComment() {
+    var commentText = $("#comment-input").val();
+
+    if (commentText == "")
+        return;
+
+    addComment(comicId, commentText);
+
+    $.ajax({
+        url: "/ComicServlet",
+        type: "get",
+        data: {"id": comicId},
+        async: false,
+        success: function(responseText) {
+            $("#comicJson > a").text(responseText);
+            currentComic = responseText;
+        }
+    })
+
+    var timestamp = new Date();
+    var date = timestamp.getMonth() + '/' + timestamp.getDate() + '/' + (timestamp.getYear() - 100) + ' - AT ' +  timestamp.getHours() +  ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds();
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON ' + date + '<br>' + commentText + '</li>');
+    $("#comment-input").val('');
 }

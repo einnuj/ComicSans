@@ -13,6 +13,17 @@ import java.util.List;
  */
 public class MockFieldGenerator {
 
+    private ArrayList<String> listOfAuthors;
+    private ArrayList<String> listOfNames;
+    private ArrayList<String> listOfBios;
+
+    public MockFieldGenerator() {
+        listOfAuthors = new ArrayList<String>();
+        listOfNames = new ArrayList<String>();
+        listOfBios = new ArrayList<String>();
+        init();
+    }
+
     /* Methods */
     public void genMockComicFields(ComicMetadata metadata, FieldFactory
             fieldFactory) {
@@ -125,5 +136,43 @@ public class MockFieldGenerator {
                     break;
             }
         }
+    }
+
+    public String getRandomAuthor() {
+        return listOfAuthors.get((int) Math.floor(Math.random() * listOfAuthors.size()));
+    }
+
+    public String getRandomName() {
+        return listOfNames.get((int) Math.floor(Math.random() * listOfNames.size()));
+    }
+
+    public String getRandomBio() {
+        return listOfBios.get((int) Math.floor(Math.random() * listOfBios.size()));
+    }
+
+    private void init() {
+        listOfAuthors.add("Junnie");
+        listOfAuthors.add("Chaerin");
+        listOfAuthors.add("Maggie");
+        listOfAuthors.add("John");
+        listOfAuthors.add("Obama");
+        listOfAuthors.add("McKenna");
+        listOfAuthors.add("Wong");
+        listOfAuthors.add("Fodor");
+
+        listOfNames.add("Captain Hamerica");
+        listOfNames.add("The Incredible Bulk");
+        listOfNames.add("For: Son of Codin");
+        listOfNames.add("Siren Man");
+        listOfNames.add("man(steel)");
+        listOfNames.add(".bat Man");
+        listOfNames.add("Static Block");
+
+        listOfBios.add("where procrastination and sleepiness go hand in hand");
+        listOfBios.add("in a world where computers have had enough");
+        listOfBios.add("The Professors are hell-bent on eradicating all students; only four remain.");
+        listOfBios.add("A boring comic where all people are nice and thoughtful");
+        listOfBios.add("people are really, really tall. What chaos ensues!");
+        listOfBios.add("All the video-game instances of characters that have died are reborn all at once.");
     }
 }

@@ -203,12 +203,27 @@ function numFavorites(){
 }
 
 function getComments(){
-    $.get("/SocialServlet", {"request": "getComments", "comicId": "4785074604081152"})
-        .done(function (resp) { // on sucess
-            for(c in resp){
-                console.log(resp[c].description);
-                console.log(resp[c].userOrigin);
+    $.get("/SocialServlet", {"request": "getComments", "comicId": comicId})
+        .done(function (resp) { // on success
+            if(resp == "null"){
+                console.log("no comments");
+            } else {
+                for(c in resp){
+                    console.log(resp[c].description);
+                    console.log(resp[c].userOrigin);
+                }
             }
+
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function getRating(){
+    $.get("/SocialServlet", {"request": "getRating", "comicId": comicId})
+        .done(function (resp) { // on sucess
+            console.log(resp);
         })
         .fail(function () { // on failure
             alert("Request failed.");

@@ -1,8 +1,10 @@
 package model.metadata;
 
 import model.metadata.fields.Comment;
+import model.metadata.fields.Rating;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ public class ComicMetadata extends AbstractMetadata {
     private float rating;
 
     private List<Comment> commentList;
+    private HashMap<String, Rating> ratingMap;
 
     ComicMetadata(){}
 
@@ -27,8 +30,25 @@ public class ComicMetadata extends AbstractMetadata {
         this.author = author;
         genre = GenreEnum.UNLISTED;
         commentList = new ArrayList<Comment>();
+        ratingMap = new HashMap<String, Rating>();
     }
 
+    public ComicMetadata(String name, String author, String genre){
+        super(name);
+
+        this.author = author;
+        setEnum(genre);
+        commentList = new ArrayList<>();
+        ratingMap = new HashMap<>();
+    }
+
+    private void setEnum(String genre){
+        for(GenreEnum g : GenreEnum.values()){
+            if (genre.equals(g)){
+                this.genre = g;
+            }
+        }
+    }
     /* Getters */
 
     public String getAuthor() {
@@ -51,14 +71,19 @@ public class ComicMetadata extends AbstractMetadata {
         return likes;
     }
 
-    public float getRating() {
-        return rating;
+    public HashMap<String, Rating> getRatingMap() {
+        return ratingMap;
     }
+
 
     /* Setters */
 
     public void setGenre(GenreEnum genre) {
         this.genre = genre;
+    }
+
+    public void addRating(Rating rating){
+        ratingMap.put(rating.getUserOrigin(), rating);
     }
 
     /* Methods */
@@ -80,7 +105,17 @@ public class ComicMetadata extends AbstractMetadata {
     }
 
     public int getRatingAsInt() {
-        return Math.round(rating);
+        if(ratingMap != null) {
+            if(ratingMap.size() > 0) {
+                double num = ratingMap.size();
+                double total = 0;
+                for (Rating r : ratingMap.values()) {
+                    total += r.getRating();
+                }
+                return (int) Math.round(total / num);
+            }
+        }
+        return 0;
     }
 
     public void addComment(Comment c){
@@ -93,6 +128,9 @@ public class ComicMetadata extends AbstractMetadata {
     public void reload() {
         if (commentList == null) {
             commentList = new ArrayList<Comment>();
+        }
+        if (ratingMap == null) {
+            ratingMap = new HashMap<>();
         }
     }
 }

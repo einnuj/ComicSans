@@ -50,7 +50,8 @@
             <a href="#" onclick="checkFavorite()">Click to check fave!</a>
             <a href="#" onclick="numLikes()">get num likes!</a>
             <a href="#" onclick="numFavorites()">get num favess!</a>
-
+            <a href="#" onclick="getComments()">get comments</a>
+            <a href="#" onclick="getRating()">get rating</a>
         </div>
         <div id="currentUserObject">
             <p>Nothing's Here!</p>

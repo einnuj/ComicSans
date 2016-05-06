@@ -110,7 +110,7 @@ function addRating() {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "RATE", "comicId": "5910974510923776", "rating": "3"},
+        data: {"action": "RATE", "comicId": number, "rating": "3"},
         success: function (result) {
             console.log(result);
         },
@@ -125,7 +125,6 @@ function addComment(id_num, text) {
         url: "/SocialServlet",
         type: "post",
         data: {"action": "COMMENT", "comicId": id_num, "comment": text},
-        async: false,
         success: function (result) {
             console.log(result);
         },
@@ -139,7 +138,7 @@ function addBookmark(number) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "BOOKMARK", "comicId": "5910974510923776"},
+        data: {"action": "BOOKMARK", "comicId": number},
         success: function (result) {
             console.log(result);
         },
@@ -153,7 +152,7 @@ function removeBookmark(number) {
     $.ajax({
         url: "/SocialServlet",
         type: "post",
-        data: {"action": "UNBOOKMARK", "comicId": "5910974510923776"},
+        data: {"action": "UNBOOKMARK", "comicId": number},
         success: function (result) {
             console.log(result);
         },
@@ -181,6 +180,7 @@ function checkLike(id_num) {
     console.log("result is " + result);
     return result;
 }
+
 
 /**
  * Checks to see if the comic with the given comicId is in the current user's favorites
@@ -221,7 +221,7 @@ function isSubscribed(id_num) {
 }
 
 function numLikes(){
-    $.get("/SocialServlet", {"request": "numLikes", "comicId": "5910974510923776"})
+    $.get("/SocialServlet", {"request": "numLikes", "comicId": number})
         .done(function (resp) { // on sucess
             console.log(resp);
         })
@@ -231,7 +231,35 @@ function numLikes(){
 }
 
 function numFavorites(){
-    $.get("/SocialServlet", {"request": "numFavorites", "comicId": "5910974510923776"})
+    $.get("/SocialServlet", {"request": "numFavorites", "comicId": number})
+        .done(function (resp) { // on sucess
+            console.log(resp);
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function getComments(){
+    $.get("/SocialServlet", {"request": "getComments", "comicId": comicId})
+        .done(function (resp) { // on success
+            if(resp == "null"){
+                console.log("no comments");
+            } else {
+                for(c in resp){
+                    console.log(resp[c].description);
+                    console.log(resp[c].userOrigin);
+                }
+            }
+
+        })
+        .fail(function () { // on failure
+            alert("Request failed.");
+        });
+}
+
+function getRating(){
+    $.get("/SocialServlet", {"request": "getRating", "comicId": comicId})
         .done(function (resp) { // on sucess
             console.log(resp);
         })

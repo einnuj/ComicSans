@@ -4,6 +4,7 @@ import controller.mock.MockComicController;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import utilities.JsonHelper;
+import utilities.data.ObjectifyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +21,15 @@ public class MockComicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int page = Integer.parseInt(req.getParameter("page"));
         int chapter = Integer.parseInt(req.getParameter("chapter"));
-        String genre = req.getParameter("genre");
         String imgFile = req.getParameter("imgFile");
         String title = req.getParameter("title");
 
 
         System.out.println(title);
-        System.out.println(genre);
         System.out.println(chapter);
         System.out.println(page);
 
-        ComicPage ourPage = new ComicPage(title, imgFile, page, chapter, genre);
+        ComicPage ourPage = new ComicPage(title, imgFile, page, chapter);
 
 
     }
@@ -41,6 +40,9 @@ public class MockComicServlet extends HttpServlet {
                 "Sam", "Junnie");
         String comicInJson = JsonHelper.objectToJson(webComic);
 
+        ObjectifyHelper.save(webComic);
+
+        resp.setContentType("application/json");
         resp.getWriter().write(comicInJson);
     }
 }

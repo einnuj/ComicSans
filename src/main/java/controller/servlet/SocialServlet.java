@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.*;
@@ -118,7 +119,7 @@ public class SocialServlet extends HttpServlet {
 
                         Rating myRating = fieldFactory.getRating(Integer.parseInt(rating));
                         userMetadata.addToRatedMap(myRating);
-                        // testComic.getMetadata().addToRatingList(myRating);
+                        comicMetadata.addRating(myRating);
                         break;
                     case "BOOKMARK":
                         Bookmark myBM = fieldFactory.getBookmark(0, 0);
@@ -225,6 +226,23 @@ public class SocialServlet extends HttpServlet {
                             resp.getWriter().write("true");
                         } else
                             resp.getWriter().write("false");
+                        break;
+                    case "getComments":
+                        if(comicMetadata.getCommentList() != null && comicMetadata.getCommentList().size() > 0) {
+                            String comments = new Gson().toJson(comicMetadata.getCommentList());
+                            resp.getWriter().write(comments);
+                        } else {
+                            resp.getWriter().write("null");
+                        }
+                        break;
+                    case "getRating":
+                        if(comicMetadata.getRatingMap() != null && comicMetadata.getRatingMap().size()>0){
+                            int rating = comicMetadata.getRatingAsInt();
+                            resp.getWriter().write(Integer.toString(rating));
+                        } else {
+                            // to indicate there is no rating
+                            resp.getWriter().write("0");
+                        }
                         break;
                 }
 

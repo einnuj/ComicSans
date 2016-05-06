@@ -24,10 +24,16 @@
 
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/tooltips.css" rel="stylesheet">
 
     <title>Comic Directory</title>
 </head>
 <body>
+    <%--
+        This basically forces whatever loads this page to GET from the URL, then return here afterwards.
+    --%>
+    <jsp:include page="/ComicServlet"/>
+
     <%-- Side navbar --%>
     <c:set var="sideNav" value="sideNav.html"/>
     <jsp:include page="${sideNav}"></jsp:include>
@@ -42,35 +48,44 @@
 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="">Action</a></li>
-                <li><a href="">Comedy</a></li>
-                <li><a href="">Drama</a></li>
-                <li><a href="">Fantasy</a></li>
-                <li><a href="">Gaming</a> </li>
-                <li><a href="">Horror</a> </li>
-                <li><a href="">Romance</a></li>
-                <li><a href="">Sports</a> </li>
-                <li><a href="">Thriller</a> </li>
+                <li><a href="#" onclick="filterComics('action')">Action</a></li>
+                <li><a href="#" onclick="filterComics('comedy')">Comedy</a></li>
+                <li><a href="#" onclick="filterComics('drama')">Drama</a></li>
+                <li><a href="#" onclick="filterComics('fantasy')">Fantasy</a></li>
+                <li><a href="#" onclick="filterComics('gaming')">Gaming</a> </li>
+                <li><a href="#" onclick="filterComics('horror')">Horror</a> </li>
+                <li><a href="#" onclick="filterComics('romance')">Romance</a></li>
+                <li><a href="#" onclick="filterComics('sports')">Sports</a> </li>
+                <li><a href="#" onclick="filterComics('thriller')">Thriller</a> </li>
             </ul>
         </div>
 
         <%-- Comic Listing --%>
         <c:forEach var="comic" items="${allComics.comicsAsList}">
-            <div class="comic-listing">
-                <a href="summary.jsp">
-                    <c:choose>
-                        <c:when test="${comic.metadata.displayPicture == ''}">
-                            <img src="images/covers/CoConutCover.png">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="data:image/jpeg;base64,${comic.metadata.displayPicture}">
-                        </c:otherwise>
-                    </c:choose>
-                </a>
-                <h3><c:out value="${comic.name}"/></h3>
-                <h5><c:out value="${comic.metadata.author}"/></h5>
+            <div class="comicBlock">
+                <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}">
+                    <a href="summary.jsp">
+                        <c:choose>
+                            <c:when test="${comic.metadata.displayPicture == ''}">
+                                <img src="images/covers/CoConutCover.png">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="data:image/jpeg;base64,${comic.metadata.displayPicture}">
+                            </c:otherwise>
+                        </c:choose>
+                    </a>
+                    <span class="tooltips">
+                        <h3><c:out value="${comic.name}"/></h3><br>
+                        <c:out value="${comic.metadata.bio}"/> <br><br>
+                        <b>Genre: </b><c:out value="${comic.metadata.genre}"/>
+                     </span>
+                    <h3><c:out value="${comic.name}"/></h3>
+                    <h5><c:out value="${comic.metadata.author}"/></h5>
+                </div>
             </div>
         </c:forEach>
+
+        <%-- COMMENTED OUT FOR JS TESTING PURPOSES
         <div class="comic-listing">
             <a href="summary.jsp"><img src="images/covers/CoConutCover.png"></a>
             <h3>CoConut</h3>
@@ -86,6 +101,8 @@
             <h3>Doofus</h3>
             <h5>Ian McKellen</h5>
         </div>
+        --%>
+
     </div>
 
 </body>
@@ -94,3 +111,4 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/directory.js"></script>

@@ -11,17 +11,15 @@ public class ComicPage extends ComicMedia {
     private String imgURL;
     private int pageNumber;
     private int chapterNumber;
-    private String genre;
 
     ComicPage(){}
 
     // TODO: evaluate purpose of this constructor
-    public ComicPage(String name, String imgURL, int pageNumber, int chapterNumber, String genre) {
+    public ComicPage(String name, String imgURL, int pageNumber, int chapterNumber) {
         super(name);
 
         this.imgURL = imgURL;
         this.pageNumber = pageNumber;
-        this.genre = genre;
         this.chapterNumber = chapterNumber;
     }
 
@@ -36,9 +34,6 @@ public class ComicPage extends ComicMedia {
     public String getImgURL() {
         return imgURL;
     }
-    public String getGenre() {
-        return genre;
-    }
     public int getPageNumber(){
         return pageNumber;
     }
@@ -50,9 +45,6 @@ public class ComicPage extends ComicMedia {
     }
     public void setPageNumber(int pageNumber){
         this.pageNumber=pageNumber;
-    }
-    public void setGenre(String genre){
-        this.genre=genre;
     }
     public void setImgURL(String imgURL){
         this.imgURL=imgURL;

@@ -148,6 +148,10 @@ function waitForAjaxComic(obj) {
         $("#cover-thumbnail").attr("src", "images/covers/DoenutCover.png");
     else
         $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
+
+    // Fill out the comments section
+    //fillComments();
+
 }
 
 function socialButton(type) {
@@ -222,4 +226,9 @@ function appendComment() {
     var date = timestamp.getMonth() + '/' + timestamp.getDate() + '/' + (timestamp.getYear() - 100) + ' - AT ' +  timestamp.getHours() +  ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds();
     $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON ' + date + '<br>' + commentText + '</li>');
     $("#comment-input").val('');
+}
+
+function fillComments() {
+    var commentsList = getComments(comicId);
+    console.log(commentsList);
 }

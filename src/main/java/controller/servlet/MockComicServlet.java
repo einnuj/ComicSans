@@ -20,17 +20,15 @@ public class MockComicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int page = Integer.parseInt(req.getParameter("page"));
         int chapter = Integer.parseInt(req.getParameter("chapter"));
-        String genre = req.getParameter("genre");
         String imgFile = req.getParameter("imgFile");
         String title = req.getParameter("title");
 
 
         System.out.println(title);
-        System.out.println(genre);
         System.out.println(chapter);
         System.out.println(page);
 
-        ComicPage ourPage = new ComicPage(title, imgFile, page, chapter, genre);
+        ComicPage ourPage = new ComicPage(title, imgFile, page, chapter);
 
 
     }

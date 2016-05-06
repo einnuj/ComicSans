@@ -33,6 +33,11 @@ public class ComicChapter extends ComicMediaParent {
     /* Overridden Methods */
 
     @Override
+    public List<ComicPage> getChildMediaList(){
+        return childMediaList;
+    }
+
+    @Override
     public void addToChildMediaList(ComicMedia mediaToAdd) {
         if (mediaToAdd instanceof ComicPage) {
             childMediaList.add((ComicPage) mediaToAdd);

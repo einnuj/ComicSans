@@ -18,9 +18,7 @@ abstract class ComicMediaParent extends ComicMedia {
 
     /* Getters */
 
-    public List<ComicMedia> getChildMediaList() {
-        return childMediaList;
-    }
+    public abstract List getChildMediaList();
 
     /* Methods */
 

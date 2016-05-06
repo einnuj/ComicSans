@@ -30,12 +30,27 @@ public class WebComic extends ComicMediaParent {
         metadata = new ComicMetadata(name, author);
     }
 
+    public WebComic(String name, String author, String genre){
+        super(name);
+
+        childMediaList = new ArrayList<ComicChapter>();
+        metadata = new ComicMetadata(name, author, genre);
+    }
+
     /* Getters */
     public Long getId() {return id;}
 
     public ComicMetadata getMetadata() {
         return metadata;
     }
+
+    @Override
+    public List<ComicChapter> getChildMediaList() {
+        return childMediaList;
+    }
+
+
+
 
     /* Setters */
 
@@ -54,6 +69,11 @@ public class WebComic extends ComicMediaParent {
     public void reload() {
         if (childMediaList == null) {
             childMediaList = new ArrayList<ComicChapter>();
+        } else {
+            for(ComicChapter c : childMediaList){
+                c.reload();
+            }
         }
+
     }
 }

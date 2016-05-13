@@ -223,8 +223,7 @@ function appendComment() {
     })
 
     var timestamp = new Date();
-    var date = timestamp.getMonth() + '/' + timestamp.getDate() + '/' + (timestamp.getYear() - 100) + ' - AT ' +  timestamp.getHours() +  ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds();
-    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON ' + date + '<br>' + commentText + '</li>');
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
     $("#comment-input").val('');
 }
 function fillComments() {
@@ -233,8 +232,9 @@ function fillComments() {
     var time = [];
     getComments(comicId, users, time, descriptions);
 
-
+    var comTime;
     for (i=0;i<users.length;i++) {
-        $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + users[i] + ' - AT TIME ' + time[i] + '<br>' + descriptions[i] + '</li>');
+        comTime = new Date(time[i]);
+        $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + users[i] + ' - ON: ' + comTime.toString() + '<br>' + descriptions[i] + '</li>');
     }
 }

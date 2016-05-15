@@ -13,6 +13,7 @@ var checkResult; // used for checking if someone is liked/favorite/subscribed (h
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
 getCurrentUser();
+console.log(currentUser);
 
 function editComicSummary(comic) {
     $("#edit-summary").toggle();
@@ -79,20 +80,15 @@ function getUserHelper(response) {
         $(".comic-info-descr").css("margin-left", "+=65");
     }
 
-    // * * * at this point the currentComic and currentUser are available for use ma nigga * * *
+    // * * * at this point the currentComic and currentUser are available for use * * *
 
-
-    //var testCase = isSubscribed(comicId); --- buggy? skip subscribe for now
-    //console.log(testCase);
-
-    /*  BUGGY
     checkResult = isSubscribed(comicId);
     // if the user is subscribed to the comic
     if (checkResult) {
         // set button text to unsubscribe
         $("#sub-btn").html("Unsubscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
     } // else do nothing (text will be subscribe by default
-    */
+
 
     checkResult = checkLike(comicId);
     // if the user liked the comic
@@ -162,11 +158,11 @@ function socialButton(type) {
     switch (type) {
         case "SUB":
             if ($("#sub-btn").text().trim() == "Subscribe") { // If the user doesn't already like the comic, then allow a like
-                //subscribe(comicId);
+                subscribe(comicId);
                 $("#sub-btn").html("Unsubscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
             }
             else {
-                //unsubscribe(comicId);
+                unsubscribe(comicId);
                 $("#sub-btn").html("Subscribe" + "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>");
             }
             break;

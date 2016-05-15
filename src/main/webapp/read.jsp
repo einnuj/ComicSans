@@ -24,6 +24,7 @@
 
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/read.css" rel="stylesheet">
 
     <title>Read</title>
 </head>
@@ -49,23 +50,12 @@
                 </div>
             </div>
             <div class="comic-reading-dd">
-                <%-- Page Dropdown --%>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <h4>Page <span class="caret"></span></h4>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="javascript:jumpToPage(1)">1</a></li>
-                        <li><a href="javascript:jumpToPage(2)">2</a></li>
-                        <li><a href="javascript:jumpToPage(3)">3</a></li>
-                        <li><a href="javascript:jumpToPage(4)">4</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="comic-reading-dd">
                 <a class="btn btn-lg btn-primary" role="button"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmark </a>
             </div>
-            <a href="javascript:nextPage()"><img src="images/covers/CoConutCover.png" id="comic-page"/></a>
+            <img src="images/covers/CoConutCover.png"/>
+            <img src="images/mockpages/1.png"/>
+            <img src="images/mockpages/2.png"/>
+            <img src="images/mockpages/3.png"/>
         </div>
     </div>
 </body>
@@ -74,4 +64,3 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="scripts/pagehandling.js"></script>

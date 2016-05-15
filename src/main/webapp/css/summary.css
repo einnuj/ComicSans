@@ -20,12 +20,12 @@
     margin-top: 10px;
 }
 .user-comments {
-    margin-top: 5%;
-    padding: 10px;
+    margin-top: 3%;
+    margin-left: -3%;
     font-size: 15px;
+    padding: 20px;
     width: 80%;
-    border: 1px solid white;
-    border-radius: 10px;
+    border-bottom: 1px solid white;
 }
 .chapter-listing {
     margin-top: 5%;
@@ -68,4 +68,10 @@
 }
 .chapter-info-descr button{
     margin-left: 1em;
+}
+textarea {
+    width: 85%;
+    height: 100px;
+    margin: 25px;
+    resize: none;
 }

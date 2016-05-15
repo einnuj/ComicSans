@@ -98,12 +98,12 @@
             </div>
             <a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
         </div>
+        <br><br><br>
         <%-- COMMENT THREAD STUFFS --%>
-        <textarea id="comment-input"></textarea>
+        <textarea id="comment-input"></textarea><br><br>
         <a id="comment-submit" class="btn btn-lg btn-primary" role="button" onclick="appendComment()">Submit <span class="glyphicon glyphicon-edit"></span></a>
-        <ul id="comment-thread" class="user-comments">
+        <ul id="comment-thread">
         </ul>
-
     </div>
 </body>
 </html>

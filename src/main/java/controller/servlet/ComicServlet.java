@@ -205,6 +205,81 @@ public class ComicServlet extends HttpServlet {
                     }
                     break;
                 }
+            case "EDIT TITLE":
+                try {
+                    String idString = req.getParameter("id");
+                    String title = req.getParameter("title");
+
+                    if (idString == null) {
+                        throw new ParameterNotFoundException("id");
+                    }
+
+                    if (title == null){
+                        throw new ParameterNotFoundException("title");
+                    }
+
+                    Long id = Long.valueOf(idString);
+                    WebComic comic = ComicAccess.queryForComic(id);
+
+                    if (comic == null) {
+                        throw new ComicNotFoundException(id);
+                    }
+
+                    comic.setName(title);
+
+                    ObjectifyHelper.save(comic);
+
+                    comic.reload();
+                }
+                catch (ComicNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
+                catch (ParameterNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                }
+                break;
+            case "EDIT BIO":
+                try {
+                    String idString = req.getParameter("id");
+                    String bio = req.getParameter("bio");
+
+                    if (idString == null) {
+                        throw new ParameterNotFoundException("id");
+                    }
+
+                    if (bio == null){
+                        throw new ParameterNotFoundException("bio");
+                    }
+
+                    Long id = Long.valueOf(idString);
+                    WebComic comic = ComicAccess.queryForComic(id);
+
+                    if (comic == null) {
+                        throw new ComicNotFoundException(id);
+                    }
+
+                    comic.getMetadata().setBio(bio);
+
+                    ObjectifyHelper.save(comic);
+
+                    comic.reload();
+                    comic.getMetadata().reload();
+                }
+                catch (ComicNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
+                catch (ParameterNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                }
+                break;
         }
     }
 

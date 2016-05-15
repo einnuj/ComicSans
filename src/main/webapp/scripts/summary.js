@@ -21,8 +21,22 @@ function editComicSummary(comic) {
         editSummary = true;
     }
     else {
-        if ($("#summary-text-area").val() != "")
+        if ($("#summary-text-area").val() != "") {
             $("#summary-paragraph").html($("#summary-text-area").val());
+
+            //ajax to save bio to datastore
+            $.ajax({
+                url: "/ComicServlet",
+                type: "post",
+                data: {"action": "EDIT BIO", "id": comicId, "bio": $("#summary-text-area").val()},
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
         editSummary = false;
     }
 
@@ -30,11 +44,24 @@ function editComicSummary(comic) {
 function editComicTitle() {
     if (editTitle == true) {
         editTitle = false;
-        if ($("#title-text").val() != "")  // if it has, reflect the change in the title header
+        if ($("#title-text").val() != "") {  // if it has been changed, reflect the change in the title header
             $("#title-header").html($("#title-text").val());
+
+            //ajax to save title to datastore
+            $.ajax({
+                url: "/ComicServlet",
+                type: "post",
+                data: {"action": "EDIT TITLE", "id": comicId, "title": $("#title-text").val()},
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
     } // else just change boolean flag
     else editTitle = true;
-
     $("#edit-title").toggle(); // toggle visibility of text box
 }
 // FOR EDITING THE COVER PAGE IMAGE

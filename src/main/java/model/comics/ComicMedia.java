@@ -18,4 +18,6 @@ abstract class ComicMedia {
     public String getName() {
         return name;
     }
+
+    public void setName(String str) { this.name = str;}
 }

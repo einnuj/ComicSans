@@ -44,7 +44,7 @@ public class ComicMetadata extends AbstractMetadata {
 
     private void setEnum(String genre){
         for(GenreEnum g : GenreEnum.values()){
-            if (genre.equals(g)){
+            if (genre.equalsIgnoreCase(String.valueOf(g))){
                 this.genre = g;
             }
         }

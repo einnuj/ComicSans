@@ -267,6 +267,7 @@ function getComments(id_num, userIds, timestamp, text) {
         async: false,
         data: {"request": "getComments", "comicId": id_num},
         success: function (resp) {
+            balls = resp;
             for (c in resp) {
                 userIds.push(resp[c].userOrigin);
                 timestamp.push(resp[c].timeCreatedMillis);

@@ -195,5 +195,9 @@ public class UserMetadata extends AbstractMetadata {
             userHistory = new LinkedList<WebComic>();
         }
 
+        if(subscriptions == null) {
+            subscriptions = new HashMap<>();
+        }
+
     }
 }

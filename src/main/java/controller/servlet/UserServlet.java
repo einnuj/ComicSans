@@ -30,25 +30,44 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         com.google.appengine.api.users.User googleUser = UserAccess.getGoogleUser();
 
-        if (googleUser != null) {
+        // This code is for getting a user by their googleID. The if block is only executed if there
+        // is a uID parameter passed whereas the else block will get the current user.
+        // *** NOTE: originally this just consisted of the else block. Delete the if block if something is broken ***
+        String requestedID = req.getParameter("uID");
+        if (requestedID != null) {
             resp.setContentType("application/json");
             try {
-                User genUser = UserAccess.queryForUser(googleUser.getUserId());
+                User commenter = UserAccess.queryForUser(requestedID);
 
-                // There was no User in the DB; must be a new User.
-                if (genUser == null) {
-                    genUser = new User(googleUser.getNickname(), googleUser.getUserId());
-
-                    ObjectifyHelper.save(genUser);
-                }
-
-                resp.getWriter().write(JsonHelper.objectToJson(genUser));
+                resp.getWriter().write(JsonHelper.objectToJson(commenter));
                 resp.setStatus(HttpServletResponse.SC_OK);
-            }
-            catch (NonUniqueGoogleIdException ex) {
+
+            }catch (NonUniqueGoogleIdException ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } else {
+
+            if (googleUser != null) {
+                resp.setContentType("application/json");
+                try {
+                    User genUser = UserAccess.queryForUser(googleUser.getUserId());
+
+                    // There was no User in the DB; must be a new User.
+                    if (genUser == null) {
+                        genUser = new User(googleUser.getNickname(), googleUser.getUserId());
+
+                        ObjectifyHelper.save(genUser);
+                    }
+
+                    resp.getWriter().write(JsonHelper.objectToJson(genUser));
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (NonUniqueGoogleIdException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
             }
         }
     }

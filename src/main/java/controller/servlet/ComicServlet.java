@@ -100,6 +100,8 @@ public class ComicServlet extends HttpServlet {
                         String description = req.getParameter("description");
                         String genre = req.getParameter("genre");
 
+                        WebComic newComic;
+
                         if (author == null) {
                             throw new UserNotFoundException(googleUser.getUserId());
                         }
@@ -109,48 +111,33 @@ public class ComicServlet extends HttpServlet {
                         if (description == null) {
                             throw new ParameterNotFoundException("description");
                         }
-                        if (genre != null){
-                            WebComic newComic1 = new WebComic(name, author.getMetadata().getName(), genre);
-                            newComic1.getMetadata().setBio(description);
-                            ObjectifyHelper.save(newComic1);         // Gets us the Long id
-                            newComic1.reload();
-                            // Update User!
-                            author.getMetadata().addToComicsCreated(newComic1);
-
-
-                            ComicChapter newChapter = new ComicChapter("1");
-                            newComic1.addToChildMediaList(newChapter);
-
-                            newChapter.reload();
-
-                            ObjectifyHelper.save(newComic1);
-                            ObjectifyHelper.save(author);
-
-                            newComic1.reload();
-
-                            Long comicId = newComic1.getId();
-                            resp.getWriter().write(Long.toString(comicId));
-                            resp.setStatus(HttpServletResponse.SC_OK);
-
-                        } else {
-
-                            WebComic newComic = new WebComic(name, author.getMetadata().getName());
-                            newComic.getMetadata().setBio(description);
-
-                            ObjectifyHelper.save(newComic);         // Gets us the Long id
-                            newComic.reload();
-
-                            // Update User!
-                            author.getMetadata().addToComicsCreated(newComic);
-
-                            ObjectifyHelper.save(newComic);
-                            ObjectifyHelper.save(author);
-
-                            newComic.reload();
-
-                            resp.getWriter().write(JsonHelper.objectToJson(newComic));
-                            resp.setStatus(HttpServletResponse.SC_OK);
+                        if (genre != null) {
+                            newComic = new WebComic(name, author.getMetadata().getName(), genre);
                         }
+                        else {
+                            newComic = new WebComic(name, author.getMetadata().getName());
+                        }
+
+                        newComic.getMetadata().setBio(description);
+
+                        ObjectifyHelper.save(newComic);         // Gets us the Long id
+                        newComic.reload();
+
+                        // Update User!
+                        author.getMetadata().addToComicsCreated(newComic);
+
+                        ComicChapter newChapter = new ComicChapter("1");
+                        newComic.addToChildMediaList(newChapter);
+
+                        newChapter.reload();
+
+                        ObjectifyHelper.save(newComic);
+                        ObjectifyHelper.save(author);
+
+                        newComic.reload();
+
+                        resp.getWriter().write(JsonHelper.objectToJson(newComic));
+                        resp.setStatus(HttpServletResponse.SC_OK);
                     }
                     catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
                         resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

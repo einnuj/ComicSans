@@ -73,22 +73,6 @@ textarea{
 .social-buttons {
     padding-top: 20px;
 }
-.comic-reading {
-    height: auto;
-    position: relative;
-    text-align: center;
-}
-.comic-reading img {
-    margin: auto;
-    margin-top: 40px;
-    vertical-align: middle;
-    text-align: center;
-    display: block;
-    width: 500px;
-}
-.comic-reading-dd {
-    display: inline-flex;
-}
 .preview-options {
     margin-top: 25%;
     margin-left: 40px;

@@ -211,13 +211,14 @@ function appendComment() {
     if (commentText == "")
         return;
 
+    // add the comment to the actual comic in the datastore
     addComment(comicId, commentText);
 
+    // ajax to bring the comic back to the front end
     $.ajax({
         url: "/ComicServlet",
         type: "get",
         data: {"id": comicId},
-        async: false,
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             currentComic = responseText;
@@ -225,9 +226,10 @@ function appendComment() {
     })
 
     var timestamp = new Date();
-    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.metadata.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
     $("#comment-input").val('');
 }
+
 function fillComments() {
     var users = [];
     var descriptions = [];
@@ -235,8 +237,25 @@ function fillComments() {
     getComments(comicId, users, time, descriptions);
 
     var comTime;
+    var commenter;
     for (i=0;i<users.length;i++) {
+        commenter = getUserById(users[i]);
         comTime = new Date(time[i]);
-        $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + users[i] + ' - ON: ' + comTime.toString() + '<br>' + descriptions[i] + '</li>');
+        $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + commenter + ' - ON: ' + comTime.toString() + '<br>' + descriptions[i] + '</li>');
     }
+}
+
+function getUserById(strID) {
+    var username = "";
+    $.ajax({
+        url: "/UserServlet",
+        type: "get",
+        data: {"uID": strID},
+        async: false,
+        success: function(responseText) {
+            $("#userJson > a").text(responseText);
+            username = responseText.metadata.name;
+        },
+    });
+    return username;
 }

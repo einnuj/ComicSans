@@ -31,8 +31,8 @@
 </head>
 <body>
     <%-- Side navbar --%>
-    <c:set var="sideNav" value="sideNav.html"/>
-    <jsp:include page="${sideNav}"></jsp:include>
+    <c:set var="mainNav" value="mainNav.html"/>
+    <jsp:include page="${mainNav}"></jsp:include>
 
     <div class="info-container">
         <h1>Upload Chapter</h1>

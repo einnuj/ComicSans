@@ -35,8 +35,8 @@
     <jsp:include page="/ComicServlet"/>
 
     <%-- Side navbar --%>
-    <c:set var="sideNav" value="sideNav.html"/>
-    <jsp:include page="${sideNav}"></jsp:include>
+    <c:set var="dirNav" value="dirNav.html"/>
+    <jsp:include page="${dirNav}"></jsp:include>
 
     <div class="info-container">
         <h1>All Comics</h1>

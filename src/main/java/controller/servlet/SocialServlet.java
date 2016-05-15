@@ -258,6 +258,28 @@ public class SocialServlet extends HttpServlet {
             } catch (ParameterNotFoundException e) {
                 e.printStackTrace();
             }
+        } else { // user isn't logged in, but should still be able to view comments
+            resp.setContentType("application/json");
+            String request = req.getParameter("request");
+
+            if (request.equals("getComments")) {
+
+                String comicId = req.getParameter("comicId");
+
+                WebComic targetComic = ComicAccess.queryForComic(Long.valueOf(comicId));
+
+                ComicMetadata comicMetadata = targetComic.getMetadata();
+
+                targetComic.reload();
+                comicMetadata.reload();
+
+                if (comicMetadata.getCommentList() != null && comicMetadata.getCommentList().size() > 0) {
+                    String comments = new Gson().toJson(comicMetadata.getCommentList());
+                    resp.getWriter().write(comments);
+                } else {
+                    resp.getWriter().write("null");
+                }
+            }
         }
     }
 }

@@ -70,6 +70,9 @@ function getUserHelper(response) {
     if (currentUser == ""){
         $(".AUTHOR_PRIV").toggle();
         $(".comic-info-descr").css("margin-left", "+=65");
+        // turn off commenting controls
+        $("#comment-input").toggle();
+        $("#comment-submit").toggle();
     }
     else if (currentUser.metadata.name != author) {
         $(".AUTHOR_PRIV").toggle();
@@ -113,12 +116,12 @@ function getComic() {
         data: {"id": comicId},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
-            waitForAjaxComic(responseText);
+            getComicHelper(responseText);
         }
     })
 }
 
-function waitForAjaxComic(obj) {
+function getComicHelper(obj) {
     // Get data for each field from JSON object
     currentComic = obj;
     name = obj.name;
@@ -151,7 +154,6 @@ function waitForAjaxComic(obj) {
 
     // Fill out the comments section
     fillComments();
-
 }
 
 function socialButton(type) {

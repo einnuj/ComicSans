@@ -113,7 +113,7 @@ function getComic() {
     $.ajax({
         url: "/ComicServlet",
         type: "get",
-        data: {"id": comicId},
+        data: {"id": comicId, "summary" : true},
         success: function(responseText) {
             $("#comicJson > a").text(responseText);
             getComicHelper(responseText);
@@ -123,10 +123,10 @@ function getComic() {
 
 function getComicHelper(obj) {
     // Get data for each field from JSON object
-    currentComic = obj;
-    name = obj.name;
-    author = obj.metadata.author;
-    biography = obj.metadata.bio;
+    currentMetadata = obj;
+    name = currentMetadata.name;
+    author = currentMetadata.author;
+    biography = currentMetadata.bio;
     //cover = obj.metadata.displayPicture; ---- Needs to be added to JSON
 
     // Set data for the title
@@ -141,7 +141,7 @@ function getComicHelper(obj) {
     $("#summary-text-area").html(biography);
 
     // Set data for favorites
-    $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+    $("#fav-field").html("Favorites: " + currentMetadata.favorites);
 
     // Set the cover image
     var number = sessionStorage.getItem("ComicNumberSelected");
@@ -174,14 +174,14 @@ function socialButton(type) {
         case "FAV":
             if ($("#fav-btn").text().trim() == "Favorite") { // If the user doesn't already like the comic, then allow a like
                 favorite(comicId);
-                currentComic.metadata.favorites++;
-                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                currentMetadata.favorites++;
+                $("#fav-field").html("Favorites: " + currentMetadata.favorites);
                 $("#fav-btn").html("Unfavorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
             }
             else {
                 unfavorite(comicId);
-                currentComic.metadata.favorites--;
-                $("#fav-field").html("Favorites: " + currentComic.metadata.favorites);
+                currentMetadata.favorites--;
+                $("#fav-field").html("Favorites: " + currentMetadata.favorites);
                 $("#fav-btn").html("Favorite" + "<span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>");
             }
             break;
@@ -189,12 +189,12 @@ function socialButton(type) {
         case "LIK":
             if ($("#lik-btn").text().trim() == "Like") { // If the user doesn't already like the comic, then allow a like
                 like(comicId);
-                currentComic.metadata.likes++;
+                currentMetadata.likes++;
                 $("#lik-btn").html("Unlike" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             else {
                 unlike(comicId);
-                currentComic.metadata.likes--;
+                currentMetadata.likes--;
                 $("#lik-btn").html("Like" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             break;
@@ -226,7 +226,7 @@ function appendComment() {
     })
 
     var timestamp = new Date();
-    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.metadata.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
     $("#comment-input").val('');
 }
 

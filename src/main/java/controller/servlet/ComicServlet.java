@@ -218,6 +218,7 @@ public class ComicServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idString = req.getParameter("id");
+        Object summary = req.getParameter("summary");
 
         if (idString != null) {
             Long id = Long.valueOf(req.getParameter("id"));
@@ -229,7 +230,12 @@ public class ComicServlet extends HttpServlet {
                     throw new ComicNotFoundException(id);
                 }
 
-                resp.getWriter().write(JsonHelper.objectToJson(webComic));
+                if (summary == null) {
+                    resp.getWriter().write(JsonHelper.objectToJson(webComic));
+                }
+                else {
+                    resp.getWriter().write(JsonHelper.objectToJson(webComic.getMetadata()));
+                }
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.setContentType("application/json");
             } catch (ComicNotFoundException ex) {

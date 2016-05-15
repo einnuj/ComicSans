@@ -19,7 +19,7 @@ function submitComicFunction() {
             data: {"action" : "CREATE COMIC", "description" : summary, "genre" : genre, "name" : title },
             success: function(result){
                 console.log("result:" + result);
-                var comicId = result;
+                var comicId = result.id;
 
                 for(var i = 0; i < files.length; i++){
                     var dataURL;
@@ -39,7 +39,7 @@ function submitComicFunction() {
                                     console.log("success");
                                 },
                                 error: function(err){
-                                    console.log("fail");
+                                    console.log(err);
                                 }
                             });
                         }

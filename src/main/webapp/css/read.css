@@ -1,0 +1,16 @@
+.comic-reading {
+    height: auto;
+    position: relative;
+    text-align: center;
+}
+.comic-reading img {
+    margin: auto;
+    margin-top: 40px;
+    vertical-align: middle;
+    text-align: center;
+    display: block;
+    width: 700px;
+}
+.comic-reading-dd {
+    display: inline-flex;
+}

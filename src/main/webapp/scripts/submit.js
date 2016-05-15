@@ -21,6 +21,7 @@ function submitComicFunction() {
                 console.log("result:" + result);
                 var comicId = result.id;
                 var status = 0;
+                var end = files.length;
                 for(var i = 0; i < files.length; i++){
                     var dataURL;
                     (function(i){
@@ -29,7 +30,7 @@ function submitComicFunction() {
                         reader.readAsDataURL(file);
                         reader.onload = function(e) {
                             dataURL = reader.result;
-                            var end = files.length;
+                            var page = i+1;
                             $.ajax({
                                 type: "POST",
                                 url: "/ComicServlet",

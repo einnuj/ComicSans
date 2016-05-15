@@ -83,11 +83,9 @@
             <br>
             <button class=btn-primary id="save" type="button">Save <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>
             <button class=btn-primary id="load" type="button">Load <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button>
-            <button class=btn-primary id="delete" type="button">Delete save <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
             <br>
             <button class=btn-primary id="image_save" type="button">Save png to localstorage <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>
             <button class=btn-primary id="image_load" type="button">Load png from localstorage <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button>
-            <button class=btn-primary id="image_delete" type="button">Remove png file <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
             <button class=btn-primary id="image_out" type="button">Image(png) Output <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
             <button class=btn-primary id="pdf_out" type="button">PDF Output <span class="glyphicon glyphicon-share" aria-hidden="true"></span></button>
         </div>

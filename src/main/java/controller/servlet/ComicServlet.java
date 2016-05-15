@@ -110,7 +110,7 @@ public class ComicServlet extends HttpServlet {
                             throw new ParameterNotFoundException("description");
                         }
                         if (genre != null){
-                            WebComic newComic1 = new WebComic(name, author.getMetadata().getName(), genre);
+                            WebComic newComic1 = new WebComic(name, author.getId().toString(), genre);
                             newComic1.getMetadata().setBio(description);
                             ObjectifyHelper.save(newComic1);         // Gets us the Long id
                             newComic1.reload();
@@ -134,7 +134,7 @@ public class ComicServlet extends HttpServlet {
 
                         } else {
 
-                            WebComic newComic = new WebComic(name, author.getMetadata().getName());
+                            WebComic newComic = new WebComic(name, author.getId().toString());
                             newComic.getMetadata().setBio(description);
 
                             ObjectifyHelper.save(newComic);         // Gets us the Long id
@@ -149,6 +149,7 @@ public class ComicServlet extends HttpServlet {
                             newComic.reload();
 
                             resp.getWriter().write(JsonHelper.objectToJson(newComic));
+                            //resp.getWriter().write(Long.toString(comicId));
                             resp.setStatus(HttpServletResponse.SC_OK);
                         }
                     }

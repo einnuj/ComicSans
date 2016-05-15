@@ -18,9 +18,8 @@ function submitComicFunction() {
             url: "/ComicServlet",
             data: {"action" : "CREATE COMIC", "description" : summary, "genre" : genre, "name" : title },
             success: function(result){
-                console.log("result:" + result);
                 var comicId = result;
-
+                var status = 0;
                 for(var i = 0; i < files.length; i++){
                     var dataURL;
                     (function(i){
@@ -30,13 +29,18 @@ function submitComicFunction() {
                         reader.onload = function(e) {
                             dataURL = reader.result;
                             var page = i+1;
-                            console.log("page:" + page);
+                            var end = files.length;
                             $.ajax({
                                 type: "POST",
                                 url: "/ComicServlet",
                                 data: {"action" : "ADD PAGE", "comicId": comicId, "file" : dataURL, "page" : page},
                                 success: function(result){
-                                    console.log("success");
+                                    status++;
+                                    console.log("status:" + status);
+                                    if(status == end){
+                                        sessionStorage.setItem('id_to_load', comicId);
+                                        window.location.href = "../summary.jsp";
+                                    }
                                 },
                                 error: function(err){
                                     console.log("fail");

@@ -19,6 +19,10 @@ public class AllComics {
         return comics.get(comicTarget);
     }
 
+    public HashMap<Long, WebComic> getComics() {
+        return comics;
+    }
+
     public List<WebComic> getComicsAsList() {
         return new ArrayList<WebComic>(comics.values());
     }

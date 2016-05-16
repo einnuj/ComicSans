@@ -44,10 +44,10 @@
                         <input type="text" name="chapter" id="chapterNumber"/> <br>
                         <br><br>
                         Upload pages:
-                        <input id ="fileSubmit" type="file" name="comicPage" accept="">
+                        <input id ="fileSubmit" type="file" name="comicPage[]" multiple>
                         <br>
                         <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
-                        <input class="btn btn-lg btn-primary" onclick="" type="button" value="Submit">
+                        <input class="btn btn-lg btn-primary" onclick="submitChapter()" type="button" value="Submit">
                     </form>
                 </li>
             </ul>
@@ -55,3 +55,5 @@
     </div>
 </body>
 </html>
+
+<script src="scripts/submit.js"></script>

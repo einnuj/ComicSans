@@ -20,6 +20,8 @@ public class WebComic extends ComicMediaParent {
 
     private ComicMetadata metadata;
 
+    private String coverImage;
+
     // Solely for Objectify
     private WebComic() {}
 
@@ -49,10 +51,16 @@ public class WebComic extends ComicMediaParent {
         return childMediaList;
     }
 
-
+    public String getCoverImage(){
+        return coverImage;
+    }
 
 
     /* Setters */
+
+    public void setCoverImage(String image){
+        this.coverImage = image;
+    }
 
     /* Methods */
 

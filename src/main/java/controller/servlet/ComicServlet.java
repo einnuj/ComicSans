@@ -43,21 +43,61 @@ public class ComicServlet extends HttpServlet {
         String action = req.getParameter("action");
 
         switch (action) {
+            case "ADD COVER":
+                com.google.appengine.api.users.User googleUser = UserServiceFactory.getUserService().getCurrentUser();
+
+                resp.setContentType("application/json");
+
+                if (googleUser != null) {
+                    try {
+                        User author = UserAccess.queryForUser(googleUser.getUserId());
+
+                        if (author == null) {
+                            throw new UserNotFoundException(googleUser.getUserId());
+                        }
+                        String file = req.getParameter("file");
+                        String comicId = req.getParameter("comicId");
+
+                        if (comicId == null) {
+                            throw new ParameterNotFoundException("comicId");
+                        }
+
+                        if (file == null) {
+                            throw new ParameterNotFoundException("file");
+                        } else {
+                            Long id = Long.valueOf(comicId);
+
+                            WebComic webComic = ComicAccess.queryForComic(id);
+                            webComic.setCoverImage(file);
+
+                            ObjectifyHelper.save(webComic);
+                            ObjectifyHelper.save(author);
+                            resp.getWriter().write("{}");
+                            resp.setStatus(HttpServletResponse.SC_OK);
+                        }
+                    } catch (NonUniqueGoogleIdException | UserNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    } catch (ParameterNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                    }
+                    break;
+                }
             case "CREATE CHAPTER":
                 try {
-                    String idString = req.getParameter("id");
-                    String name = req.getParameter("name");
-                    String file = req.getParameter("files");
+                    String idString = req.getParameter("comicId");
+                    String title = req.getParameter("title");
 
                     if (idString == null) {
-                        throw new ParameterNotFoundException("id");
+                        throw new ParameterNotFoundException("comicId");
                     }
-                    if (name == null) {
-                        throw new ParameterNotFoundException("name");
+                    if (title == null) {
+                        throw new ParameterNotFoundException("title");
                     }
-                    if (file == null) {
-                        throw new ParameterNotFoundException("files");
-                    }
+
 
                     Long id = Long.valueOf(idString);
                     WebComic comic = ComicAccess.queryForComic(id);
@@ -66,15 +106,23 @@ public class ComicServlet extends HttpServlet {
                         throw new ComicNotFoundException(id);
                     }
 
-                    ComicChapter newChapter = new ComicChapter(name);
-                    newChapter.addToChildMediaList(new ComicPage("fileName", file));
+                    int numChapter = comic.getChildMediaList().size();
+
+                    ComicChapter newChapter = new ComicChapter(title);
+                    newChapter.setChapterNumber(numChapter+1);
 
                     comic.addToChildMediaList(newChapter);
+
+                    newChapter.reload();
 
                     ObjectifyHelper.save(comic);
 
                     comic.reload();
                     comic.getMetadata().reload();
+
+                    String comicId = comic.getId().toString();
+                    resp.getWriter().write(comicId);
+                    resp.setStatus(HttpServletResponse.SC_OK);
                 }
                 catch (ComicNotFoundException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
@@ -89,7 +137,7 @@ public class ComicServlet extends HttpServlet {
                 break;
 
             case "CREATE COMIC":
-                com.google.appengine.api.users.User googleUser = UserServiceFactory.getUserService().getCurrentUser();
+                googleUser = UserServiceFactory.getUserService().getCurrentUser();
 
                 resp.setContentType("application/json");
 
@@ -126,17 +174,20 @@ public class ComicServlet extends HttpServlet {
                         // Update User!
                         author.getMetadata().addToComicsCreated(newComic);
 
-                        ComicChapter newChapter = new ComicChapter("1");
-                        newComic.addToChildMediaList(newChapter);
+                        //ComicChapter newChapter = new ComicChapter("1");
+                        //newComic.addToChildMediaList(newChapter);
 
-                        newChapter.reload();
+                        //newChapter.reload();
+
 
                         ObjectifyHelper.save(newComic);
                         ObjectifyHelper.save(author);
 
                         newComic.reload();
 
-                        resp.getWriter().write(JsonHelper.objectToJson(newComic));
+                        //resp.getWriter().write(JsonHelper.objectToJson(newComic));
+                        String comicId = newComic.getId().toString();
+                        resp.getWriter().write(comicId);
                         resp.setStatus(HttpServletResponse.SC_OK);
                     }
                     catch (NonUniqueGoogleIdException | UserNotFoundException ex) {

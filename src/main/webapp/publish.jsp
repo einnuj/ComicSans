@@ -59,7 +59,8 @@
                         <br>
                         <textarea type="input" name="summary" id="comicSummary"></textarea>
                         <br><br>
-                        <input id ="fileSubmit" type="file" name="comicPage[]" multiple>
+                        <input id ="fileSubmit" type="file" name="comicCover">
+
                         <br>
                         <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
                         <input class="btn btn-lg btn-primary" onclick="submitComicFunction()" type="button" value="Submit">

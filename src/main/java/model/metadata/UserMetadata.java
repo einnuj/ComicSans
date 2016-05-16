@@ -16,7 +16,6 @@ public class UserMetadata extends AbstractMetadata {
 
     private String drawJson;
 
-
     //key = comicTarget
     private HashMap<String, Like> comicsLikedMap;
 

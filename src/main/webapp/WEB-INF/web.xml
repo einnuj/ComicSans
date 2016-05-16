@@ -72,6 +72,16 @@
         <url-pattern>/MockComicServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>controller.servlet.Upload</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
     <!-- Objectify Filter -->
     <filter>
         <filter-name>ObjectifyFilter</filter-name>

@@ -45,7 +45,25 @@ function submitComicFunction() {
 
 }
 
-function submitChapter(){
+function submitChapter() {
+    var fd = new FormData();
+    var files = document.getElementById("fileSubmit").files;
+    var chapter = document.getElementById("chapter").value;
+    var comicId = sessionStorage.getItem('id_to_load');
+
+    console.log(chapter);
+        for ( var i = 0; i < files.length; i++) {
+            fd.append("file" + i, files[i]);
+        }
+        fd.append("chapterTitle", chapter);
+        fd.append("comicId", comicId);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", document.getElementById('submitComicForm').action);
+        xhr.send(fd);
+
+}
+
+function submitChapter2(){
     var title = document.getElementById("chapterNumber").value;
     var files = document.getElementById("fileSubmit").files;
 
@@ -79,7 +97,7 @@ function submitChapter(){
                         var page = i+1;
                         $.ajax({
                             type: "POST",
-                            url: "/ComicServlet",
+                            url: "/upload",
                             data: {"action" : "ADD PAGE", "comicId": comicId, "file" : dataURL, "page" : page},
                             success: function(result){
                                 status++;

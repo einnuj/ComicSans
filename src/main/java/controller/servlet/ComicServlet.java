@@ -277,6 +277,7 @@ public class ComicServlet extends HttpServlet {
                     }
 
                     comic.setName(title);
+                    comic.getMetadata().setName(title);
 
                     ObjectifyHelper.save(comic);
 

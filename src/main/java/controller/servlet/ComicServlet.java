@@ -335,10 +335,15 @@ public class ComicServlet extends HttpServlet {
                 }
 
                 req.setAttribute("allComics", allComics);
+
+                resp.getWriter().write(JsonHelper.objectToJson(allComics.getComics()));
                 resp.setStatus(HttpServletResponse.SC_OK);
+                resp.setContentType("application/json");
 
             } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                System.out.println("THAT BROKE");
 
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }

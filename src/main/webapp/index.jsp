@@ -109,19 +109,10 @@
         </a>
     </div>
     <%-- End of Carousel --%>
-    <div class="section-sliders">
+    <div id="top-suggestions" class="section-sliders">
         <%--<div class="section-title">Continue Reading</div>--%>
         <h2>Continue Reading</h2>
         <ul>
-            <li>
-                <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
-            </li>
-            <li>
-                <img src="images/covers/DoenutCover.png" />
-            </li>
-            <li>
-                <img src="images/covers/DoofusCover.png" />
-            </li>
         </ul>
     </div>
     <div class="section-sliders">
@@ -157,6 +148,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="scripts/authentication.js"></script>
+<script src="scripts/index.js"></script>
 <script>
     function passBySession(id, image) {
         sessionStorage.setItem('id_to_load', id);

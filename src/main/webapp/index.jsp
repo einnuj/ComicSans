@@ -111,7 +111,7 @@
     <%-- End of Carousel --%>
     <div id="top-suggestions" class="section-sliders">
         <%--<div class="section-title">Continue Reading</div>--%>
-        <h2>Continue Reading</h2>
+        <h2>Top Suggestions</h2>
         <ul>
         </ul>
     </div>

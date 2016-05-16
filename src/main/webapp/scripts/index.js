@@ -34,7 +34,7 @@ function addComicsIntoHTML(allComics) {
             continue;
         }
         var imgSrc = getRandomCoverArt();
-        var html = "<li><a href='summary.js'><img src=" + imgSrc + "/></a></li>"
+        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + imgSrc[0] + ")' role='button'><img src=" + imgSrc[1] + "/></a></li>"
         targetDiv.append(html);
     }
 }
@@ -42,11 +42,11 @@ function addComicsIntoHTML(allComics) {
 function getRandomCoverArt() {
     switch(Math.floor(Math.random() * (3))) {
         case 0:
-            return "images/covers/CoConutCover.png";
+            return [0,"images/covers/CoConutCover.png"];
         case 1:
-            return "images/covers/DoenutCover.png";
+            return [1,"images/covers/DoenutCover.png"];
         case 2:
-            return "images/covers/DoofusCover.png";
+            return [2,"images/covers/DoofusCover.png"];
     }
 }
 

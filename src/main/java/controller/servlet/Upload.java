@@ -44,7 +44,7 @@ public class Upload extends HttpServlet{
                 if (comicId == null) {
                     throw new ParameterNotFoundException("comicId");
                 }
-                
+
                 Long id = Long.valueOf(comicId);
                 WebComic comic = ComicAccess.queryForComic(id);
 
@@ -71,9 +71,9 @@ public class Upload extends HttpServlet{
 
                 //res.sendRedirect("/upload?blob_key=" + blobs.get("file0").get(0).getKeyString());
             } catch (ParameterNotFoundException ex) {
-                resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+                res.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
-                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                res.sendError(HttpServletResponse.SC_BAD_REQUEST);
             }
 
         }

@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import controller.data.ComicAccess;
+import controller.data.SearchEngine;
 import controller.data.UserAccess;
 import model.comics.WebComic;
 import model.users.User;
@@ -8,7 +9,7 @@ import model.users.User;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.*;
 
 /**
  * A HTTPServlet class that will handle all Search requests.

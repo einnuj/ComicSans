@@ -28,8 +28,6 @@ public class SearchEngine {
     private static Map<Long, Integer> searchComics(List<WebComic> comicsList, String query) {
         Map<Long, Integer> hits = new HashMap<Long, Integer>();
 
-        
-
         return hits;
     }
 }

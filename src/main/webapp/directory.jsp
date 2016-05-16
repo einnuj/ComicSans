@@ -64,7 +64,7 @@
         <c:forEach var="comic" items="${allComics.comicsAsList}">
             <div class="comicBlock">
                 <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}" data-author="${comic.metadata.author}">
-                    <a href="summary.jsp">
+                    <a onclick="passBySession(${comic.id}, 0)" role="button">
                         <c:choose>
                             <c:when test="${comic.metadata.displayPicture == ''}">
                                 <img src="images/covers/CoConutCover.png">
@@ -111,4 +111,5 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/session.js"></script>
 <script src="scripts/directory.js"></script>

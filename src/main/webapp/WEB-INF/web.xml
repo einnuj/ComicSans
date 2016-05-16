@@ -86,7 +86,16 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>profile</web-resource-name>
-            <url-pattern>/profile/*</url-pattern>
+            <url-pattern>/profile.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>publish</web-resource-name>
+            <url-pattern>/publish.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>*</role-name>

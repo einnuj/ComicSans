@@ -68,7 +68,7 @@ public class ComicServlet extends HttpServlet {
                             Long id = Long.valueOf(comicId);
 
                             WebComic webComic = ComicAccess.queryForComic(id);
-                            webComic.setCoverImage(file);
+
 
                             ObjectifyHelper.save(webComic);
                             ObjectifyHelper.save(author);

@@ -7,6 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
+<%
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+%>
 <html>
 <head>
     <%-- Meta tags --%>
@@ -38,7 +44,7 @@
         <div class="create-content">
             <ul>
                 <li>
-                    <form id="submitComicForm" name="submitForm">
+                    <form id="submitComicForm" name="submitForm" action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
                         <label for="titleid">Title:</label>
                         <br>
                         <input type="text" name="title" id="titleid"/>
@@ -62,8 +68,8 @@
                         <input id ="fileSubmit" type="file" name="comicCover">
 
                         <br>
-                        <a class="btn btn-lg btn-primary" role="button" href="preview.jsp">Preview</a>
-                        <input class="btn btn-lg btn-primary" onclick="submitComicFunction()" type="button" value="Submit">
+                        <input class="btn btn-lg btn-primary" onclick="submitComic()" type="button" value="Submit">
+
                     </form>
                 </li>
             </ul>

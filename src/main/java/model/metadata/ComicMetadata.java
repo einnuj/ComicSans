@@ -21,6 +21,7 @@ public class ComicMetadata extends AbstractMetadata {
 
     private List<Comment> commentList;
     private HashMap<String, Rating> ratingMap;
+    private String coverImage;
 
     ComicMetadata(){}
 
@@ -75,8 +76,16 @@ public class ComicMetadata extends AbstractMetadata {
         return ratingMap;
     }
 
+    public String getCoverImage(){
+        return coverImage;
+    }
+
 
     /* Setters */
+
+    public void setCoverImage(String cover){
+        this.coverImage = cover;
+    }
 
     public void setGenre(GenreEnum genre) {
         this.genre = genre;

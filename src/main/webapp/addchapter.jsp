@@ -46,7 +46,7 @@
             <ul>
                 <li>
 
-                    <form id="submitComicForm" name="submitForm" action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
+                    <form id="submitChapterForm" name="submitForm" action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
                         <label for="chapter" id="labelForChapter">Chapter Title:</label>
                         <input type="text" name="chapter" id="chapter"/> <br>
                         <br><br>

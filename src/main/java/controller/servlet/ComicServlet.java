@@ -387,9 +387,13 @@ public class ComicServlet extends HttpServlet {
 
                 req.setAttribute("allComics", allComics);
 
-                resp.getWriter().write(JsonHelper.objectToJson(allComics.getComics()));
+                if (req.getParameter("index") != null) {
+                    resp.setContentType("application/json");
+                    resp.getWriter().write(JsonHelper.objectToJson(allComics.getComics()));
+                }
+
                 resp.setStatus(HttpServletResponse.SC_OK);
-                resp.setContentType("application/json");
+
 
             } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

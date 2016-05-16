@@ -2,6 +2,7 @@ function main() {
     $.ajax({
         url: "/ComicServlet",
         type: "GET",
+        data: {"index" : true},
         success: function(response) {
             var allComics = getTopSuggestions(response);
             addComicsIntoHTML(allComics);

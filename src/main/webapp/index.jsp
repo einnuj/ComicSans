@@ -147,12 +147,6 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/session.js"></script>
 <script src="scripts/authentication.js"></script>
 <script src="scripts/index.js"></script>
-<script>
-    function passBySession(id, image) {
-        sessionStorage.setItem('id_to_load', id);
-        sessionStorage.setItem("ComicNumberSelected", image);
-        window.location.assign("summary.jsp");
-    }
-</script>

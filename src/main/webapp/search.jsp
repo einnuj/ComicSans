@@ -18,10 +18,41 @@
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tooltips.css" rel="stylesheet">
+    <link href="css/homePage.css" rel="stylesheet">
 
     <title>Search Results</title>
 </head>
 <body>
+    <%-- Side navbar --%>
+    <c:set var="dirNav" value="dirNav.html"/>
+    <jsp:include page="${dirNav}"></jsp:include>
+
+    <div class="info-container">
+        <h1>Search Results</h1>
+
+        <div id="search-comics" class="section-sliders">
+            <h2>Comics</h2>
+            <ul>
+            </ul>
+        </div>
+
+        <div id="search-comments" class="section-sliders">
+            <h2>Comments In Comics</h2>
+            <ul>
+            </ul>
+        </div>
+
+        <div id="search-users" class="section-sliders">
+            <h2>Users</h2>
+            <ul>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/session.js"></script>
+<script src="scripts/index.js"></script>

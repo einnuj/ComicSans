@@ -398,8 +398,6 @@ public class ComicServlet extends HttpServlet {
             } catch (Exception ex) {
                 resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
-                System.out.println("THAT BROKE");
-
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }

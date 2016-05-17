@@ -54,7 +54,9 @@
             <a href="#" onclick="getRating()">get rating</a>
         </div>
         <div id="searchDiv">
-            <a href="#" onclick="searchComics()">Click to Search!</a>
+                Search:
+                <textarea id="search-text"></textarea>
+            <a href="#" onclick="searchComics()">SUBMIT</a>
         </div>
         <div id="currentUserObject">
             <p>Nothing's Here!</p>

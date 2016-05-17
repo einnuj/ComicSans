@@ -4,6 +4,7 @@ import model.comics.ComicChapter;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import model.metadata.ComicMetadata;
+import model.metadata.UserMetadata;
 import model.metadata.fields.Comment;
 import model.users.User;
 import org.ahocorasick.trie.Emit;
@@ -14,20 +15,10 @@ import java.util.*;
 public class SearchEngine {
 
     public static List<Map> search(List<WebComic> comicsList, List<User> userList, String keyword) {
-        // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
-        // Comic Name, Chapter Names, Page Names, Author Name, Bio
 
         Map<Long, String> comicResults = searchComics(comicsList, keyword);
-
-        // Returns a Map<id, index> where the index corresponds to which index of the list of Comments that had a search-hit.
         Map<Long, List> commentResults = searchComments(comicsList, keyword);
-
-        // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
-        // User Name, User Bio
-
-        /*
-        Call searchUsers Function Here
-         */
+        Map<Long, String> userResults = searchUsers(userList, keyword);
 
         return null;
     }
@@ -36,23 +27,25 @@ public class SearchEngine {
      * Searches through a List of WebComics for a keyword and generates a Map<WebComic id, String binary> result.
      * @param comicsList - the List of WebComics to search through
      * @param keyword - the keyword to search for
-     * @return - a Map with key being Long WebComic id, String binary such that the binary represents which fields contained the keyword:
-     *          [0]: WebComic's Name
-     *          [1]: WebComic's Chapters' Names
-     *          [2]: WebComic's Chapters' Names
-     *          [3]: WebComic's Author's Name
-     *          [4]: WebComic's Bio
+     * @return - a Map with key being Long WebComic id, String binary such that the binary represents which fields contained the keyword, 1 meaning a hit:
+     *      [0]: WebComic's Name
+     *      [1]: WebComic's Chapters' Names
+     *      [2]: WebComic's Chapters' Names
+     *      [3]: WebComic's Author's Name
+     *      [4]: WebComic's Bio
      */
     private static Map<Long, String> searchComics(List<WebComic> comicsList, String keyword) {
         Map<Long, String> hits = new HashMap<Long, String>();
 
-        for (WebComic comic : comicsList) {
-            // Build an Aho-Corasick based Trie that discounts text-overlaps and case-ness with a single keyword: the search keyword.
-            Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
+        // Build an Aho-Corasick based Trie that discounts text-overlaps and case-ness with a single keyword: the search keyword.
+        Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
 
+        for (WebComic comic : comicsList) {
             char[] comicResults = searchComic(comic, trie);
 
-            hits.put(comic.getId(), new String(comicResults));
+            if (comicResults != null) {
+                hits.put(comic.getId(), new String(comicResults));
+            }
         }
 
         return hits;
@@ -62,10 +55,11 @@ public class SearchEngine {
      * Searches through all of a Comics' text fields via a given Trie
      * @param comic - the target WebComic
      * @param trie - the Trie that implements the search algorithm
-     * @return a char[] that represents a binary number representing which fields had hits
+     * @return a char[] that represents a binary number representing which fields had hits; null if no hits
      */
     private static char[] searchComic(WebComic comic, Trie trie) {
         char[] results = new char[]{'0', '0', '0', '0', '0'};
+        boolean atLeastOneHit = false;
 
         List<StringBuilder> collapsedNames = collapseChapterAndPageNames(comic);
         ComicMetadata metadata = comic.getMetadata();
@@ -78,21 +72,26 @@ public class SearchEngine {
 
         if (searchComicName != null) {
             results[0] = '1';
+            atLeastOneHit = true;
         }
         if (searchChapterNames != null) {
             results[1] = '1';
+            atLeastOneHit = true;
         }
         if (searchPageNames != null) {
             results[2] = '1';
+            atLeastOneHit = true;
         }
         if (searchAuthorName != null) {
             results[3] = '1';
+            atLeastOneHit = true;
         }
         if (searchBio != null) {
             results[4] = '1';
+            atLeastOneHit = true;
         }
 
-        return results;
+        return (atLeastOneHit) ? results : null;
     }
 
     /**
@@ -126,10 +125,9 @@ public class SearchEngine {
      */
     private static Map<Long, List> searchComments(List<WebComic> comicsList, String keyword) {
         Map<Long, List> hits = new HashMap<Long, List>();
+        Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
 
         for (WebComic comic : comicsList) {
-            Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
-
             List<Integer> commentsHit = searchComments(comic, trie);
 
             if (commentsHit != null && !commentsHit.isEmpty()) {
@@ -161,5 +159,54 @@ public class SearchEngine {
         }
 
         return hitIndices;
+    }
+
+    /**
+     * Given a List of Users and a String keyword, searches through all Users' text fields for the keyword
+     * @param userList - a List of all Users to search through
+     * @param keyword - the keyword to search for
+     * @return a Map of Long representing the User's id, and a String, representing the binary representation of which fields have hits, 1 meaning a hit:
+     *      [0]: User's Name
+     *      [1]: User's Bio
+     */
+    private static Map<Long, String> searchUsers(List<User> userList, String keyword) {
+        Map<Long, String> hits = new HashMap<Long, String>();
+        Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
+
+        for (User user : userList) {
+            char[] userResults = searchUser(user, trie);
+
+            if (userResults != null) {
+                hits.put(user.getId(), new String(userResults));
+            }
+        }
+
+        return hits;
+    }
+
+    /**
+     * Searches a User's name and bio using a given Trie
+     * @param user - the User to search through
+     * @param trie - the search-algo Trie to search with
+     * @return a char[] representing whether there was a search hit on the fields in a User, or null if not hits
+     */
+    private static char[] searchUser(User user, Trie trie) {
+        char[] results = new char[] {'0', '0'};
+        UserMetadata metadata = user.getMetadata();
+        boolean atLeastOneHit = false;
+
+        Emit searchName = trie.firstMatch(metadata.getName());
+        Emit searchBio = trie.firstMatch(metadata.getBio());
+
+        if (searchName != null) {
+            results[0] = '1';
+            atLeastOneHit = true;
+        }
+        if (searchBio != null) {
+            results[1] = '1';
+            atLeastOneHit = true;
+        }
+
+        return (atLeastOneHit) ? results : null;
     }
 }

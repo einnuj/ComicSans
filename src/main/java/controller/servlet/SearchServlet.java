@@ -28,7 +28,7 @@ public class SearchServlet extends HttpServlet {
             return;
         }
 
-        SearchEngine.search(allWebComicsList, allUsersList, "bat");
+        SearchEngine.search(allWebComicsList, allUsersList, "Junnie");
 
         allWebComicsList.get(0).getName();                                                          // Comic Names
         allWebComicsList.get(0).getChildMediaList().get(0).getName();                               // Chapter Names

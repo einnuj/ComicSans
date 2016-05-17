@@ -14,13 +14,24 @@ import java.util.*;
 
 public class SearchEngine {
 
+    /**
+     * Will attempt to search for a keyword in all text fields in all WebComics and Users
+     * @param comicsList - the list of all WebComics to search through
+     * @param userList - the list of all Users to search through
+     * @param keyword - the keyword to search for
+     * @return a List of three Maps:
+     *      [0]: Map<Long, String>: Comics that have search hits: Long id, String binary of fields with hits
+     *      [1]: Map<Long, List>: Comments with search hits: Long id (of their parent Comic), List of indices marking which of the CommentsList has hits
+     *      [2]: Map<Long, String>: Users that have search hits: Long id, String binary of fields with hits
+     */
     public static List<Map> search(List<WebComic> comicsList, List<User> userList, String keyword) {
+        List<Map> results = new ArrayList<Map>();
 
-        Map<Long, String> comicResults = searchComics(comicsList, keyword);
-        Map<Long, List> commentResults = searchComments(comicsList, keyword);
-        Map<Long, String> userResults = searchUsers(userList, keyword);
+        results.add(searchComics(comicsList, keyword));
+        results.add(searchComments(comicsList, keyword));
+        results.add(searchUsers(userList, keyword));
 
-        return null;
+        return results;
     }
 
     /**

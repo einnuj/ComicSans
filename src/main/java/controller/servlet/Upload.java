@@ -194,6 +194,7 @@ public class Upload extends HttpServlet{
 
                         String imageUrl = imagesService.getServingUrl(options);
                         System.out.println(imageUrl);
+                        resp.getWriter().write(imageUrl);
                     }
                 } catch (ParameterNotFoundException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

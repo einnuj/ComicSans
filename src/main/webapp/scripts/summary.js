@@ -14,10 +14,6 @@ var checkResult; // used for checking if someone is liked/favorite/subscribed (h
 getComic();
 getCurrentUser();
 
-var cover = "balls";
-cover  = retrieveImage("YpeJPEzZRYBaJbEY-HWXrw");
-console.log(cover);
-
 function editComicSummary(comic) {
     $("#edit-summary").toggle();
     if (editSummary == false) {
@@ -166,20 +162,13 @@ function getComicHelper(obj) {
 
     // Set data for favorites
     $("#fav-field").html("Favorites: " + currentMetadata.favorites);
-/*
-    console.log("before cover is set");
-    // Set the cover image -- if no image, default to coconut
-    if (cover == null || cover == "") // if no cover image assigned then set it to coconut
-        $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
+
+    if (cover == null || cover == "")
+        $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
     else {
-        cover = retrieveImage(cover); // retrieve img url from blobstore
-        if (cover == "")
-            $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
-        else
-            $("#cover-thumbnail").attr("src", cover); // set src to img url
+        cover = retrieveImage(cover);
+        $("#cover-thumbnail").attr("src", cover);
     }
-*/
-    $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
 
     // Fill out the comments section
     fillComments();
@@ -291,7 +280,7 @@ function getUserById(strID) {
 function retrieveImage(img_key) {
     var path = "";
     $.ajax({
-        url: "/Upload",
+        url: "/upload",
         type: "GET",
         async: false,
         data: {"action": "GET IMAGE", "blob_key": img_key},

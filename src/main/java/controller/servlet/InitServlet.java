@@ -19,7 +19,6 @@ import java.io.IOException;
 public class InitServlet extends HttpServlet {
     // Register Objectify Entities
     static {
-        JodaTimeTranslators.add(ObjectifyService.factory());
         ObjectifyService.register(WebComic.class);
         ObjectifyService.register(User.class);
     }

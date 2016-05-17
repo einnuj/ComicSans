@@ -16,11 +16,9 @@ function search(keyword) {
 }
 
 function check_session() {
-    var comicResults = sessionStorage.getItem("comic-results");
-    var commentResults = sessionStorage.getItem("comment-results");
-    var userResults = sessionStorage.getItem("user-results");
+    var resultsList = sessionStorage.getItem("result-object");
     
-    if (comicResults == null || commentResults == null || userResults == null) {
+    if (resultsList == null) {
         
     }
 }

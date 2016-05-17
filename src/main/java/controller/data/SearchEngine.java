@@ -4,6 +4,7 @@ import model.comics.ComicChapter;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import model.metadata.ComicMetadata;
+import model.metadata.fields.Comment;
 import model.users.User;
 import org.ahocorasick.trie.Emit;
 import org.ahocorasick.trie.Trie;
@@ -12,11 +13,14 @@ import java.util.*;
 
 public class SearchEngine {
 
-    public static List<Map> search(List<WebComic> comicsList, List<User> userList, String query) {
+    public static List<Map> search(List<WebComic> comicsList, List<User> userList, String keyword) {
         // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
-        // Comic Name, Chapter Names, Page Names, Author Name, Bio, Comments
+        // Comic Name, Chapter Names, Page Names, Author Name, Bio
 
-        Map<Long, String> comicResults = searchComics(comicsList, query);
+        Map<Long, String> comicResults = searchComics(comicsList, keyword);
+
+        // Returns a Map<id, index> where the index corresponds to which index of the list of Comments that had a search-hit.
+        Map<Long, List> commentResults = searchComments(comicsList, keyword);
 
         // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
         // User Name, User Bio
@@ -31,7 +35,7 @@ public class SearchEngine {
     /**
      * Searches through a List of WebComics for a keyword and generates a Map<WebComic id, String binary> result.
      * @param comicsList - the List of WebComics to search through
-     * @param query - the keyword to search for
+     * @param keyword - the keyword to search for
      * @return - a Map with key being Long WebComic id, String binary such that the binary represents which fields contained the keyword:
      *          [0]: WebComic's Name
      *          [1]: WebComic's Chapters' Names
@@ -39,12 +43,12 @@ public class SearchEngine {
      *          [3]: WebComic's Author's Name
      *          [4]: WebComic's Bio
      */
-    private static Map<Long, String> searchComics(List<WebComic> comicsList, String query) {
+    private static Map<Long, String> searchComics(List<WebComic> comicsList, String keyword) {
         Map<Long, String> hits = new HashMap<Long, String>();
 
         for (WebComic comic : comicsList) {
-            // Build an Aho-Corasick based Trie that discounts text-overlaps and case-ness with a single keyword: the search query.
-            Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(query).build();
+            // Build an Aho-Corasick based Trie that discounts text-overlaps and case-ness with a single keyword: the search keyword.
+            Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
 
             char[] comicResults = searchComic(comic, trie);
 
@@ -112,5 +116,50 @@ public class SearchEngine {
         results.add(collapsedPageNames);
 
         return results;
+    }
+
+    /**
+     * Takes a list of WebComics and a String keyword and searches through all Comments for the keyword sans overlap and case-ness
+     * @param comicsList - a List of WebComics to search through
+     * @param keyword - a String keyword to look for
+     * @return a Map of Long, the Comic ID, and a List of Comments that contain the keyword, or some equivalent representation
+     */
+    private static Map<Long, List> searchComments(List<WebComic> comicsList, String keyword) {
+        Map<Long, List> hits = new HashMap<Long, List>();
+
+        for (WebComic comic : comicsList) {
+            Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(keyword).build();
+
+            List<Integer> commentsHit = searchComments(comic, trie);
+
+            if (commentsHit != null && !commentsHit.isEmpty()) {
+                hits.put(comic.getId(), commentsHit);
+            }
+        }
+
+        return hits;
+    }
+
+    /**
+     * Takes a WebComic and Trie and returns a List of Integers for any comments that contain the search keyword.
+     * @param comic - the target WebComic to search through Comments for the containing keyword
+     * @param trie - the Trie structure for searching
+     * @return a List of Integers that represent the index of the Comment that contains the keyword in the Comic Metadata
+     */
+    private static List<Integer> searchComments(WebComic comic, Trie trie) {
+        List<Comment> commentList = comic.getMetadata().getCommentList();
+        List<Integer> hitIndices = new ArrayList<Integer>();
+
+        for (int i = 0; i < commentList.size(); i++) {
+            Comment currentComment = commentList.get(i);
+
+            Emit searchComment = trie.firstMatch(currentComment.getDescription());
+
+            if (searchComment != null) {
+                hitIndices.add(i);
+            }
+        }
+
+        return hitIndices;
     }
 }

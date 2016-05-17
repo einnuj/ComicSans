@@ -53,6 +53,9 @@
             <a href="#" onclick="getComments()">get comments</a>
             <a href="#" onclick="getRating()">get rating</a>
         </div>
+        <div id="searchDiv">
+            <a href="#" onclick="searchComics()">Click to Search!</a>
+        </div>
         <div id="currentUserObject">
             <p>Nothing's Here!</p>
         </div>

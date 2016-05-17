@@ -16,7 +16,7 @@ public class SearchEngine {
         // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
         // Comic Name, Chapter Names, Page Names, Author Name, Bio, Comments
 
-        searchComics(comicsList, query);
+        Map<Long, String> comicResults = searchComics(comicsList, query);
 
         // Returns a Map<id, binToDecNumber> where the binToDecNumber is a decimal number, but when converted to binary, represents which of the following had search hits:
         // User Name, User Bio

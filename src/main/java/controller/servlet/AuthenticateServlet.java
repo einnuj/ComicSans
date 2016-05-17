@@ -50,7 +50,5 @@ public class AuthenticateServlet extends HttpServlet {
         }
 
         response.getWriter().write("{\"loggedIn\":" + loggedIn + ", \"url\":\"" + responseURL + "\"}");
-
-        SearchEngine.search(new ArrayList<WebComic>(), new ArrayList<User>(), "Otherwise");
     }
 }

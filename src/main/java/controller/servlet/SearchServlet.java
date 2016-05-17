@@ -6,6 +6,7 @@ import controller.data.UserAccess;
 import model.comics.WebComic;
 import model.users.User;
 
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,8 @@ public class SearchServlet extends HttpServlet {
             // Something terrible has happened!
             return;
         }
+
+        SearchEngine.search(allWebComicsList, allUsersList, "bat");
 
         allWebComicsList.get(0).getName();                                                          // Comic Names
         allWebComicsList.get(0).getChildMediaList().get(0).getName();                               // Chapter Names

@@ -26,7 +26,6 @@ public class SearchServlet extends HttpServlet {
         String searchParameter = req.getParameter("search");
 
         try {
-
             List<WebComic> allWebComicsList = ComicAccess.queryAllComics();
             List<User> allUsersList = UserAccess.queryAllUsers();
 
@@ -41,10 +40,16 @@ public class SearchServlet extends HttpServlet {
 
             List<Map> searchResultsList = SearchEngine.search(allWebComicsList, allUsersList, searchParameter);
 
-            req.getSession().setAttribute("result-object", JsonHelper.objectToJson(searchResultsList));
             resp.setStatus(HttpServletResponse.SC_OK);
 
-            resp.sendRedirect("/search.jsp");
+            if (req.getParameter("jsp") != null) {
+                resp.setContentType("application/json");
+                resp.getWriter().write(JsonHelper.objectToJson(searchResultsList));
+            }
+            else {
+                req.getSession().setAttribute("result-object", JsonHelper.objectToJson(searchResultsList));
+                resp.sendRedirect("/search.jsp");
+            }
         }
         catch (ParameterNotFoundException ex) {
             resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

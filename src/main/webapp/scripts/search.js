@@ -1,8 +1,8 @@
-function search(keyword) {
+function searchFunc() {
     $.ajax({
         url: "/search",
         type: "POST",
-        data: {"search" : keyword},
+        data: {"search" : $("#search-text").val(), "jsp" : true},
         success: function(response) {
             var comicResults = response[0];
             var commentResults = response[1];
@@ -13,6 +13,8 @@ function search(keyword) {
             console.log(response);
         }
     });
+    
+    console.log("SUCCESS");
 }
 
 function check_session() {

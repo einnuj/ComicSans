@@ -30,6 +30,11 @@
     <div class="info-container">
         <h1>Search Results</h1>
 
+        <div id="search-field">
+            <input id="search-text" type="text" value=""/>
+            <a href="#" onclick="searchFunc()" class="btn btn-primary">Search</a>
+        </div>
+
         <div id="search-comics" class="section-sliders">
             <h2>Comics</h2>
             <ul>

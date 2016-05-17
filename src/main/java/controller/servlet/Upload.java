@@ -1,5 +1,6 @@
 package controller.servlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -159,7 +160,15 @@ public class Upload extends HttpServlet{
             }
 
         }
+/*
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws IOException {
+        BlobKey blobKey = new BlobKey(req.getParameter("blob_key"));
+        blobstoreService.serve(blobKey, res);
+    }
+*/
 
+    @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String action = req.getParameter("action");
@@ -180,9 +189,12 @@ public class Upload extends HttpServlet{
                     } else {
                         BlobKey blob_key = new BlobKey(blob_key_string);
                         ImagesService imagesService = ImagesServiceFactory.getImagesService();
+
                         ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key);
+
                         String imageUrl = imagesService.getServingUrl(options);
                         System.out.println(imageUrl);
+                        resp.getWriter().write(imageUrl);
                     }
                 } catch (ParameterNotFoundException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

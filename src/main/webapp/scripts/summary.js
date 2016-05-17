@@ -13,7 +13,10 @@ var checkResult; // used for checking if someone is liked/favorite/subscribed (h
 // Get data from a mock comic (datastore) to populate the summary page
 getComic();
 getCurrentUser();
-console.log(currentUser);
+
+var cover = "balls";
+cover  = retrieveImage("YpeJPEzZRYBaJbEY-HWXrw");
+console.log(cover);
 
 function editComicSummary(comic) {
     $("#edit-summary").toggle();
@@ -30,7 +33,6 @@ function editComicSummary(comic) {
                 type: "post",
                 data: {"action": "EDIT BIO", "id": comicId, "bio": $("#summary-text-area").val()},
                 success: function (result) {
-                    console.log(result);
                 },
                 error: function (err) {
                     console.log(err);
@@ -53,7 +55,6 @@ function editComicTitle() {
                 type: "post",
                 data: {"action": "EDIT TITLE", "id": comicId, "title": $("#title-text").val()},
                 success: function (result) {
-                    console.log(result);
                 },
                 error: function (err) {
                     console.log(err);
@@ -150,7 +151,7 @@ function getComicHelper(obj) {
     name = currentMetadata.name;
     author = currentMetadata.author;
     biography = currentMetadata.bio;
-    //cover = obj.metadata.displayPicture; ---- Needs to be added to JSON
+    cover = currentMetadata.coverImage;
 
     // Set data for the title
     $("#title-header").html(name);
@@ -165,15 +166,20 @@ function getComicHelper(obj) {
 
     // Set data for favorites
     $("#fav-field").html("Favorites: " + currentMetadata.favorites);
-
-    // Set the cover image
-    var number = sessionStorage.getItem("ComicNumberSelected");
-    if (number == 1)
+/*
+    console.log("before cover is set");
+    // Set the cover image -- if no image, default to coconut
+    if (cover == null || cover == "") // if no cover image assigned then set it to coconut
         $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
-    else if (number == 2)
-        $("#cover-thumbnail").attr("src", "images/covers/DoenutCover.png");
-    else
-        $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
+    else {
+        cover = retrieveImage(cover); // retrieve img url from blobstore
+        if (cover == "")
+            $("#cover-thumbnail").attr("src", "images/covers/CoConutCover.png");
+        else
+            $("#cover-thumbnail").attr("src", cover); // set src to img url
+    }
+*/
+    $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
 
     // Fill out the comments section
     fillComments();
@@ -223,7 +229,6 @@ function socialButton(type) {
             break;
 
         default:
-            console.log("Something's off...");
             break;
     }
 }
@@ -281,4 +286,19 @@ function getUserById(strID) {
         },
     });
     return username;
+}
+
+function retrieveImage(img_key) {
+    var path = "";
+    $.ajax({
+        url: "/Upload",
+        type: "GET",
+        async: false,
+        data: {"action": "GET IMAGE", "blob_key": img_key},
+        success: function(responseText) {
+            console.log(responseText);
+            path = responseText;
+        },
+    });
+    return path;
 }

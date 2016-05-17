@@ -28,25 +28,38 @@ public class SearchEngine {
         return null;
     }
 
-    private static Map<Long, Integer> searchComics(List<WebComic> comicsList, String query) {
-        Map<Long, Integer> hits = new HashMap<Long, Integer>();
+    /**
+     * Searches through a List of WebComics for a keyword and generates a Map<WebComic id, String binary> result.
+     * @param comicsList - the List of WebComics to search through
+     * @param query - the keyword to search for
+     * @return - a Map with key being Long WebComic id, String binary such that the binary represents which fields contained the keyword:
+     *          [0]: WebComic's Name
+     *          [1]: WebComic's Chapters' Names
+     *          [2]: WebComic's Chapters' Names
+     *          [3]: WebComic's Author's Name
+     *          [4]: WebComic's Bio
+     */
+    private static Map<Long, String> searchComics(List<WebComic> comicsList, String query) {
+        Map<Long, String> hits = new HashMap<Long, String>();
 
         for (WebComic comic : comicsList) {
+            // Build an Aho-Corasick based Trie that discounts text-overlaps and case-ness with a single keyword: the search query.
             Trie trie = Trie.builder().removeOverlaps().caseInsensitive().addKeyword(query).build();
 
-            searchComic(comic, trie);
-        }
+            char[] comicResults = searchComic(comic, trie);
 
-        // The Collection<Emit> that comes as the result of the Trie parse contains the keyword, and the start/end index of where it was found.
-        Trie trie = Trie.builder()
-                .caseInsensitive()
-                .addKeyword("casing")
-                .build();
-        Emit emits = trie.firstMatch("not here");
+            hits.put(comic.getId(), new String(comicResults));
+        }
 
         return hits;
     }
 
+    /**
+     * Searches through all of a Comics' text fields via a given Trie
+     * @param comic - the target WebComic
+     * @param trie - the Trie that implements the search algorithm
+     * @return a char[] that represents a binary number representing which fields had hits
+     */
     private static char[] searchComic(WebComic comic, Trie trie) {
         char[] results = new char[]{'0', '0', '0', '0', '0'};
 

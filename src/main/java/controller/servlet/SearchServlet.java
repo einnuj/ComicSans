@@ -8,6 +8,7 @@ import model.comics.WebComic;
 import model.users.User;
 import utilities.JsonHelper;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,9 +41,10 @@ public class SearchServlet extends HttpServlet {
 
             List<Map> searchResultsList = SearchEngine.search(allWebComicsList, allUsersList, searchParameter);
 
-            resp.setContentType("application/json");
-            resp.getWriter().write(JsonHelper.objectToJson(searchResultsList));
+            req.getSession().setAttribute("result-object", JsonHelper.objectToJson(searchResultsList));
             resp.setStatus(HttpServletResponse.SC_OK);
+
+            resp.sendRedirect("/search.jsp");
         }
         catch (ParameterNotFoundException ex) {
             resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
@@ -51,6 +53,7 @@ public class SearchServlet extends HttpServlet {
         }
     }
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        doPost(req, resp);
     }
 }

@@ -1,30 +1,22 @@
-/**
- * Created by einnuj.
- */
-
 function authenticate() {
     var currentURL = window.location.href;
-    var response;
 
     $.ajax({
         url: "/AuthServlet",
         type: "get",
         data: {"currentURL" : currentURL},
         success: function(responseText) {
-            $("#logLink").attr("href", responseText.url);
+            var logLinkDiv = $("#logLink");
+            logLinkDiv.attr("href", responseText.url);
             if (responseText.loggedIn) {
-                $("#logLink").text("Log Out");
+                logLinkDiv.text("Log Out");
             }
             else {
-                $("#logLink").text("Log In");
+                logLinkDiv.text("Log In");
             }
-            $("#logLink").show();
+            logLinkDiv.show();
         }
     });
-}
-
-function fakeAjax() {
-    $("#ajaxDiv > a").text("You just got AJAX'D");
 }
 
 $(document).ready(authenticate());

@@ -147,13 +147,14 @@ function getComicHelper(obj) {
     author = currentMetadata.author;
     biography = currentMetadata.bio;
     cover = currentMetadata.coverImage;
+    var username = getUserById(author);
 
     // Set data for the title
     $("#title-header").html(name);
     $("#title-text").html(name);
 
     // Set the author
-    $("#author-header").html("Author: " + author)
+    $("#author-header").html("Author: " + username);
 
     // Set data for the summary
     $("#summary-paragraph").html(biography);
@@ -290,6 +291,7 @@ function retrieveImage(img_key) {
     });
     return path;
 }
+
 
 function deleteIssue(issueTitle){
     $.ajax({

@@ -66,7 +66,7 @@ public class Upload extends HttpServlet{
                                 throw new ParameterNotFoundException("genre");
                             }
                             else {
-                                newComic = new WebComic(name, author.getId().toString(), genre);
+                                newComic = new WebComic(name, author.getGoogleId(), genre);
 
                             }
 

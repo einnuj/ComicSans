@@ -4,7 +4,7 @@ function retrieveImage(img_key) {
         url: "/upload",
         type: "GET",
         async: false,
-        data: {"action": "GET COVER", "blob_key": img_key},
+        data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function (responseText) {
             path = responseText;
         }
@@ -23,16 +23,22 @@ function loadCovers() {
 
         // get the image url via ajax
         if (cover_key == ""  || cover_key == null) {
+            var defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/usericon.png" : "images/covers/DoenutCover.png";
             // no cover for the comic, default to Doenut
-            the_image.attr("src", "images/covers/DoenutCover.png");
+            the_image.attr("src", defaultPic);
         } else {
             var img_path = retrieveImage(cover_key);
 
-            if (img_path == "")
-            // blob wasn't retrieved
-                the_image.attr("src", "images/covers/Doofus.png");
-            else
+            if (img_path == "") {
+                // blob wasn't retrieved
+                defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/usericon.png" : "images/covers/Doofus.png";
+
+                the_image.attr("src", defaultPic);
+            }
+            else {
                 the_image.attr("src", img_path); // blob was retrieved =)
+            }
+
         }
 
     });

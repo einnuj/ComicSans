@@ -99,7 +99,7 @@ function getUserHelper(response) {
         $("#comment-submit").toggle();
         $("#comment-header").html("Log in to leave a comment.");
     }
-    else if (currentUser.id != author) {
+    else if (currentUser.googleId != author) {
         $(".AUTHOR_PRIV").toggle();
     }
 
@@ -273,7 +273,7 @@ function getUserById(strID) {
         success: function(responseText) {
             $("#userJson > a").text(responseText);
             username = responseText.metadata.name;
-        },
+        }
     });
     return username;
 }

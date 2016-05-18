@@ -97,6 +97,7 @@ function getUserHelper(response) {
         // turn off commenting controls
         $("#comment-input").toggle();
         $("#comment-submit").toggle();
+        $("#comment-header").html("Log in to leave a comment.");
     }
     else if (currentUser.id != author) {
         $(".AUTHOR_PRIV").toggle();

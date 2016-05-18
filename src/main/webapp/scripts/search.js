@@ -47,8 +47,7 @@ function addToHTML(resultList, typeString) {
 }
 
 function populateDiv(resultList, targetDivId) {
-    // var targetDiv = $("#" + targetDivId + "> ul > .comicBlock");
-    var targetDiv = $("#" + targetDivId + " > .comicBlock");
+    var targetDiv = $("#" + targetDivId + " > .comic-block");
     
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();

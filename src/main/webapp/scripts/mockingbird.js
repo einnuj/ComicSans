@@ -198,6 +198,18 @@ function callTestUser() {
     })
 }
 
+function searchComics() {
+    $.ajax({
+        url: "/search",
+        type: "POST",
+        data: {"search" : $("#search-text").val()},
+        success: function(response) {
+            $("#searchDiv > a").text("SEARCH'D");
+            console.log(response);
+        }
+    })
+}
+
 function hideGetComic() {
     $("#getComicDiv > a").hide();
 }

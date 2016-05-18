@@ -54,13 +54,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JodaTime -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.3</version>
-        </dependency>
-
         <!-- Objectify -->
         <dependency>
             <groupId>com.googlecode.objectify</groupId>
@@ -74,6 +67,14 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.7.3</version>
         </dependency>
+
+        <!-- Aho-Corasick Search Algo -->
+        <dependency>
+            <groupId>org.ahocorasick</groupId>
+            <artifactId>ahocorasick</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

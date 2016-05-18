@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.ImagesService;
-import com.google.appengine.api.images.ImagesServiceFactory;
-import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.appengine.api.images.*;
 import com.google.appengine.api.users.UserServiceFactory;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
@@ -176,6 +174,32 @@ public class Upload extends HttpServlet{
             case "GET COMICID":
 
                 break;
+            case "GET COVER":
+                try {
+                    String blob_key_string = req.getParameter("blob_key");
+
+                    if (blob_key_string == null) {
+                        throw new ParameterNotFoundException("blob key");
+                    }
+                    System.out.println("BLOBKEY: " + blob_key_string);
+                    if (blob_key_string == null) {
+                        System.out.println("No blobkey given");
+                    } else {
+                        BlobKey blob_key = new BlobKey(blob_key_string);
+                        ImagesService imagesService = ImagesServiceFactory.getImagesService();
+
+                        ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key).imageSize(300);
+
+                        String imageUrl = imagesService.getServingUrl(options);
+                        System.out.println(imageUrl);
+                        resp.getWriter().write(imageUrl);
+                    }
+                } catch (ParameterNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                }
+                break;
             case "GET IMAGE":
                 try {
                     String blob_key_string = req.getParameter("blob_key");
@@ -190,7 +214,7 @@ public class Upload extends HttpServlet{
                         BlobKey blob_key = new BlobKey(blob_key_string);
                         ImagesService imagesService = ImagesServiceFactory.getImagesService();
 
-                        ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key);
+                        ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key).imageSize(700);
 
                         String imageUrl = imagesService.getServingUrl(options);
                         System.out.println(imageUrl);

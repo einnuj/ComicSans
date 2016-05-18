@@ -94,14 +94,12 @@ function getUserHelper(response) {
     currentUser = response;
     if (currentUser == ""){
         $(".AUTHOR_PRIV").toggle();
-        $(".comic-info-descr").css("margin-left", "+=65");
         // turn off commenting controls
         $("#comment-input").toggle();
         $("#comment-submit").toggle();
     }
     else if (currentUser.id != author) {
         $(".AUTHOR_PRIV").toggle();
-        $(".comic-info-descr").css("margin-left", "+=65");
     }
 
     // * * * at this point the currentComic and currentUser are available for use * * *
@@ -283,7 +281,7 @@ function retrieveImage(img_key) {
         url: "/upload",
         type: "GET",
         async: false,
-        data: {"action": "GET IMAGE", "blob_key": img_key},
+        data: {"action": "GET COVER", "blob_key": img_key},
         success: function(responseText) {
             console.log(responseText);
             path = responseText;

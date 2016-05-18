@@ -52,7 +52,20 @@ function populateDiv(resultList, targetDivId) {
     
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();
-        var html = "<div class='comic-listing' data-cover='" + resultList[i].metadata.coverImage + "'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
+        ( 
+            function(targetId, imageSource) {
+                targetDiv.click(function() {
+                    if (targetDivId.includes("users")) {
+                        userToProfile(targetId);
+                    }
+                    else {
+                        passBySession(targetId, imageSource);
+                    }
+                });
+            }
+        )(resultList[i].id, imgSrc[0]);
+
+        var html = "<div class='comic-listing' data-cover='" + resultList[i].metadata.coverImage + "'><a role='button'><img src=" + imgSrc[1] + "></a></div>";
         targetDiv.append(html);
     }
 }

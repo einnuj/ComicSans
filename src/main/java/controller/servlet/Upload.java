@@ -148,8 +148,6 @@ public class Upload extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_OK);
                     resp.getWriter().write(comic.getId().toString());
 
-                    break;
-
                     //res.sendRedirect("/upload?blob_key=" + blobs.get("file0").get(0).getKeyString());
                 } catch (ParameterNotFoundException | RepeatTitleException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");

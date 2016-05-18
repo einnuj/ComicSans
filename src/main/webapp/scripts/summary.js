@@ -303,7 +303,6 @@ function fillIssueNames() {
     }
 }
 
-
 function getIssueNames(id_num, issueNames) {
     jQuery.ajax({
         url: "/upload",
@@ -333,6 +332,20 @@ function deleteIssue(issueTitle){
 }
 
 function readIssue(issueNumber) {
+    var error_detect = "";
+    $.ajax({
+        url: "/ComicServlet",
+        type: "get",
+        data: {"id": comicId},
+        async: false,
+        success: function(responseText) {
+            $("#comicJson > a").text(responseText);
+            error_detect = responseText.childMediaList[0].childMediaList;
+        }
+    })
+
+    if (error_detect == null || error_detect == "")
+        return;
     sessionStorage.setItem("issue_to_read", issueNumber);
     window.location.assign("read.jsp");
 }

@@ -1,17 +1,16 @@
 // get the comic to read
 var actualComic = getComic(sessionStorage.getItem("id_to_load"));
-console.log(actualComic);
+
+$("#title-header").html("Reading: " + actualComic.metadata.name);
 
 // get the list of issues
 var issues = actualComic.childMediaList[0].childMediaList;
-console.log(issues);
 
 // initialize current issue
 var currentIssue = parseInt(sessionStorage.getItem("issue_to_read"));
 
 // get the img blob_key for the particular issue
 var imgToLoad = issues[currentIssue].imgURL;
-console.log(imgToLoad);
 
 // retrieve the image for the issue and set it as the img src
 var image = retrieveImage(imgToLoad);

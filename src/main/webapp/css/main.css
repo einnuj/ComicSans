@@ -123,3 +123,11 @@ textarea{
     width: 230px;
     height: 310px;
 }
+
+#user-created {
+    display: none;
+}
+#user-created img {
+    width: 230px;
+    height: 310px;
+}

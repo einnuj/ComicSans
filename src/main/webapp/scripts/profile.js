@@ -110,7 +110,13 @@ function generateCreated(allComics){
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
 }
 
@@ -127,11 +133,17 @@ function generateFavorites(allComics){
         $("#user-favorites").show();
     }
     for(var key in userFavorites) {
-        if(!userFavorites.hasOwnProperty(key)){
+        if(!userFavorites.hasOwnProperty(key)) {
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
 }
 
@@ -152,8 +164,20 @@ function generateLikes(allComics){
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
+}
+
+function passBySession(id, image) {
+    sessionStorage.setItem('id_to_load', id);
+    sessionStorage.setItem("ComicNumberSelected", image);
+    window.location.assign("summary.jsp");
 }
 
 $(document).ready(main());

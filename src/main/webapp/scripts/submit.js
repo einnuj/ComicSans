@@ -84,7 +84,7 @@ function submitComic(){
 
 function submitIssue() {
     var fd = new FormData();
-    var files = document.getElementById("fileSubmit").files[0];
+    var files = document.getElementById("fileSubmit").files;
     var title = document.getElementById("issueTitle").value;
     var comicId = sessionStorage.getItem('id_to_load');
     var hasFile = document.getElementById("fileSubmit").value;

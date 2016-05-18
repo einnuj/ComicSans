@@ -16,6 +16,7 @@ function searchFunc() {
             console.log(response);
         }
     });
+    resetAllSearchHTML();
     
     console.log("SUCCESS");
 }
@@ -44,13 +45,18 @@ function addToHTML(resultList, typeString) {
 }
 
 function populateDiv(resultList, targetDivId) {
-    var targetDiv = $("#" + targetDivId + "> ul");
-
+    // var targetDiv = $("#" + targetDivId + "> ul > .comicBlock");
+    var targetDiv = $(".comicBlock");
+    
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();
-        var html = "<li><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "/></a></li>";
+        var html = "<div class='comic-listing'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
         targetDiv.append(html);
     }
+}
+
+function resetAllSearchHTML() {
+    $(".comic-listing").remove();
 }
 
 function check_session() {

@@ -34,23 +34,21 @@
             <a href="#" onclick="searchFunc()" class="btn btn-primary">Search</a>
         </div>
 
-        <div id="search-comics" class="section-sliders">
+        <div id="search-comics">
             <h2>Comics</h2>
-            <ul>
-            </ul>
+            <div class="comicBlock"></div>
         </div>
 
-        <div id="search-comments" class="section-sliders">
+        <div id="search-comments">
             <h2>Comments In Comics</h2>
-            <ul>
-            </ul>
+            <div class="comicBlock"></div>
         </div>
 
-        <div id="search-users" class="section-sliders">
+        <div id="search-users">
             <h2>Users</h2>
-            <ul>
-            </ul>
+            <div class="comicBlock"></div>
         </div>
+        
     </div>
 
 </body>

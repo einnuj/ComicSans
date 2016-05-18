@@ -79,7 +79,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Doenut</h1>
-                        <h3>Jane Doe</h3>
+                        <h3>thingsnmoarstuff</h3>
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
                         <p><a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 2)" role="button">Read Now</a></p>
@@ -91,7 +91,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Doofus</h1>
-                        <h3>Ian McKellen</h3>
+                        <h3>thingsnmoarstuff</h3>
                         <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
                         <p><a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 3)" role="button">Read Now</a></p>
                     </div>

@@ -38,9 +38,7 @@ function loadCovers() {
             else {
                 the_image.attr("src", img_path); // blob was retrieved =)
             }
-
         }
-
     });
     //jQuery(this).find("img");
 }

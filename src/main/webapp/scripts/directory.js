@@ -81,7 +81,7 @@ function retrieveImage(img_key) {
         data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function (responseText) {
             path = responseText;
-        },
+        }
     });
     return path;
 }

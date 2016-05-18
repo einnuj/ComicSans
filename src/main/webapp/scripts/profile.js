@@ -13,7 +13,7 @@ function getUser(strID) {
         success: function (responseText) {
             $("#userJson > a").text(responseText);
             user = responseText;
-        },
+        }
     });
     return user;
 }
@@ -31,10 +31,10 @@ function retrieveImage(img_key) {
         url: "/upload",
         type: "GET",
         async: false,
-        data: {"action": "GET COVER", "blob_key": img_key},
+        data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function (responseText) {
             path = responseText;
-        },
+        }
     });
     return path;
 }
@@ -68,7 +68,6 @@ function loadCovers() {
 
 function loadCreatedComics() {
     var comicsCreated = currentUser.metadata.comicsCreatedMap;
-    var comicsLen = Object.keys(comicsCreated).length;
     var imageKey;
 
     for(var key in comicsCreated) {

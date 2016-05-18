@@ -1,25 +1,16 @@
 package controller.servlet;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.*;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.NonUniqueGoogleIdException;
 import controller.exceptions.ParameterNotFoundException;
+import controller.exceptions.RepeatTitleException;
 import controller.exceptions.UserNotFoundException;
 import model.comics.ComicChapter;
 import model.comics.ComicPage;
@@ -27,6 +18,15 @@ import model.comics.WebComic;
 import model.users.User;
 import utilities.JsonHelper;
 import utilities.data.ObjectifyHelper;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cherrinkim on 5/15/16.
@@ -133,6 +133,10 @@ public class Upload extends HttpServlet{
                         WebComic comic = ComicAccess.queryForComic(id);
                         ComicChapter myChapter = comic.getChildMediaList().get(0);
 
+                        if (!isUniqueName(myChapter.getChildMediaList(), title)) {
+                            throw new RepeatTitleException(title);
+                        }
+
                         for (String n : blobs.keySet()) {
                             String file = blobs.get(n).get(0).getKeyString();
                             ComicPage newPage = new ComicPage(title, file);
@@ -149,7 +153,7 @@ public class Upload extends HttpServlet{
                         break;
 
                         //res.sendRedirect("/upload?blob_key=" + blobs.get("file0").get(0).getKeyString());
-                    } catch (ParameterNotFoundException ex) {
+                    } catch (ParameterNotFoundException | RepeatTitleException ex) {
                         resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
                         resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -250,4 +254,13 @@ public class Upload extends HttpServlet{
         }
     }
 
+}
+
+private boolean isUniqueName(List<ComicPage> pageList, String name) {
+    for (ComicPage page : pageList) {
+        if (page.getName().equals(name)) {
+            return false;
+        }
+    }
+    return true;
 }

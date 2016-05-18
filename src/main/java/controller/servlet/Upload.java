@@ -141,6 +141,8 @@ public class Upload extends HttpServlet{
 
                         comic.reload();
                         comic.getMetadata().reload();
+                        resp.getWriter().write(comic.getId().toString());
+
                         break;
 
                         //res.sendRedirect("/upload?blob_key=" + blobs.get("file0").get(0).getKeyString());

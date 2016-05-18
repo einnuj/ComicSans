@@ -41,19 +41,19 @@
     <jsp:include page="${mainNav}"></jsp:include>
 
     <div class="info-container">
-        <h1>Upload Issues</h1>
+        <h1>Upload Issue</h1>
         <div class="create-content">
             <ul>
                 <li>
 
                     <form id="submitChapterForm" name="submitForm" action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
                         <label for="chapter" id="labelForChapter">Issue Title:</label>
-                        <input type="text" name="chapter" id="chapter"/> <br>
+                        <input type="text" name="issueTitle" id="issueTitle"/> <br>
                         <br><br>
                         Choose image:
                         <input id ="fileSubmit" type="file" name="comicPages">
                         <br>
-                        <input class="btn btn-lg btn-primary" onclick="submitChapter()" type="button" value="Submit">
+                        <input class="btn btn-lg btn-primary" onclick="submitIssue()" type="button" value="Submit">
 
                     </form>
                 </li>

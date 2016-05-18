@@ -111,10 +111,14 @@ function submitIssue() {
     xhr.open("POST", document.getElementById('submitChapterForm').action);
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.status == 200) {
             console.log(xhr.responseText);
             sessionStorage.setItem('id_to_load', xhr.responseText);
             window.location.href = "../summary.jsp";
+        }
+        else {
+            alert(xhr.responseText);
+            window.location.reload();
         }
     }
         xhr.send(fd);

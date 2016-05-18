@@ -144,6 +144,8 @@ public class Upload extends HttpServlet {
 
                     comic.reload();
                     comic.getMetadata().reload();
+
+                    resp.setStatus(HttpServletResponse.SC_OK);
                     resp.getWriter().write(comic.getId().toString());
 
                     break;

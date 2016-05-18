@@ -7,10 +7,10 @@ var issues = actualComic.childMediaList[0].childMediaList;
 console.log(issues);
 
 // initialize current issue
-var currentIssue = 0;
+var currentIssue = parseInt(sessionStorage.getItem("issue_to_read"));
 
 // get the img blob_key for the particular issue
-var imgToLoad = issues[0].imgURL;
+var imgToLoad = issues[currentIssue].imgURL;
 console.log(imgToLoad);
 
 // retrieve the image for the issue and set it as the img src

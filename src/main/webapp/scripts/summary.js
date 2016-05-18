@@ -299,7 +299,7 @@ function fillIssueNames() {
     getIssueNames(comicId, issueNames);
 
     for (i=0;i<issueNames.length;i++) {
-        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span>          <a href="read.jsp">' + issueNames[i] + '<br>');
+        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a onclick="readIssue(i);"><span class="glyphicon glyphicon-trash"></span></a></span>          <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
     }
 }
 
@@ -332,6 +332,7 @@ function deleteIssue(issueTitle){
     });
 }
 
-function readNow() {
+function readIssue(issueNumber) {
+    sessionStorage.setItem("issue_to_read", issueNumber);
     window.location.assign("read.jsp");
 }

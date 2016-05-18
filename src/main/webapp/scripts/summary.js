@@ -297,20 +297,19 @@ function fillIssueNames() {
     var issueNames = [];
 
     getIssueNames(comicId, issueNames);
-
+    var namez;
 
     if(issueNames.length > 0) {
         for (i=0;i<issueNames.length;i++) {
             namez = issueNames[i];
             console.log(namez);
-            $("#issue-list").prepend('<span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-trash" onclick="deleteIssue(namez)"></span></a></span>    <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
+            $("#issue-list").prepend('<span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-trash" onclick="deleteIssue(\'' + namez + '\')"></span></a></span>    <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
         }
     } else {
         $("#issue-list").prepend("No issues here.");
     }
-    
-}
 
+}
 
 function getIssueNames(id_num, issueNames) {
     jQuery.ajax({
@@ -329,7 +328,7 @@ function getIssueNames(id_num, issueNames) {
 }
 
 function deleteIssue(issueTitle){
-    console.log(issueTitle);
+    console.log("title:" + issueTitle);
     $.ajax({
         url: "/upload",
         type: "POST",
@@ -337,12 +336,26 @@ function deleteIssue(issueTitle){
         data: {"action": "DELETE ISSUE", "comicId": comicId, "issueTitle": issueTitle},
         success: function(responseText) {
             console.log(responseText);
-            //location.reload();
+            location.reload();
         },
     });
 }
 
 function readIssue(issueNumber) {
+    var error_detect = "";
+    $.ajax({
+        url: "/ComicServlet",
+        type: "get",
+        data: {"id": comicId},
+        async: false,
+        success: function(responseText) {
+            $("#comicJson > a").text(responseText);
+            error_detect = responseText.childMediaList[0].childMediaList;
+        }
+    })
+
+    if (error_detect == null || error_detect == "")
+        return;
     sessionStorage.setItem("issue_to_read", issueNumber);
     window.location.assign("read.jsp");
 }

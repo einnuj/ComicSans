@@ -34,32 +34,15 @@
     <jsp:include page="${mainNav}"></jsp:include>
 
     <div class="info-container">
-        <h1>Reading: CoConut</h1>
+        <h1 id="title-header">Reading: </h1>
 
         <div class="comic-reading">
             <div class="comic-reading-dd">
-                <%-- Chapter Dropdown --%>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <h4>Issue <span class="caret"></span></h4>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                    </ul>
-                </div>
+                <input class="btn btn-lg btn-primary" type="button" onclick="loadPreviousPage();" value="PREV">
+                <input class="btn btn-lg btn-primary" type="button" onclick="loadNextPage();" value="NEXT">
             </div>
-            <div class="comic-reading-dd">
-                <a class="btn btn-lg btn-primary" role="button"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmark </a>
-            </div>
-            <%-- <img src="images/covers/CoConutCover.png"/>
-            <img src="images/mockpages/1.png"/>
-            <img src="images/mockpages/2.png"/>
-            <img src="images/mockpages/3.png"/> --%>
-            <img id="page-image" src="images/mockpages/1.png" />
+            <img id="page-image" src="" />
 
-            <input type="button" onclick="loadPreviousPage();" value="PREV">
-            <input type="button" onclick="loadNextPage();" value="NEXT">
         </div>
     </div>
 </body>

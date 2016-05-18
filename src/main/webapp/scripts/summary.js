@@ -302,3 +302,7 @@ function deleteIssue(issueTitle){
         },
     });
 }
+
+function readNow() {
+    window.location.assign("read.jsp");
+}

@@ -1,6 +1,6 @@
 function submitComicFunction() {
     var genre = document.getElementById("genreName").value;
-    var file = document.getElementById("fileSubmit").files[0];
+    var file = document.getElementById("fileSubmit").files;
     var title = document.getElementById("titleid").value;
     var summary = document.getElementById("comicSummary").value;
     if(title == null || summary == null || title == "" || summary == ""){

@@ -47,7 +47,7 @@
                 <li>
 
                     <form id="submitChapterForm" name="submitForm" action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
-                        <label for="chapter" id="labelForChapter">Issue Title:</label>
+                        <label for="issueTitle" id="labelForChapter">Issue Title:</label>
                         <input type="text" name="issueTitle" id="issueTitle"/> <br>
                         <br><br>
                         Choose image:

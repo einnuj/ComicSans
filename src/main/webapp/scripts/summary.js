@@ -283,7 +283,7 @@ function retrieveImage(img_key) {
         url: "/upload",
         type: "GET",
         async: false,
-        data: {"action": "GET IMAGE", "blob_key": img_key},
+        data: {"action": "GET COVER", "blob_key": img_key},
         success: function(responseText) {
             console.log(responseText);
             path = responseText;

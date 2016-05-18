@@ -214,7 +214,7 @@ public class Upload extends HttpServlet{
                         BlobKey blob_key = new BlobKey(blob_key_string);
                         ImagesService imagesService = ImagesServiceFactory.getImagesService();
 
-                        ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key);
+                        ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key).imageSize(700);
 
                         String imageUrl = imagesService.getServingUrl(options);
                         System.out.println(imageUrl);

@@ -41,7 +41,7 @@
                 <%-- Chapter Dropdown --%>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <h4>Chapter <span class="caret"></span></h4>
+                        <h4>Issue <span class="caret"></span></h4>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="">1</a></li>

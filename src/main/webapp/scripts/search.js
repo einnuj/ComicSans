@@ -10,6 +10,8 @@ function searchFunc() {
             addToHTML(response[0], comicString);
             addToHTML(response[1], commentString);
             addToHTML(response[2], userString);
+            
+            loadCovers();
             console.log(response);
         },
         error: function(response) {
@@ -46,11 +48,11 @@ function addToHTML(resultList, typeString) {
 
 function populateDiv(resultList, targetDivId) {
     // var targetDiv = $("#" + targetDivId + "> ul > .comicBlock");
-    var targetDiv = $(".comicBlock");
+    var targetDiv = $("#" + targetDivId + " > .comicBlock");
     
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();
-        var html = "<div class='comic-listing'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
+        var html = "<div class='comic-listing' data-cover='" + resultList[i].metadata.coverImage + "'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
         targetDiv.append(html);
     }
 }
@@ -59,10 +61,45 @@ function resetAllSearchHTML() {
     $(".comic-listing").remove();
 }
 
-function check_session() {
-    var resultsList = sessionStorage.getItem("result-object");
-    
-    if (resultsList == null) {
-        
-    }
+// ADDITIONAL STUFF
+
+function retrieveImage(img_key) {
+    var path = "";
+    $.ajax({
+        url: "/upload",
+        type: "GET",
+        async: false,
+        data: {"action": "GET COVER", "blob_key": img_key},
+        success: function (responseText) {
+            path = responseText;
+        },
+    });
+    return path;
+}
+
+function loadCovers() {
+    $(".comic-listing").each(function() {
+
+        // get the image key
+        var cover_key = $(this).data("cover");
+
+        // get the actual image tag from the page
+        the_image = $(this).find("img");
+
+        // get the image url via ajax
+        if (cover_key == ""  || cover_key == null) {
+            // no cover for the comic, default to Doenut
+            the_image.attr("src", "images/covers/DoenutCover.png");
+        } else {
+            img_path = retrieveImage(cover_key);
+
+            if (img_path == "")
+            // blob wasn't retrieved
+                the_image.attr("src", "images/covers/Doofus.png");
+            else
+                the_image.attr("src", img_path); // blob was retrieved =)
+        }
+
+    });
+    //jQuery(this).find("img");
 }

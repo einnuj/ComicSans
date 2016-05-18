@@ -87,12 +87,12 @@
                 </div>
             </div>
             <div class="item">
-                <img class="third-slide" src="images/banners/DoofusBanner.png" alt="Third slide">
+                <img class="third-slide" src="images/banners/DudeBroBanner.png" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>Doofus</h1>
-                        <h3>Ian McKellen</h3>
-                        <p>Doofus contemplates life in the universe and why he's shaped like a potato.</p>
+                        <h1>The Dudebros</h1>
+                        <h3>johnguast</h3>
+                        <p>Duuuuuuude!!!! Broooooo!!!!</p>
                         <p><a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 3)" role="button">Read Now</a></p>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 package controller.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.*;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.NonUniqueGoogleIdException;
@@ -192,8 +194,31 @@ public class Upload extends HttpServlet{
             throws IOException {
         String action = req.getParameter("action");
         switch(action) {
-            case "GET COMICID":
+            case "GET ISSUE NAMES":
+                try {
+                    String comicId = req.getParameter("comicId");
 
+                    if(comicId == null) {
+                        throw new ParameterNotFoundException("comicId");
+                    }
+
+                    Long id = Long.valueOf(comicId);
+                    WebComic comic = ComicAccess.queryForComic(id);
+                    ComicChapter myChapter = comic.getChildMediaList().get(0);
+                    ArrayList<String> issueList = new ArrayList<String>();
+                    for(ComicPage page : myChapter.getChildMediaList()){
+                        issueList.add(page.getName());
+                    }
+
+                    String issueNames = new Gson().toJson(issueList);
+                    resp.getWriter().write(issueNames);
+                    break;
+
+                } catch (ParameterNotFoundException ex) {
+                    resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                }
                 break;
             case "GET IMAGE":
                 try {
@@ -202,7 +227,6 @@ public class Upload extends HttpServlet{
                     if (blob_key_string == null) {
                         throw new ParameterNotFoundException("blob key");
                     }
-                    System.out.println("BLOBKEY: " + blob_key_string);
                     if (blob_key_string == null) {
                         System.out.println("No blobkey given");
                     } else {

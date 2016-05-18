@@ -52,10 +52,11 @@ function addComicsIntoHTML(allComics) {
             continue;
         }
         var imgSrc = getRandomCoverArt();
-        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + imgSrc[0] + ")' role='button'><img src=" + imgSrc[1] + "/></a></li>"
+        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + imgSrc[0] + ")' role='button'><img src=" + imgSrc[1] + "/></a></li>";
         targetDiv.append(html);
     }
 }
+
 function generateFavorites(allComics){
     if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
         return;
@@ -65,15 +66,20 @@ function generateFavorites(allComics){
     var targetDiv = $("#user-favorites > ul");
     var imageKey;
 
-    if(currentUser != null){
-        $("#user-favorites").show();
-    }
+    $("#user-favorites").show();
+
     for(var key in userFavorites) {
-        if(!userFavorites.hasOwnProperty(key)){
+        if(!userFavorites.hasOwnProperty(key)) {
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
 }
 

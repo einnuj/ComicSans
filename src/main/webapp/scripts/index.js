@@ -8,7 +8,6 @@ function getUser(strID) {
         data: {"uID": strID},
         async: false,
         success: function (responseText) {
-            $("#userJson > a").text(responseText);
             user = responseText;
         }
     });

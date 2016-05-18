@@ -30,16 +30,17 @@ function main() {
 
 function getTopSuggestions(allComics) {
     var allComicsAsMap = allComics;
+    
+    if (Object.keys(allComicsAsMap).length <= 5) {
+        return allComicsAsMap;
+    }
 
     for (var key in allComicsAsMap) {
         if (!allComicsAsMap.hasOwnProperty(key)) {
             continue;
         }
-        else if (!(Math.random() < 0.5)) {
+        if (!(Math.random() < 0.5)) {
             delete allComicsAsMap[key];
-        }
-        if (allComicsAsMap.length <= 5) {
-            return allComicsAsMap;
         }
     }
     return allComicsAsMap;
@@ -48,12 +49,17 @@ function getTopSuggestions(allComics) {
 function addComicsIntoHTML(allComics) {
     var targetDiv = $("#top-suggestions > ul");
         for (var key in allComics) {
-        if (!allComics.hasOwnProperty(key)) {
-            continue;
-        }
-        var imgSrc = getRandomCoverArt();
-        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + imgSrc[0] + ")' role='button'><img src=" + imgSrc[1] + "/></a></li>";
-        targetDiv.append(html);
+            if (!allComics.hasOwnProperty(key)) {
+                continue;
+            }
+            var imgSrc = retrieveImage(allComics[key].metadata.coverImage);
+    
+            if (imgSrc == null || typeof imgSrc == 'undefined' || imgSrc == '') {
+                imgSrc = "images/covers/DoofusCover.png";
+            }
+    
+            var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + 0 + ")' role='button'><img src=" + imgSrc + "></a></li>";
+            targetDiv.append(html);
     }
 }
 
@@ -92,15 +98,20 @@ function generateLikes(allComics){
     var targetDiv = $("#user-likes > ul");
     var imageKey;
 
-    if(currentUser != null){
-        $("#user-likes").show();
-    }
+    $("#user-likes").show();
+
     for(var key in userLikes) {
         if(!userLikes.hasOwnProperty(key)){
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
 }
 

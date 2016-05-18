@@ -64,7 +64,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>CoConut</h1>
-                        <h3>John Smith</h3>
+                        <h3>thingsnmoarstuff</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                         <p>
                             <%-- IMPORTANT: CHANGE THE FIRST PARAMETER IN passBySession TO THE ID OF A COMIC IN YOUR DATASTORE --%>
@@ -79,7 +79,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Doenut</h1>
-                        <h3>Jane Doe</h3>
+                        <h3>thingsnmoarstuff</h3>
                         <p>Doenut is a deer. But besides that, she's also insane. What crazy adventures
                             will she have?</p>
                         <p><a class="btn btn-lg btn-primary" onclick="passBySession(4644337115725824, 2)" role="button">Read Now</a></p>
@@ -110,7 +110,7 @@
     <%-- End of Carousel --%>
     <div id="top-suggestions" class="section-sliders">
         <%--<div class="section-title">Continue Reading</div>--%>
-        <h2>Top Suggestions</h2>
+        <h2>Suggestions</h2>
         <ul>
         </ul>
     </div>

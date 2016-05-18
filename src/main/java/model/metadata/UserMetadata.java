@@ -16,6 +16,8 @@ public class UserMetadata extends AbstractMetadata {
 
     private String drawJson;
 
+    private String coverImage;
+
     //key = comicTarget
     private HashMap<String, Like> comicsLikedMap;
 
@@ -81,11 +83,15 @@ public class UserMetadata extends AbstractMetadata {
 
     public String getDrawJson() { return drawJson; }
 
+    public String getCoverImage() { return coverImage; }
+
     /* Setters */
 
     public void setDrawJson(String drawJson){
         this.drawJson = drawJson;
     }
+
+    public void setCoverImage(String coverImage) { this.coverImage = coverImage; }
 
     /* Methods */
 

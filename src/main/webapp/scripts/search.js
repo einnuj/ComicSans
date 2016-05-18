@@ -12,15 +12,12 @@ function searchFunc() {
             addToHTML(response[2], userString);
             
             loadCovers();
-            console.log(response);
         },
         error: function(response) {
             console.log(response);
         }
     });
     resetAllSearchHTML();
-    
-    console.log("SUCCESS");
 }
 
 function addToHTML(resultList, typeString) {
@@ -40,7 +37,7 @@ function addToHTML(resultList, typeString) {
             targetId = userDivId;
             break;
         default:
-            console.log("ERROR");
+            return;
     }
 
     populateDiv(resultList, targetId);

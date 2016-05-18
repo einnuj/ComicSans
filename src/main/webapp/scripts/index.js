@@ -30,14 +30,13 @@ function main() {
 
 function getTopSuggestions(allComics) {
     var allComicsAsMap = allComics;
-    
-    if (Object.keys(allComicsAsMap).length <= 5) {
-        return allComicsAsMap;
-    }
 
     for (var key in allComicsAsMap) {
         if (!allComicsAsMap.hasOwnProperty(key)) {
             continue;
+        }
+        if (Object.keys(allComicsAsMap).length <= 5) {
+            return allComicsAsMap;
         }
         if (!(Math.random() < 0.5)) {
             delete allComicsAsMap[key];

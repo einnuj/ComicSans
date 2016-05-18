@@ -1,7 +1,6 @@
 package controller.servlet;
 
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.impl.translate.opt.joda.JodaTimeTranslators;
 import model.comics.WebComic;
 import model.users.User;
 
@@ -24,7 +23,6 @@ public class InitServlet extends HttpServlet {
     }
 
     public void init() {
-        System.out.println("INITIALIZING");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

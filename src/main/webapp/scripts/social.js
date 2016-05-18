@@ -9,7 +9,6 @@ function subscribe(id_num){
         url: "/SocialServlet",
         data: {"action": "SUBSCRIBE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -27,7 +26,6 @@ function unsubscribe(id_num){
         url: "/SocialServlet",
         data: {"action": "UNSUBSCRIBE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -45,7 +43,7 @@ function favorite(id_num){
         url: "/SocialServlet",
         data: {"action": "FAVORITE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
+
         },
         error: function (err) {
             console.log(err);
@@ -63,7 +61,7 @@ function unfavorite(id_num){
         url: "/SocialServlet",
         data: {"action": "UNFAVORITE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
+
         },
         error: function (err) {
             console.log(err);
@@ -81,7 +79,7 @@ function like(id_num){
         url: "/SocialServlet",
         data: {"action": "LIKE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
+
         },
         error: function (err) {
             console.log(err);
@@ -99,7 +97,7 @@ function unlike(id_num){
         url: "/SocialServlet",
         data: {"action": "UNLIKE", "comicId": id_num},
         success: function (result) {
-            console.log(result);
+
         },
         error: function (err) {
             console.log(err);
@@ -113,7 +111,7 @@ function addRating() {
         type: "post",
         data: {"action": "RATE", "comicId": comicId, "rating": rating},
         success: function (result) {
-            console.log(result);
+
         },
         error: function (err) {
             console.log(err);
@@ -127,7 +125,6 @@ function addComment(id_num, text) {
         type: "post",
         data: {"action": "COMMENT", "comicId": id_num, "comment": text},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -141,7 +138,6 @@ function addBookmark(number) {
         type: "post",
         data: {"action": "BOOKMARK", "comicId": comicId},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -155,7 +151,6 @@ function removeBookmark(number) {
         type: "post",
         data: {"action": "UNBOOKMARK", "comicId": comicId},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -173,11 +168,9 @@ function checkLike(id_num) {
         async: false,
         data: {"request": "isLiked", "comicId": id_num},
         success: function (resp) {
-            console.log(resp);
             result = resp;
         }
     });
-    console.log("result is " + result);
     return result;
 }
 /**
@@ -191,11 +184,9 @@ function checkFavorite(id_num) {
         async: false,
         data: {"request": "isFavorited", "comicId": id_num},
         success: function (resp) {
-            console.log(resp);
             result = resp;
         }
     });
-    console.log("result is " + result);
     return result;
 }
 /**
@@ -209,11 +200,9 @@ function isSubscribed(id_num) {
         async: false,
         data: {"request": "isSubscribed", "comicId": id_num},
         success: function (resp) {
-            console.log(resp);
             result = resp;
         }
     });
-    console.log("result is " + result);
     return result;
 }
 
@@ -222,7 +211,6 @@ function numLikes(comicId){
     $.get("/SocialServlet", {"request": "numLikes", "comicId": comicId})
 
         .done(function (resp) { // on sucess
-            console.log(resp);
         })
         .fail(function () { // on failure
             alert("Request failed.");
@@ -234,7 +222,6 @@ function numFavorites(comicId){
     $.get("/SocialServlet", {"request": "numFavorites", "comicId": comicId})
 
         .done(function (resp) { // on sucess
-            console.log(resp);
         })
         .fail(function () { // on failure
             alert("Request failed.");
@@ -246,7 +233,6 @@ function getCommentsBad(comicId){
     $.get("/SocialServlet", {"request": "getComments", "comicId": comicId})
         .done(function (resp) { // on success
             if(resp == "null"){
-                console.log("no comments");
             } else {
                 for(c in resp){
                     list.push(c);
@@ -284,7 +270,6 @@ function deleteComment(comicId, num){
         type: "post",
         data: {"action": "DELETECOMMENT", "comicId": comicId, "numComment" : num},
         success: function (result) {
-            console.log(result);
         },
         error: function (err) {
             console.log(err);
@@ -296,7 +281,6 @@ function deleteComment(comicId, num){
 function getRating(comicId){
     $.get("/SocialServlet", {"request": "getRating", "comicId": comicId})
         .done(function (resp) { // on sucess
-            console.log(resp);
         })
         .fail(function () { // on failure
             alert("Request failed.");

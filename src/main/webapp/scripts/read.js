@@ -22,7 +22,7 @@ function loadNextPage() {
         currentIssue++;
         imageToLoad = issues[currentIssue].imgURL;
         image = retrieveImage(imageToLoad);
-        console.log("NEXT REACHED: " + image);
+        
         $("#page-image").attr("src", image);
     }
 }
@@ -32,7 +32,7 @@ function loadPreviousPage() {
         currentIssue--;
         imageToLoad = issues[currentIssue].imgURL;
         image = retrieveImage(imageToLoad);
-        console.log("PREV REACHED: " + image);
+        
         $("#page-image").attr("src", image);
     }
 }
@@ -60,7 +60,7 @@ function retrieveImage(img_key) {
         async: false,
         data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function(responseText) {
-            console.log(responseText);
+
             path = responseText;
         },
     });

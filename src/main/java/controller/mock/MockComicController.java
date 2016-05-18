@@ -55,7 +55,6 @@ public class MockComicController {
                 metadata.setGenre(GenreEnum.SPORTS);
                 break;
             default:
-                System.out.println("SOMETHING GENRE BROKED!");
                 metadata.setGenre(GenreEnum.UNLISTED);
         }
 

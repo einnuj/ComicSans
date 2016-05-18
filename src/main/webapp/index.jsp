@@ -45,7 +45,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="directory.jsp">Directory</a></li>
                     <li><a href="publish.jsp">Publish</a></li>
-                    <li><a onclick="userToProfile('');" >My Profile</a></li>
+                    <li><a onclick="userToProfile('');" role="button">My Profile</a></li>
                     <li><a id="logLink" href="#">Log In</a></li>
                 </ul>
             </div>

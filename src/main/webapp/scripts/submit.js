@@ -20,9 +20,8 @@ function submitComicFunction() {
             url: "/ComicServlet",
             data: {"action" : "CREATE COMIC", "description" : summary, "genre" : genre, "name" : title },
             success: function(result){
-                console.log("result:" + result);
                 var comicId = result;
-                console.log("comicId: " + comicId);
+                
                 $.ajax({
                     type: "POST",
                     url: "/ComicServlet",
@@ -72,7 +71,7 @@ function submitComic(){
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log(xhr.responseText);
+
             sessionStorage.setItem('id_to_load', xhr.responseText);
             window.location.href = "../summary.jsp";
         }
@@ -94,7 +93,6 @@ function submitIssue() {
         alert("Fields cannot be blank.");
         return false;
     } else {
-        console.log("title is" + title);
     }
     if(hasFile == ""){
         alert("Please choose a file.");
@@ -113,7 +111,7 @@ function submitIssue() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText);
+
                 sessionStorage.setItem('id_to_load', xhr.responseText);
                 window.location.href = "../summary.jsp";
             }

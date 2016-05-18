@@ -75,7 +75,6 @@ public class MockFieldGenerator {
                     }
                     break;
                 default:
-                    System.out.println("Something that shouldn't have happened happened in our MockUserController.");
                     i = 100;
                     break;
             }
@@ -131,7 +130,6 @@ public class MockFieldGenerator {
                     }
                     break;
                 default:
-                    System.out.println("Something that shouldn't have happened happened in our MockUserController.");
                     i = 100;
                     break;
             }

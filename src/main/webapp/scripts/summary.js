@@ -286,7 +286,6 @@ function retrieveImage(img_key) {
         async: false,
         data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function(responseText) {
-            console.log(responseText);
             path = responseText;
         },
     });
@@ -302,7 +301,6 @@ function fillIssueNames() {
     if(issueNames.length > 0) {
         for (i=0;i<issueNames.length;i++) {
             namez = issueNames[i];
-            console.log(namez);
             $("#issue-list").prepend('<span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-trash" onclick="deleteIssue(\'' + namez + '\')"></span></a></span>    <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
         }
     } else {
@@ -324,18 +322,15 @@ function getIssueNames(id_num, issueNames) {
             });
         }
     });
-    console.log("success???");
 }
 
 function deleteIssue(issueTitle){
-    console.log("title:" + issueTitle);
     $.ajax({
         url: "/upload",
         type: "POST",
         async: false,
         data: {"action": "DELETE ISSUE", "comicId": comicId, "issueTitle": issueTitle},
         success: function(responseText) {
-            console.log(responseText);
             location.reload();
         },
     });

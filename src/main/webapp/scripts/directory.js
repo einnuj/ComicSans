@@ -14,7 +14,7 @@ function sortComics(filter) {
             dataName = "author";
             break;
         default:
-            console.log("SOMETHING ASPLODED, CAP'N!");
+            return;
     }
 
     $(".comic-listing").sort(function (a, b) {

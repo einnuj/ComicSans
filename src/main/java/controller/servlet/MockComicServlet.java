@@ -25,10 +25,6 @@ public class MockComicServlet extends HttpServlet {
         String title = req.getParameter("title");
 
 
-        System.out.println(title);
-        System.out.println(chapter);
-        System.out.println(page);
-
         ComicPage ourPage = new ComicPage(title, imgFile, page, chapter);
 
 

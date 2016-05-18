@@ -254,7 +254,6 @@ public class Upload extends HttpServlet {
                         ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blob_key).imageSize(1600);
 
                         String imageUrl = imagesService.getServingUrl(options);
-                        System.out.println(imageUrl);
                         resp.getWriter().write(imageUrl);
                     }
                 } catch (ParameterNotFoundException ex) {

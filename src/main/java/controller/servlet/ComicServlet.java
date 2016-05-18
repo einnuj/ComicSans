@@ -381,8 +381,14 @@ public class ComicServlet extends HttpServlet {
                 }
 
                 AllComics allComics = new AllComics();
+                List<User> userList = UserAccess.getAuthorsFromList(UserAccess.queryAllUsers());
 
                 for (WebComic comic : webComicList) {
+                    for (User user : userList) {
+                        if (user.getMetadata().getComicsCreatedMap().containsKey(Long.toString(comic.getId()))) {
+                            comic.getMetadata().setAuthor(user.getMetadata().getName());
+                        }
+                    }
                     allComics.addComic(comic.getId(), comic);
                 }
 

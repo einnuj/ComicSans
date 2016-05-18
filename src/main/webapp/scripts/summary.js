@@ -244,7 +244,7 @@ function appendComment() {
     })
 
     var timestamp = new Date();
-    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
+    $("#comment-thread").prepend('<li class="user-comments">' + 'Posted by: ' + currentUser.metadata.name + ' - ON: ' + timestamp.toString() + '<br>' + commentText + '</li>');
     $("#comment-input").val('');
 }
 

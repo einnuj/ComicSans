@@ -83,6 +83,8 @@ public class ComicMetadata extends AbstractMetadata {
 
     /* Setters */
 
+    public void setAuthor(String author) { this.author = author; }
+
     public void setCoverImage(String cover){
         this.coverImage = cover;
     }

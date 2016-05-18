@@ -2,9 +2,11 @@ package controller.data;
 
 import com.google.appengine.api.users.UserServiceFactory;
 import controller.exceptions.NonUniqueGoogleIdException;
+import model.metadata.UserMetadata;
 import model.users.User;
 import utilities.data.ObjectifyHelper;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -48,6 +50,19 @@ public class UserAccess {
 
     public static com.google.appengine.api.users.User getGoogleUser() {
         return UserServiceFactory.getUserService().getCurrentUser();
+    }
+
+    public static List<User> getAuthorsFromList(List<User> userList) {
+        for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+            User currentUser = iterator.next();
+            UserMetadata metadata = currentUser.getMetadata();
+
+            if (metadata.getComicsCreatedMap() == null || metadata.getComicsCreatedMap().size() <1) {
+                iterator.remove();
+            }
+        }
+
+        return userList;
     }
 
     private static void reinstantiate(User user) {

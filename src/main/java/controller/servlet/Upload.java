@@ -1,11 +1,21 @@
 package controller.servlet;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.ImagesService;
-import com.google.appengine.api.images.ImagesServiceFactory;
-import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.appengine.api.images.*;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
 import controller.exceptions.NonUniqueGoogleIdException;
@@ -167,13 +177,29 @@ public class Upload extends HttpServlet {
                         throw new ParameterNotFoundException("comicId");
                     }
 
-                    Long id = Long.valueOf(comicId);
-                    WebComic comic = ComicAccess.queryForComic(id);
-                    boolean success = comic.getChildMediaList().get(0).removeFromChildMediaList(issueTitle);
-                    if (!success)
-                        throw new ParameterNotFoundException("Issue named" + issueTitle);
+                        Long id = Long.valueOf(comicId);
+                        WebComic comic = ComicAccess.queryForComic(id);
+                        ComicChapter chapter = comic.getChildMediaList().get(0);
+                        boolean success = chapter.removeFromChildMediaList(issueTitle);
+                        if(!success) throw new ParameterNotFoundException("Issue named" + issueTitle);
 
-                    break;
+                        if(chapter.getChildMediaList().size() == 0){
+                            comic.removeFromChildMediaList(chapter);
+                            ComicChapter newChapter = new ComicChapter("Comic");
+                            comic.addToChildMediaList(newChapter);
+                            newChapter.reload();
+                        }
+
+                        ObjectifyHelper.save(comic);
+
+                        comic.reload();
+                        chapter.reload();
+                        ObjectifyHelper.save(comic);
+                        resp.getWriter().write("Success");
+
+                        break;
+
+
                 } catch (ParameterNotFoundException ex) {
                     resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
 
@@ -195,12 +221,12 @@ public class Upload extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String action = req.getParameter("action");
-        switch (action) {
+        switch(action) {
             case "GET ISSUE NAMES":
                 try {
                     String comicId = req.getParameter("comicId");
 
-                    if (comicId == null) {
+                    if(comicId == null) {
                         throw new ParameterNotFoundException("comicId");
                     }
 
@@ -208,7 +234,7 @@ public class Upload extends HttpServlet {
                     WebComic comic = ComicAccess.queryForComic(id);
                     ComicChapter myChapter = comic.getChildMediaList().get(0);
                     ArrayList<String> issueList = new ArrayList<String>();
-                    for (ComicPage page : myChapter.getChildMediaList()) {
+                    for(ComicPage page : myChapter.getChildMediaList()){
                         issueList.add(page.getName());
                     }
 

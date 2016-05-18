@@ -298,9 +298,17 @@ function fillIssueNames() {
 
     getIssueNames(comicId, issueNames);
 
-    for (i=0;i<issueNames.length;i++) {
-        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a onclick="readIssue(i);"><span class="glyphicon glyphicon-trash"></span></a></span>          <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
+
+    if(issueNames.length > 0) {
+        for (i=0;i<issueNames.length;i++) {
+            namez = issueNames[i];
+            console.log(namez);
+            $("#issue-list").prepend('<span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-trash" onclick="deleteIssue(namez)"></span></a></span>    <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
+        }
+    } else {
+        $("#issue-list").prepend("No issues here.");
     }
+    
 }
 
 
@@ -321,6 +329,7 @@ function getIssueNames(id_num, issueNames) {
 }
 
 function deleteIssue(issueTitle){
+    console.log(issueTitle);
     $.ajax({
         url: "/upload",
         type: "POST",
@@ -328,6 +337,7 @@ function deleteIssue(issueTitle){
         data: {"action": "DELETE ISSUE", "comicId": comicId, "issueTitle": issueTitle},
         success: function(responseText) {
             console.log(responseText);
+            //location.reload();
         },
     });
 }

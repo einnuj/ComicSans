@@ -25,6 +25,7 @@ import model.comics.ComicChapter;
 import model.comics.ComicPage;
 import model.comics.WebComic;
 import model.users.User;
+import utilities.JsonHelper;
 import utilities.data.ObjectifyHelper;
 
 /**
@@ -210,8 +211,9 @@ public class Upload extends HttpServlet{
                         issueList.add(page.getName());
                     }
 
-                    String issueNames = new Gson().toJson(issueList);
-                    resp.getWriter().write(issueNames);
+                    //String issueNames = new Gson().toJson(issueList);
+                    //resp.setContentType("application/json");
+                    resp.getWriter().write(JsonHelper.objectToJson(issueList));
                     break;
 
                 } catch (ParameterNotFoundException ex) {

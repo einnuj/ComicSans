@@ -172,6 +172,7 @@ function getComicHelper(obj) {
 
     // Fill out the comments section
     fillComments();
+    fillIssueNames();
 }
 
 function socialButton(type) {
@@ -292,6 +293,32 @@ function retrieveImage(img_key) {
     return path;
 }
 
+function fillIssueNames() {
+    var issueNames = [];
+
+    getIssueNames(comicId, issueNames);
+
+    for (i=0;i<issueNames.length;i++) {
+        console.log(issueNames[i]);
+    }
+}
+
+
+function getIssueNames(id_num, issueNames) {
+    jQuery.ajax({
+        url: "/upload",
+        type: "get",
+        async: false,
+        data: {"action": "GET ISSUE NAMES", "comicId": id_num},
+        success: function (resp) {
+            resp = $.parseJSON(resp);
+            $.each(resp, function(i, item) {
+                issueNames.push(item);
+            });
+        }
+    });
+    console.log("success???");
+}
 
 function deleteIssue(issueTitle){
     $.ajax({

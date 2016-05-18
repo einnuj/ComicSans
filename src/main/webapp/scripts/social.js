@@ -275,7 +275,6 @@ function getComments(id_num, userIds, timestamp, text) {
             }
         }
     });
-    console.log("success???");
 }
 
 

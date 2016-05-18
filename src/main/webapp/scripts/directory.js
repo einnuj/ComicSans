@@ -86,22 +86,6 @@ function retrieveImage(img_key) {
     return path;
 }
 
-function isLoggedIn() {
-    $.ajax({
-        url: "/UserServlet",
-        type: "get",
-        async: false,
-        success: function(responseText) {
-            console.log(responseText);
-            user = responseText;
-            return responseText;
-        },
-        error: function(_) {
-            return false;
-        }
-    })
-}
-
 function loadCovers() {
     $(".comic-listing").each(function() {
 
@@ -130,4 +114,3 @@ function loadCovers() {
 }
 
 $(document).ready(loadCovers());
-$(document).ready(isLoggedIn());

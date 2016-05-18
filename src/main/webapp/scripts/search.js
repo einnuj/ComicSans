@@ -10,6 +10,8 @@ function searchFunc() {
             addToHTML(response[0], comicString);
             addToHTML(response[1], commentString);
             addToHTML(response[2], userString);
+            
+            loadCovers();
             console.log(response);
         },
         error: function(response) {
@@ -46,23 +48,15 @@ function addToHTML(resultList, typeString) {
 
 function populateDiv(resultList, targetDivId) {
     // var targetDiv = $("#" + targetDivId + "> ul > .comicBlock");
-    var targetDiv = $(".comicBlock");
+    var targetDiv = $("#" + targetDivId + " > .comicBlock");
     
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();
-        var html = "<div class='comic-listing'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
+        var html = "<div class='comic-listing' data-cover='" + resultList[i].metadata.coverImage + "'><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "></a></div>";
         targetDiv.append(html);
     }
 }
 
 function resetAllSearchHTML() {
     $(".comic-listing").remove();
-}
-
-function check_session() {
-    var resultsList = sessionStorage.getItem("result-object");
-    
-    if (resultsList == null) {
-        
-    }
 }

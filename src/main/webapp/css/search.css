@@ -1,0 +1,8 @@
+.comic-block {
+    width: 80%;
+    clear: both;
+}
+.comic-block h2 {
+    border-top: none;
+    border-bottom: 1px solid white;
+}

@@ -17,38 +17,33 @@
 
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/tooltips.css" rel="stylesheet">
+    <link href="css/search.css" rel="stylesheet">
 
     <title>Search Results</title>
 </head>
 <body>
     <%-- Side navbar --%>
-    <c:set var="dirNav" value="dirNav.html"/>
-    <jsp:include page="${dirNav}"></jsp:include>
+    <c:set var="mainNav" value="mainNav.html"/>
+    <jsp:include page="${mainNav}"></jsp:include>
 
     <div class="info-container">
         <h1>Search Results</h1>
 
-        <div id="search-field">
-            <input id="search-text" type="text" value=""/>
-            <a href="#" onclick="searchFunc()" class="btn btn-primary">Search</a>
+        <div class="search-results">
+            <div id="search-field">
+                <input id="search-text" type="text" value=""/>
+                <a href="#" onclick="searchFunc()" class="btn btn-primary">Search</a>
+            </div>
+            <div id="search-comics">
+                <div class="comic-block"><h2>Comics</h2></div>
+            </div>
+            <div id="search-comments">
+                <div class="comic-block"><h2>Comments</h2></div>
+            </div>
+            <div id="search-users">
+                <div class="comic-block"><h2>Users</h2></div>
+            </div>
         </div>
-
-        <div id="search-comics">
-            <h2>Comics</h2>
-            <div class="comicBlock"></div>
-        </div>
-
-        <div id="search-comments">
-            <h2>Comments In Comics</h2>
-            <div class="comicBlock"></div>
-        </div>
-
-        <div id="search-users">
-            <h2>Users</h2>
-            <div class="comicBlock"></div>
-        </div>
-        
     </div>
 
 </body>

@@ -36,7 +36,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img src="images/usericon.png" />
+            <img src="images/defaultLogo.png" />
             <div class="comic-info-descr">
                 <h1 id="name-header"></h1>
                 <h4 id="created-header">Comics created: </h4>

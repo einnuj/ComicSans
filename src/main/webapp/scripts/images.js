@@ -26,7 +26,7 @@ function loadCovers() {
 
         // get the image url via ajax
         if (cover_key == ""  || cover_key == null) {
-            var defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/usericon.png" : "images/covers/DoenutCover.png";
+            var defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/defaultLogo.png" : "images/covers/DoenutCover.png";
             // no cover for the comic, default to Doenut
             the_image.attr("src", defaultPic);
         } else {
@@ -34,7 +34,7 @@ function loadCovers() {
 
             if (img_path == "") {
                 // blob wasn't retrieved
-                defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/usericon.png" : "images/covers/Doofus.png";
+                defaultPic = ($(this).parent().parent().attr('id') == "search-users") ? "images/defaultLogo.png" : "images/covers/Doofus.png";
 
                 the_image.attr("src", defaultPic);
             }

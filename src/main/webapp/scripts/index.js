@@ -30,7 +30,7 @@ function getTopSuggestions(allComics) {
 
 function addComicsIntoHTML(allComics) {
     var targetDiv = $("#top-suggestions > ul");
-    for (var key in allComics) {
+        for (var key in allComics) {
         if (!allComics.hasOwnProperty(key)) {
             continue;
         }

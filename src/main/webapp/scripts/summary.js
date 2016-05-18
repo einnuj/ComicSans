@@ -99,7 +99,7 @@ function getUserHelper(response) {
         $("#comment-input").toggle();
         $("#comment-submit").toggle();
     }
-    else if (currentUser.metadata.name != author) {
+    else if (currentUser.id != author) {
         $(".AUTHOR_PRIV").toggle();
         $(".comic-info-descr").css("margin-left", "+=65");
     }

@@ -63,14 +63,14 @@
         <%-- Comic Listing --%>
         <c:forEach var="comic" items="${allComics.comicsAsList}">
             <div class="comicBlock">
-                <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}" data-author="${comic.metadata.author}">
+                <div class="comic-listing" id="${comic.id}" data-name="${comic.name}" data-genre="${comic.metadata.genre}" data-author="${comic.metadata.author}" data-cover="${comic.metadata.coverImage}">
                     <a onclick="passBySession(${comic.id}, 0)" role="button">
                         <c:choose>
-                            <c:when test="${comic.metadata.displayPicture == ''}">
+                            <c:when test="${comic.metadata.coverImage != ''}">
                                 <img src="images/covers/CoConutCover.png">
                             </c:when>
-                            <c:otherwise>
-                                <img src="data:image/jpeg;base64,${comic.metadata.displayPicture}">
+                            <c:otherwise>   <%-- This is where the cover image for each comic is set  --%>
+                                <img src="" ${comic.metadata.coverImage}>
                             </c:otherwise>
                         </c:choose>
                     </a>

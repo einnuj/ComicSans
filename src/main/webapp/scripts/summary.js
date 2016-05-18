@@ -299,7 +299,7 @@ function fillIssueNames() {
     getIssueNames(comicId, issueNames);
 
     for (i=0;i<issueNames.length;i++) {
-        console.log(issueNames[i]);
+        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span>          <a href="read.jsp">' + issueNames[i] + '<br>');
     }
 }
 

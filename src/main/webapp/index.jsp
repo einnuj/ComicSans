@@ -130,4 +130,3 @@
 <script src="scripts/authentication.js"></script>
 <script src="scripts/index.js"></script>
 <script src="scripts/random.js"></script>
-<script src="scripts/profile.js"></script>

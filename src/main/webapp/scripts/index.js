@@ -56,6 +56,9 @@ function addComicsIntoHTML(allComics) {
     }
 }
 function generateFavorites(allComics){
+    if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
+        return;
+    }
     var allComicsAsMap = allComics;
     var userFavorites = currentUser.metadata.favorites;
     var targetDiv = $("#user-favorites > ul");

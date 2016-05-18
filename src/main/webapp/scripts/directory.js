@@ -50,12 +50,13 @@ function getAllComicsAsArray() {
 function filterComics(filter) {
     var comicsMap = getAllComicsAsMap();
     var filterUpper = filter.toUpperCase();
+    var user = compareFave();
     
     for (var key in comicsMap) {
         if (!comicsMap.hasOwnProperty(key)) {
             continue;
         }
-        if (filterUpper === "FAVE" && user) {
+        if (filterUpper === "FAVE") {
             if (!user.metadata.favorites[key]) {
                 $("#" + key).hide();
             }
@@ -70,6 +71,19 @@ function filterComics(filter) {
             $("#" + key).show();
         }
     }
+}
+
+function compareFave() {
+    var user;
+    $.ajax({
+        url: "/UserServlet",
+        type: "GET",
+        async: false,
+        success: function(response) {
+            user = response;
+        }
+    });
+    return user;
 }
 
 function retrieveImage(img_key) {

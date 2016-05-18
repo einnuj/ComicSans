@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
         // is a uID parameter passed whereas the else block will get the current user.
         // *** NOTE: originally this just consisted of the else block. Delete the if block if something is broken ***
         String requestedID = req.getParameter("uID");
-        if (requestedID != null && !requestedID.isEmpty()) {
+        if (requestedID != null && !requestedID.isEmpty() && !requestedID.equals("undefined")) {
             resp.setContentType("application/json");
             try {
                 User commenter = UserAccess.queryForUser(requestedID);

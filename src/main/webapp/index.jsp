@@ -149,4 +149,4 @@
 <script src="scripts/session.js"></script>
 <script src="scripts/authentication.js"></script>
 <script src="scripts/index.js"></script>
-<script src="scripts/profile.js"></script>
+<%-- <script src="scripts/profile.js"></script>  COMMENTED THIS OUT CAUSE IT WAS PISSING ME OFF WHILE TESTING--%>

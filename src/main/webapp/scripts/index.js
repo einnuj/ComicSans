@@ -31,13 +31,39 @@ function getTopSuggestions(allComics) {
 function addComicsIntoHTML(allComics) {
     var targetDiv = $("#top-suggestions > ul");
         for (var key in allComics) {
-        if (!allComics.hasOwnProperty(key)) {
-            continue;
-        }
-        var imgSrc = getRandomCoverArt();
-        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + imgSrc[0] + ")' role='button'><img src=" + imgSrc[1] + "/></a></li>"
+            if (!allComics.hasOwnProperty(key)) {
+                continue;
+            }
+            //var imgSrc = getRandomCoverArt();
+
+            var imgSrc = allComics[key].metadata.coverImage;
+
+            if (imgSrc == null || imgSrc == "")
+                imgSrc = "images/covers/DoenutCover.png";
+            else {
+                imgSrc = retrieveImage(imgSrc);
+                if (imgSrc == null || imgSrc == "")
+                    imgSrc = "images/covers/DoenutCover.png";
+            }
+
+
+        var html = "<li><a onclick='passBySession(" + allComics[key].id + "," + 1 + ")' role='button'><img src=" + imgSrc + "></a></li>"
         targetDiv.append(html);
     }
+}
+
+function retrieveImage(img_key) {
+    var path = "";
+    $.ajax({
+        url: "/upload",
+        type: "GET",
+        async: false,
+        data: {"action": "GET COVER", "blob_key": img_key},
+        success: function (responseText) {
+            path = responseText;
+        },
+    });
+    return path;
 }
 
 function getRandomCoverArt() {

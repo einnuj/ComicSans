@@ -54,7 +54,6 @@
             <ul>
             </ul>
         </div>
-        <br>
         <div class="section-sliders" id="user-likes">
             <h2>Likes</h2>
             <ul>

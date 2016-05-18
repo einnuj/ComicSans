@@ -3,15 +3,14 @@ var actualComic = getComic(sessionStorage.getItem("id_to_load"));
 console.log(actualComic);
 
 // get the list of issues
-// issues[i].childMediaList[0].imgURL gets the page for issue i+1
-var issues = actualComic.childMediaList;
+var issues = actualComic.childMediaList[0].childMediaList;
 console.log(issues);
 
 // initialize current issue
 var currentIssue = 0;
 
 // get the img blob_key for the particular issue
-var imgToLoad = issues[currentIssue].childMediaList[0].imgURL;
+var imgToLoad = issues[0].imgURL;
 console.log(imgToLoad);
 
 // retrieve the image for the issue and set it as the img src
@@ -22,7 +21,7 @@ $("#page-image").attr("src", image);
 function loadNextPage() {
     if (currentIssue + 1 < issues.length) {
         currentIssue++;
-        imageToLoad = issues[currentIssue].childMediaList[0].imgURL;
+        imageToLoad = issues[currentIssue].imgURL;
         image = retrieveImage(imageToLoad);
         console.log("NEXT REACHED: " + image);
         $("#page-image").attr("src", image);
@@ -32,7 +31,7 @@ function loadNextPage() {
 function loadPreviousPage() {
     if (currentIssue != 0) { // if this is not the first issue
         currentIssue--;
-        imageToLoad = issues[currentIssue].childMediaList[0].imgURL;
+        imageToLoad = issues[currentIssue].imgURL;
         image = retrieveImage(imageToLoad);
         console.log("PREV REACHED: " + image);
         $("#page-image").attr("src", image);

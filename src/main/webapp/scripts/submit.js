@@ -1,6 +1,6 @@
 function submitComicFunction() {
     var genre = document.getElementById("genreName").value;
-    var file = document.getElementById("fileSubmit").files[0];
+    var file = document.getElementById("fileSubmit").files;
     var title = document.getElementById("titleid").value;
     var summary = document.getElementById("comicSummary").value;
     if(title == null || summary == null || title == "" || summary == ""){
@@ -112,11 +112,18 @@ function submitIssue() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log(xhr.responseText);
-            sessionStorage.setItem('id_to_load', xhr.responseText);
-            window.location.href = "../summary.jsp";
+            if (xhr.status == 200) {
+                console.log(xhr.responseText);
+                sessionStorage.setItem('id_to_load', xhr.responseText);
+                window.location.href = "../summary.jsp";
+            }
+            else if (xhr.status == 400) {
+                var errorMsg = xhr.responseText.match(/{(.*?)}/)[1];
+                alert("ERROR 400: " + errorMsg);
+                window.location.reload();
+            }
         }
-    }
+    };
         xhr.send(fd);
 
 }

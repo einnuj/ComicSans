@@ -52,10 +52,14 @@
             <div class="comic-reading-dd">
                 <a class="btn btn-lg btn-primary" role="button"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Bookmark </a>
             </div>
-            <img src="images/covers/CoConutCover.png"/>
+            <%-- <img src="images/covers/CoConutCover.png"/>
             <img src="images/mockpages/1.png"/>
             <img src="images/mockpages/2.png"/>
-            <img src="images/mockpages/3.png"/>
+            <img src="images/mockpages/3.png"/> --%>
+            <img id="page-image" src="images/mockpages/1.png" />
+
+            <input type="button" onclick="loadPreviousPage();" value="PREV">
+            <input type="button" onclick="loadNextPage();" value="NEXT">
         </div>
     </div>
 </body>
@@ -64,3 +68,4 @@
 <%-- SCRIPTS --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/read.js"></script>

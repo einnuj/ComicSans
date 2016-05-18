@@ -99,7 +99,7 @@ function getUserHelper(response) {
         $("#comment-submit").toggle();
         $("#comment-header").html("Log in to leave a comment.");
     }
-    else if (currentUser.id != author) {
+    else if (currentUser.googleId != author) {
         $(".AUTHOR_PRIV").toggle();
     }
 
@@ -273,7 +273,7 @@ function getUserById(strID) {
         success: function(responseText) {
             $("#userJson > a").text(responseText);
             username = responseText.metadata.name;
-        },
+        }
     });
     return username;
 }
@@ -299,7 +299,7 @@ function fillIssueNames() {
     getIssueNames(comicId, issueNames);
 
     for (i=0;i<issueNames.length;i++) {
-        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span>          <a href="read.jsp">' + issueNames[i] + '<br>');
+        $("#issue-list").prepend('<span class="AUTHOR_PRIV"><a onclick="readIssue(i);"><span class="glyphicon glyphicon-trash"></span></a></span>          <a onclick="readIssue(' + i + ')">' + issueNames[i] + '<br>');
     }
 }
 
@@ -330,4 +330,9 @@ function deleteIssue(issueTitle){
             console.log(responseText);
         },
     });
+}
+
+function readIssue(issueNumber) {
+    sessionStorage.setItem("issue_to_read", issueNumber);
+    window.location.assign("read.jsp");
 }

@@ -44,7 +44,7 @@ public class ComicChapter extends ComicMediaParent {
         }
     }
 
-    @Override
+
     public boolean removeFromChildMediaList(String issueTitle) {
         for(ComicPage page : childMediaList){
             if(issueTitle.equalsIgnoreCase(page.getName())){

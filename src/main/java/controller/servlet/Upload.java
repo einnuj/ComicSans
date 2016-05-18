@@ -169,8 +169,23 @@ public class Upload extends HttpServlet{
 
                         Long id = Long.valueOf(comicId);
                         WebComic comic = ComicAccess.queryForComic(id);
-                        boolean success = comic.getChildMediaList().get(0).removeFromChildMediaList(issueTitle);
+                        ComicChapter chapter = comic.getChildMediaList().get(0);
+                        boolean success = chapter.removeFromChildMediaList(issueTitle);
                         if(!success) throw new ParameterNotFoundException("Issue named" + issueTitle);
+
+                        if(chapter.getChildMediaList().size() == 0){
+                            comic.removeFromChildMediaList(chapter);
+                            ComicChapter newChapter = new ComicChapter("Comic");
+                            comic.addToChildMediaList(newChapter);
+                            newChapter.reload();
+                        }
+
+                        ObjectifyHelper.save(comic);
+
+                        comic.reload();
+                        chapter.reload();
+                        ObjectifyHelper.save(comic);
+                        resp.getWriter().write("Success");
 
                         break;
                     } catch (ParameterNotFoundException ex) {

@@ -64,7 +64,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>CoConut</h1>
-                        <h3>John Smith</h3>
+                        <h3>thingsnmoarstuff</h3>
                         <p>Follow the adventures of CoConut, the most relatable fruit in the world.</p>
                         <p>
                             <%-- IMPORTANT: CHANGE THE FIRST PARAMETER IN passBySession TO THE ID OF A COMIC IN YOUR DATASTORE --%>

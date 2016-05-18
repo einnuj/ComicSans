@@ -40,10 +40,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <div class="edit-image">
-                <img id="cover-thumbnail" src="" />
-                <input class="AUTHOR_PRIV" id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
-            </div>
+            <img id="cover-thumbnail" src="" width="200px" height="320px"/>
             <div class="comic-info-descr">
                 <h1 id="title-header"></h1>
                 <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span></span>
@@ -72,7 +69,6 @@
                 <p id="fav-field">Favorites: </p>
                 <p>Last updated: <em>3 days ago</em></p>
                 <div class="social-buttons">
-                    <a id="sub-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('SUB')">Subscribe <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                     <a id="fav-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
                     <a id="lik-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
                     <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
@@ -85,23 +81,24 @@
                 <div class="col-md-6"><h3>Date</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a></span><a href="read.jsp"> Chapter 01</a></div>
+                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span><a href="read.jsp"> Issue #01</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <div class="row">
-                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a></span><a href=""> Chapter 02</a></div>
+                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span><a href=""> Issue #02</a></div>
                 <div class="col-md-6">Today</div>
             </div>
             <div class="row">
-                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a></span><a href=""> Chapter 03</a></div>
+                <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-trash"></span></a></span><a href=""> Issue #03</a></div>
                 <div class="col-md-6">Today</div>
             </div>
-            <span class="AUTHOR_PRIV"><a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Issue <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a></span>
+            <span class="AUTHOR_PRIV"><a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Issue <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></span>
         </div>
-        <br><br><br>
+        <br><br>
         <%-- COMMENT THREAD STUFFS --%>
+        <h3>Leave a comment:</h3>
         <textarea id="comment-input"></textarea><br><br>
-        <a id="comment-submit" class="btn btn-lg btn-primary" role="button" onclick="appendComment()">Submit <span class="glyphicon glyphicon-edit"></span></a>
+        <a id="comment-submit" class="btn btn-lg btn-primary" role="button" onclick="appendComment()">Submit &nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
         <ul id="comment-thread">
         </ul>
     </div>

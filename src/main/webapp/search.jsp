@@ -22,6 +22,41 @@
     <title>Search Results</title>
 </head>
 <body>
+    <%-- Side navbar --%>
+    <c:set var="dirNav" value="dirNav.html"/>
+    <jsp:include page="${dirNav}"></jsp:include>
+
+    <div class="info-container">
+        <h1>Search Results</h1>
+
+        <div id="search-field">
+            <input id="search-text" type="text" value=""/>
+            <a href="#" onclick="searchFunc()" class="btn btn-primary">Search</a>
+        </div>
+
+        <div id="search-comics">
+            <h2>Comics</h2>
+            <div class="comicBlock"></div>
+        </div>
+
+        <div id="search-comments">
+            <h2>Comments In Comics</h2>
+            <div class="comicBlock"></div>
+        </div>
+
+        <div id="search-users">
+            <h2>Users</h2>
+            <div class="comicBlock"></div>
+        </div>
+        
+    </div>
 
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="scripts/session.js"></script>
+<script src="scripts/index.js"></script>
+<script src="scripts/search.js"></script>
+<script src="scripts/random.js"></script>

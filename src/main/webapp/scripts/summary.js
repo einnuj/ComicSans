@@ -94,14 +94,12 @@ function getUserHelper(response) {
     currentUser = response;
     if (currentUser == ""){
         $(".AUTHOR_PRIV").toggle();
-        $(".comic-info-descr").css("margin-left", "+=65");
         // turn off commenting controls
         $("#comment-input").toggle();
         $("#comment-submit").toggle();
     }
-    else if (currentUser.metadata.name != author) {
+    else if (currentUser.id != author) {
         $(".AUTHOR_PRIV").toggle();
-        $(".comic-info-descr").css("margin-left", "+=65");
     }
 
     // * * * at this point the currentComic and currentUser are available for use * * *

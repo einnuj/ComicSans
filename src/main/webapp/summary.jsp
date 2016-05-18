@@ -40,7 +40,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img id="cover-thumbnail" src="" width="200px" height="320px"/>
+            <img id="cover-thumbnail" src="" width="200px" height="310px"/>
             <div class="comic-info-descr">
                 <h1 id="title-header"></h1>
                 <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span></span>

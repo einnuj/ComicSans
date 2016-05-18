@@ -71,7 +71,7 @@
                 <div class="social-buttons">
                     <a id="fav-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
                     <a id="lik-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
-                    <a class="btn btn-lg btn-primary" role="button" href="read.jsp">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
+                    <a class="btn btn-lg btn-primary" role="button" onclick="readIssue(0);">Read Now <span class="glyphicon glyphicon-book" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>

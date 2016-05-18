@@ -18,7 +18,6 @@
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tooltips.css" rel="stylesheet">
-    <link href="css/homePage.css" rel="stylesheet">
 
     <title>Search Results</title>
 </head>
@@ -62,3 +61,4 @@
 <script src="scripts/session.js"></script>
 <script src="scripts/index.js"></script>
 <script src="scripts/search.js"></script>
+<script src="scripts/random.js"></script>

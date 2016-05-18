@@ -10,9 +10,6 @@ function searchFunc() {
             addToHTML(response[0], comicString);
             addToHTML(response[1], commentString);
             addToHTML(response[2], userString);
-            var comicResults = response[0];
-            var commentResults = response[1];
-            var userResults = response[2];
             console.log(response);
         },
         error: function(response) {
@@ -23,31 +20,37 @@ function searchFunc() {
     console.log("SUCCESS");
 }
 
-function addToHTML(resultMap, typeString) {
+function addToHTML(resultList, typeString) {
+    var comicsDivId = "search-comics";
+    var commentDivId = "search-comments";
+    var userDivId = "search-users";
+    var targetId;
+
     switch (typeString) {
         case "comics":
-            var comicsMap = getComics(resultMap);
-            populateComicsDiv(resultMap);
+            targetId = comicsDivId;
             break;
         case "comments":
+            targetId = commentDivId;
             break;
         case "users":
+            targetId = userDivId;
             break;
         default:
             console.log("ERROR");
     }
+
+    populateDiv(resultList, targetId);
 }
 
-function getComics(resultMap) {
-    $.ajax({
-        url: ""
-    })
-}
+function populateDiv(resultList, targetDivId) {
+    var targetDiv = $("#" + targetDivId + "> ul");
 
-function populateComicsDiv(finalComicsMap) {
-    var comicsDiv = $("#search-comics > ul");
-
-
+    for (var i = 0; i < resultList.length; i++) {
+        var imgSrc = getRandomCoverArt();
+        var html = "<li><a onclick='passBySession(" + resultList[i].id + "," + imgSrc[0] +")' role='button'><img src=" + imgSrc[1] + "/></a></li>";
+        targetDiv.append(html);
+    }
 }
 
 function check_session() {

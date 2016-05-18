@@ -9,7 +9,7 @@ function userToProfile(strID) {
     $.ajax({
         url: "/UserServlet",
         type: "get",
-        //data: {"uID": strID}, WITH THIS LINE COMMENTED OUT IT WILL ALWAYS GIVE THE USER LOGGED IN AT THE MOMENT
+        data: {"uID": strID},
         async: false,
         success: function(responseText) {
             $("#userJson > a").text(responseText);

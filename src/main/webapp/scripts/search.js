@@ -52,17 +52,17 @@ function populateDiv(resultList, targetDivId) {
     for (var i = 0; i < resultList.length; i++) {
         var imgSrc = getRandomCoverArt();
         ( 
-            function(targetId, imageSource) {
+            function(target, imageSource) {
                 targetDiv.click(function() {
                     if (targetDivId.includes("users")) {
-                        userToProfile(targetId);
+                        userToProfile(target.googleId);
                     }
                     else {
-                        passBySession(targetId, imageSource);
+                        passBySession(target.id, imageSource);
                     }
                 });
             }
-        )(resultList[i].id, imgSrc[0]);
+        )(resultList[i], imgSrc[0]);
 
         var html = "<div class='comic-listing' data-cover='" + resultList[i].metadata.coverImage + "'><a role='button'><img src=" + imgSrc[1] + "></a></div>";
         targetDiv.append(html);

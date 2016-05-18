@@ -65,8 +65,9 @@
                         <br>
                         <textarea type="input" name="summary" id="comicSummary"></textarea>
                         <br><br>
+                        <h4>Upload a cover image:</h4>
                         <input id ="fileSubmit" type="file" name="comicCover">
-
+                        <h5>Recommended Image Size: 200x310px</h5>
                         <br>
                         <input class="btn btn-lg btn-primary" onclick="submitComic()" type="button" value="Submit">
 

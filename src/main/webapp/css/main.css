@@ -41,6 +41,10 @@ textarea{
 .comic-listing h5 {
     color: #8d8d8d;
 }
+.comic-listing img {
+    width: 200px;
+    height: 310px;
+}
 .dropdown-menu {
     background-color: #252525 !important;
     border-radius: 0 !important;

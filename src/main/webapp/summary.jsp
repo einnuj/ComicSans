@@ -96,7 +96,7 @@
         </div>
         <br><br>
         <%-- COMMENT THREAD STUFFS --%>
-        <h3>Leave a comment:</h3>
+        <h3 id="comment-header">Leave a comment:</h3>
         <textarea id="comment-input"></textarea><br><br>
         <a id="comment-submit" class="btn btn-lg btn-primary" role="button" onclick="appendComment()">Submit &nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
         <ul id="comment-thread">

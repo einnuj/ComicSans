@@ -95,7 +95,7 @@ public class SearchServlet extends HttpServlet {
     private List<User> findUsers(List<User> allUsersList, Map targetUsers) {
         List<User> allUsersListCopy = new ArrayList<User>(allUsersList);
 
-        for (Iterator<User> iterator = allUsersListCopy.iterator(); iterator.hasNext()) {
+        for (Iterator<User> iterator = allUsersListCopy.iterator(); iterator.hasNext();) {
             User currentUser = iterator.next();
             if(!targetUsers.containsKey(currentUser.getId())) {
                 iterator.remove();

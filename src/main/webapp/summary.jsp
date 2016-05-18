@@ -81,7 +81,7 @@
         </div>
         <div class="chapter-listing">
             <div class="row">
-                <div class="col-md-6"><h3>Chapters</h3></div>
+                <div class="col-md-6"><h3>Issues</h3></div>
                 <div class="col-md-6"><h3>Date</h3></div>
             </div>
             <div class="row">
@@ -96,7 +96,7 @@
                 <div class="col-md-6"><span class="AUTHOR_PRIV"><a href="editchapter.jsp"><span class="glyphicon glyphicon-pencil"></span></a></span><a href=""> Chapter 03</a></div>
                 <div class="col-md-6">Today</div>
             </div>
-            <span class="AUTHOR_PRIV"><a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Chapter <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a></span>
+            <span class="AUTHOR_PRIV"><a class="btn btn-lg btn-primary" role="button" href="addchapter.jsp">Issue <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a></span>
         </div>
         <br><br><br>
         <%-- COMMENT THREAD STUFFS --%>

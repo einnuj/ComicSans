@@ -60,3 +60,4 @@
 <script src="scripts/index.js"></script>
 <script src="scripts/search.js"></script>
 <script src="scripts/random.js"></script>
+<script src="scripts/images.js"></script>

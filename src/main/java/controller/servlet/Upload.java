@@ -1,27 +1,14 @@
 package controller.servlet;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.*;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.appengine.repackaged.com.google.gson.Gson;
 import controller.data.ComicAccess;
 import controller.data.UserAccess;
-import controller.exceptions.NonUniqueGoogleIdException;
-import controller.exceptions.ParameterNotFoundException;
-import controller.exceptions.RepeatTitleException;
-import controller.exceptions.UserNotFoundException;
+import controller.exceptions.*;
 import model.comics.ComicChapter;
 import model.comics.ComicPage;
 import model.comics.WebComic;
@@ -256,9 +243,11 @@ public class Upload extends HttpServlet {
                     if (blob_key_string == null) {
                         throw new ParameterNotFoundException("blob key");
                     }
-                    if (blob_key_string == null) {
-                        System.out.println("No blobkey given");
-                    } else {
+                    else if (blob_key_string.isEmpty() || blob_key_string.equals("undefined")) {
+                        return;
+                    }
+                    else
+                    {
                         BlobKey blob_key = new BlobKey(blob_key_string);
                         ImagesService imagesService = ImagesServiceFactory.getImagesService();
 

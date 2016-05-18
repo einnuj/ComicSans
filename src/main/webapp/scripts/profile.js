@@ -78,6 +78,85 @@ function loadCreatedComics() {
         $(".comics-created").append('<div class="comic-listing"><img src=' + imageKey + '><h3>' + comicsCreated[key].name + '</h3></div>' );
     }
 }
+
+function main() {
+    $.ajax({
+        url: "/ComicServlet",
+        type: "GET",
+        data: {"index" : true},
+        success: function(response) {
+            generateFavorites(response);
+            generateLikes(response);
+            generateCreated(response);
+            
+        }
+    });
+}
+
+function generateCreated(allComics){
+    if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
+        return;
+    }
+    var allComicsAsMap = allComics;
+    var userCreated = currentUser.metadata.comicsCreatedMap;
+    var targetDiv = $("#user-created > ul");
+    var imageKey;
+
+    if(currentUser != null){
+        $("#user-created").show();
+    }
+    for(var key in userCreated) {
+        if(!userCreated.hasOwnProperty(key)){
+            continue;
+        }
+        imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
+        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+    }
+}
+
+function generateFavorites(allComics){
+    if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
+        return;
+    }
+    var allComicsAsMap = allComics;
+    var userFavorites = currentUser.metadata.favorites;
+    var targetDiv = $("#user-favorites > ul");
+    var imageKey;
+
+    if(currentUser != null){
+        $("#user-favorites").show();
+    }
+    for(var key in userFavorites) {
+        if(!userFavorites.hasOwnProperty(key)){
+            continue;
+        }
+        imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
+        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+    }
+}
+
+function generateLikes(allComics){
+    if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
+        return;
+    }
+    var allComicsAsMap = allComics;
+    var userLikes = currentUser.metadata.likes;
+    var targetDiv = $("#user-likes > ul");
+    var imageKey;
+
+    if(currentUser != null){
+        $("#user-likes").show();
+    }
+    for(var key in userLikes) {
+        if(!userLikes.hasOwnProperty(key)){
+            continue;
+        }
+        imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
+        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+    }
+}
+
+$(document).ready(main());
 $(document).ready(loadCovers());
 $(document).ready(loadCreatedComics());
 

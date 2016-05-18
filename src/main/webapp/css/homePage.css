@@ -72,3 +72,10 @@ ul, ol, li{
     padding: 15px;
     float: left;
 }
+#user-favorites {
+    display: none;
+}
+#user-favorites img {
+    width: 230px;
+    height: 310px;
+}

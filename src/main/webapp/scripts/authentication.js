@@ -12,6 +12,7 @@ function authenticate() {
                 logLinkDiv.text("Log Out");
             }
             else {
+                sessionStorage.removeItem("user_to_profile");
                 logLinkDiv.text("Log In");
             }
             logLinkDiv.show();

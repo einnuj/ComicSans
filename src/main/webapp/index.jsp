@@ -114,32 +114,11 @@
         <ul>
         </ul>
     </div>
-    <div class="section-sliders">
+    <div class="section-sliders" id="user-favorites">
         <h2>Favorites</h2>
         <ul>
-            <li>
-                <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
-            </li>
-            <li>
-                <img src="images/covers/DoenutCover.png" />
-            </li>
-            <li>
-                <img src="images/covers/DoofusCover.png" />
-            </li>
         </ul>
     </div>
-    <%--<div id="ajaxDiv">--%>
-        <%--<a href="#" onclick="fakeAjax()">Click here for AJAX!</a>--%>
-    <%--</div>--%>
-
-    <%--<div id="profileDiv">--%>
-        <%--<a href="profile/profile.jsp">Click here for Profile!</a>--%>
-    <%--</div>--%>
-    <%--<div id="logDiv">--%>
-        <%--<a id="logLink" href=""></a>--%>
-    <%--</div>--%>
-
-
 </body>
 </html>
 
@@ -147,7 +126,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="scripts/session.js"></script>
+<script src="scripts/images.js"></script>
 <script src="scripts/authentication.js"></script>
 <script src="scripts/index.js"></script>
 <script src="scripts/random.js"></script>
-<script src="scripts/profile.js"></script>

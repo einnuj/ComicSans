@@ -119,6 +119,11 @@
         <ul>
         </ul>
     </div>
+    <div class="section-sliders" id="user-likes">
+        <h2>Likes</h2>
+        <ul>
+        </ul>
+    </div>
 </body>
 </html>
 

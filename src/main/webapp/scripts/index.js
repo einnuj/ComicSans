@@ -21,6 +21,7 @@ function main() {
         data: {"index" : true},
         success: function(response) {
             generateFavorites(response);
+            generateLikes(response);
             var allComics = getTopSuggestions(response);
             addComicsIntoHTML(allComics);
         }
@@ -69,6 +70,27 @@ function generateFavorites(allComics){
     }
     for(var key in userFavorites) {
         if(!userFavorites.hasOwnProperty(key)){
+            continue;
+        }
+        imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
+        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+    }
+}
+
+function generateLikes(allComics){
+    if (currentUser == null || typeof currentUser == 'undefined' || currentUser == '') {
+        return;
+    }
+    var allComicsAsMap = allComics;
+    var userLikes = currentUser.metadata.likes;
+    var targetDiv = $("#user-likes > ul");
+    var imageKey;
+
+    if(currentUser != null){
+        $("#user-likes").show();
+    }
+    for(var key in userLikes) {
+        if(!userLikes.hasOwnProperty(key)){
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);

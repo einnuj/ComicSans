@@ -79,3 +79,11 @@ ul, ol, li{
     width: 230px;
     height: 310px;
 }
+
+#user-likes {
+    display: none;
+}
+#user-likes img {
+    width: 230px;
+    height: 310px;
+}

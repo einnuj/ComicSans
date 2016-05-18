@@ -36,7 +36,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <img src="images/usericon.png" />
+            <img src="images/defaultLogo.png" />
             <div class="comic-info-descr">
                 <h1 id="name-header"></h1>
                 <h4 id="created-header">Comics created: </h4>
@@ -45,17 +45,17 @@
         </div>
 
         <div class="section-sliders" id="user-created">
-            <h2>Creator Of</h2>
+            <h3>Creator Of</h3>
             <ul>
             </ul>
         </div>
         <div class="section-sliders" id="user-favorites">
-            <h2>Favorites</h2>
+            <h3>Favorites</h3>
             <ul>
             </ul>
         </div>
         <div class="section-sliders" id="user-likes">
-            <h2>Likes</h2>
+            <h3>Likes</h3>
             <ul>
             </ul>
         </div>

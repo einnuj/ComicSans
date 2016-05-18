@@ -97,6 +97,8 @@ function generateLikes(allComics){
         targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
     }
 }
+
+
 $(document).ready(main());
 $(document).ready(loadCovers());
 

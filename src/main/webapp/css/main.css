@@ -87,3 +87,39 @@ textarea{
     width: 100%;
     padding: 30px;
 }
+
+.section-sliders {
+    margin-left: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+}
+.section-sliders h2{
+    color: white;
+    margin-left: 20px;
+}
+.section-sliders ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+.section-sliders img{
+    display: block;
+    padding: 15px;
+    float: left;
+}
+#user-favorites {
+    display: none;
+}
+#user-favorites img {
+    width: 230px;
+    height: 310px;
+}
+
+#user-likes {
+    display: none;
+}
+#user-likes img {
+    width: 230px;
+    height: 310px;
+}

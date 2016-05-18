@@ -26,6 +26,7 @@
     <%-- Stylesheets --%>
     <link href="css/main.css" rel="stylesheet">
 
+
     <title>Profile</title>
 </head>
 <body>
@@ -42,8 +43,22 @@
                 <h4 id="comments-header">Comments posted: </h4>
             </div>
         </div>
-        <h2>Creator of: </h2>
-        <div class="comics-created">
+
+        <div class="section-sliders" id="user-created">
+            <h2>Creator Of</h2>
+            <ul>
+            </ul>
+        </div>
+        <div class="section-sliders" id="user-favorites">
+            <h2>Favorites</h2>
+            <ul>
+            </ul>
+        </div>
+        <br>
+        <div class="section-sliders" id="user-likes">
+            <h2>Likes</h2>
+            <ul>
+            </ul>
         </div>
     </div>
 </body>
@@ -53,3 +68,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="scripts/profile.js"></script>
+

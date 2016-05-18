@@ -37,26 +37,13 @@
         <div class="comic-info">
             <img src="images/usericon.png" />
             <div class="comic-info-descr">
-                <h1 id="name-header">Maggie</h1>
-                <h4 id="created-header">Comics created: 3</h4>
-                <h4>Comics read: 13</h4>
-                <h4 id="comments-header">Comments posted: 35</h4>
-                <p>Bio:
-                    <br>I have been reading comics since I was a child. I love comics with a passion.
+                <h1 id="name-header"></h1>
+                <h4 id="created-header">Comics created: </h4>
+                <h4 id="comments-header">Comments posted: </h4>
             </div>
         </div>
         <h2>Creator of: </h2>
-        <div class="comic-listing">
-            <a href="summary.jsp"><img src="images/covers/CoConutCover.png" /></a>
-            <h3>CoConut</h3>
-        </div>
-        <div class="comic-listing">
-            <img src="images/covers/DoenutCover.png" />
-            <h3>Doenut</h3>
-        </div>
-        <div class="comic-listing">
-            <img src="images/covers/DoofusCover.png" />
-            <h3>Doofus</h3>
+        <div class="comics-created">
         </div>
     </div>
 </body>

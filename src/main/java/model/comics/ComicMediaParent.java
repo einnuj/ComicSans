@@ -22,9 +22,8 @@ abstract class ComicMediaParent extends ComicMedia {
 
     /* Methods */
 
-    public boolean removeFromChildMediaList(ComicMedia mediaToRemove) {
-        return childMediaList.remove(mediaToRemove);
-    }
+    public abstract boolean removeFromChildMediaList(String issueTitle);
+
 
     /* Abstract Methods */
 

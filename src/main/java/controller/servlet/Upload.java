@@ -75,6 +75,9 @@ public class Upload extends HttpServlet{
                             newComic.getMetadata().setCoverImage(cover);
                             newComic.getMetadata().setBio(summary);
 
+                            ComicChapter newChapter = new ComicChapter("Comic");
+                            newComic.addToChildMediaList(newChapter);
+
                             ObjectifyHelper.save(newComic);         // Gets us the Long id
                             newComic.reload();
 
@@ -84,6 +87,7 @@ public class Upload extends HttpServlet{
                             ObjectifyHelper.save(newComic);
                             ObjectifyHelper.save(author);
 
+                            newChapter.reload();
                             newComic.reload();
 
                             resp.getWriter().write(newComic.getId().toString());
@@ -108,15 +112,15 @@ public class Upload extends HttpServlet{
                     }
                     break;
 
-                case "CREATE CHAPTER":
+                case "ADD ISSUE":
                     try {
                         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 
-                        String title = req.getParameter("chapterTitle");
+                        String title = req.getParameter("issueTitle");
                         String comicId = req.getParameter("comicId");
 
                         if (title == null) {
-                            throw new ParameterNotFoundException("title");
+                            throw new ParameterNotFoundException("issueTitle");
                         }
                         if (comicId == null) {
                             throw new ParameterNotFoundException("comicId");
@@ -124,23 +128,15 @@ public class Upload extends HttpServlet{
 
                         Long id = Long.valueOf(comicId);
                         WebComic comic = ComicAccess.queryForComic(id);
-
-                        int numChapter = comic.getChildMediaList().size();
-
-                        ComicChapter newChapter = new ComicChapter(title);
-                        newChapter.setChapterNumber(numChapter + 1);
+                        ComicChapter myChapter = comic.getChildMediaList().get(0);
 
                         for (String n : blobs.keySet()) {
                             String file = blobs.get(n).get(0).getKeyString();
-                            ComicPage newPage = new ComicPage(n, file);
-                            newChapter.addToChildMediaList(newPage);
+                            ComicPage newPage = new ComicPage(title, file);
+                            myChapter.addToChildMediaList(newPage);
                         }
 
-
-                        comic.addToChildMediaList(newChapter);
-
-                        newChapter.reload();
-
+                        myChapter.reload();
                         ObjectifyHelper.save(comic);
 
                         comic.reload();
@@ -153,7 +149,30 @@ public class Upload extends HttpServlet{
 
                         resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                     }
+                    break;
+                case "DELETE ISSUE":
+                    try {
+                        String comicId = req.getParameter("comicId");
+                        String issueTitle = req.getParameter("issueTitle");
 
+                        if (comicId == null) {
+                            throw new ParameterNotFoundException("comicId");
+                        }
+                        if (issueTitle == null) {
+                            throw new ParameterNotFoundException("comicId");
+                        }
+
+                        Long id = Long.valueOf(comicId);
+                        WebComic comic = ComicAccess.queryForComic(id);
+                        boolean success = comic.getChildMediaList().get(0).removeFromChildMediaList(issueTitle);
+                        if(!success) throw new ParameterNotFoundException("Issue named" + issueTitle);
+
+                        break;
+                    } catch (ParameterNotFoundException ex) {
+                        resp.getWriter().write("{\"error\":" + ex.getMessage() + "}");
+
+                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                    }
 
             }
 

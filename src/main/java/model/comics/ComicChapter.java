@@ -45,6 +45,17 @@ public class ComicChapter extends ComicMediaParent {
     }
 
     @Override
+    public boolean removeFromChildMediaList(String issueTitle) {
+        for(ComicPage page : childMediaList){
+            if(issueTitle.equalsIgnoreCase(page.getName())){
+                childMediaList.remove(page);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void reload() {
         if (childMediaList == null) {
             childMediaList = new ArrayList<ComicPage>();

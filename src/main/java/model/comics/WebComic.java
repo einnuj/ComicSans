@@ -67,6 +67,11 @@ public class WebComic extends ComicMediaParent {
     }
 
     @Override
+    public boolean removeFromChildMediaList(String issueTitle){
+        return false;
+    }
+
+    @Override
     public void reload() {
         if (childMediaList == null) {
             childMediaList = new ArrayList<ComicChapter>();

@@ -75,15 +75,15 @@ function submitComic(){
 function submitChapter() {
     var fd = new FormData();
     var files = document.getElementById("fileSubmit").files;
-    var chapter = document.getElementById("chapter").value;
+    var title = document.getElementById("chapter").value;
     var comicId = sessionStorage.getItem('id_to_load');
 
         for ( var i = 0; i < files.length; i++) {
             fd.append("file" + i, files[i]);
         }
-        fd.append("chapterTitle", chapter);
+        fd.append("issueTitle", title);
         fd.append("comicId", comicId);
-        fd.append("action", "CREATE CHAPTER");
+        fd.append("action", "ADD ISSUE");
         var xhr = new XMLHttpRequest();
         xhr.open("POST", document.getElementById('submitChapterForm').action);
         xhr.send(fd);

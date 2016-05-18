@@ -291,3 +291,15 @@ function retrieveImage(img_key) {
     });
     return path;
 }
+
+function deleteIssue(issueTitle){
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        async: false,
+        data: {"action": "DELETE ISSUE", "comicId": comicId, "issueTitle": issueTitle},
+        success: function(responseText) {
+            console.log(responseText);
+        },
+    });
+}

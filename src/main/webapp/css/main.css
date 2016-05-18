@@ -65,6 +65,9 @@ textarea{
     margin-top: 5%;
     display: flex;
 }
+.comic-info-descr {
+    margin-left: 65px;
+}
 .comic-info-descr h1 {
     border: none;
     padding: 0;

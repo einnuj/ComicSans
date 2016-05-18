@@ -40,10 +40,7 @@
 
     <div class="info-container">
         <div class="comic-info">
-            <div class="edit-image">
-                <img id="cover-thumbnail" src="" />
-                <input class="AUTHOR_PRIV" id="edit-cover-picker" type="file" accept="image/*;" onchange="readURL(this)" />
-            </div>
+            <img id="cover-thumbnail" src="" width="200px"/>
             <div class="comic-info-descr">
                 <h1 id="title-header"></h1>
                 <span class="AUTHOR_PRIV"><span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick="editComicTitle()"></span></span>

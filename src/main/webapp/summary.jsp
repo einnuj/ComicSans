@@ -61,12 +61,8 @@
                 <br>
                 <br>
                 <br>
-                <p>Rating:
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span></p>
                 <p id="fav-field">Favorites: </p>
+                <p id="like-field">Likes :</p>
                 <div class="social-buttons">
                     <a id="fav-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('FAV')">Favorite <span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
                     <a id="lik-btn" class="btn btn-lg btn-primary" role="button" onclick="socialButton('LIK')">Like <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>

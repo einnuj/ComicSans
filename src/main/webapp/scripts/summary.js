@@ -162,6 +162,7 @@ function getComicHelper(obj) {
 
     // Set data for favorites
     $("#fav-field").html("Favorites: " + currentMetadata.favorites);
+    $("#like-field").html("Likes: " + currentMetadata.likes);
 
     if (cover == null || cover == "")
         $("#cover-thumbnail").attr("src", "images/covers/DoofusCover.png");
@@ -209,11 +210,13 @@ function socialButton(type) {
             if ($("#lik-btn").text().trim() == "Like") { // If the user doesn't already like the comic, then allow a like
                 like(comicId);
                 currentMetadata.likes++;
+                $("#like-field").html("Likes: " + currentMetadata.likes);
                 $("#lik-btn").html("Unlike" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             else {
                 unlike(comicId);
                 currentMetadata.likes--;
+                $("#like-field").html("Likes: " + currentMetadata.likes);
                 $("#lik-btn").html("Like" + "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>");
             }
             break;

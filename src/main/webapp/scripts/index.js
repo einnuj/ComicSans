@@ -100,7 +100,13 @@ function generateLikes(allComics){
             continue;
         }
         imageKey = retrieveImage(allComicsAsMap[key].metadata.coverImage);
-        targetDiv.append('<div class="comic-listing"><img src=' + imageKey + '></div>' );
+
+        if (imageKey == null || typeof imageKey == 'undefined' || imageKey == '') {
+            imageKey = "images/covers/DoofusCover.png";
+        }
+
+        var html = "<li><a onclick='passBySession(" + allComicsAsMap[key].id + "," + 0 + ")' role='button'><img src=" + imageKey + "></a></li>";
+        targetDiv.append(html);
     }
 }
 

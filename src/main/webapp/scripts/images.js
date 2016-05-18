@@ -7,6 +7,9 @@ function retrieveImage(img_key) {
         data: {"action": "GET IMAGE", "blob_key": img_key},
         success: function (responseText) {
             path = responseText;
+        },
+        error: function (responseText) {
+            console.log(responseText);
         }
     });
     return path;
